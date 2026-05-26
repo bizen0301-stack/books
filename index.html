@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>本屋大賞ガイド｜2004〜2026年 全受賞・ノミネート作品一覧</title>
+<meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで、Amazon・Kindle・楽天ブックスからすぐ購入できます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#1a1208;--ink-2:#3d3325;--ink-3:#6b5f50;--ink-4:#9e9184;
+  --paper:#faf8f3;--paper-2:#f3f0e8;--paper-3:#eae6db;--paper-card:#fffef9;
+  --red:#b5301f;--red-light:#f5e6e4;--gold:#9a7a1a;--gold-light:#f5edcf;
+  --amazon:#ff9900;--amazon-dk:#e68000;
+  --rakuten:#bf0000;--rakuten-dk:#990000;
+  --border:rgba(74,63,47,.1);--border-2:rgba(74,63,47,.2);
+  --r:8px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7}
+
+/* ─── HEADER ─── */
+header{background:var(--ink);color:#fff;position:relative;overflow:hidden}
+.hdr-lines{position:absolute;inset:0;background:repeating-linear-gradient(0deg,transparent,transparent 39px,rgba(255,255,255,.04) 39px,rgba(255,255,255,.04) 40px);pointer-events:none}
+.hdr-inner{max-width:1140px;margin:0 auto;padding:3rem 1.5rem 2.5rem;position:relative}
+.hdr-kana{font-family:'Noto Serif JP',serif;font-size:11px;letter-spacing:.3em;color:var(--amazon);margin-bottom:.75rem;display:flex;align-items:center;gap:10px}
+.hdr-kana::before{content:'';width:20px;height:1px;background:var(--amazon)}
+h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.8rem,5vw,3rem);font-weight:700;line-height:1.2;margin-bottom:1rem}
+h1 span{color:var(--amazon)}
+.hdr-lead{font-size:14px;color:rgba(255,255,255,.85);font-weight:400;max-width:760px;margin-bottom:1rem;line-height:1.8}
+.hdr-sub{font-size:12px;color:rgba(255,255,255,.5);font-weight:300;letter-spacing:.05em}
+
+/* ─── STICKY NAV ─── */
+.nav-wrap{background:var(--paper-2);border-bottom:1px solid var(--border-2);position:sticky;top:0;z-index:100;box-shadow:0 2px 12px rgba(0,0,0,.06)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:.75rem 1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:240px}
+.search-box input{width:100%;padding:8px 12px 8px 36px;border:1px solid var(--border-2);border-radius:6px;background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:border-color .15s,box-shadow .15s}
+.search-box input:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(181,48,31,.1)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:14px;color:var(--ink-3);pointer-events:none}
+.filter-groups{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;flex:3;min-width:280px}
+.filter-group{display:flex;align-items:center;gap:6px}
+.filter-label{font-size:11px;color:var(--ink-3);font-weight:bold;white-space:nowrap}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:4px 10px;border-radius:20px;border:1px solid var(--border-2);background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--ink-3);cursor:pointer;transition:all .15s;white-space:nowrap}
+.chip:hover{background:var(--paper-3);color:var(--ink-2)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff}
+
+/* ─── MAIN CONTENT ─── */
+.main{max-width:1140px;margin:0 auto;padding:2rem 1.5rem}
+
+/* ─── BOOK GRID ─── */
+.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:16px}
+
+/* ─── CARD ─── */
+.card{background:var(--paper-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:transform .18s,box-shadow .18s,border-color .18s}
+.card:hover{transform:translateY(-3px);box-shadow:0 8px 32px rgba(26,18,8,.12);border-color:var(--border-2)}
+.card.rank-1{border-top:3px solid var(--gold);background:linear-gradient(to bottom, var(--gold-light) 0%, var(--paper-card) 150px)}
+
+/* cover */
+.cover-wrap{position:relative;width:100%;padding-top:140%;background:var(--paper-3);overflow:hidden;border-bottom:1px solid var(--border)}
+.cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s;z-index:1}
+.cover-wrap .placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:'Noto Serif JP',serif;padding:1rem;text-align:center;background:linear-gradient(135deg, var(--paper-3), var(--paper-2));z-index:0}
+.placeholder-title{font-size:13px;font-weight:600;color:var(--ink-2);line-height:1.4;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+.placeholder-author{font-size:11px;color:var(--ink-3)}
+
+/* badges */
+.rank-badge{position:absolute;top:8px;left:8px;padding:2px 8px;border-radius:4px;font-family:'Noto Sans JP',sans-serif;font-size:10px;font-weight:700;z-index:2;box-shadow:0 2px 4px rgba(0,0,0,0.1)}
+.rank-badge.r1{background:var(--gold);color:#fff}
+.rank-badge.r2{background:#8a8a8a;color:#fff}
+.rank-badge.r3{background:#a0623a;color:#fff}
+.rank-badge.rn{background:rgba(26,18,8,.75);color:#fff}
+
+.year-badge{position:absolute;top:8px;right:8px;padding:2px 6px;border-radius:4px;font-family:'Noto Sans JP',sans-serif;font-size:10px;font-weight:500;z-index:2;background:rgba(255,255,255,0.85);color:var(--ink);box-shadow:0 1px 3px rgba(0,0,0,0.05)}
+
+/* card body */
+.card-body{padding:.85rem .85rem .6rem;flex:1;display:flex;flex-direction:column}
+.tag-container{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:6px}
+.genre-badge{font-size:10px;background:var(--paper-3);color:var(--ink-2);padding:1px 6px;border-radius:3px;font-weight:500}
+.media-badge{font-size:10px;background:var(--red-light);color:var(--red);padding:1px 6px;border-radius:3px;font-weight:600}
+
+.book-title{font-family:'Noto Serif JP',serif;font-size:14px;font-weight:600;line-height:1.4;color:var(--ink);margin-bottom:4px}
+.book-author{font-size:11px;color:var(--ink-3);margin-bottom:.5rem}
+.synopsis{font-size:11.5px;color:var(--ink-2);line-height:1.75;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden}
+
+/* card footer */
+.card-foot{padding:.6rem .85rem .85rem;border-top:1px solid var(--border);display:flex;flex-direction:column;gap:5px;margin-top:auto}
+.btn-kindle{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--amazon);color:#111;text-decoration:none;font-size:12px;font-weight:500;font-family:'Noto Sans JP',sans-serif;padding:6px 8px;border-radius:4px;transition:background .15s;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+.btn-kindle:hover{background:var(--amazon-dk)}
+.btn-rakuten{display:flex;align-items:center;justify-content:center;gap:5px;background:var(--rakuten);color:#fff;text-decoration:none;font-size:12px;font-weight:500;font-family:'Noto Sans JP',sans-serif;padding:6px 8px;border-radius:4px;transition:background .15s;box-shadow:0 1px 2px rgba(0,0,0,0.05)}
+.btn-rakuten:hover{background:var(--rakuten-dk)}
+.btn-paper{padding:5px 8px;border:1px solid var(--border-2);border-radius:4px;font-size:11px;color:var(--ink-3);text-decoration:none;display:flex;align-items:center;justify-content:center;transition:background .15s}
+.btn-paper:hover{background:var(--paper-2)}
+
+/* ─── RESULT INFO ─── */
+.result-info{font-size:12px;color:var(--ink-3);margin-bottom:1.5rem;text-align:right}
+
+/* ─── NO RESULTS ─── */
+.no-res{text-align:center;padding:4rem 1rem;color:var(--ink-3);font-size:14px}
+
+/* ─── AFFILIATE NOTICE ─── */
+.affiliate{max-width:1140px;margin:0 auto;padding:0 1.5rem 1rem;font-size:11px;color:var(--ink-4);border-top:1px solid var(--border);padding-top:1rem}
+
+/* ─── FOOTER ─── */
+footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.75rem;text-align:center;font-size:11px;letter-spacing:.05em;margin-top:3rem}
+
+/* ─── LOADING ─── */
+.loading-overlay{position:fixed;inset:0;background:var(--paper);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .4s}
+.loading-overlay.done{opacity:0;pointer-events:none}
+.spinner{width:36px;height:36px;border:3px solid var(--border-2);border-top-color:var(--red);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:980px) {
+  .nav-inner { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .filter-groups { flex-direction: column; align-items: flex-start; gap: 0.5rem; }
+}
+@media(max-width:640px){
+  .hdr-inner,.nav-inner,.main{padding-left:1rem;padding-right:1rem}
+  .book-grid{grid-template-columns:repeat(2,1fr);gap:10px}
+  h1{font-size:1.6rem}
+}
+</style>
+</head>
+<body>
+
+<div class="loading-overlay" id="loader"><div class="spinner"></div></div>
+
+<header>
+  <div class="hdr-lines"></div>
+  <div class="hdr-inner">
+    <div class="hdr-kana">全国書店員が選んだ、いちばん売りたい本</div>
+    <h1>本屋大賞<br><span>歴代全作品ガイド</span></h1>
+    <p class="hdr-lead">
+      2004年の第1回開催から現在に至るまで、全国の書店員が「本当に売りたい、面白い」と情熱を注いだ名作たち。本ギャラリーでは、歴代の大賞受賞作から惜しくも受賞を逃した隠れた傑作ノミネート作まで、地続きのひとつの壁として網羅しました。あらすじや系統ジャンル、映像化の軌跡から、あなたの読書人生を満たす至高の一冊が必ず見つかります。
+    </p>
+    <p class="hdr-sub">※各作品カードから、お使いの端末（Kindle電子書籍）や各種通販（楽天ブックス・紙の本）へ直接アクセスして試し読み・購入が可能です。</p>
+  </div>
+</header>
+
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="タイトル・著者・キーワードで検索…" autocomplete="off" oninput="render()">
+    </div>
+    <div class="filter-groups">
+      <div class="filter-group">
+        <span class="filter-label">順位:</span>
+        <div class="chips" id="chips-rank">
+          <button class="chip on" data-r="all" onclick="setRankFilter(this)">すべて</button>
+          <button class="chip" data-r="1" onclick="setRankFilter(this)">大賞のみ</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">年代:</span>
+        <div class="chips" id="chips-decade">
+          <button class="chip on" data-d="all" onclick="setDecadeFilter(this)">すべて</button>
+          <button class="chip" data-d="2020s" onclick="setDecadeFilter(this)">2020年代</button>
+          <button class="chip" data-d="2010s" onclick="setDecadeFilter(this)">2010年代</button>
+          <button class="chip" data-d="2000s" onclick="setDecadeFilter(this)">2000年代</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">系統:</span>
+        <div class="chips" id="chips-genre">
+          <button class="chip on" data-g="all" onclick="setGenreFilter(this)">すべて</button>
+          <button class="chip" data-g="ミステリ" onclick="setGenreFilter(this)">ミステリ</button>
+          <button class="chip" data-g="青春" onclick="setGenreFilter(this)">青春・日常</button>
+          <button class="chip" data-g="ヒューマン" onclick="setGenreFilter(this)">ドラマ・家族</button>
+          <button class="chip" data-g="SF" onclick="setGenreFilter(this)">SF・ファンタジー</button>
+          <button class="chip" data-g="歴史" onclick="setGenreFilter(this)">歴史・時代</button>
+          <button class="chip" data-g="お仕事" onclick="setGenreFilter(this)">お仕事・医療</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">映像化:</span>
+        <div class="chips" id="chips-media">
+          <button class="chip on" data-m="all" onclick="setMediaFilter(this)">すべて</button>
+          <button class="chip" data-m="yes" onclick="setMediaFilter(this)">映像化あり</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<main class="main" id="main">
+  <p class="result-info" id="result-info"></p>
+  <div class="book-grid" id="content"></div>
+</main>
+
+<div class="affiliate">
+  ※ 当サイトはAmazonアソシエイト・プログラム、および楽天アフィリエイトの参加者です。リンクを経由してご購入いただくと、サイト運営者に紹介料が支払われます。書影はGoogle Books APIより取得しています。
+</div>
+<footer>© 2026 本屋大賞受賞作ガイド</footer>
+
+<script>
+// ─── アフィリエイトIDの設定 ───
+const AMAZON_TAG = 'wespressoblog-22'; 
+const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
+
+let filterRank = 'all';
+let filterDecade = 'all';
+let filterGenre = 'all';
+let filterMedia = 'all';
+
+// ─── BOOK DATA ───
+const BOOKS = [
+  // 2026 第23回
+  {year:2026,rank:1,title:"イン・ザ・メガチャーチ",author:"朝井リョウ",genre:"ヒューマン",media:"",synopsis:"ファンダム経済を仕掛ける側、のめり込む側、かつてのめり込んでいた側——3つの視点から、人の心を動かす「物語」の功罪をあぶり出す意欲作。"},
+  {year:2026,rank:2,title:"熟柿",author:"佐藤正午",genre:"ヒューマン",media:"",synopsis:"轢き逃げの罪を背負い、息子を求めて西へ西へと流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。"},
+  {year:2026,rank:3,title:"PRIZE―プライズ―",author:"村山由佳",genre:"お仕事",media:"",synopsis:"何度も本屋大賞を受賞しながら直木賞が取れない作家・天羽カインの執念と苦悩を描く、文壇の光と影。"},
+  {year:2026,rank:4,title:"エピクロスの処方箋",author:"夏川草介",genre:"お仕事",media:"",synopsis:"スピノザの診察室の続編。大学病院の絶対権力者の父親を診ることになった医師・雄町の葛藤と使命を描く医療小説。"},
+  {year:2026,rank:5,title:"暁星",author:"湊かなえ",genre:"ミステリ",media:"",synopsis:"文部科学大臣刺殺事件の犯人が語る手記と、事件を小説にする作家。ノンフィクションとフィクションが交錯するミステリ。"},
+  {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況でビジネストークを駆使するユーモア×サスペンス。"},
+  {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く、瀬尾まいこらしい温かな物語。"},
+  {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相が楽しいエンタメ作。"},
+  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミステリ。"},
+  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男。伊坂幸太郎流のユーモアと緊張感が同居するサスペンス。"},
+  // 2025 第22回
+  {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草のこと。言葉の温もりをテーマにした愛の物語。"},
+  {year:2025,rank:2,title:"アルプス席の母",author:"早見和真",genre:"ヒューマン",media:"",synopsis:"野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く。スポーツと家族の絆が交差する感動作。"},
+  {year:2025,rank:3,title:"小説",author:"野崎まど",genre:"SF",media:"",synopsis:"「小説」という奇妙なタイトルが示す通り、物語の構造そのものを問い直す実験的かつ読みやすいエンタメ。"},
+  {year:2025,rank:4,title:"禁忌の子",author:"山口未桜",genre:"ミステリ",media:"",synopsis:"触れてはいけない真実を抱えた子どもたちの物語。新鋭・山口未桜が放つ衝撃のデビュー作。"},
+  {year:2025,rank:5,title:"人魚が逃げた",author:"青山美智子",genre:"青春",media:"",synopsis:"「人魚が逃げた」という謎の書き置きから始まる連作短編。青山美智子の温かく不思議な世界観が光る。"},
+  {year:2025,rank:6,title:"spring",author:"恩田陸",genre:"青春",media:"",synopsis:"バレエを通じて描かれる才能と情熱、嫉妬と愛。恩田陸が「蜜蜂と遠雷」に続いてアートの世界に挑んだ大作。"},
+  {year:2025,rank:7,title:"恋とか愛とかやさしさなら",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"さまざまな形の愛の物語を集めた連作短編集。一穂ミチが紡ぐ多様な関係性と感情の機微。"},
+  {year:2025,rank:8,title:"生殖記",author:"朝井リョウ",genre:"SF",media:"",synopsis:"AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウの挑戦作。"},
+  {year:2025,rank:9,title:"死んだ山田と教室",author:"金子玲介",genre:"青春",media:"",synopsis:"突然死した同級生・山田が教室のスピーカーに宿り、クラスメートと会話するという奇想天外な青春小説。"},
+  {year:2025,rank:10,title:"成瀬は信じた道をいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"前作「成瀬は天下を取りにいく」の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む痛快青春小説。"},
+  // 2024 第21回
+  {year:2024,rank:1,title:"成瀬は天下を取りにいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"滋賀県大津市を舞台に、西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。周囲を巻き込みながら突き進む姿が痛快な青春小説。"},
+  {year:2024,rank:2,title:"水車小屋のネネ",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。"},
+  {year:2024,rank:3,title:"存在のすべてを",author:"塩田武士",genre:"ミステリ",media:"",synopsis:"誘拐事件と芸術の謎が絡み合うサスペンス。塩田武士が挑んだスケールの大きな人間ドラマ。"},
+  {year:2024,rank:4,title:"スピノザの診察室",author:"夏川草介",genre:"お仕事",media:"",synopsis:"大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作として話題を呼んだ作品。"},
+  {year:2024,rank:5,title:"レーエンデ国物語",author:"多崎礼",genre:"SF",media:"",synopsis:"異世界の小国を舞台にした壮大なファンタジー。講談社タイガーから登場した話題作で、続篇も好評。"},
+  {year:2024,rank:6,title:"黄色い家",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"貧困と孤独の中で生きる女たちの物語。川上未映子が社会の底辺に生きる人々を圧倒的な筆力で描く。"},
+  {year:2024,rank:7,title:"リカバリー・カバヒコ",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"公園の古びた動物遊具「カバヒコ」に触れると回復する——という噂をめぐる連作短編。癒しと再生の物語。"},
+  {year:2024,rank:8,title:"星を編む",author:"凪良ゆう",genre:"ヒューマン",media:"",synopsis:"「汝、星のごとく」の続編にあたる短編集。前作のキャラクターたちのその後と、新たな出会いを描く。"},
+  {year:2024,rank:9,title:"放課後ミステリクラブ 1金魚の泳ぐプール事件",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"小学生探偵たちが活躍する児童向けミステリ。本屋大賞初の児童書ノミネートとして話題に。"},
+  {year:2024,rank:10,title:"君が手にするはずだった黄金について",author:"小川哲",genre:"ヒューマン",media:"",synopsis:"芥川賞作家・小川哲の初短編集。才能と承認欲求、嘘と虚栄心をめぐる鋭い文学的考察。"},
+  // 2023 第20回
+  {year:2023,rank:1,title:"汝、星のごとく",author:"凪良ゆう",genre:"ヒューマン",media:"",synopsis:"瀬戸内の島で出会った二人の男女が、それぞれの夢と愛に苦しみながら生きていく物語。凪良ゆうの最高傑作との声も多い傑作。"},
+  {year:2023,rank:2,title:"ラブカは静かに弓を持つ",author:"安壇美緒",genre:"お仕事",media:"",synopsis:"著作権調査のため音楽教室に潜入したスパイが、チェロと師匠との出会いで心を取り戻していく「スパイ×音楽」長篇。"},
+  {year:2023,rank:3,title:"光のとこにいてね",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"団地で出会った二人の少女の、長年にわたる不思議な絆を描く。時を超えた愛の形を繊細に描く傑作。"},
+  {year:2023,rank:4,title:"爆弾",author:"呉勝浩",genre:"ミステリ",media:"",synopsis:"取調室での5時間。爆弾を予告する男と刑事の頭脳戦を描く密室ミステリ。計算し尽くされた構成が圧巻。"},
+  {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じてつながる5人の登場人物。青山美智子の温かな世界観が凝縮された連作短編。"},
+  {year:2023,rank:6,title:"向日葵の咲かない夏",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。"},
+  {year:2023,rank:7,title:"栞と嘘の季節",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。"},
+  {year:2023,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"母違いの二人の「宙」の物語。食を通じて描く家族の再生と新しいつながり。"},
+  {year:2023,rank:9,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"",synopsis:"地下に閉じ込められた9人と1人の殺人犯。脱出するには1人を犠牲にしなければならない究極のサバイバルミステリ。"},
+  {year:2023,rank:10,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"生きることの苦しさと希望を、二人の若者の友情を通して描く。西加奈子の代表作になり得る渾身作。"},
+  // 2022 第19回
+  {year:2022,rank:1,title:"同志少女よ、敵を撃て",author:"逢坂冬馬",genre:"歴史",media:"",synopsis:"独ソ戦を舞台に、家族を殺された少女が女性狙撃手として戦場を生き抜く衝撃の戦争小説。デビュー作にして本屋大賞・アガサ賞W受賞。"},
+  {year:2022,rank:2,title:"赤と青とエスキース",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"一枚の絵が縦横無尽に時代・国・人をつなぐ連作短編。「人の縁」の不思議を描く感動作。"},
+  {year:2022,rank:3,title:"黒牢城",author:"米澤穂信",genre:"歴史",media:"",synopsis:"荒木村重の有岡城を舞台にした歴史ミステリ。信長への反旗のさ中に起きる密室殺人を探偵・黒田官兵衛が解く。"},
+  {year:2022,rank:4,title:"夜明けのすべて",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"PMSとパニック障害を抱える2人が、互いを思いやりながら生きていく。瀬尾まい子の優しさが全編に溢れる作品。"},
+  {year:2022,rank:5,title:"六人の嘘つきな大学生",author:"浅倉秋成",genre:"ミステリ",media:"映画化",synopsis:"就活グループ面接の6人が互いを陥れていく。衝撃の反転が待つ就活ミステリ。"},
+  {year:2022,rank:6,title:"スモールワールズ",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"日常に潜む嘘と真実を6つの短編で描く。その圧倒的完成度で一穂ミチの名を知らしめた短編集.●"},
+  {year:2022,rank:7,title:"正欲",author:"朝井リョウ",genre:"ヒューマン",media:"映画化",synopsis:"マイノリティとしての性的指向を抱えた人々の生を描く。「多様性」の欺瞞を突く問題作。"},
+  {year:2022,rank:8,title:"残月記",author:"小田雅久仁",genre:"SF",media:"",synopsis:"3つの中篇からなるダークファンタジー。圧倒的な筆力と世界観で話題をさらった怪作。"},
+  {year:2022,rank:9,title:"星落ちて、なお",author:"澤田瞳子",genre:"歴史",media:"",synopsis:"河鍋暁斎の娘・暁翠の数奇な生涯。女絵師として生きた明治の女性を描く直木賞受賞の歴史小説。"},
+  {year:2022,rank:10,title:"ザリガニの鳴くところ",author:"ディーリア・オーエンズ",genre:"ミステリ",media:"映画化",synopsis:"ノースカロライナの湿地帯で育った少女が殺人事件の容疑者となる。大自然と謎が溶け合う全米ベストセラー。"},
+  // 2021 第18回
+  {year:2021,rank:1,title:"52ヘルツのクジラたち",author:"町田そのこ",genre:"ヒューマン",media:"映画化",synopsis:"誰にも届かない52ヘルツの声で鳴くクジラになぞらえ、声なき叫びを抱えた人々の再生を描く。虐待・ヤングケアラー問題にも向き合う傑作。"},
+  {year:2021,rank:2,title:"推し、燃ゆ",author:"宇佐見りん",genre:"青春",media:"",synopsis:"推しのアイドルが炎上した。それでも推し続ける少女の狂おしい純粋さを描く。芥川賞受賞作。"},
+  {year:2021,rank:3,title:"お探し物は図書室まで",author:"青山美智子",genre:"お仕事",media:"",synopsis:"図書館で「本」を通じて人生を変えていく5人の物語。司書の一言が心に刺さる連作短編。"},
+  {year:2021,rank:4,title:"滅びの前のシャングリラ",author:"凪良ゆう",genre:"SF",media:"",synopsis:"1ヶ月後に小惑星が衝突し世界が終わる——それを知った4人それぞれの最後の日々。"},
+  {year:2021,rank:5,title:"犬がいた季節",author:"伊吹有喜",genre:"青春",media:"",synopsis:"ある高校の校門に迷い込んだ白い犬「コーシロー」と生徒たちの10年にわたる物語。"},
+  {year:2021,rank:6,title:"オルタネート",author:"加藤シゲアキ",genre:"青春",media:"",synopsis:"高校生専用マッチングアプリ「オルタネート」が舞台の青春小説。吉川英治文学新人賞受賞。"},
+  {year:2021,rank:7,title:"シャドウワーカー",author:"染井為人",genre:"ミステリ",media:"",synopsis:"闇バイトに手を染めた若者たちの転落を描く社会派サスペンス。現代の闇に迫るリアルな作品。"},
+  {year:2021,rank:8,title:"素敵な日本人",author:"東野圭吾",genre:"ミステリ",media:"",synopsis:"「素敵な日本人」と題した短編集。東野圭吾の多彩な才能が詰まった作品集。"},
+  {year:2021,rank:9,title:"自転しながら公転する",author:"山本文緒",genre:"ヒューマン",media:"ドラマ化",synopsis:"地方に帰省した女性が、恋と仕事と家族の板挟みに苦悩する。山本文緒の集大成ともいえる大人の恋愛小説。"},
+  {year:2021,rank:10,title:"という、はなし",author:"中田永一",genre:"青春",media:"",synopsis:"ラストに驚きが用意された連作短編集。巧みな語りと仕掛けが楽しい作品。"},
+  // 2020 第17回
+  {year:2020,rank:1,title:"流浪の月",author:"凪良ゆう",genre:"ヒューマン",media:"映画化",synopsis:"世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。"},
+  {year:2020,rank:2,title:"ライオンのおやつ",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"余命を知った女性が瀬戸内の島のホプスで過ごす最後の日々。人生で一番大切なものとは何かを問う感動作。"},
+  {year:2020,rank:3,title:"Medium 霊媒探偵城塚翡翠",author:"相沢沙呼",genre:"ミステリ",media:"ドラマ化",synopsis:"霊媒師を名乗る美女と推理作家のコンビが謎を解く。衝撃の反転が待ち受けるミステリ。"},
+  {year:2020,rank:4,title:"ノースライト",author:"横山秀夫",genre:"ミステリ",media:"ドラマ化",synopsis:"廃墟同然の家に誰も入居せず、依頼人も消えた——建築家が挑む謎。横山秀夫会心の本格長編。"},
+  {year:2020,rank:5,title:"熱源",author:"川越宗一",genre:"歴史",media:"",synopsis:"サハリン（樺太）を舞台に、アイヌ民族の男と反体制ポーランド人の交流を描く直木賞受賞の歴史大作。"},
+  {year:2020,rank:6,title:"むかしむかしあるところに、死体がありました。",author:"青柳碧人",genre:"ミステリ",media:"",synopsis:"昔話×本格ミステリ。「桃太郎」「鶴の恩返し」などを舞台に死体が転がるユニークな短編集。"},
+  {year:2020,rank:7,title:"AX アックス",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。「グラスホッパー」「マリアビートル」と並ぶ三部作完結編。"},
+  {year:2020,rank:8,title:"線は、僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。"},
+  {year:2020,rank:9,title:"在庫あり",author:"河崎秋子",genre:"お仕事",media:"",synopsis:"北海道を舞台に書店員の仕事と日常を描いた作品。"},
+  {year:2020,rank:10,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。"},
+  // 2019 第16回
+  {year:2019,rank:1,title:"そして、バトンは渡された",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。"},
+  {year:2019,rank:2,title:"ひと",author:"小野寺史宜",genre:"ヒューマン",media:"",synopsis:"突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。"},
+  {year:2019,rank:3,title:"そしてミランダを殺す",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
+  {year:2019,rank:4,title:"熱帯",author:"森見登美彦",genre:"SF",media:"",synopsis:"ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。"},
+  {year:2019,rank:5,title:"ある男",author:"平野啓一郎",genre:"ヒューマン",media:"映画化",synopsis:"死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。"},
+  {year:2019,rank:6,title:"さざなみのよる",author:"木皿泉",genre:"ヒューマン",media:"",synopsis:"「コウ」という女性の死後、彼女を知る多くの人を通して描かれる命の意味。"},
+  {year:2019,rank:7,title:"愛なき世界",author:"三浦しをん",genre:"お仕事",media:"ドラマ化",synopsis:"植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めきが交差する傑作。"},
+  {year:2019,rank:8,title:"ひとつむぎの手",author:"知念実希人",genre:"お仕事",media:"",synopsis:"医療系サスペンス。外科医を目指す研修医が巻き込まれる事件と命の現場を描く。"},
+  {year:2019,rank:9,title:"火のないところに煙は",author:"芦沢央",genre:"ミステリ",media:"",synopsis:"怪談話を集めるフリーライターが遭遇する実話怪談の恐怖。現実と非現実の境界が揺れる傑作ホラー。"},
+  {year:2019,rank:10,title:"フーガはユーガ",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"双子の兄弟が月に一度だけ入れ替わる「超能力」を使いながら生き抜く物語。伊坂幸太郎の新境地。"},
+  // 2018 第15回
+  {year:2018,rank:1,title:"かがみの孤城",author:"辻村深月",genre:"SF",media:"アニメ化",synopsis:"学校に居場所を失った7人の中学生が謎の城に招かれ「願いの部屋」の鍵を探す物語。伏線の収束が圧巻。映画・漫画化。"},
+  {year:2018,rank:2,title:"崩れる脳を抱きしめて",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"脳腫瘍を宣告された青年が故郷の島で出会った女性との純愛と謎。知念実希人の感動ミステリ。"},
+  {year:2018,rank:3,title:"盤上の向日葵",author:"柚月裕子",genre:"ミステリ",media:"ドラマ化",synopsis:"将棋の駒に秘められた殺人事件の真相を追う。将棋ミステリの傑作として高く評価された作品。"},
+  {year:2018,rank:4,title:"AX アックス",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。"},
+  {year:2018,rank:5,title:"屍人荘の殺人",author:"今村昌弘",genre:"ミステリ",media:"映画化",synopsis:"ゾンビが閉じ込める密室館で連続殺人が起きる。本格ミステリ+ゾンビという型破りな設定が話題に。"},
+  {year:2018,rank:6,title:"騙し絵の牙",author:"塩田武士",genre:"お仕事",media:"映画化",synopsis:"廃刊寸前の雑誌を守るため奮闘する編集長の物語。映画版も話題。"},
+  {year:2018,rank:7,title:"ツバキ文具店",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"先代から受け継いだ鎌倉の文具店を舞台に、代書屋として「手紙」を書くヒロインを描く。"},
+  {year:2018,rank:8,title:"どこへ行くのか、あの夏",author:"仙田学",genre:"青春",media:"",synopsis:"少年時代の記憶と、あの夏に置き忘れてきた感情を瑞々しく描く青春小説。"},
+  {year:2018,rank:9,title:"百貨の魔法",author:"村山早紀",genre:"SF",media:"",synopsis:"星野百貨店を舞台に描かれる人々の物語。温かく切ない百貨店ファンタジー。"},
+  {year:2018,rank:10,title:"琥珀の夏",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"カルト集団の跡地で発見された子どもの骨。かつてその施設に通っていた女性が真実を追う。"},
+  // 2017 第14回
+  {year:2017,rank:1,title:"蜜蜂と遠雷",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"国際ピアノコンクールを舞台に4人のピアニストの葛藤と音楽への情熱を描く。直木賞とのW受賞は史上初。映画化。"},
+  {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒューマン",media:"ドラマ化",synopsis:"学習塾を舞台に3世代にわたる家族の物語。教育と愛と仕事のあり方を問う大河小説。"},
+  {year:2017,rank:3,title:"罪の声",author:"塩田武士",genre:"ミステリ",media:"映画化",synopsis:"グリコ・森永事件をモデルにした未解決事件小説。テープに声を吹き込まされた子どもたちのその後を追う。映画化。"},
+  {year:2017,rank:4,title:"あの家に暮らす四人の女",author:"三浦しをん",genre:"ヒューマン",media:"ドラマ化",synopsis:"古い一軒家に暮らす女4人のおかしくも温かな共同生活。三浦しをんの軽妙な筆致が光るコメディ。"},
+  {year:2017,rank:5,title:"コンビニ人間",author:"村田沙耶香",genre:"ヒューマン",media:"",synopsis:"36歳未婚・コンビニバイト歴18年の女性が「普通」の人間社会に異議を唱える。芥川賞受賞作。"},
+  {year:2017,rank:6,title:"夜中にチーズをかじりながら",author:"群ようこ",genre:"青春",media:"",synopsis:"日々のちょっとした可笑しみや、大人の女性の日常を軽妙なエッセイタッチで描く。"},
+  {year:2017,rank:7,title:"友罪",author:"薬丸岳",genre:"ミステリ",media:"映画化",synopsis:"少年犯罪の加害者として生きる男と、その友人の葛藤を描く社会派サスペンス。映画化。"},
+  {year:2017,rank:8,title:"i",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"シリア人の父を持つ女性が「私」とは何かを問い続ける。第7回広島本大賞受賞。"},
+  {year:2017,rank:9,title:"真夜中の探偵",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"謎多き事件の裏側にある、人と人との心理的な繋がりを辻村深月が緊迫感たっぷりに描く。"},
+  {year:2017,rank:10,title:"影裏",author:"沼田真佑",genre:"ヒューマン",media:"映画化",synopsis:"岩手県を舞台に、男二人の友情と喪失を描く。芥川賞受賞作。"},
+  // 2016 第13回
+  {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を静謐な文体で綴る。北海道の森と音楽が織りなす美しい世界観。映画化。"},
+  {year:2016,rank:2,title:"海の見える理髪店",author:"荻原浩",genre:"ヒューマン",media:"ドラマ化",synopsis:"海辺の理髪店を舞台にした6つの物語。切なさと温かさが同居する直木賞受賞短編集。"},
+  {year:2016,rank:3,title:"わたしを離さないで",author:"カズオ・イシグロ",genre:"SF",media:"ドラマ化",synopsis:"提供者として生まれた子供たちの運命と愛。カズオ・イシグロのノーベル賞受賞作が日本でも再注目。"},
+  {year:2016,rank:4,title:"朝が来る",author:"辻村深月",genre:"ヒューマン",media:"映画化",synopsis:"特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。映画化。"},
+  {year:2016,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"父の死後、孤独に生きる女性編集者が社会との接点を取り戻していく物語。"},
+  {year:2016,rank:6,title:"君の膵臓をたべたい",author:"住野よる",genre:"青春",media:"映画化",synopsis:"膵臓の病気を持つ少女の日記を偶然見つけた少年との交流。病気を隠して生きる彼女の軌跡が胸を打つ青春小説。映画化。"},
+  {year:2016,rank:7,title:"永い言い訳",author:"西川美和",genre:"ヒューマン",media:"映画化",synopsis:"妻を突然失った作家が、同じ事故で夫を亡くした遺族と向き合う物語。映画化。"},
+  {year:2016,rank:8,title:"ちょっと今から仕事やめてくる",author:"北川恵海",genre:"お仕事",media:"映画化",synopsis:"過労で倒れた青年を救った「同級生」は実は死んでいた？ブラック企業問題を扱った感動作。映画化。"},
+  {year:2016,rank:9,title:"本屋さんのダイアナ",author:"柚木麻子",genre:"青春",media:"",synopsis:"ミスマッチな名前を持つ2人の少女の友情と決別を描く青春小説。"},
+  {year:2016,rank:10,title:"世界の果てのこどもたち",author:"中脇初枝",genre:"歴史",media:"",synopsis:"満洲からの引き揚げを通じて結ばれた女の子たちの数奇な人生。戦争と平和を問う感動の大作。"},
+  // 2015 第12回
+  {year:2015,rank:1,title:"鹿の王",author:"上橋菜穂子",genre:"SF",media:"アニメ化",synopsis:"謎の疫病と戦士の逃亡を軸に描く壮大なファンタジー。感染症と医療をテーマにした先見性ある世界観。アニメ映画化。"},
+  {year:2015,rank:2,title:"サラバ！",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"エジプト生まれの男性の数奇な半生。直木賞受賞作で、自分の信じるものについて深く問いかける大作。"},
+  {year:2015,rank:3,title:"ラプラスの魔女",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"ありえない事故連続を起こす謎の少女をめぐる東野圭吾のSFミステリ。映画化。"},
+  {year:2015,rank:4,title:"火花",author:"又吉直樹",genre:"青春",media:"映画化",synopsis:"芸人の生き様と師弟関係を描いた芥川賞受賞作。又吉直樹の作家デビューとして社会現象に。"},
+  {year:2015,rank:5,title:"王とサーカス",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"ネパールで起きた王族殺害事件を追う記者の物語。ジャーナリズムの倫理を問うミステリ。"},
+  {year:2015,rank:6,title:"戦場のコックたち",author:"深緑野分",genre:"ミステリ",media:"",synopsis:"第二次大戦下、アメリカ軍のコックとして戦地を転戦する男の日常と謎。戦争ミステリの傑作。"},
+  {year:2015,rank:7,title:"か「」く「」し「」ご「」と「",author:"住野よる",genre:"青春",media:"",synopsis:"5人の高校生それぞれが、少しだけ不思議な「能力」を持って生活する青春小説。"},
+  {year:2015,rank:8,title:"長いお別れ",author:"中島京子",genre:"ヒューマン",media:"映画化",synopsis:"アルツハイマー病の父と家族の10年を描く。笑いと涙が溢れる「良い別れ」の物語。映画化。"},
+  {year:2015,rank:9,title:"コーヒーが冷めないうちに",author:"川口俊和",genre:"SF",media:"映画化",synopsis:"過去に戻れる喫茶店で、様々な後悔を持つ人々が再び大切な人に会いに行く。映画化。"},
+  {year:2015,rank:10,title:"永遠と横道世之介",author:"吉田修一",genre:"青春",media:"映画化",synopsis:"長崎から上京した青年・横道世之介の大学生活。明るく人懐っこい主人公がすべての人の心を温める。映画化。"},
+  // 2014 第11回
+  {year:2014,rank:1,title:"村上海賊の娘",author:"和田竜",genre:"歴史",media:"",synopsis:"戦国時代を舞台に、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンターテインメント。圧倒的な戦闘描写とユーモアが魅力。"},
+  {year:2014,rank:2,title:"旅猫リポート",author:"有川浩",genre:"ヒューマン",media:"映画化",synopsis:"猫の「ナナ」と飼い主が旅をしながら昔の友人を訪ねる物語。人と猫の絆に涙が止まらない感動作。映画化。"},
+  {year:2014,rank:3,title:"ゼロ、ハチ、ゼロ、ナナ。",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"親友の母親殺しという衝撃的な出来事をめぐり、2人の女性の人生と友情を描く問題作。"},
+  {year:2014,rank:4,title:"キャプテンサンダーボルト",author:"阿部和重／伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"二大作家のコラボ。宮城・山形を舞台にしたロードノベル×サスペンス。"},
+  {year:2014,rank:5,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性と精神科医の物語。百田尚樹が正統派の心理ミステリに挑んだ作品。"},
+  {year:2014,rank:6,title:"四十九日のレシピ",author:"伊吹有喜",genre:"ヒューマン",media:"映画化",synopsis:"母の四十九日に集まった家族が残したレシピを通して絆を取り戻す。温かい家族の物語。映画化。"},
+  {year:2014,rank:7,title:"昨夜のカレー、明日のパン",author:"木皿泉",genre:"ヒューマン",media:"ドラマ化",synopsis:"夫を亡くした嫁と義父の奇妙な共同生活。食卓を通じて描かれる喪失と再生の物語。ドラマ化。"},
+  {year:2014,rank:8,title:"紙の月",author:"角田光代",genre:"ミステリ",media:"映画化",synopsis:"主婦が横領に手を染めていく経緯を描く。女性の欲望と社会の歪みを鋭くえぐる角田光代の問題作。映画化。"},
+  {year:2014,rank:9,title:"島はぼくらと",author:"辻村深月",genre:"青春",media:"",synopsis:"瀬戸内海の離島に生まれ育った4人の高校生の青春。地方と都会の狭間で揺れる若者たちを描く。"},
+  {year:2014,rank:10,title:"ハケンアニメ！",author:"辻村深月",genre:"お仕事",media:"映画化",synopsis:"アニメ業界を舞台に覇権を争うアニメーターたちの熱い物語。映画化。"},
+  // 2013 第10回
+  {year:2013,rank:1,title:"海賊とよばれた男",author:"百田尚樹",genre:"歴史",media:"映画化",synopsis:"石油業界に孤独に挑み続けた出光興産の創業者をモデルにした経済小説。映画化。"},
+  {year:2013,rank:2,title:"64（ロクヨン）",author:"横山秀夫",genre:"ミステリ",media:"映画化",synopsis:"昭和64年のたった7日間に起きた誘拐事件。その秘密が14年後に刑事部広報室を揺るがす。横山秀夫の代表作。映画化。"},
+  {year:2013,rank:3,title:"光媒の花",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"道尾秀介が描く6つの連作短編。それぞれの物語が緻密に絡み合い光を放つ傑作。"},
+  {year:2013,rank:4,title:"晴天の迷いクジラ",author:"窪美澄",genre:"ヒューマン",media:"",synopsis:"3人が乗り込んだクジラの座礁現場へと向かう車の中——それぞれの生きづらさと再生の物語。"},
+  {year:2013,rank:5,title:"七つの会議",author:"池井戸潤",genre:"お仕事",media:"映画化",synopsis:"大企業の不正を暴く会議室の攻防戦。池井戸ワールド全開の痛快企業小説。映画化。"},
+  {year:2013,rank:6,title:"楽園のカンヴァス",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"ルソーの絵画をめぐる謎と、アートをこよなく愛する人々の情熱を描く傑作アート小説。"},
+  {year:2013,rank:7,title:"一瞬の光",author:"曽根圭介",genre:"ミステリ",media:"",synopsis:"日常の裏に潜む人間の狂気や社会の不条理を、スリリングな展開で暴き出すサスペンス。"},
+  {year:2013,rank:8,title:"桜ノ雨",author:"降田天",genre:"青春",media:"映画化",synopsis:"初音ミクの国民的ボカロ曲をモチーフに、合唱部に所属する高校生たちの葛藤と未来を描く。"},
+  {year:2013,rank:9,title:"草祭",author:"恒川光太郎",genre:"SF",media:"",synopsis:"とある田舎町に伝わる伝説と怪異を描く連作短編。"},
+  {year:2013,rank:10,title:"くちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"長崎の中学校合唱部の物語。映画化。"},
+  {year:2013,rank:11,title:"ソロモンの偽証",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"中学校での死体発見と学内裁判を描く宮部みゆきの大作。映画化。"},
+  // 2012 第9回
+  {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった傑作。映画化・アニメ化。"},
+  {year:2012,rank:2,title:"ジェノサイド",author:"高野和明",genre:"SF",media:"",synopsis:"天才的知性を持つ少年と日本人研究者の物語が交錯するスケール壮大な冒険小説。山田風太郎賞受賞。"},
+  {year:2012,rank:3,title:"マスカレード・ホテル",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"高級ホテルを舞台に連続殺人の標的を守るため潜入捜査する刑事の物語。シリーズ第一弾。映画化。"},
+  {year:2012,rank:4,title:"鍵のない夢を見る",author:"辻村深月",genre:"ミステリ",media:"ドラマ化",synopsis:"女性の犯罪を描く5つの短編集。直木賞受賞作。"},
+  {year:2012,rank:5,title:"父・四十二歳の春",author:"高橋三千綱",genre:"ヒューマン",media:"",synopsis:"人生の折り返し地点に立った男の惑いと家族との心の交流を描いたヒューマンドラマ。"},
+  {year:2012,rank:6,title:"ピエタ",author:"大島真寿美",genre:"歴史",media:"",synopsis:"ヴィヴァルディを育てたヴェネツィアのピエタ院を舞台にした音楽小説。直木賞候補作。映画化。"},
+  {year:2012,rank:7,title:"ビブリア古書堂の事件手帖",author:"三上延",genre:"ミステリ",media:"映画化",synopsis:"古書店の謎めいた女主人と古書にまつわる謎。ライトミステリの大ヒットシリーズ第一弾。映画化。"},
+  {year:2012,rank:8,title:"みかみの恋のたりない",author:"高樹のぶ子",genre:"ヒューマン",media:"",synopsis:"現代を生きる大人の男女の、ままならない恋愛心理を艶やかに描いた恋愛小説。"},
+  {year:2012,rank:9,title:"リボルバー",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"ゴッホとゴーギャンをめぐるアートミステリ。"},
+  {year:2012,rank:10,title:"宿命と真実の炎",author:"佐々木譲",genre:"ミステリ",media:"",synopsis:"警察内部の思惑と、執念の捜査が交錯する本格警察ミステリの傑作。"},
+  // 2011 第8回
+  {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事と毒舌執事のコンビが難事件を解決するユーモアミステリー。軽妙な掛け合いが魅力。映画・ドラマ化。"},
+  {year:2011,rank:2,title:"利己的な遺伝子",author:"下村敦史",genre:"ミステリ",media:"",synopsis:"科学的なアプローチと人間の倫理観がぶつかり合う、先が読めないサスペンス。"},
+  {year:2011,rank:3,title:"ふたつのしるし",author:"宮下奈都",genre:"ヒューマン",media:"",synopsis:"宮下奈都が描く2人の物語。「羊と鋼の森」に続く静謐な作品世界。"},
+  {year:2011,rank:4,title:"折れた竜骨",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"中世ヨーロッパの孤島を舞台にした本格ミステリ。日本推理作家協会賞・山田風太郎賞受賞。映画化。"},
+  {year:2011,rank:5,title:"小さいおうち",author:"中島京子",genre:"歴史",media:"映画化",synopsis:"昭和初期の山の手の小さな家に仕えた女中の回想録。戦争と秘密を描く直木賞受賞作。映画化。"},
+  {year:2011,rank:6,title:"阪急電車",author:"有川浩",genre:"ヒューマン",media:"映画化",synopsis:"今津線の各駅停車に乗り合わせた乗客たちの小さな物語の連作。映画化。"},
+  {year:2011,rank:7,title:"光待つ場所へ",author:"辻村深月",genre:"青春",media:"",synopsis:"辻村作品の登場人物たちがクロスオーバーする、ファン必読の心温まる短編集。"},
+  {year:2011,rank:8,title:"その女アレックス",author:"ピエール・ルメートル",genre:"ミステリ",media:"",synopsis:"密室に拉致された女性と捜査陣の攻防。二転三転する衝撃のフランスミステリ。映画化。"},
+  {year:2011,rank:9,title:"出星前夜",author:"飯嶋和一",genre:"歴史",media:"",synopsis:"島原の乱を描く歴史大作。"},
+  {year:2011,rank:10,title:"下町ロケット",author:"池井戸潤",genre:"お仕事",media:"ドラマ化",synopsis:"中小企業がロケット部品の特許を武器に大企業と戦う感動の企業小説。直木賞受賞作。ドラマ化。"},
+  // 2010 第7回
+  {year:2010,rank:1,title:"天地明察",author:"冲方丁",genre:"歴史",media:"映画化",synopsis:"江戸時代、日本初の暦を作るべく生涯を賭けた渋川春海の物語。数学・天文学・囲碁を絡め、愛とロマンに満ちた本格歴史小説。映画化。"},
+  {year:2010,rank:2,title:"神様のカルテ",author:"夏川草介",genre:"お仕事",media:"映画化",synopsis:"信州の病院で働く内科医の日常。患者と向き合う医師の姿に涙が溢れる医療小説。映画化.●"},
+  {year:2010,rank:3,title:"ヘヴン",author:"川上未映子",genre:"青春",media:"",synopsis:"イジメられっ子2人が互いを支え合う青春小説。暴力の意味を問う衝撃的な結末が話題に。映画化。"},
+  {year:2010,rank:4,title:"猫を抱いて象と泳ぐ",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"將棋の世界を舞台に、奇妙な師匠と少年の交流を描く幻想的な物語。"},
+  {year:2010,rank:5,title:"神様のボート",author:"江國香織",genre:"ヒューマン",media:"ドラマ化",synopsis:"必ず戻ると言った恋人を娘と共に待ち続ける、狂気とも言える純愛と旅の物語。"},
+  {year:2010,rank:6,title:"悪の教典",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"優秀な高校教師が実は連続殺人鬼だったという衝撃作。映画化。"},
+  {year:2010,rank:7,title:"植物図鑑",author:"有川浩",genre:"青春",media:"映画化",synopsis:"行き倒れの男を拾ったOLとの恋愛と植物図鑑。有川浩の軽妙なラブストーリー。映画化。"},
+  {year:2010,rank:8,title:"スノーフレーク",author:"大崎梢",genre:"ミステリ",media:"映画化",synopsis:"日常の謎を解き明かす、爽やかで少し切ない青春ミステリの佳作。"},
+  {year:2010,rank:9,title:"戦友の恋",author:"大沼紀子",genre:"ヒューマン",media:"",synopsis:"現代を生きる若者たちの、友情と恋愛のはざまで揺れるリアルな感情を描く。"},
+  {year:2010,rank:10,title:"ゴールデンタイム",author:"片山恭一",genre:"ヒューマン",media:"",synopsis:"『世界の中心で、愛をさけぶ』の著者が描く、喪失からの再生を見つめる人間ドラマ。"},
+  // 2009 第6回
+  {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"娘を殺した犯人への教師の復讐を複数視点で描くダーク・ミステリー。イヤミスの最高峰と称される衝撃作。映画化。"},
+  {year:2009,rank:2,title:"砂漠",author:"伊坂幸太郎",genre:"青春",media:"",synopsis:"大学生5人の4年間を描く青春小説。伊坂幸太郎の作品の中でも特に読者人気が高い代表作。映画化。"},
+  {year:2009,rank:3,title:"ガール",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"職場の現実を生きる女性たちをユーモラスに描く連作短編。奥田英朗の人気シリーズ。映画化。"},
+  {year:2009,rank:4,title:"赤い指",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"家族が隠した殺人を追う加賀恭一郎シリーズ。家族の崩壊と再生を描くミステリ。映画化。"},
+  {year:2009,rank:5,title:"流星の絆",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"両親を惨殺された3兄妹の復讐と思わぬ展開。東野圭吾の本格長編。ドラマ化。"},
+  {year:2009,rank:6,title:"終末のフール",author:"伊坂幸太郎",genre:"SF",media:"ドラマ化",synopsis:"8年後に小惑星が衝突すると判明した5年後——それでも生きる人々を描く連作短編。"},
+  {year:2009,rank:7,title:"切羽へ",author:"井上荒野",genre:"ヒューマン",media:"",synopsis:"孤島の診療所に務める女性と島の男との禁断の恋。直木賞受賞作。"},
+  {year:2009,rank:8,title:"ひと月の月",author:"川上弘美",genre:"ヒューマン",media:"",synopsis:"日常のきらめきと、男女の曖昧で愛おしい距離感を独特の筆致で描く短編集。"},
+  {year:2009,rank:9,title:"新参者",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"下町・日本橋に赴任した刑事・加賀恭一郎が地元住民に寄り添いながら謎を解くシリーズ。映画化。"},
+  {year:2009,rank:10,title:"わたしの彼氏",author:"金原ひとみ",genre:"ヒューマン",media:"",synopsis:"過剰な自意識と恋愛のリアルな痛みを鮮烈に描き出す、金原ひとみの意欲作。"},
+  // 2008 第5回
+  {year:2008,rank:1,title:"ゴールデンスランバー",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"首相暗殺犯に仕立てられた青年・青柳雅春が仙台を逃げ続ける。友情とビートルズの名曲を軸にしたエンタメ巨篇。映画化。"},
+  {year:2008,rank:2,title:"悼む人",author:"天童荒太",genre:"ヒューマン",media:"映画化",synopsis:"全国を旅して故人を「悼む」男を追うロードノベル。直木賞受賞作。映画化。"},
+  {year:2008,rank:3,title:"夜は短し歩けよ乙女",author:"森見登美彦",genre:"SF",media:"アニメ化",synopsis:"京都の街を歩く「黒髪の乙女」と彼女を追う先輩の恋愛ファンタジー。アニメ映画化。"},
+  {year:2008,rank:4,title:"チームバチスタの栄光",author:"海堂尊",genre:"お仕事",media:"映画化",synopsis:"大学病院の心臓手術チームの不審死を探る医療ミステリ。映画・ドラマ化。"},
+  {year:2008,rank:5,title:"新世界より",author:"貴志祐介",genre:"SF",media:"アニメ化",synopsis:"1000年後の日本を舞台にした圧倒的スケールのディストピアSF。日本SF大賞受賞。アニメ化。"},
+  {year:2008,rank:6,title:"モンスター",author:"百田尚樹",genre:"ヒューマン",media:"映画化",synopsis:"美容整形で美しくなった女性の波乱の人生を描く。百田尚樹の本格長編。映画化。"},
+  {year:2008,rank:7,title:"切り裂きジャックの告白",author:"高野史緒",genre:"ミステリ",media:"",synopsis:"近代ロンドンを震撼させた殺人鬼が現代の日本に現れたら？奇抜な設定の知性派ミステリ。"},
+  {year:2008,rank:8,title:"終わらない歌",author:"宮部みゆき",genre:"SF",media:"",synopsis:"「ブレイブ・ストーリー」の世界を舞台にした冒険小説。"},
+  {year:2008,rank:9,title:"真夜中のもう一人の僕",author:"坂木司",genre:"青春",media:"",synopsis:"優しい日常系ミステリの旗手が描く、自分自身と向き合う若者の成長譚。"},
+  {year:2008,rank:10,title:"死神の精度",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"7日間で対象者の「死」を判断する死神を主人公にした連作短編。映画化。"},
+  // 2007 第4回
+  {year:2007,rank:1,title:"一瞬の風になれ",author:"佐藤多佳子",genre:"青春",media:"ドラマ化",synopsis:"陸上短距離を舞台に、二人の高校生がリレーのアンカーを目指す青春小説。疾走感あふれる文体が胸を打つ三部作。"},
+  {year:2007,rank:2,title:"風が強く吹いている",author:"三浦しをん",genre:"青春",media:"アニメ化",synopsis:"箱根駅伝を目指す弱小陸上部の物語。チームと個人の成長を描く三浦しをんの代表作。アニメ映画化。"},
+  {year:2007,rank:3,title:"ひとりっ子同盟",author:"那須正幹",genre:"青春",media:"",synopsis:"ズッコケ三人組の著者が描く、昭和の子どもたちの友情とささやかな冒険。"},
+  {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来事を描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
+  {year:2007,rank:5,title:"女王の百年密室",author:"森博嗣",genre:"SF",media:"",synopsis:"孤立した独自の文明を持つ都市で起きる不可解な事件。森博嗣流の哲学系SFミステリ。"},
+  {year:2007,rank:6,title:"エイジ",author:"重松清",genre:"青春",media:"ドラマ化",synopsis:"同級生が事件を起こした——。多感な中学2年生のリアルな心理と日常を紡ぐ青春小説。"},
+  {year:2007,rank:7,title:"容疑者Xの献身",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"天才数学者が愛する女性のために完全犯罪を企てる。ガリレオシリーズの傑作。映画化。"},
+  {year:2007,rank:8,title:"赤朽葉家の伝説",author:"桜庭一樹",genre:"歴史",media:"",synopsis:"山陰の旧家・赤朽葉家の3代にわたる女性たちの物語。桜庭一樹が日本推理作家協会賞を受賞した大作。"},
+  {year:2007,rank:9,title:"理由",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"荒川区の高層マンションで起きた一家4人殺害事件を追う。直木賞受賞の傑作ミステリ。"},
+  {year:2007,rank:10,title:"その日のまえに",author:"重松清",genre:"ヒューマン",media:"映画化",synopsis:"家族の死と向き合う物語。重松清が描く喪失と再生の感動作。映画化。"},
+  // 2006 第3回
+  {year:2006,rank:1,title:"東京タワー〜オカンとボクと、時々、オトン〜",author:"リリー・フランキー",genre:"ヒューマン",media:"映画化",synopsis:"著者の実体験をもとに母との絆を綴った自伝的小説。ユーモアと深い悲しみが共存する感動の「母と息子」の物語。映画・ドラマ化。"},
+  {year:2006,rank:2,title:"陰日向に咲く",author:"劇団ひとり",genre:"ヒューマン",media:"映画化",synopsis:"有名芸人によるデビュー小説。笑いと感動が同居する連作短編集。映画化。"},
+  {year:2006,rank:3,title:"チルドレン",author:"伊坂幸太郎",genre:"ヒューマン",media:"ドラマ化",synopsis:"家裁調査官・坂木を中心にした連作短編。独自のユーモアと優しさが溢れる伊坂幸太郎の人気作。"},
+  {year:2006,rank:4,title:"告白",author:"町田康",genre:"ヒューマン",media:"映画化",synopsis:"不運な男が語る自分の人生。笑いながらも深い孤独を覚える直木賞受賞作。映画化。"},
+  {year:2006,rank:5,title:"私の男",author:"桜庭一樹",genre:"ヒューマン",media:"映画化",synopsis:"養父と養女の禁断の愛を描く直木賞受賞作。衝撃的な設定と文学的完成度が高く評価された。映画化。"},
+  {year:2006,rank:6,title:"僕は勉強ができない",author:"山田詠美",genre:"青春",media:"",synopsis:"勉強より恋愛を選ぶ高校生・秀美の爽快な青春小説。"},
+  {year:2006,rank:7,title:"星のみなし子",author:"荻原規子",genre:"歴史",media:"",synopsis:"古代日本の神話をベースにした、圧倒的な筆力で魅せる至高のファンタジー。"},
+  {year:2006,rank:8,title:"魔王",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"超能力を持つ兄弟が独裁者の台頭に抵抗する社会派小説。漫画化。"},
+  // 2005 第2回
+  {year:2005,rank:1,title:"夜のピクニック",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"高校最後の行事「歩行祭」の一夜を、ある秘密を胸に歩き続ける主人公の決意とともに描く青春小説。映画化。"},
+  {year:2005,rank:2,title:"サウスバウンド",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"元過激派活動家の父と子どもたちが沖縄の離島で生活する痛快家族小説。映画化。"},
+  {year:2005,rank:3,title:"家族狩り",author:"天童荒太",genre:"ヒューマン",media:"ドラマ化",synopsis:"家族の絆と崩壊を描く壮大な物語。直木賞候補作。ドラマ化。"},
+  {year:2005,rank:4,title:"四日間の奇蹟",author:"浅倉卓弥",genre:"ヒューマン",media:"映画化",synopsis:"山中の診療所を舞台にした奇跡の物語。映画化。"},
+  {year:2005,rank:5,title:"スターターズ",author:"リサ・プライス",genre:"SF",media:"",synopsis:"若さと肉体が売買される近未来。スリリングな展開が止まらない海外SF。"},
+  {year:2005,rank:6,title:"邪悪な少女",author:"高橋克彦",genre:"ミステリ",media:"",synopsis:"一見無垢な少女の裏に隠された悪意。ベテランが描く戦慄のサイコホラー。"},
+  {year:2005,rank:7,title:"暗いところで待ち合わせ",author:"乙一",genre:"ヒューマン",media:"映画化",synopsis:"暗闇の中で起きた事件をめぐる2人の物語。乙一の繊細で切ない作風が光る。映画化。"},
+  {year:2005,rank:8,title:"死神の浮力",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"「死神の精度」の続編。死神が浮力の謎を持つ事件に向き合う。"},
+  // 2004 第1回
+  {year:2004,rank:1,title:"博士の愛した数式",author:"小川洋子",genre:"ヒューマン",media:"映画化",synopsis:"記憶が80分しか持続しない数学者と家政婦、その息子の交流を描く。素数と野球をめぐる知的な愛情物語が読者の心を清らかにする。映画・ドラマ化。"},
+  {year:2004,rank:2,title:"クライマーズ・ハイ",author:"横山秀夫",genre:"お仕事",media:"映画化",synopsis:"日航機墜落事故を報じる地方新聞記者の奮闘を描く傑作。映画・ドラマ化。"},
+  {year:2004,rank:3,title:"4TEEN",author:"石田衣良",genre:"青春",media:"映画化",synopsis:"下町に住む14歳4人組の夏休みを描く青春小説。第25回吉川英治文学新人賞受賞。映画化。"},
+  {year:2004,rank:4,title:"盲目的な恋と友情",author:"辻村深月",genre:"ヒューマン",media:"",synopsis:"愛ゆえの盲目、友情ゆえの嫉妬。女性同士の濃密な関係性を抉り出す傑作小説。"},
+  {year:2004,rank:5,title:"世界の終わりとハードボイルド・ワンダーランド",author:"村上春樹",genre:"SF",media:"",synopsis:"並行する二つの物語が語り手の意識の中で交差する。村上春樹の長篇小説の代表作のひとつ。"},
+  {year:2004,rank:6,title:"永遠の仔",author:"天童荒太",genre:"ヒューマン",media:"ドラマ化",synopsis:"幼少期の傷を抱えた3人の再会を描く壮大な小説。映画・ドラマ化。"},
+  {year:2004,rank:7,title:"黒い家",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"保険調査員が出会う本物の狂気。日本ホラー小説大賞受賞の傑作ホラー。映画化。"},
+  {year:2004,rank:8,title:"あの夏の誰か",author:"三島由紀夫",genre:"青春",media:"",synopsis:"美しき青年たちの愛憎と、夏の光の中に消えゆく儚さを描いた古典名作。"},
+  {year:2004,rank:9,title:"スコーレNo.4",author:"宮下奈都",genre:"青春",media:"",synopsis:"自分の居場所を探し求める少女の葛藤と成長を、優しく瑞々しい筆致で描くデビュー作。"},
+  {year:2004,rank:10,title:"対岸の彼女",author:"角田光代",genre:"ヒューマン",media:"映画化",synopsis:"現代女性の友情と孤立を描く直木賞受賞作。映画化。"},
+];
+
+// ─── 各アフィリエイトURL生成ロジック ───
+function getAmazonKindleLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author);
+  return `https://www.amazon.co.jp/s?k=${q}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
+}
+function getAmazonPaperLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author);
+  return `https://www.amazon.co.jp/s?k=${q}&tag=${AMAZON_TAG}`;
+}
+function getRakutenLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author);
+  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
+}
+
+// ─── Google Books API 書影ロード（クエリ最適化） ───
+const coverCache = {};
+async function fetchCover(title, author) {
+  const cleanTitle = title.split(/[〜～─━:-]/)[0].trim();
+  const key = title + '|' + author;
+  
+  if (coverCache[key] !== undefined) return coverCache[key];
+  coverCache[key] = null; 
+
+  try {
+    const q = encodeURIComponent(`${cleanTitle} ${author}`);
+    const res = await fetch(`https://www.googleapis.com/books/v1/volumes?q=${q}&maxResults=3&langRestrict=ja`);
+    const d = await res.json();
+    
+    if (d.items && d.items.length > 0) {
+      for (const item of d.items) {
+        const volumeInfo = item.volumeInfo;
+        if (volumeInfo && volumeInfo.imageLinks) {
+          const links = volumeInfo.imageLinks;
+          const rawUrl = links.thumbnail || links.smallThumbnail || links.medium || links.large;
+          if (rawUrl) {
+            let url = rawUrl.replace('http:', 'https:');
+            if (!url.includes('zoom=')) {
+              url += '&zoom=1';
+            }
+            coverCache[key] = url;
+            break; 
+          }
+        }
+      }
+    }
+  } catch(e) {
+    console.error("Cover fetch error:", e);
+  }
+  return coverCache[key];
+}
+
+function rankBadgeHTML(r, y) {
+  const base = r === 1 ? 'r1' : (r === 2 ? 'r2' : (r === 3 ? 'r3' : 'rn'));
+  const txt = r === 1 ? '大賞' : `${r}位`;
+  return `<div class="rank-badge ${base}">${txt}</div>`;
+}
+
+function cardHTML(b) {
+  const coverKey = `cover-${b.year}-${b.rank}`;
+  const isTop = b.rank === 1;
+  const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
+
+  return `
+<article class="card${isTop?' rank-1':''}" data-year="${b.year}" data-rank="${b.rank}">
+  <div class="cover-wrap">
+    ${rankBadgeHTML(b.rank, b.year)}
+    <div class="year-badge">${b.year}年</div>
+    <div class="placeholder" id="ph-${coverKey}">
+      <span class="placeholder-title">${b.title}</span>
+      <span class="placeholder-author">${b.author}</span>
+    </div>
+    <img id="img-${coverKey}" src="" alt="${b.title}" style="opacity:0; display:block;" loading="lazy">
+  </div>
+  <div class="card-body">
+    <div class="tag-container">
+      <span class="genre-badge">${b.genre}</span>
+      ${mediaBadgeHTML}
+    </div>
+    <div class="book-title">${b.title}</div>
+    <div class="book-author">${b.author} 著</div>
+    ${b.synopsis ? `<p class="synopsis">${b.synopsis}</p>` : ''}
+  </div>
+  <div class="card-foot">
+    <a class="btn-kindle" href="${getAmazonKindleLink(b.title, b.author)}" target="_blank" rel="noopener">📱 Kindleで読む</a>
+    <a class="btn-rakuten" href="${getRakutenLink(b.title, b.author)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>
+    <a class="btn-paper" href="${getAmazonPaperLink(b.title, b.author)}" target="_blank" rel="noopener">紙の本</a>
+  </div>
+</article>`;
+}
+
+function getDecade(y) {
+  if (y >= 2020) return '2020s';
+  if (y >= 2010) return '2010s';
+  return '2000s';
+}
+
+function getFiltered() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  return BOOKS.filter(b => {
+    const rankOk = filterRank === 'all' || (filterRank === '1' && b.rank === 1);
+    const decadeOk = filterDecade === 'all' || filterDecade === getDecade(b.year);
+    const genreOk = filterGenre === 'all' || filterGenre === b.genre;
+    const mediaOk = filterMedia === 'all' || (filterMedia === 'yes' && b.media !== "");
+    const qOk = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || (b.synopsis && b.synopsis.toLowerCase().includes(q));
+    return rankOk && decadeOk && genreOk && mediaOk && qOk;
+  });
+}
+
+function render() {
+  const filtered = getFiltered();
+  document.getElementById('result-info').textContent = `${filtered.length}件を表示中`;
+
+  const content = document.getElementById('content');
+  if (!filtered.length) {
+    content.innerHTML = '<div class="no-res">該当する作品が見つかりませんでした</div>';
+    return;
+  }
+
+  content.innerHTML = filtered.map(b => cardHTML(b)).join('');
+
+  // 書影の非同期ロード
+  filtered.forEach(b => {
+    const coverKey = `cover-${b.year}-${b.rank}`;
+    fetchCover(b.title, b.author).then(url => {
+      if (url) {
+        const img = document.getElementById(`img-${coverKey}`);
+        const ph = document.getElementById(`ph-${coverKey}`);
+        if (img) {
+          img.src = url;
+          img.onload = () => {
+            img.style.opacity = '1';
+            if (ph) ph.style.display = 'none';
+          };
+        }
+      }
+    });
+  });
+}
+
+function setRankFilter(el) {
+  filterRank = el.dataset.r;
+  document.querySelectorAll('#chips-rank .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+
+function setDecadeFilter(el) {
+  filterDecade = el.dataset.d;
+  document.querySelectorAll('#chips-decade .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+
+function setGenreFilter(el) {
+  filterGenre = el.dataset.g;
+  document.querySelectorAll('#chips-genre .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+
+function setMediaFilter(el) {
+  filterMedia = el.dataset.m;
+  document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  render();
+}
+
+// 初期化
+document.addEventListener('DOMContentLoaded', () => {
+  render();
+  document.getElementById('loader').classList.add('done');
+});
+</script>
+</body>
+</html>
