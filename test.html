@@ -1,68 +1,176 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <title>楽天API 書影取得テスト</title>
-    <style>
-        body { font-family: sans-serif; padding: 40px; text-align: center; background: #faf8f3; }
-        .box { background: white; border: 1px solid #ccc; padding: 20px; display: inline-block; border-radius: 8px; }
-        #cover { width: 200px; min-height: 280px; background: #eee; display: block; margin: 10px auto; object-fit: cover; }
-        #status { color: #666; font-size: 14px; margin-top: 10px; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>楽天ブックスAPI 書影取得テスト</title>
+<style>
+  body { font-family: sans-serif; max-width: 900px; margin: 2rem auto; padding: 0 1rem; background: #f9f9f9; }
+  h1 { font-size: 1.4rem; margin-bottom: 1.5rem; }
+
+  .search-row { display: flex; gap: 8px; margin-bottom: 1.5rem; }
+  .search-row input { flex: 1; padding: 10px 14px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; }
+  .search-row button { padding: 10px 20px; background: #bf0000; color: #fff; border: none; border-radius: 6px; font-size: 15px; cursor: pointer; }
+  .search-row button:hover { background: #990000; }
+
+  #status { margin-bottom: 1rem; font-size: 13px; color: #666; min-height: 1.5em; }
+  #status.error { color: #c00; font-weight: bold; }
+  #status.ok    { color: #080; font-weight: bold; }
+
+  .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 16px; }
+  .card { background: #fff; border: 1px solid #e0e0e0; border-radius: 8px; overflow: hidden; font-size: 12px; }
+  .cover { width: 100%; aspect-ratio: 2/3; object-fit: cover; display: block; background: #eee; }
+  .cover-placeholder { width: 100%; aspect-ratio: 2/3; background: #ddd; display: flex; align-items: center; justify-content: center; font-size: 11px; color: #888; text-align: center; padding: 4px; }
+  .card-info { padding: 6px 8px 8px; }
+  .card-title { font-weight: bold; line-height: 1.4; margin-bottom: 3px; display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-author { color: #555; margin-bottom: 2px; display: -webkit-box; -webkit-line-clamp: 1; -webkit-box-orient: vertical; overflow: hidden; }
+  .card-pub { color: #888; }
+
+  /* デバッグパネル */
+  details { margin-top: 2rem; background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 12px; }
+  summary { cursor: pointer; font-size: 13px; color: #555; }
+  pre { font-size: 11px; overflow: auto; max-height: 300px; margin-top: 8px; white-space: pre-wrap; word-break: break-all; }
+</style>
 </head>
 <body>
 
-<div class="box">
-    <h2>『イン・ザ・メガチャーチ』</h2>
-    <p>朝井リョウ 著</p>
-    
-    <img id="cover" src="" alt="書影プレースホルダー">
-    
-    <div id="status">API通信中...</div>
+<h1>📚 楽天ブックスAPI — 書影取得テスト</h1>
+
+<div class="search-row">
+  <input type="text" id="keyword" value="成瀬は天下を取りにいく" placeholder="書名・著者名を入力">
+  <button onclick="search()">検索</button>
 </div>
 
+<div id="status">← キーワードを入力して検索してください</div>
+<div class="grid" id="grid"></div>
+
+<details>
+  <summary>🛠 APIレスポンス（デバッグ用）</summary>
+  <pre id="debug">（まだ検索していません）</pre>
+</details>
+
 <script>
-// 元のソースと同じアプリID
-const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1';
+const APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1';
 
-// 検索キーワード
-const title = "イン・ザ・メガチャーチ";
-const author = "朝井リョウ";
+// ── JSONP ヘルパー ──────────────────────────────────────────
+// 楽天APIはCORSヘッダー非対応のため、fetch()は使えません。
+// callbackパラメータを付けてscriptタグで読み込むJSONP方式を使います。
+let callbackCounter = 0;
 
-// 1. 楽天APIから結果が返ってきたときに実行される関数（コールバック）
-window.rakutenTestCallback = function(data) {
-    const statusEl = document.getElementById('status');
-    const imgEl = document.getElementById('cover');
-
-    // APIエラーや該当データがない場合
-    if (!data || data.error || !data.Items || data.Items.length === 0) {
-        statusEl.innerHTML = `<span style="color:red;">❌ 取得失敗しました。</span><br>理由: ${data?.error_description || '該当する本が見つかりません（またはID無効）'}`;
-        return;
-    }
-
-    // 成功した場合、1件目の本の画像URLを取得
-    const item = data.Items[0].Item;
-    const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
-
-    if (rawUrl) {
-        const httpsUrl = rawUrl.replace('http:', 'https:');
-        imgEl.src = httpsUrl;
-        statusEl.innerHTML = `<span style="color:green;">▲ 取得成功！</span><br>正式名称: ${item.title}`;
-    } else {
-        statusEl.innerText = "❌ 本の情報はありましたが、画像URLが空でした。";
-    }
-};
-
-// 2. 画面を開いた瞬間に、楽天APIを叩くscriptタグを動的に注入する処理
-document.addEventListener('DOMContentLoaded', () => {
+function jsonp(url) {
+  return new Promise((resolve, reject) => {
+    const cbName = `_rakutenCb${callbackCounter++}`;
     const script = document.createElement('script');
-    
-    // 楽天ブックス書籍検索APIのURL（callbackに上記の関数名を指定）
-    script.src = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${RAKUTEN_APP_ID}&title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&hits=1&callback=rakutenTestCallback`;
-    
-    document.body.appendChild(script);
+
+    // タイムアウト（10秒）
+    const timer = setTimeout(() => {
+      cleanup();
+      reject(new Error('タイムアウト（10秒）'));
+    }, 10000);
+
+    function cleanup() {
+      clearTimeout(timer);
+      delete window[cbName];
+      if (script.parentNode) script.parentNode.removeChild(script);
+    }
+
+    window[cbName] = (data) => {
+      cleanup();
+      resolve(data);
+    };
+
+    script.src = `${url}&callback=${cbName}`;
+    script.onerror = () => {
+      cleanup();
+      reject(new Error('スクリプト読み込みエラー'));
+    };
+    document.head.appendChild(script);
+  });
+}
+
+// ── 検索メイン ──────────────────────────────────────────────
+async function search() {
+  const keyword = document.getElementById('keyword').value.trim();
+  if (!keyword) return;
+
+  const status = document.getElementById('status');
+  const grid   = document.getElementById('grid');
+  const debug  = document.getElementById('debug');
+
+  status.className = '';
+  status.textContent = '🔍 検索中…';
+  grid.innerHTML = '';
+  debug.textContent = '取得中…';
+
+  // 楽天ブックス書籍検索API
+  // https://webservice.rakuten.co.jp/documentation/books-book-search
+  const apiUrl = [
+    'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404',
+    `?applicationId=${APP_ID}`,
+    `&title=${encodeURIComponent(keyword)}`,
+    '&hits=30',         // 最大30件
+    '&imageFlag=1',     // 書影URLを含める
+    '&formatVersion=2', // レスポンスをフラット化（Items[].Item → Items[]）
+  ].join('');
+
+  try {
+    const data = await jsonp(apiUrl);
+
+    // デバッグ表示（最初の1件のみ）
+    const sample = data.Items ? data.Items[0] : data;
+    debug.textContent = JSON.stringify(sample, null, 2);
+
+    if (!data.Items || data.Items.length === 0) {
+      status.className = 'error';
+      status.textContent = '❌ 該当する書籍が見つかりませんでした。';
+      return;
+    }
+
+    // formatVersion=2 の場合は Items[] がフラット（Item階層なし）
+    // formatVersion=1 の場合は Items[].Item
+    const items = data.Items.map(i => i.Item || i);
+
+    status.className = 'ok';
+    status.textContent = `✅ ${items.length}件取得成功（全${data.count}件中）`;
+
+    grid.innerHTML = items.map(item => {
+      // 書影URL: largeImageUrl > mediumImageUrl > smallImageUrl
+      const imgUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl || '';
+
+      const coverHtml = imgUrl
+        ? `<img class="cover" src="${imgUrl}" alt="${escHtml(item.title)}" loading="lazy">`
+        : `<div class="cover-placeholder">書影なし</div>`;
+
+      return `
+      <div class="card">
+        ${coverHtml}
+        <div class="card-info">
+          <div class="card-title">${escHtml(item.title)}</div>
+          <div class="card-author">${escHtml(item.author || '著者不明')}</div>
+          <div class="card-pub">${escHtml(item.publisherName || '')}</div>
+        </div>
+      </div>`;
+    }).join('');
+
+  } catch (err) {
+    status.className = 'error';
+    status.textContent = `❌ エラー: ${err.message}`;
+    debug.textContent = err.toString();
+  }
+}
+
+function escHtml(str) {
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;');
+}
+
+// Enterキーでも検索できるように
+document.getElementById('keyword').addEventListener('keydown', e => {
+  if (e.key === 'Enter') search();
 });
 </script>
-
 </body>
 </html>
