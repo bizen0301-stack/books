@@ -198,10 +198,13 @@ footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.75rem;text-al
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
 
 <script>
-// ─── アフィリエイト・API設定 ───
+// ─── アフィリエイト・API設定（2026年最新セキュリティ仕様） ───
 const AMAZON_TAG = 'wespressoblog-22'; 
 const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
-const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; //
+
+// 🔴 ここにお手持ちの「本物の楽天アプリID」と「Access Key」を入力してください
+const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
+const RAKUTEN_ACCESS_KEY = 'pk_w4t1wF8ZHMfpK5JFK7MVXW86wI3hMEF5vZSc4ikgUou'; 
 
 let filterRank = 'all';
 let filterDecade = 'all';
@@ -222,7 +225,7 @@ const BOOKS = [
   {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く、瀬尾まいこらしい温かな物語。"},
   {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相が楽しいエンタメ作。"},
   {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミステリ。"},
-  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男。伊坂幸太郎流のユーモアと緊張感が同居するサスペンス。"},
+  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男.伊坂幸太郎流のユーモアと緊張感が同居するサスペンス。"},
   // 2025 第22回
   {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草のこと。言葉の温もりをテーマにした愛の物語。"},
   {year:2025,rank:2,title:"アルプス席の母",author:"早見和真",genre:"ヒューマン",media:"",synopsis:"野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く。スポーツと家族の絆が交差する感動作。"},
@@ -254,7 +257,7 @@ const BOOKS = [
   {year:2023,rank:6,title:"向日葵の咲かない夏",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。"},
   {year:2023,rank:7,title:"栞と嘘の季節",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。"},
   {year:2023,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"母違いの二人の「宙」の物語。食を通じて描く家族の再生と新しいつながり。"},
-  {year:2023,rank:9,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"",synopsis:"地下に閉じ込められた9人と1人の殺人犯。脱出するには1人を犠牲にしなければならない究極のサバイバルミステリ。"},
+  {year:2023,rank:9,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"映画化",synopsis:"地下に閉じ込められた9人と1人の殺人犯。脱出するには1人を犠牲にしなければならない究極のサバイバルミステリ。"},
   {year:2023,rank:10,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"生きることの苦しさと希望を、二人の若者の友情を通して描く。西加奈子の代表作になり得る渾身作。"},
   // 2022 第19回
   {year:2022,rank:1,title:"同志少女よ、敵を撃て",author:"逢坂冬馬",genre:"歴史",media:"",synopsis:"独ソ戦を舞台に、家族を殺された少女が女性狙撃手として戦場を生き抜く衝撃の戦争小説。デビュー作にして本屋大賞・アガサ賞W受賞。"},
@@ -308,7 +311,7 @@ const BOOKS = [
   {year:2018,rank:5,title:"屍人荘の殺人",author:"今村昌弘",genre:"ミステリ",media:"映画化",synopsis:"ゾンビが閉じ込める密室館で連続殺人が起きる。本格ミステリ+ゾンビという型破りな設定が話題に。"},
   {year:2018,rank:6,title:"騙し絵の牙",author:"塩田武士",genre:"お仕事",media:"映画化",synopsis:"返刊寸前の雑誌を守るため奮闘する編集長の物語。映画版も話題。"},
   {year:2018,rank:7,title:"ツバキ文具店",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"先代から受け継いだ鎌倉の文具店を舞台に、代書屋として「手紙」を書くヒロインを描く。"},
-  {year:2018,rank:8,title:"どこへ行くのか、あの夏",author:"仙田学",genre:"青春",media:"",synopsis:"少年時代の記憶と、あの夏に置き忘れてきた感情を瑞々しく描く青春小説。"},
+  {year:2018,rank:8,title:"どこへ行くのか、あの夏",author:"仙田学",genre:"青春",media:"",synopsis:"少年時代の記憶と、あの夏に置き忘れたきた感情を瑞々しく描く青春小説。"},
   {year:2018,rank:9,title:"百貨の魔法",author:"村山早紀",genre:"SF",media:"",synopsis:"星野百貨店を舞台に描かれる人々の物語。温かく切ない百貨店ファンタジー。"},
   {year:2018,rank:10,title:"琥珀の夏",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"カルト集団の跡地で発見された子どもの骨。かつてその施設に通っていた女性が真実を追う。"},
   // 2017 第14回
@@ -347,7 +350,7 @@ const BOOKS = [
   // 2014 第11回
   {year:2014,rank:1,title:"村上海賊の娘",author:"和田竜",genre:"歴史",media:"",synopsis:"戦国時代を舞台に、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンターテインメント。圧倒的な戦闘描写とユーモアが魅力。"},
   {year:2014,rank:2,title:"旅猫リポート",author:"有川浩",genre:"ヒューマン",media:"映画化",synopsis:"猫の「ナナ」と飼い主が旅をしながら昔の友人を訪ねる物語。人と猫の絆に涙が止まらない感動作。映画化。"},
-  {year:2014,rank:3,title:"ゼロ、ハチ、ゼロ、ナナ。",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"親友の母親殺しという衝撃的な出来事をめぐり、2人の女性の人生と友情を描く問題作。"},
+  {year:2014,rank:3,title:"ゼロ、ハチ、ゼロ、ナナ。",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"親友の母親殺しという衝撃的な出来さをめぐり、2人の女性の人生と友情を描く問題作。"},
   {year:2014,rank:4,title:"キャプテンサンダーボルト",author:"阿部和重／伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"二大作家のコラボ。宮城・山形を舞台にしたロードノベル×サスペンス。"},
   {year:2014,rank:5,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性と精神科医の物語。百田尚樹が正統派のメインミステリに挑んだ作品。"},
   {year:2014,rank:6,title:"四十九日のレシピ",author:"伊吹有喜",genre:"ヒューマン",media:"映画化",synopsis:"母の四十九日に集まった家族が残したレシピを通して絆を取り戻す。温かい家族の物語。映画化。"},
@@ -377,7 +380,7 @@ const BOOKS = [
   {year:2012,rank:7,title:"ビブリア古書堂の事件手帖",author:"三上延",genre:"ミステリ",media:"映画化",synopsis:"古書店の謎めいた女主人と古書にまつわる謎。ライトミステリの大ヒットシリーズ第一弾。映画化。"},
   {year:2012,rank:8,title:"みかみの恋のたりない",author:"高樹のぶ子",genre:"ヒューマン",media:"",synopsis:"現代を生きる大人の男女の、ままならない恋愛心理を艶やかに描いた恋愛小説。"},
   {year:2012,rank:9,title:"リボルバー",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"ゴッホとゴーギャンをめぐるアートミステリ。"},
-  {year:2012,rank:10,title:"宿命と真実の炎",author:"佐々木譲",genre:"ミステリ",media:"",synopsis:"警察内部の思惑と、執念の捜査が交錯する本格警察ミステリの傑作。"},
+  {year:2012,rank:10,title:"宿命と真真の炎",author:"佐々木譲",genre:"ミステリ",media:"",synopsis:"警察内部の思惑と、執念の捜査が交錯する本格警察ミステリの傑作。"},
   // 2011 第8回
   {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事と毒舌執事のコンビが難事件を解決するユーモアミステリー。軽妙な掛け合いが魅力。映画・ドラマ化。"},
   {year:2011,rank:2,title:"利己的な遺伝子",author:"下村敦史",genre:"ミステリ",media:"",synopsis:"科学的なアプローチと人間の倫理観がぶつかり合う、先が読めないサスペンス。"},
@@ -386,7 +389,7 @@ const BOOKS = [
   {year:2011,rank:5,title:"小さいおうち",author:"中島京子",genre:"歴史",media:"映画化",synopsis:"昭和初期の山の手の小さな家に仕えた女中の回想録。戦争と秘密を描く直木賞受賞作。映画化。"},
   {year:2011,rank:6,title:"阪急電車",author:"有川浩",genre:"ヒューマン",media:"映画化",synopsis:"今津線の各駅停車に乗り合わせた乗客たちの小さな物語の連作。映画化。"},
   {year:2011,rank:7,title:"光待つ場所へ",author:"辻村深月",genre:"青春",media:"",synopsis:"辻村作品の登場人物たちがクロスオーバーする、ファン必読の心温まる短編集。"},
-  {year:2011,rank:8,title:"その女アレックス",author:"ピエール・ルメートル",genre:"ミステリ",media:"映画化",synopsis:"密室に拉致された女性と捜査陣の攻防。二転三転する衝撃のフランスミステリ。映画化。"},
+  {year:2011,rank:8,title:"その女アレックス",author:"ピエール・ルメートル",genre:"ミステリ",media:"映画化",synopsis:"密室にラ致された女性と捜査陣の攻防。二転三転する衝撃のフランスミステリ。映画化。"},
   {year:2011,rank:9,title:"出星前夜",author:"飯嶋和一",genre:"歴史",media:"",synopsis:"島原の乱を描く歴史大作。"},
   {year:2011,rank:10,title:"下町ロケット",author:"池井戸潤",genre:"お仕事",media:"ドラマ化",synopsis:"中小企業がロケット部品の特許を武器に大企業と戦う感動の企業小説。直木賞受賞作。ドラマ化。"},
   // 2010 第7回
@@ -407,7 +410,7 @@ const BOOKS = [
   {year:2009,rank:4,title:"赤い指",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"家族が隠した殺人を追う加賀恭一郎シリーズ。家族の崩壊と再生を描くミステリ.映画化。"},
   {year:2009,rank:5,title:"流星の絆",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"両親を惨殺された3兄妹の復讐と思わぬ展開。東野圭吾の本格長編。ドラマ化。"},
   {year:2009,rank:6,title:"終末のフール",author:"伊坂幸太郎",genre:"SF",media:"ドラマ化",synopsis:"8年後に小惑星が衝突すると判明した5年後——それでも生きる人々を描く連作短編。"},
-  {year:2009,rank:7,title:"切羽へ",author:"井上荒野",genre:"ヒューマン",media:"",synopsis:"孤島の診療所に務める女性と島の男との禁断の恋。直木賞受賞作。"},
+  {year:2009,rank:7,title:"切羽へ",author:"井上荒野",genre:"ヒューマン",media:"",synopsis:"開島の診療所に務める女性と島の男との禁断の恋。直木賞受賞作。"},
   {year:2009,rank:8,title:"ひと月の月",author:"川上弘美",genre:"ヒューマン",media:"",synopsis:"日常のきらめきと、男女の曖昧で愛おしい距離感を独特の筆致で描く短編集.●"},
   {year:2009,rank:9,title:"新参者",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"下町・日本橋に赴任した刑事・加賀恭一郎が地元住民に寄り添いながら謎を解くシリーズ。映画化。"},
   {year:2009,rank:10,title:"わたしの彼氏",author:"金原ひとみ",genre:"ヒューマン",media:"",synopsis:"過剰な自意識と恋愛のリアルな痛みを鮮烈に描き出す、金原ひとみの意欲作。"},
@@ -431,7 +434,7 @@ const BOOKS = [
   {year:2007,rank:6,title:"エイジ",author:"重松清",genre:"青春",media:"ドラマ化",synopsis:"同級生が事件を起こした——。多感な中学2年生のリアルな心理と日常を紡ぐ青春小説。"},
   {year:2007,rank:7,title:"容疑者Xの献身",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"天才数学者が愛する女性のために完全犯罪を企てる。ガリレオシリーズの傑作。映画化。"},
   {year:2007,rank:8,title:"赤朽葉家の伝説",author:"桜庭一樹",genre:"歴史",media:"",synopsis:"山陰 of 旧家・赤朽葉家の3代にわたる女性たちの物語。桜庭一樹が日本推理作家協会賞を受賞した大作。"},
-  {year:2007,rank:9,title:"理由",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"荒川区の高層マンションで起きた一家4人殺害事件を追う。直木賞受賞の傑作ミステリ。"},
+  {year:2007,rank:9,title:"理由",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"荒川区の高層マンションで起きた一家4人殺害事件を追う。直木賞受賞の傑作ミステリ。映画化。"},
   {year:2007,rank:10,title:"その日のまえに",author:"重松清",genre:"ヒューマン",media:"映画化",synopsis:"家族の死と向き合う物語。重松清が描く喪失と再生の感動作。映画化。"},
   // 2006 第3回
   {year:2006,rank:1,title:"東京タワー〜オカンとボクと、時々、オトン〜",author:"リリー・フランキー",genre:"ヒューマン",media:"映画化",synopsis:"著者の実体験をもとに母との絆を綴った自伝的小説。ユーモアと深い悲しみが共存する感動の「母と息子」の物語。映画・ドラマ化。"},
@@ -444,7 +447,7 @@ const BOOKS = [
   {year:2006,rank:8,title:"魔王",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"超能力を持つ兄弟が独裁者の台頭に抵抗する社会派小説。漫画化。"},
   // 2005 第2回
   {year:2005,rank:1,title:"夜のピクニック",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"高校最後の行事「歩行祭」の一夜を、ある秘密を胸に歩き続ける主人公の決意とともに描く青春小説。映画化。"},
-  {year:2005,rank:2,title:"サウスバウンド",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"元過激派活動家の父と子どもたちが沖縄の離島で生活する痛快家族小説。映画化。"},
+  {year:2005,rank:2,title:"サウスバウンド",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"元過激派活動家の父と子どもたちが沖縄の離島で生活する痛快家族小説.映画化。"},
   {year:2005,rank:3,title:"家族狩り",author:"天童荒太",genre:"ヒューマン",media:"ドラマ化",synopsis:"家族の絆と崩壊を描く壮大な物語。直木賞候補作。ドラマ化。"},
   {year:2005,rank:4,title:"四日間の奇蹟",author:"浅倉卓弥",genre:"ヒューマン",media:"映画化",synopsis:"山中の診療所を舞台にした奇跡の物語。映画化。"},
   {year:2005,rank:5,title:"スターターズ",author:"リサ・プライス",genre:"SF",media:"",synopsis:"若さと肉体が売買される近未来。スリリングな展開が止まらない海外SF。"},
@@ -478,54 +481,45 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックスAPI 書影ロード用（JSONPによる完全CORS回避仕様） ───
+// ─── 楽天ブックスAPI 書影ロード用（Modern fetch & JSON 仕様に刷新） ───
 const coverCache = {};
-const pendingCallbacks = {};
 
-// 楽天APIのレスポンスを受け取るグローバル関数
-window.rakuten_jsonp_callback = function(data, key) {
-  if (pendingCallbacks[key]) {
-    pendingCallbacks[key](data);
-    delete pendingCallbacks[key];
-  }
-};
-
-function fetchCover(title, author) {
+async function fetchCover(title, author) {
   const cleanTitle = title.split(/[〜～─━:-]/)[0].trim();
   const key = title + '|' + author;
   
-  if (coverCache[key] !== undefined) return Promise.resolve(coverCache[key]);
+  if (coverCache[key] !== undefined) return coverCache[key];
   coverCache[key] = null; 
 
-  return new Promise((resolve) => {
-    // ユニークなコールバックキーを作成
-    const callbackKey = 'cb_' + Math.random().toString(36).substr(2, 9);
-    
-    // 楽天APIに送信する、JSONP用のグローバルラッパー関数を動的定義
-    window[callbackKey] = function(data) {
-      if (data.Items && data.Items.length > 0) {
-        const item = data.Items[0].Item;
-        const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
-        if (rawUrl) {
-          coverCache[key] = rawUrl.replace('http:', 'https:');
-        }
-      }
-      resolve(coverCache[key]);
-      
-      // 使用済みのスクリプトタグと関数をクレンジング
-      setTimeout(() => {
-        const scriptEl = document.getElementById(callbackKey);
-        if (scriptEl) scriptEl.remove();
-        delete window[callbackKey];
-      }, 50);
-    };
-
-    // JSONP用のscriptタグをHTMLに注入（CORSによる400/ブロックを完全に回避）
-    const script = document.createElement('script');
-    script.id = callbackKey;
-    script.src = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${RAKUTEN_APP_ID}&title=${encodeURIComponent(cleanTitle)}&author=${encodeURIComponent(author)}&hits=1&callback=${callbackKey}`;
-    document.body.appendChild(script);
+  const apiUrl = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
+  
+  // URLパラメータの構築（2026年最新仕様に合わせたパラメータ設計）
+  const params = new URLSearchParams({
+    applicationId: RAKUTEN_APP_ID,
+    accessKey: RAKUTEN_ACCESS_KEY, 
+    title: cleanTitle,
+    author: author,
+    hits: 1
   });
+
+  try {
+    // 廃止されたJSONPを捨て、セキュリティ制限を突破する通常のfetch非同期通信に全面書き換え
+    const response = await fetch(`${apiUrl}?${params.toString()}`);
+    if (!response.ok) return null;
+
+    const data = await response.json();
+    if (data.Items && data.Items.length > 0) {
+      const item = data.Items[0].Item;
+      const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
+      if (rawUrl) {
+        coverCache[key] = rawUrl.replace('http:', 'https:');
+      }
+    }
+  } catch (error) {
+    console.error("楽天APIエラー:", error);
+  }
+
+  return coverCache[key];
 }
 
 function rankBadgeHTML(r, y) {
@@ -601,7 +595,7 @@ function render() {
     activeObserver.disconnect();
   }
 
-  // 遅延監視ロジック
+  // スクロール時の遅延監視ロジック（仕様変更なし）
   activeObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
