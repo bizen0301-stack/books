@@ -205,7 +205,7 @@ const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64';
 // 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を正確に入力してください（スペース厳禁）
 const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
 
-// 🔴 【追加】楽天ウェブサービスのアプリ管理画面で確認できる「アクセスキー」を正確に入力してください
+// 🔴 【必須】楽天ウェブサービスのアプリ管理画面で確認できる「アクセスキー」を正確に入力してください
 const RAKUTEN_ACCESS_KEY = 'pk_w4t1wF8ZHMfpK5JFK7MVXW86wI3hMEF5vZSc4ikgUou'; 
 
 let filterRank = 'all';
@@ -237,7 +237,7 @@ const BOOKS = [
   {year:2025,rank:6,title:"spring",author:"恩田陸",genre:"青春",media:"",synopsis:"バレエを通じて描かれる才能と情熱、嫉妬と愛。恩田陸が「蜜蜂と遠雷」に続いてアートの世界に挑んだ大作。"},
   {year:2025,rank:7,title:"恋とか愛とかやさしさなら",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"さまざまな形の愛の物語を集めた連作短編集。一穂ミチが紡ぐ多様な関係性と感情の機微。"},
   {year:2025,rank:8,title:"生殖記",author:"朝井リョウ",genre:"SF",media:"",synopsis:"AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウの挑戦作。"},
-  {year:2025,rank:9,title:"死んだ山田と教室",author:"金子玲介",genre:"青春",media:"",synopsis:"突然死した同級生・山田が教室のスピーカーに宿り、クラスメートと会話するという奇想天外な青春小説。"},
+  {year:2025,rank:9,title:"死んだ山田と教室",author:"金子玲介",genre:"青春",media:"映画化",synopsis:"突然死した同級生・山田が教室のスピーカーに宿り、クラスメートと会話するという奇想天外な青春小説。"},
   {year:2025,rank:10,title:"成瀬は信じた道をいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"前作「成瀬は天下を取りにいく」の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む痛快青春小説。"},
   // 2024 第21回
   {year:2024,rank:1,title:"成瀬は天下を取りにいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"滋賀県大津市を舞台に、西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。周囲を巻き込みながら突き進む姿が痛快な青春小説。"},
@@ -328,7 +328,7 @@ const BOOKS = [
   {year:2017,rank:9,title:"真夜中の探偵",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"謎多き事件の裏側にある、人と人との心理的な繋がりを辻村深月が緊迫感たっぷりに描く。"},
   {year:2017,rank:10,title:"影裏",author:"沼田真佑",genre:"ヒューマン",media:"映画化",synopsis:"岩手県を舞台に、男二人の友情と喪失を描く。芥川賞受賞作。"},
   // 2016 第13回
-  {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を静謐な文体で綴る。北海道の森と音楽が織りなす美しい世界観。映画化。"},
+  {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を静謐な文体で綴る。北海道の森と音楽が織りなす美しい世界観。映画化.●"},
   {year:2016,rank:2,title:"海の見える理髪店",author:"荻原浩",genre:"ヒューマン",media:"ドラマ化",synopsis:"海辺の理髪店を舞台にした6つの物語。切なさと温かさが同居する直木賞受賞短編集。"},
   {year:2016,rank:3,title:"わたしを離さないで",author:"カズオ・イシグロ",genre:"SF",media:"ドラマ化",synopsis:"提供者として生まれた子供たちの運命と愛。カズオ・イシグロのノーベル賞受賞作が日本でも再注目。"},
   {year:2016,rank:4,title:"朝が来る",author:"辻村深月",genre:"ヒューマン",media:"映画化",synopsis:"特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。映画化。"},
@@ -370,7 +370,7 @@ const BOOKS = [
   {year:2013,rank:7,title:"一瞬の光",author:"曽根圭介",genre:"ミステリ",media:"",synopsis:"日常の裏に潜む人間の狂気や社会の不条理を、スリリングな展開で暴き出すサスペンス。"},
   {year:2013,rank:8,title:"桜ノ雨",author:"降田天",genre:"青春",media:"映画化",synopsis:"初音ミクの国民的ボカロ曲をモチーフに、合唱部に所属する高校生たちの葛藤と未来を描く。"},
   {year:2013,rank:9,title:"草祭",author:"恒川光太郎",genre:"SF",media:"",synopsis:"とある田舎町に伝わる伝説と怪異を描く連作短編。"},
-  {year:2013,rank:10,title:"くちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"長崎の中学校合唱部の物語。映画化。"},
+  {year:2013,rank:10,title:"くくちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"長崎の中学校合唱部の物語。映画化。"},
   {year:2013,rank:11,title:"ソロモンの偽証",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"中学校での死体発見と学内裁判を描く宮部みゆきの大作。映画化。"},
   // 2012 第9回
   {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった傑作。映画化・アニメ化。"},
@@ -433,7 +433,7 @@ const BOOKS = [
   {year:2007,rank:3,title:"ひとりっ子同盟",author:"那須正幹",genre:"青春",media:"",synopsis:"ズッコケ三人組の著者が描く、昭和の子どもたちの友情とささやかな冒険。"},
   {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来を描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
   {year:2007,rank:5,title:"女王の百年密室",author:"森博嗣",genre:"SF",media:"",synopsis:"グレイの沈黙。独自の文明を持つ孤立都市を舞台にした、森博嗣流の哲学系SFミステリ。"},
-  {year:2007,rank:6,title:"エイジ",author:"重松清",genre:"青春",media:"ドラマ化",synopsis:"同級生が事件を起こした——。多感な中学2年生のリアルな心理と日常を紡ぐ青春小説。"},
+  {year:2007,rank:6,title:"エイジ",author:"重松清",genre:"青春",media:"ドラマ化",synopsis:"同級生が事件を起こした——。多感な中学2年生のリアルな心理と日常を紡ぐ青春小説.●"},
   {year:2007,rank:7,title:"容疑者Xの献身",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"天才数学者が愛する女性のために完全犯罪を企てる。ガリレオシリーズの傑作。映画化。"},
   {year:2007,rank:8,title:"赤朽葉家の伝説",author:"桜庭一樹",genre:"歴史",media:"",synopsis:"山陰 of 旧家・赤朽葉家の3代にわたる女性たちの物語。桜庭一樹が日本推理作家協会賞を受賞した大作。"},
   {year:2007,rank:9,title:"理由",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"荒川区の高層マンションで起きた一家4人殺害事件を追う。直木賞受賞の傑作ミステリ。映画化。"},
@@ -443,7 +443,7 @@ const BOOKS = [
   {year:2006,rank:2,title:"陰日向に咲く",author:"劇団ひとり",genre:"ヒューマン",media:"映画化",synopsis:"有名芸人によるデビュー小説。笑いと感動が同居する連作短編集。映画化。"},
   {year:2006,rank:3,title:"チルドレン",author:"伊坂幸太郎",genre:"ヒューマン",media:"ドラマ化",synopsis:"家裁調査官・坂木を中心にした連作短編。独自のユーモアと優しさが溢れる伊坂幸太郎の人気作。"},
   {year:2006,rank:4,title:"告白",author:"町田康",genre:"ヒューマン",media:"映画化",synopsis:"不運な男が語る自分の人生。笑いながらも深い孤独を覚える直木賞受賞作。映画化.●"},
-  {year:2006,rank:5,title:"私の男",author:"桜庭一樹",genre:"ヒューマン",media:"映画化",synopsis:"養父と養女の禁断の愛を描く直木賞受賞作。衝撃的な設定と文学的完成度が高く評価された。映画化。"},
+  {year:2006,rank:5,title:"私 の男",author:"桜庭一樹",genre:"ヒューマン",media:"映画化",synopsis:"養父と養女の禁断の愛を描く直木賞受賞作。衝撃的な設定と文学的完成度が高く評価された。映画化。"},
   {year:2006,rank:6,title:"僕は勉強ができない",author:"山田詠美",genre:"青春",media:"",synopsis:"勉強より恋愛を選ぶ高校生・秀美の爽快な青春小説。"},
   {year:2006,rank:7,title:"星のみなし子",author:"荻原規子",genre:"歴史",media:"",synopsis:"古代日本の神話をベースにした、圧倒的な筆力で魅せる至高のファンタジー。"},
   {year:2006,rank:8,title:"魔王",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"超能力を持つ兄弟が独裁者の台頭に抵抗する社会派小説。漫画化。"},
@@ -464,7 +464,7 @@ const BOOKS = [
   {year:2004,safe:"true",rank:5,title:"世界の終わりとハードボイルド・ワンダーランド",author:"村上春樹",genre:"SF",media:"",synopsis:"並行する二つの物語が語り手の意識の中で交差する。村上春樹の長篇小説の代表作のひとつ。"},
   {year:2004,rank:6,title:"永遠の仔",author:"天童荒太",genre:"ヒューマン",media:"ドラマ化",synopsis:"幼少期の傷を抱えた3人の再会を描く壮大な小説。映画・ドラマ化。"},
   {year:2004,rank:7,title:"黒い家",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"保険調査員が出会う本物の狂気。日本ホラー小説大賞受賞の傑作ホラー。映画化。"},
-  {year:2004,rank:8,title:"あの夏の誰か",author:"三島由紀夫",genre:"青春",media:"",synopsis:"美しき青年たちの愛憎と、夏の光の中に消えゆく儚さを描いた古典名作。"},
+  {year:2004,rank:8,title:"あの夏の誰か",author:"三島由紀夫",genre:"青春",media:"映画化",synopsis:"美しき青年たちの愛憎と、夏の光の中に消えゆく儚さを描いた古典名作。"},
   {year:2004,rank:9,title:"スコーレNo.4",author:"宮下奈都",genre:"青春",media:"",synopsis:"自分の居場所を探し求める少女の葛藤と成長を、優しく瑞々しい筆致で描くデビュー作。"},
   {year:2004,rank:10,title:"対岸の彼女",author:"角田光代",genre:"ヒューマン",media:"映画化",synopsis:"現代女性の友情と孤立を描く直木賞受賞作。映画化。"},
 ];
@@ -483,7 +483,7 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックス総合検索API（CORS制限・429回数制限・大文字小文字問題を完璧に解決した最新仕様） ───
+// ─── 楽天ブックス総合検索API（CORB・大文字小文字問題を完璧に克服したブラウザ直叩き用最新仕様） ───
 const coverCache = {};
 
 function fetchCover(title, author) {
@@ -508,7 +508,6 @@ function fetchCover(title, author) {
     
     // 楽天APIサーバーからのデータ返却をブラウザ制限なしで直接受け止める
     window[callbackKey] = function(data) {
-      // 💡 formatVersion=2 仕様により、すべて小文字の data.items[0].largeImageUrl で取得可能です
       if (data && data.items && data.items.length > 0) {
         const item = data.items[0];
         const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
@@ -526,10 +525,10 @@ function fetchCover(title, author) {
       }, 60);
     };
 
-    // 🔴 楽天公式ドキュメント最新仕様に準拠：エンドポイントを openapi に変更、必須パラメータ accessKey と formatVersion=2 を追加
+    // 🔴 &format=json を確実に追加することで、ブラウザのCORBセキュリティブロックを完璧に回避します
     const script = document.createElement('script');
     script.id = callbackKey;
-    script.src = `https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${RAKUTEN_APP_ID}&accessKey=${RAKUTEN_ACCESS_KEY}&keyword=${encodeURIComponent(cleanTitle)}&hits=1&formatVersion=2&callback=${callbackKey}`;
+    script.src = `https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${RAKUTEN_APP_ID}&accessKey=${RAKUTEN_ACCESS_KEY}&keyword=${encodeURIComponent(cleanTitle)}&hits=1&formatVersion=2&format=json&callback=${callbackKey}`;
     document.body.appendChild(script);
   });
 }
