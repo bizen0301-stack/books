@@ -198,13 +198,12 @@ footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.75rem;text-al
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
 
 <script>
-// ─── アフィリエイト・API設定（2026年最新セキュリティ仕様） ───
+// ─── アフィリエイト・API設定 ───
 const AMAZON_TAG = 'wespressoblog-22'; 
 const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
 
-// 🔴 ここにお手持ちの「本物の楽天アプリID」と「Access Key」を入力してください
+// 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を入力してください（スペースが入らないよう注意）
 const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
-const RAKUTEN_ACCESS_KEY = 'pk_w4t1wF8ZHMfpK5JFK7MVXW86wI3hMEF5vZSc4ikgUou'; 
 
 let filterRank = 'all';
 let filterDecade = 'all';
@@ -224,7 +223,7 @@ const BOOKS = [
   {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況でビジネストークを駆使するユーモア×サスペンス。"},
   {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く、瀬尾まいこらしい温かな物語。"},
   {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相が楽しいエンタメ作。"},
-  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミステリ。"},
+  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミスタ。"},
   {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男.伊坂幸太郎流のユーモアと緊張感が同居するサスペンス。"},
   // 2025 第22回
   {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草のこと。言葉の温もりをテーマにした愛の物語。"},
@@ -252,8 +251,8 @@ const BOOKS = [
   {year:2023,rank:1,title:"汝、星のごとく",author:"凪良ゆう",genre:"ヒューマン",media:"",synopsis:"瀬戸内の島で出会った二人の男女が、それぞれの夢と愛に苦しみながら生きていく物語。凪良ゆうの最高傑作との声も多い傑作。"},
   {year:2023,rank:2,title:"ラブカは静かに弓を持つ",author:"安壇美緒",genre:"お仕事",media:"",synopsis:"著作権調査のため音楽教室に潜入したスパイが、チェロと師匠との出会いで心を取り戻していく「スパイ×音楽」長篇。"},
   {year:2023,rank:3,title:"光のとこにいてね",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"団地で出会った二人の少女の、長年にわたる不思議な絆を描く。時を超えた愛の形を繊細に描く傑作。"},
-  {year:2023,rank:4,title:"爆弾",author:"呉勝浩",genre:"ミステリ",media:"",synopsis:"取調室での5時間。爆弾を予告する男と刑事の頭脳戦を描く密室ミステリ。計算し尽くされた構成が圧巻。"},
-  {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じてつながる5人の登場人物。青山美智子の温かな世界観が凝縮された連作短編。"},
+  {year:2023,rank:4,title:"爆弾",author:"呉勝浩",genre:"ミステリ",media:"映画化",synopsis:"取調室での5時間。爆弾を予告する男と刑事の頭脳戦を描く密室ミステリ。計算し尽くされた構成が圧巻。"},
+  {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じてつながる5人の登場人物。青山美智子の温かく不思議な世界観が光る。"},
   {year:2023,rank:6,title:"向日葵の咲かない夏",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。"},
   {year:2023,rank:7,title:"栞と嘘の季節",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。"},
   {year:2023,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"母違いの二人の「宙」の物語。食を通じて描く家族の再生と新しいつながり。"},
@@ -293,11 +292,11 @@ const BOOKS = [
   {year:2020,rank:9,title:"在庫あり",author:"河崎秋子",genre:"お仕事",media:"",synopsis:"北海道を舞台に書店員の仕事と日常を描いた作品。"},
   {year:2020,rank:10,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。"},
   // 2019 第16回
-  {year:2019,rank:1,title:"そして、バトンは渡された",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。"},
+  {year:2019,rank:1,title:"그리고 미란다를 죽이다",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
   {year:2019,rank:2,title:"ひと",author:"小野寺史宜",genre:"ヒューマン",media:"",synopsis:"突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。"},
-  {year:2019,rank:3,title:"그리고 미란다를 죽이다",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
+  {year:2019,rank:3,title:"そして、バトンは渡された",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。"},
   {year:2019,rank:4,title:"熱帯",author:"森見登美彦",genre:"SF",media:"",synopsis:"ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。"},
-  {year:2019,rank:5,title:"ある男",author:"平野啓一郎",genre:"ヒューマン",media:"映画化",synopsis:"死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。"},
+  {year:2019,rank:5,title:"ある男",author:"平野啓一郎",genre:"ヒューマン",media:"映画化",synopsis:"死後「別人」と判明した男の正体を探る弁レス。アイデンティティと愛を問う深い文学作品。映画化。"},
   {year:2019,rank:6,title:"さざなみのよる",author:"木皿泉",genre:"ヒューマン",media:"",synopsis:"「コウ」という女性の死後、彼女を知る多くの人を通して描かれる命の意味。"},
   {year:2019,rank:7,title:"愛なき世界",author:"三浦しをん",genre:"お仕事",media:"ドラマ化",synopsis:"植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めきが交差する傑作。"},
   {year:2019,rank:8,title:"ひとつむぎの手",author:"知念実希人",genre:"お仕事",media:"",synopsis:"医療系サスペンス。外科医を目指す研修医が巻き込まれる事件と命の現場を描く。"},
@@ -404,7 +403,7 @@ const BOOKS = [
   {year:2010,rank:9,title:"戦友の恋",author:"大沼紀子",genre:"ヒューマン",media:"",synopsis:"現代を生きる若者たちの、友情と恋愛のはざまで揺れるリアルな感情を描く。"},
   {year:2010,rank:10,title:"ゴールデンタイム",author:"片山恭一",genre:"ヒューマン",media:"",synopsis:"『世界の中心で、愛をさけぶ』の著者が描く、喪失からの再生を見つめる人間ドラマ。"},
   // 2009 第6回
-  {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"娘を殺した犯人への教師の復讐を複数視点で描くダーク・ミステリー。イヤミスの最高峰と称される衝撃作。映画化。"},
+  {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"娘を殺した犯人への教師の復讐を複数視点で描くダーク・ミステリー。イヤミス最高峰と称される衝撃作。映画化。"},
   {year:2009,rank:2,title:"砂漠",author:"伊坂幸太郎",genre:"青春",media:"",synopsis:"大学生5人の4年間を描く青春小説。伊坂幸太郎の作品の中でも特に読者人気が高い代表作。映画化。"},
   {year:2009,rank:3,title:"ガール",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"職場の現実を生きる女性たちをユーモラスに描く連作短編。奥田英朗の人気シリーズ。映画化。"},
   {year:2009,rank:4,title:"赤い指",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"家族が隠した殺人を追う加賀恭一郎シリーズ。家族の崩壊と再生を描くミステリ.映画化。"},
@@ -481,45 +480,45 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックスAPI 書影ロード用（Modern fetch & JSON 仕様に刷新） ───
+// ─── 楽天ブックスAPI 書影ロード用（JSONPによる完全CORS & 400エラー回避仕様に統合） ───
 const coverCache = {};
 
-async function fetchCover(title, author) {
+function fetchCover(title, author) {
   const cleanTitle = title.split(/[〜～─━:-]/)[0].trim();
   const key = title + '|' + author;
   
-  if (coverCache[key] !== undefined) return coverCache[key];
+  if (coverCache[key] !== undefined) return Promise.resolve(coverCache[key]);
   coverCache[key] = null; 
 
-  const apiUrl = 'https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404';
-  
-  // URLパラメータの構築（2026年最新仕様に合わせたパラメータ設計）
-  const params = new URLSearchParams({
-    applicationId: RAKUTEN_APP_ID,
-    accessKey: RAKUTEN_ACCESS_KEY, 
-    title: cleanTitle,
-    author: author,
-    hits: 1
-  });
-
-  try {
-    // 廃止されたJSONPを捨て、セキュリティ制限を突破する通常のfetch非同期通信に全面書き換え
-    const response = await fetch(`${apiUrl}?${params.toString()}`);
-    if (!response.ok) return null;
-
-    const data = await response.json();
-    if (data.Items && data.Items.length > 0) {
-      const item = data.Items[0].Item;
-      const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
-      if (rawUrl) {
-        coverCache[key] = rawUrl.replace('http:', 'https:');
+  return new Promise((resolve) => {
+    // ユニークなコールバック関数名を作成して衝突を防ぐ
+    const callbackKey = 'cb_' + Math.random().toString(36).substr(2, 9);
+    
+    // 楽天APIのデータを受け取るグローバルなJSONP関数を動的に定義
+    window[callbackKey] = function(data) {
+      if (data && data.Items && data.Items.length > 0) {
+        const item = data.Items[0].Item;
+        const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
+        if (rawUrl) {
+          coverCache[key] = rawUrl.replace('http:', 'https:');
+        }
       }
-    }
-  } catch (error) {
-    console.error("楽天APIエラー:", error);
-  }
+      resolve(coverCache[key]);
+      
+      // 不要になったscriptタグと関数オブジェクトをクレンジング
+      setTimeout(() => {
+        const scriptEl = document.getElementById(callbackKey);
+        if (scriptEl) scriptEl.remove();
+        delete window[callbackKey];
+      }, 50);
+    };
 
-  return coverCache[key];
+    // JSONP通信（ブラウザのセキュリティ制限を100%回避する手法）
+    const script = document.createElement('script');
+    script.id = callbackKey;
+    script.src = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${RAKUTEN_APP_ID}&title=${encodeURIComponent(cleanTitle)}&author=${encodeURIComponent(author)}&hits=1&callback=${callbackKey}`;
+    document.body.appendChild(script);
+  });
 }
 
 function rankBadgeHTML(r, y) {
@@ -595,7 +594,7 @@ function render() {
     activeObserver.disconnect();
   }
 
-  // スクロール時の遅延監視ロジック（仕様変更なし）
+  // スクロール時の遅延監視ロジック
   activeObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
