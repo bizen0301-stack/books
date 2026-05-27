@@ -202,7 +202,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.75rem;text-al
 const AMAZON_TAG = 'wespressoblog-22'; 
 const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
 
-// 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を入力してください（スペースが入らないよう注意）
+// 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を正確に入力してください
 const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
 
 let filterRank = 'all';
@@ -223,7 +223,7 @@ const BOOKS = [
   {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況でビジネストークを駆使するユーモア×サスペンス。"},
   {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く、瀬尾まいこらしい温かな物語。"},
   {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相が楽しいエンタメ作。"},
-  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミスタ。"},
+  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミステリ。"},
   {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男.伊坂幸太郎流のユーモアと緊張感が同居するサスペンス。"},
   // 2025 第22回
   {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草のこと。言葉の温もりをテーマにした愛の物語。"},
@@ -292,7 +292,7 @@ const BOOKS = [
   {year:2020,rank:9,title:"在庫あり",author:"河崎秋子",genre:"お仕事",media:"",synopsis:"北海道を舞台に書店員の仕事と日常を描いた作品。"},
   {year:2020,rank:10,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。"},
   // 2019 第16回
-  {year:2019,rank:1,title:"그리고 미란다를 죽이다",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
+  {year:2019,rank:1,title:"그리고 미란다を죽이다",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
   {year:2019,rank:2,title:"ひと",author:"小野寺史宜",genre:"ヒューマン",media:"",synopsis:"突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。"},
   {year:2019,rank:3,title:"そして、バトンは渡された",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。"},
   {year:2019,rank:4,title:"熱帯",author:"森見登美彦",genre:"SF",media:"",synopsis:"ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。"},
@@ -315,7 +315,7 @@ const BOOKS = [
   {year:2018,rank:10,title:"琥珀の夏",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"カルト集団の跡地で発見された子どもの骨。かつてその施設に通っていた女性が真実を追う。"},
   // 2017 第14回
   {year:2017,rank:1,title:"蜜蜂と遠雷",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"国際ピアノコンクールを舞台に4人のピアニストの葛藤と音楽への情熱を描く。直木賞とのW受賞は史上初。映画化。"},
-  {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒューマン",media:"ドラマ化",synopsis:"学習塾を舞台に3世代にわたる家族の物語。教育と愛と仕事のあり方を問う大河小説。"},
+  {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒューマン",media:"ドラマ化",synopsis:"学習塾を舞台に3世代にわたる家族の物語。教育と愛と仕事のあり方を問う大河小説.●"},
   {year:2017,rank:3,title:"罪の声",author:"塩田武士",genre:"ミステリ",media:"映画化",synopsis:"グリコ・森永事件をモデルにした未解決事件小説。テープに声を吹き込まされた子どもたちのその後を追う。映画化。"},
   {year:2017,rank:4,title:"あの家に暮らす四人の女",author:"三浦しをん",genre:"ヒューマン",media:"ドラマ化",synopsis:"古い一軒家に暮らす女4人のおかしくも温かな共同生活。三浦しをんの軽妙な筆致が光るコメディ。"},
   {year:2017,rank:5,title:"コンビニ人間",author:"村田沙耶香",genre:"ヒューマン",media:"",synopsis:"36歳未婚・コンビニバイト歴18年の女性が「普通」の人間社会に異議を唱える。芥川賞受賞作。"},
@@ -451,7 +451,7 @@ const BOOKS = [
   {year:2005,rank:4,title:"四日間の奇蹟",author:"浅倉卓弥",genre:"ヒューマン",media:"映画化",synopsis:"山中の診療所を舞台にした奇跡の物語。映画化。"},
   {year:2005,rank:5,title:"スターターズ",author:"リサ・プライス",genre:"SF",media:"",synopsis:"若さと肉体が売買される近未来。スリリングな展開が止まらない海外SF。"},
   {year:2005,rank:6,title:"邪悪な少女",author:"高橋克彦",genre:"ミステリ",media:"",synopsis:"一見無垢な少女の裏に隠された悪意。ベテランが描く戦慄のサイコホラー。"},
-  {year:2005,rank:7,title:"暗いところで待ち合わせ",author:"乙一",genre:"ヒューマン",media:"映画化",synopsis:"暗闇の中で起きた事件をめぐる2人の物語。乙一の繊細で切ない作風が光る。映画化。"},
+  {year:2005,rank:7,title:"暗いところで待ち合わせ",author:"乙一",genre:"ヒューマン",media:"映画化",synopsis:"暗闇の中で起きた事件をめぐる2人の物語。乙一の繊慢で切ない作風が光る。映画化。"},
   {year:2005,rank:8,title:"死神の浮力",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"「死神の精度」の続編。死神が浮力の謎を持つ事件に向き合う。"},
   // 2004 第1回
   {year:2004,rank:1,title:"博士の愛した数式",author:"小川洋子",genre:"ヒューマン",media:"映画化",synopsis:"記憶が80分しか持続しない数学者と家政婦、その息子の交流を描く。素数と野球をめぐる知的な愛情物語が読者の心を清らかにする。映画・ドラマ化。"},
@@ -480,10 +480,11 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックスAPI 書影ロード用（JSONPによる完全CORS & 400エラー回避仕様に統合） ───
+// ─── 楽天ブックスAPI 書影ロード用（CORS回避用JSONP仕様 + タイワード検索最適化） ───
 const coverCache = {};
 
 function fetchCover(title, author) {
+  // 記号やサブタイトルを綺麗にトリミング
   const cleanTitle = title.split(/[〜～─━:-]/)[0].trim();
   const key = title + '|' + author;
   
@@ -491,10 +492,10 @@ function fetchCover(title, author) {
   coverCache[key] = null; 
 
   return new Promise((resolve) => {
-    // ユニークなコールバック関数名を作成して衝突を防ぐ
+    // ユニークな動的コールバックキーの生成
     const callbackKey = 'cb_' + Math.random().toString(36).substr(2, 9);
     
-    // 楽天APIのデータを受け取るグローバルなJSONP関数を動的に定義
+    // 楽天APIからデータが返ってきたときに自動実行される関数
     window[callbackKey] = function(data) {
       if (data && data.Items && data.Items.length > 0) {
         const item = data.Items[0].Item;
@@ -505,7 +506,7 @@ function fetchCover(title, author) {
       }
       resolve(coverCache[key]);
       
-      // 不要になったscriptタグと関数オブジェクトをクレンジング
+      // 使用が終わったscriptタグとwindowオブジェクトのクレンジング
       setTimeout(() => {
         const scriptEl = document.getElementById(callbackKey);
         if (scriptEl) scriptEl.remove();
@@ -513,10 +514,10 @@ function fetchCover(title, author) {
       }, 50);
     };
 
-    // JSONP通信（ブラウザのセキュリティ制限を100%回避する手法）
+    // 🔴 著者名（author）の完全一致制限を解除し、クレンジングされた「タイトル」のみで高精度検索を実行
     const script = document.createElement('script');
     script.id = callbackKey;
-    script.src = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${RAKUTEN_APP_ID}&title=${encodeURIComponent(cleanTitle)}&author=${encodeURIComponent(author)}&hits=1&callback=${callbackKey}`;
+    script.src = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${RAKUTEN_APP_ID}&title=${encodeURIComponent(cleanTitle)}&hits=1&callback=${callbackKey}`;
     document.body.appendChild(script);
   });
 }
@@ -594,7 +595,7 @@ function render() {
     activeObserver.disconnect();
   }
 
-  // スクロール時の遅延監視ロジック
+  // スクロールに合わせた遅延読み込みロジック
   activeObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -658,7 +659,7 @@ function setMediaFilter(el) {
   render();
 }
 
-// 初期化
+// アプリケーション初期化
 document.addEventListener('DOMContentLoaded', () => {
   render();
   document.getElementById('loader').classList.add('done');
