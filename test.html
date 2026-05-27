@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>楽天API 書影取得テスト</title>
+    <style>
+        body { font-family: sans-serif; padding: 40px; text-align: center; background: #faf8f3; }
+        .box { background: white; border: 1px solid #ccc; padding: 20px; display: inline-block; border-radius: 8px; }
+        #cover { width: 200px; min-height: 280px; background: #eee; display: block; margin: 10px auto; object-fit: cover; }
+        #status { color: #666; font-size: 14px; margin-top: 10px; }
+    </style>
+</head>
+<body>
+
+<div class="box">
+    <h2>『イン・ザ・メガチャーチ』</h2>
+    <p>朝井リョウ 著</p>
+    
+    <img id="cover" src="" alt="書影プレースホルダー">
+    
+    <div id="status">API通信中...</div>
+</div>
+
+<script>
+// 元のソースと同じアプリID
+const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1';
+
+// 検索キーワード
+const title = "イン・ザ・メガチャーチ";
+const author = "朝井リョウ";
+
+// 1. 楽天APIから結果が返ってきたときに実行される関数（コールバック）
+window.rakutenTestCallback = function(data) {
+    const statusEl = document.getElementById('status');
+    const imgEl = document.getElementById('cover');
+
+    // APIエラーや該当データがない場合
+    if (!data || data.error || !data.Items || data.Items.length === 0) {
+        statusEl.innerHTML = `<span style="color:red;">❌ 取得失敗しました。</span><br>理由: ${data?.error_description || '該当する本が見つかりません（またはID無効）'}`;
+        return;
+    }
+
+    // 成功した場合、1件目の本の画像URLを取得
+    const item = data.Items[0].Item;
+    const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
+
+    if (rawUrl) {
+        const httpsUrl = rawUrl.replace('http:', 'https:');
+        imgEl.src = httpsUrl;
+        statusEl.innerHTML = `<span style="color:green;">▲ 取得成功！</span><br>正式名称: ${item.title}`;
+    } else {
+        statusEl.innerText = "❌ 本の情報はありましたが、画像URLが空でした。";
+    }
+};
+
+// 2. 画面を開いた瞬間に、楽天APIを叩くscriptタグを動的に注入する処理
+document.addEventListener('DOMContentLoaded', () => {
+    const script = document.createElement('script');
+    
+    // 楽天ブックス書籍検索APIのURL（callbackに上記の関数名を指定）
+    script.src = `https://app.rakuten.co.jp/services/api/BooksBook/Search/20170404?applicationId=${RAKUTEN_APP_ID}&title=${encodeURIComponent(title)}&author=${encodeURIComponent(author)}&hits=1&callback=rakutenTestCallback`;
+    
+    document.body.appendChild(script);
+});
+</script>
+
+</body>
+</html>
