@@ -205,6 +205,9 @@ const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64';
 // 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を正確に入力してください（スペース厳禁）
 const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
 
+// 🔴 【追加】楽天ウェブサービスのアプリ管理画面で確認できる「アクセスキー」を正確に入力してください
+const RAKUTEN_ACCESS_KEY = 'pk_w4t1wF8ZHMfpK5JFK7MVXW86wI3hMEF5vZSc4ikgUou'; 
+
 let filterRank = 'all';
 let filterDecade = 'all';
 let filterGenre = 'all';
@@ -238,7 +241,7 @@ const BOOKS = [
   {year:2025,rank:10,title:"成瀬は信じた道をいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"前作「成瀬は天下を取りにいく」の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む痛快青春小説。"},
   // 2024 第21回
   {year:2024,rank:1,title:"成瀬は天下を取りにいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"滋賀県大津市を舞台に、西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。周囲を巻き込みながら突き進む姿が痛快な青春小説。"},
-  {year:2024,rank:2,title:"水車小屋のネネ",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。"},
+  {year:2024,rank:2,title:"水車小屋のネネ",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"水車小屋に棲む謎 of 鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。"},
   {year:2024,rank:3,title:"存在のすべてを",author:"塩田武士",genre:"ミステリ",media:"",synopsis:"誘拐事件と芸術の謎が絡み合うサスペンス。塩田武士が挑んだスケールの大きな人間ドラマ。"},
   {year:2024,rank:4,title:"スピノザの診察室",author:"夏川草介",genre:"お仕事",media:"",synopsis:"大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作として話題を呼んだ作品。"},
   {year:2024,rank:5,title:"レーエンデ国物語",author:"多崎礼",genre:"SF",media:"",synopsis:"異世界の小国を舞台にした壮大なファンタジー。講談社タイガーから登場した話題作で、続篇も好評。"},
@@ -312,7 +315,7 @@ const BOOKS = [
   {year:2018,rank:7,title:"ツバキ文具店",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"先代から受け継いだ鎌倉の文具店を舞台に、代書屋として「手紙」を書くヒロインを描く。"},
   {year:2018,rank:8,title:"どこへ行くのか、あの夏",author:"仙田学",genre:"青春",media:"",synopsis:"少年時代の記憶と、あの夏に置き忘れたきた感情を瑞々しく描く青春小説。"},
   {year:2018,rank:9,title:"百貨の魔法",author:"村山早紀",genre:"SF",media:"",synopsis:"星野百貨店を舞台に描かれる人々の物語。温かく切ない百貨店ファンタジー。"},
-  {year:2018,rank:10,title:"琥珀の夏",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"カルト集団の跡地で発見された子どもの骨。かつてその施設に通っていた女性が真実を追う。"},
+  {year:2018,rank:10,title:"琥珀の夏",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"カルト集団の跡地で発見された子どもの骨。かつてその施設に通っていた女性が真真を追う。"},
   // 2017 第14回
   {year:2017,rank:1,title:"蜜蜂と遠雷",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"国際ピアノコンクールを舞台に4人のピアニストの葛藤と音楽への情熱を描く。直木賞とのW受賞は史上初。映画化。"},
   {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒューマン",media:"ドラマ化",synopsis:"学習塾を舞台に3世代にわたる家族の物語。教育と愛と仕事のあり方を問う大河小説.●"},
@@ -343,7 +346,7 @@ const BOOKS = [
   {year:2015,rank:5,title:"王とサーカス",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"ネパールで起きた王族殺害事件を追う記者の物語。ジャーナリズムの倫理を問うミステリ。"},
   {year:2015,rank:6,title:"戦場のコックたち",author:"深緑野分",genre:"ミステリ",media:"",synopsis:"第二次大戦下、アメリカ軍のコックとして戦地を転戦する男の日常と謎。戦争ミステリの傑作。"},
   {year:2015,rank:7,title:"か「」く「」し「」ご「」と「",author:"住野よる",genre:"青春",media:"",synopsis:"5人の高校生それぞれが、少しだけ不思議な「能力」を持って生活する青春小説。"},
-  {year:2015,rank:8,title:"長いお別れ",author:"中島京子",genre:"ヒューマン",media:"映画化",synopsis:"アルツハイマー病の父と家族の10年を描く。笑いと涙が溢れる「良い別れ」の物語。映画化。"},
+  {year:2015,rank:8,title:"長いお別れ",author:"中島京子",genre:"ヒューマン",media:"映画化",synopsis:"アルツハイマー病の父と家族の10年を描く。笑いと涙が溢れる「良い別れ」の物語.映画化。"},
   {year:2015,rank:9,title:"コーヒーが冷めないうちに",author:"川口俊和",genre:"SF",media:"映画化",synopsis:"過去に戻れる喫茶店で、様々な後悔を持つ人々が再び大切な人に会いに行く。映画化。"},
   {year:2015,rank:10,title:"永遠と横道世之介",author:"吉田修一",genre:"青春",media:"映画化",synopsis:"長崎から上京した青年・横道世之介の大学生活。明るく人懐っこい主人公がすべての人の心を温める。映画化。"},
   // 2014 第11回
@@ -393,7 +396,7 @@ const BOOKS = [
   {year:2011,rank:10,title:"下町ロケット",author:"池井戸潤",genre:"お仕事",media:"ドラマ化",synopsis:"中小企業がロケット部品の特許を武器に大企業と戦う感動の企業小説。直木賞受賞作。ドラマ化。"},
   // 2010 第7回
   {year:2010,rank:1,title:"天地明察",author:"冲方丁",genre:"歴史",media:"映画化",synopsis:"江戸時代、日本初の暦を作るべく生涯を賭けた渋川春海の物語。数学・天文学・囲碁を絡め、愛とロマンに満ちた本格歴史小説。映画化。"},
-  {year:2010,rank:2,title:"神様のカルテ",author:"夏川草介",genre:"お仕事",media:"映画化",synopsis:"信州の病院で働く内科医の日常。患者と向き合う医師의姿に涙が溢れる医療小説。映画化。"},
+  {year:2010,rank:2,title:"神様のカルテ",author:"夏川草介",genre:"お仕事",media:"映画化",synopsis:"信州の病院で働く内科医の日常。患者と向き合う医師の姿に涙が溢れる医療小説.映画化。"},
   {year:2010,rank:3,title:"ヘヴン",author:"川上未映子",genre:"青春",media:"",synopsis:"イジメられっ子2人が互いを支え合う青春小説。暴力の意味を問う衝撃的な結末が話題に。映画化。"},
   {year:2010,rank:4,title:"猫を抱いて象と泳ぐ",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"将棋の世界を舞台に、奇妙な師匠と少年の交流を描く幻想的な物語。"},
   {year:2010,safe:"true",rank:5,title:"神様のボート",author:"江國香織",genre:"ヒューマン",media:"ドラマ化",synopsis:"必ず戻ると言った恋人を娘と共に待ち続ける、狂気とも言える純愛と旅の物語。"},
@@ -426,7 +429,7 @@ const BOOKS = [
   {year:2008,rank:10,title:"死神の精度",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"7日間で対象者の「死」を判断する死神を主人公にした連作短編。映画化。"},
   // 2007 第4回
   {year:2007,rank:1,title:"一瞬の風になれ",author:"佐藤多佳子",genre:"青春",media:"ドラマ化",synopsis:"陸上短距離を舞台に、二人の高校生がリレーのアンカーを目指す青春小説。疾走感あふれる文体が胸を打つ三部作。"},
-  {year:2007,rank:2,title:"風が強く吹いている",author:"三浦しをん",genre:"青春",media:"アニメ化",synopsis:"箱根駅伝を目指す弱小陸上部の物語。チームと個人の成長を描く三浦しをんの代表作。アニメ映画化。"},
+  {year:2007,rank:2,title:"風が強く吹いている",author:"三浦しをん",genre:"青春",media:"アニメ化",synopsis:"箱根駅伝を目指す弱弱陸上部の物語。チームと個人の成長を描く三浦しをんの代表作。アニメ映画化。"},
   {year:2007,rank:3,title:"ひとりっ子同盟",author:"那須正幹",genre:"青春",media:"",synopsis:"ズッコケ三人組の著者が描く、昭和の子どもたちの友情とささやかな冒険。"},
   {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来を描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
   {year:2007,rank:5,title:"女王の百年密室",author:"森博嗣",genre:"SF",media:"",synopsis:"グレイの沈黙。独自の文明を持つ孤立都市を舞台にした、森博嗣流の哲学系SFミステリ。"},
@@ -457,8 +460,8 @@ const BOOKS = [
   {year:2004,rank:1,title:"博士の愛した数式",author:"小川洋子",genre:"ヒューマン",media:"映画化",synopsis:"記憶が80分しか持続しない数学者と家政婦、その息子の交流を描く。素数と野球をめぐる知的な愛情物語が読者の心を清らかにする。映画・ドラマ化。"},
   {year:2004,rank:2,title:"クライマーズ・ハイ",author:"横山秀夫",genre:"お仕事",media:"映画化",synopsis:"日航機墜落事故を報じる地方新聞記者の奮闘を描く傑作。映画・ドラマ化。"},
   {year:2004,rank:3,title:"4TEEN",author:"石田衣良",genre:"青春",media:"映画化",synopsis:"下町に住む14歳4人組の夏休みを描く青春小説。第25回吉川英治文学新人賞受賞。映画化。"},
-  {year:2004,rank:4,title:"盲目的な恋と友情",author:"辻村深月",genre:"ヒューマン",media:"",synopsis:"愛ゆえの盲目、友情ゆえの嫉妬。女性同士の濃密な関係性を抉り出す傑作小説。"},
-  {year:2004,rank:5,title:"世界の終わりとハードボイルド・ワンダーランド",author:"村上春樹",genre:"SF",media:"",synopsis:"並行する二つの物語が語り手の意識の中で交差する。村上春樹の長篇小説の代表作のひとつ。"},
+  {year:2004,rank:4,title:"盲目的な恋と友情",author:"辻村深月",genre:"ヒューマン",media:"",synopsis:"愛ゆえの盲目、友情ゆえの嫉嫉。女性同士の濃密な関係性を抉り出す傑作小説。"},
+  {year:2004,safe:"true",rank:5,title:"世界の終わりとハードボイルド・ワンダーランド",author:"村上春樹",genre:"SF",media:"",synopsis:"並行する二つの物語が語り手の意識の中で交差する。村上春樹の長篇小説の代表作のひとつ。"},
   {year:2004,rank:6,title:"永遠の仔",author:"天童荒太",genre:"ヒューマン",media:"ドラマ化",synopsis:"幼少期の傷を抱えた3人の再会を描く壮大な小説。映画・ドラマ化。"},
   {year:2004,rank:7,title:"黒い家",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"保険調査員が出会う本物の狂気。日本ホラー小説大賞受賞の傑作ホラー。映画化。"},
   {year:2004,rank:8,title:"あの夏の誰か",author:"三島由紀夫",genre:"青春",media:"",synopsis:"美しき青年たちの愛憎と、夏の光の中に消えゆく儚さを描いた古典名作。"},
@@ -480,7 +483,7 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックス総合検索API（CORS制限・429回数制限を完璧に根絶したJSONP最新仕様） ───
+// ─── 楽天ブックス総合検索API（CORS制限・429回数制限・大文字小文字問題を完璧に解決した最新仕様） ───
 const coverCache = {};
 
 function fetchCover(title, author) {
@@ -505,8 +508,9 @@ function fetchCover(title, author) {
     
     // 楽天APIサーバーからのデータ返却をブラウザ制限なしで直接受け止める
     window[callbackKey] = function(data) {
-      if (data && data.Items && data.Items.length > 0) {
-        const item = data.Items[0].Item;
+      // 💡 formatVersion=2 仕様により、すべて小文字の data.items[0].largeImageUrl で取得可能です
+      if (data && data.items && data.items.length > 0) {
+        const item = data.items[0];
         const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
         if (rawUrl) {
           coverCache[key] = rawUrl.replace('http:', 'https:');
@@ -522,11 +526,10 @@ function fetchCover(title, author) {
       }, 60);
     };
 
-    // 🔴 楽天公式ドキュメント準拠：BooksTotal/Searchを使用。
-    // プロキシサーバーを介さないため、429制限（Too Many Requests）を回避できます。
+    // 🔴 楽天公式ドキュメント最新仕様に準拠：エンドポイントを openapi に変更、必須パラメータ accessKey と formatVersion=2 を追加
     const script = document.createElement('script');
     script.id = callbackKey;
-    script.src = `https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${RAKUTEN_APP_ID}&keyword=${encodeURIComponent(cleanTitle)}&hits=1&callback=${callbackKey}`;
+    script.src = `https://openapi.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${RAKUTEN_APP_ID}&accessKey=${RAKUTEN_ACCESS_KEY}&keyword=${encodeURIComponent(cleanTitle)}&hits=1&formatVersion=2&callback=${callbackKey}`;
     document.body.appendChild(script);
   });
 }
