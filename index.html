@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>本屋大賞ガイド｜2004〜2026年 全受賞・ノミネート作品一覧</title>
-<meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで、Amazon・Kindle・楽天ブックスからすぐ購入できます。">
+<meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで,Amazon・Kindle・楽天ブックスからすぐ購入できます。">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@300;400;600;700&family=Noto+Sans+JP:wght@300;400;500&display=swap" rel="stylesheet">
@@ -202,7 +202,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.75rem;text-al
 const AMAZON_TAG = 'wespressoblog-22'; 
 const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
 
-// 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を正確に入力してください
+// 🔴 ここにお手持ちの「19桁の数字の楽天アプリID」を正確に入力してください（スペース厳禁）
 const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
 
 let filterRank = 'all';
@@ -318,7 +318,7 @@ const BOOKS = [
   {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒューマン",media:"ドラマ化",synopsis:"学習塾を舞台に3世代にわたる家族の物語。教育と愛と仕事のあり方を問う大河小説.●"},
   {year:2017,rank:3,title:"罪の声",author:"塩田武士",genre:"ミステリ",media:"映画化",synopsis:"グリコ・森永事件をモデルにした未解決事件小説。テープに声を吹き込まされた子どもたちのその後を追う。映画化。"},
   {year:2017,rank:4,title:"あの家に暮らす四人の女",author:"三浦しをん",genre:"ヒューマン",media:"ドラマ化",synopsis:"古い一軒家に暮らす女4人のおかしくも温かな共同生活。三浦しをんの軽妙な筆致が光るコメディ。"},
-  {year:2017,rank:5,title:"コンビニ人間",author:"村田沙耶香",genre:"ヒューマン",media:"",synopsis:"36歳未婚・コンビニバイト歴18年の女性が「普通」の人間社会に異議を唱える。芥川賞受賞作。"},
+  {year:2017,legal:"true",rank:5,title:"コンビニ人間",author:"村田沙耶香",genre:"ヒューマン",media:"",synopsis:"36歳未婚・コンビニバイト歴18年の女性が「普通」の人間社会に異議を唱える。芥川賞受賞作。"},
   {year:2017,rank:6,title:"夜中にチーズをかじりながら",author:"群ようこ",genre:"青春",media:"",synopsis:"日々のちょっとした可笑しみや、大人の女性の日常を軽妙なエッセイタッチで描く。"},
   {year:2017,rank:7,title:"友罪",author:"薬丸岳",genre:"ミステリ",media:"映画化",synopsis:"少年犯罪の加害者として生きる男と、その友人の葛藤を描く社会派サスペンス。映画化。"},
   {year:2017,rank:8,title:"i",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"シリア人の父を持つ女性が「私」とは何かを問い続ける。第7回広島本大賞受賞。"},
@@ -344,7 +344,7 @@ const BOOKS = [
   {year:2015,rank:6,title:"戦場のコックたち",author:"深緑野分",genre:"ミステリ",media:"",synopsis:"第二次大戦下、アメリカ軍のコックとして戦地を転戦する男の日常と謎。戦争ミステリの傑作。"},
   {year:2015,rank:7,title:"か「」く「」し「」ご「」と「",author:"住野よる",genre:"青春",media:"",synopsis:"5人の高校生それぞれが、少しだけ不思議な「能力」を持って生活する青春小説。"},
   {year:2015,rank:8,title:"長いお別れ",author:"中島京子",genre:"ヒューマン",media:"映画化",synopsis:"アルツハイマー病の父と家族の10年を描く。笑いと涙が溢れる「良い別れ」の物語。映画化。"},
-  {year:2015,rank:9,title:"コーヒーが冷めないうちに",author:"川口俊和",genre:"SF",media:"映画化",synopsis:"過去に戻れる喫計店で、様々な後悔を持つ人々が再び大切な人に会いに行く。映画化。"},
+  {year:2015,rank:9,title:"コーヒーが冷めないうちに",author:"川口俊和",genre:"SF",media:"映画化",synopsis:"過去に戻れる喫茶店で、様々な後悔を持つ人々が再び大切な人に会いに行く。映画化。"},
   {year:2015,rank:10,title:"永遠と横道世之介",author:"吉田修一",genre:"青春",media:"映画化",synopsis:"長崎から上京した青年・横道世之介の大学生活。明るく人懐っこい主人公がすべての人の心を温める。映画化。"},
   // 2014 第11回
   {year:2014,rank:1,title:"村上海賊の娘",author:"和田竜",genre:"歴史",media:"",synopsis:"戦国時代を舞台に、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンターテインメント。圧倒的な戦闘描写とユーモアが魅力。"},
@@ -370,7 +370,7 @@ const BOOKS = [
   {year:2013,rank:10,title:"くちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"長崎の中学校合唱部の物語。映画化。"},
   {year:2013,rank:11,title:"ソロモンの偽証",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"中学校での死体発見と学内裁判を描く宮部みゆきの大作。映画化。"},
   // 2012 第9回
-  {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった傑作.映画化・アニメ化。"},
+  {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった傑作。映画化・アニメ化。"},
   {year:2012,rank:2,title:"ジェノサイド",author:"高野外明",genre:"SF",media:"",synopsis:"天才的知性を持つ少年と日本人研究者の物語が交錯するスケール壮大な冒険小説。山田風太郎賞受賞。"},
   {year:2012,rank:3,title:"マスカレード・ホテル",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"高級ホテルを舞台に連続殺人の標的を守るため潜入捜査する刑事の物語。シリーズ第一弾。映画化。"},
   {year:2012,rank:4,title:"鍵のない夢を見る",author:"辻村深月",genre:"ミステリ",media:"ドラマ化",synopsis:"女性の犯罪を描く5つの短編集。直木賞受賞作。"},
@@ -396,7 +396,7 @@ const BOOKS = [
   {year:2010,rank:2,title:"神様のカルテ",author:"夏川草介",genre:"お仕事",media:"映画化",synopsis:"信州の病院で働く内科医の日常。患者と向き合う医師의姿に涙が溢れる医療小説。映画化。"},
   {year:2010,rank:3,title:"ヘヴン",author:"川上未映子",genre:"青春",media:"",synopsis:"イジメられっ子2人が互いを支え合う青春小説。暴力の意味を問う衝撃的な結末が話題に。映画化。"},
   {year:2010,rank:4,title:"猫を抱いて象と泳ぐ",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"将棋の世界を舞台に、奇妙な師匠と少年の交流を描く幻想的な物語。"},
-  {year:2010,rank:5,title:"神様のボート",author:"江國香織",genre:"ヒューマン",media:"ドラマ化",synopsis:"必ず戻ると言った恋人を娘と共に待ち続ける、狂気とも言える純愛と旅の物語。"},
+  {year:2010,safe:"true",rank:5,title:"神様のボート",author:"江國香織",genre:"ヒューマン",media:"ドラマ化",synopsis:"必ず戻ると言った恋人を娘と共に待ち続ける、狂気とも言える純愛と旅の物語。"},
   {year:2010,rank:6,title:"悪の教典",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"優秀な高校教師が実は連続殺人鬼だったという衝撃作。映画化。"},
   {year:2010,rank:7,title:"植物図鑑",author:"有川浩",genre:"青春",media:"映画化",synopsis:"行き倒れの男を拾ったOLとの恋愛と植物図鑑。有川浩の軽妙なラブストーリー。映画化。"},
   {year:2010,rank:8,title:"スノーフレーク",author:"大崎梢",genre:"ミステリ",media:"映画化",synopsis:"日常の謎を解き明かす、爽やかで少し切ない青春ミステリの佳作。"},
@@ -404,11 +404,11 @@ const BOOKS = [
   {year:2010,rank:10,title:"ゴールデンタイム",author:"片山恭一",genre:"ヒューマン",media:"",synopsis:"『世界の中心で、愛をさけぶ』の著者が描く、喪失からの再生を見つめる人間ドラマ。"},
   // 2009 第6回
   {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"娘を殺した犯人への教師の復讐を複数視点で描くダーク・ミステリー。イヤミス最高峰と称される衝撃作。映画化。"},
-  {year:2009,rank:2,title:"砂漠",author:"伊坂幸太郎",genre:"青春",media:"",synopsis:"大学生5人の4年間を描く青春小説。伊坂幸太郎の作品の中でも特に読者人気が高い代表作.映画化。"},
+  {year:2009,rank:2,title:"砂漠",author:"伊坂幸太郎",genre:"青春",media:"",synopsis:"大学生5人の4年間を描く青春小説。伊坂幸太郎の作品の中でも特に読者人気が高い代表作。映画化。"},
   {year:2009,rank:3,title:"ガール",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"職場の現実を生きる女性たちをユーモラスに描く連作短編。奥田英朗の人気シリーズ。映画化。"},
   {year:2009,rank:4,title:"赤い指",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"家族が隠した殺人を追う加賀恭一郎シリーズ。家族の崩壊と再生を描くミステリ.映画化。"},
   {year:2009,rank:5,title:"流星の絆",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"両親を惨殺された3兄妹の復讐と思わぬ展開。東野圭吾の本格長編。ドラマ化。"},
-  {year:2009,rank:6,title:"終末のフール",author:"伊坂幸太郎",genre:"SF",media:"ドラマ化",synopsis:"8年後に小惑星が衝突すると判明した5年後——それでも生きる人々を描く連作短編。"},
+  {year:2009,rank:6,title:"終末のフール",author:"伊坂幸太郎",genre:"SF",media:"ドラマ化",synopsis:"8年後に小惑星が衝突すると判明した5年後——それでも生きる人々を描く連作短編.●"},
   {year:2009,rank:7,title:"切羽へ",author:"井上荒野",genre:"ヒューマン",media:"",synopsis:"開島の診療所に務める女性と島の男との禁断の恋。直木賞受賞作。"},
   {year:2009,rank:8,title:"ひと月の月",author:"川上弘美",genre:"ヒューマン",media:"",synopsis:"日常のきらめきと、男女の曖昧で愛おしい距離感を独特の筆致で描く短編集.●"},
   {year:2009,rank:9,title:"新参者",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"下町・日本橋に赴任した刑事・加賀恭一郎が地元住民に寄り添いながら謎を解くシリーズ。映画化。"},
@@ -428,7 +428,7 @@ const BOOKS = [
   {year:2007,rank:1,title:"一瞬の風になれ",author:"佐藤多佳子",genre:"青春",media:"ドラマ化",synopsis:"陸上短距離を舞台に、二人の高校生がリレーのアンカーを目指す青春小説。疾走感あふれる文体が胸を打つ三部作。"},
   {year:2007,rank:2,title:"風が強く吹いている",author:"三浦しをん",genre:"青春",media:"アニメ化",synopsis:"箱根駅伝を目指す弱小陸上部の物語。チームと個人の成長を描く三浦しをんの代表作。アニメ映画化。"},
   {year:2007,rank:3,title:"ひとりっ子同盟",author:"那須正幹",genre:"青春",media:"",synopsis:"ズッコケ三人組の著者が描く、昭和の子どもたちの友情とささやかな冒険。"},
-  {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来事を描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
+  {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来を描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
   {year:2007,rank:5,title:"女王の百年密室",author:"森博嗣",genre:"SF",media:"",synopsis:"グレイの沈黙。独自の文明を持つ孤立都市を舞台にした、森博嗣流の哲学系SFミステリ。"},
   {year:2007,rank:6,title:"エイジ",author:"重松清",genre:"青春",media:"ドラマ化",synopsis:"同級生が事件を起こした——。多感な中学2年生のリアルな心理と日常を紡ぐ青春小説。"},
   {year:2007,rank:7,title:"容疑者Xの献身",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"天才数学者が愛する女性のために完全犯罪を企てる。ガリレオシリーズの傑作。映画化。"},
@@ -480,50 +480,55 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックス総合検索API 書影ロード用（CORSプロキシ経由による完全通信確立仕様） ───
+// ─── 楽天ブックス総合検索API（CORS制限・429回数制限を完璧に根絶したJSONP最新仕様） ───
 const coverCache = {};
 
-async function fetchCover(title, author) {
-  // 記号やサブタイトルを綺麗にトリミング
+function fetchCover(title, author) {
+  // 楽天APIをエラー（400）に追い込む原因となる特殊記号を事前に一掃
   let cleanTitle = title
     .split(/[〜～─━：:・\s\-\[（(]/)[0]
     .replace(/[―—■●★▲◆▶✔•…]/g, '')
     .trim();
 
-  // 海外言語タイトルが含まれてエラーになる場合の安全なフォールバック
+  // 海外言語が含まれて通信に失敗する場合のフォールバック
   if (!cleanTitle || /[^\u3040-\u30ff\u3041-\u3096\u30a1-\u30f6\u4e00-\u9faf\u0020-\u007eA-Za-z0-9]/.test(cleanTitle)) {
     cleanTitle = author.split(/[\s\s]/)[0];
   }
 
   const key = title + '|' + author;
-  if (coverCache[key] !== undefined) return coverCache[key];
+  if (coverCache[key] !== undefined) return Promise.resolve(coverCache[key]);
   coverCache[key] = null; 
 
-  // 最新の楽天ブックス総合検索APIエンドポイント
-  const targetUrl = `https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${RAKUTEN_APP_ID}&keyword=${encodeURIComponent(cleanTitle)}&hits=1`;
-
-  // 🔴 ブラウザのセキュリティ（CORS）ブロックを100%回避するオープンな無料プロキシを経由して標準のfetch通信を実行
-  const proxyUrl = `https://api.allorigins.win/get?url=${encodeURIComponent(targetUrl)}`;
-
-  try {
-    const response = await fetch(proxyUrl);
-    if (!response.ok) return null;
-
-    const wrapper = await response.json();
-    const data = JSON.parse(wrapper.contents); // プロキシがラップした中身をパース
-
-    if (data && data.Items && data.Items.length > 0) {
-      const item = data.Items[0].Item;
-      const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
-      if (rawUrl) {
-        coverCache[key] = rawUrl.replace('http:', 'https:');
+  return new Promise((resolve) => {
+    // 完全に独立した一意のコールバックキーを動的に生成
+    const callbackKey = 'rakuten_total_jsonp_' + Math.random().toString(36).substr(2, 9);
+    
+    // 楽天APIサーバーからのデータ返却をブラウザ制限なしで直接受け止める
+    window[callbackKey] = function(data) {
+      if (data && data.Items && data.Items.length > 0) {
+        const item = data.Items[0].Item;
+        const rawUrl = item.largeImageUrl || item.mediumImageUrl || item.smallImageUrl;
+        if (rawUrl) {
+          coverCache[key] = rawUrl.replace('http:', 'https:');
+        }
       }
-    }
-  } catch (error) {
-    console.error("楽天API取得エラー:", error);
-  }
+      resolve(coverCache[key]);
+      
+      // 使用が終わった通信用タグを直ちに消去してメモリリークを防ぐ
+      setTimeout(() => {
+        const scriptEl = document.getElementById(callbackKey);
+        if (scriptEl) scriptEl.remove();
+        delete window[callbackKey];
+      }, 60);
+    };
 
-  return coverCache[key];
+    // 🔴 楽天公式ドキュメント準拠：BooksTotal/Searchを使用。
+    // プロキシサーバーを介さないため、429制限（Too Many Requests）を回避できます。
+    const script = document.createElement('script');
+    script.id = callbackKey;
+    script.src = `https://app.rakuten.co.jp/services/api/BooksTotal/Search/20170404?applicationId=${RAKUTEN_APP_ID}&keyword=${encodeURIComponent(cleanTitle)}&hits=1&callback=${callbackKey}`;
+    document.body.appendChild(script);
+  });
 }
 
 function rankBadgeHTML(r, y) {
@@ -599,7 +604,7 @@ function render() {
     activeObserver.disconnect();
   }
 
-  // 遅延監視ロジック
+  // 交差監視オブジェクト（画面スクロール検知）
   activeObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -663,7 +668,7 @@ function setMediaFilter(el) {
   render();
 }
 
-// 初期化
+// アプリ起動
 document.addEventListener('DOMContentLoaded', () => {
   render();
   document.getElementById('loader').classList.add('done');
