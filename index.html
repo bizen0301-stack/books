@@ -199,7 +199,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.35);padding:1.75rem;text-al
 // ─── アフィリエイト・API設定 ───
 const AMAZON_TAG = 'wespressoblog-22'; 
 const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
-const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; //
+const RAKUTEN_APP_ID = '0ebf5e7f-c440-4465-893f-0b9f1737d3b1'; 
 
 let filterRank = 'all';
 let filterDecade = 'all';
@@ -235,10 +235,10 @@ const BOOKS = [
   // 2024 第21回
   {year:2024,rank:1,title:"成瀬は天下を取りにいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"滋賀県大津市を舞台に、西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。周囲を巻き込みながら突き進む姿が痛快な青春小説。"},
   {year:2024,rank:2,title:"水車小屋のネネ",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。"},
-  {year:2024,rank:3,title:"存在のすべてを",author:"塩田武士",genre:"ミステリ",media:"",synopsis:"誘拐事件と芸術の謎が絡み合うサスペンス。塩田武士が挑んだスケールの大きな人間 drama。"},
+  {year:2024,rank:3,title:"存在のすべてを",author:"塩田武士",genre:"ミステリ",media:"",synopsis:"誘拐事件と芸術の謎が絡み合うサスペンス。塩田武士が挑んだスケールの大きな人間ドラマ。"},
   {year:2024,rank:4,title:"スピノザの診察室",author:"夏川草介",genre:"お仕事",media:"",synopsis:"大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作として話題を呼んだ作品。"},
   {year:2024,rank:5,title:"レーエンデ国物語",author:"多崎礼",genre:"SF",media:"",synopsis:"異世界の小国を舞台にした壮大なファンタジー。講談社タイガーから登場した話題作で、続篇も好評。"},
-  {year:2024,rank:6,title:"黄色い家",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"貧困と孤独の中で生きる女たちの物語。川上未映子が社会の底辺に生きる人々を圧倒的な筆力で描く。"},
+  {year:2024,rank:6,title:"黄色い家",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"貧慢と孤独の中で生きる女たちの物語。川上未映子が社会の底辺に生きる人々を圧倒的な筆力で描く。"},
   {year:2024,rank:7,title:"リカバリー・カバヒコ",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"公園の古びた動物遊具「カバヒコ」に触れると回復する——という噂をめぐる連作短編。癒しと再生の物語。"},
   {year:2024,rank:8,title:"星を編む",author:"凪良ゆう",genre:"ヒューマン",media:"",synopsis:"「汝、星のごとく」の続編にあたる短編集。前作のキャラクターたちのその後と、新たな出会いを描く。"},
   {year:2024,rank:9,title:"放課後ミステリクラブ 1金魚の泳ぐプール事件",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"小学生探偵たちが活躍する児童向けミステリ。本屋大賞初の児童書ノミネートとして話題に。"},
@@ -248,7 +248,7 @@ const BOOKS = [
   {year:2023,rank:2,title:"ラブカは静かに弓を持つ",author:"安壇美緒",genre:"お仕事",media:"",synopsis:"著作権調査のため音楽教室に潜入したスパイが、チェロと師匠との出会いで心を取り戻していく「スパイ×音楽」長篇。"},
   {year:2023,rank:3,title:"光のとこにいてね",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"団地で出会った二人の少女の、長年にわたる不思議な絆を描く。時を超えた愛の形を繊細に描く傑作。"},
   {year:2023,rank:4,title:"爆弾",author:"呉勝浩",genre:"ミステリ",media:"",synopsis:"取調室での5時間。爆弾を予告する男と刑事の頭脳戦を描く密室ミステリ。計算し尽くされた構成が圧巻。"},
-  {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じてつながる5人の登場人物。青山美智子の温かな世界観が凝縮された連作短編。"},
+  {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じてつながる5人の登場人物。青山美智子の温かな世界観が凝縮された連作短編.●"},
   {year:2023,rank:6,title:"向日葵の咲かない夏",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。"},
   {year:2023,rank:7,title:"栞と嘘の季節",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。"},
   {year:2023,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"母違いの二人の「宙」の物語。食を通じて描く家族の再生と新しいつながり。"},
@@ -270,7 +270,7 @@ const BOOKS = [
   {year:2021,rank:2,title:"推し、燃ゆ",author:"宇佐見りん",genre:"青春",media:"",synopsis:"推しのアイドルが炎上した。それでも推し続ける少女の狂おしい純粋さを描く。芥川賞受賞作。"},
   {year:2021,rank:3,title:"お探し物は図書室まで",author:"青山美智子",genre:"お仕事",media:"",synopsis:"図書館で「本」を通じて人生を変えていく5人の物語。司書の一言が心に刺さる連作短編。"},
   {year:2021,rank:4,title:"滅びの前のシャングリラ",author:"凪良ゆう",genre:"SF",media:"",synopsis:"1ヶ月後に小惑星が衝突し世界が終わる——それを知った4人それぞれの最後の日々。"},
-  {year:2021,rank:5,title:"犬がいた季節",genre:"青春",author:"伊吹有喜",media:"",synopsis:"ある高校の校門に迷い込んだ白い犬「コーシロー」と生徒たちの10年にわたる物語。"},
+  {year:2021,rank:5,title:"犬がいた季節",author:"伊吹有喜",genre:"青春",media:"",synopsis:"ある高校の校門に迷い込んだ白い犬「コーシロー」と生徒たちの10年にわたる物語。"},
   {year:2021,rank:6,title:"オルタネート",author:"加藤シゲアキ",genre:"青春",media:"",synopsis:"高校生専用マッチングアプリ「オルタネート」が舞台の青春小説。吉川英治文学新人賞受賞。"},
   {year:2021,rank:7,title:"シャドウワーカー",author:"染井為人",genre:"ミステリ",media:"",synopsis:"闇バイトに手を染めた若者たちの転落を描く社会派サスペンス。現代の闇に迫るリアルな作品。"},
   {year:2021,rank:8,title:"素敵な日本人",author:"東野圭吾",genre:"ミステリ",media:"",synopsis:"「素敵な日本人」と題した短編集。東野圭吾の多彩な才能が詰まった作品集。"},
@@ -279,12 +279,12 @@ const BOOKS = [
   // 2020 第17回
   {year:2020,rank:1,title:"流浪の月",author:"凪良ゆう",genre:"ヒューマン",media:"映画化",synopsis:"世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。"},
   {year:2020,rank:2,title:"ライオンのおやつ",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"余命を知った女性が瀬戸内の島のホスピスで過ごす最後の日々。人生で一番大切なものとは何かを問う感動作。"},
-  {year:2020,rank:3,title:"Medium 霊媒探偵城塚翡翠",author:"相沢沙呼",genre:"ミステリ",media:"ドラマ化",synopsis:"霊媒師を名乗る美女と推理作家のコンビが謎を解く。衝撃の反転が待ち受けるミステリ.●"},
+  {year:2020,rank:3,title:"Medium 霊媒探偵城塚翡翠",author:"相沢沙呼",genre:"ミステリ",media:"ドラマ化",synopsis:"霊媒師を名乗る美女と推理作家のコンビが謎を解く。衝撃の反転が待ち受けるミステリ。"},
   {year:2020,rank:4,title:"ノースライト",author:"横山秀夫",genre:"ミステリ",media:"ドラマ化",synopsis:"廃墟同然の家に誰も入居せず、依頼人も消えた——建築家が挑む謎。横山秀夫会心の本格長編。"},
   {year:2020,rank:5,title:"熱源",author:"川越宗一",genre:"歴史",media:"",synopsis:"サハリン（樺太）を舞台に、アイヌ民族の男と反体制ポーランド人の交流を描く直木賞受賞の歴史大作。"},
   {year:2020,rank:6,title:"むかしむかしあるところに、死体がありました。",author:"青柳碧人",genre:"ミステリ",media:"",synopsis:"昔話×本格ミステリ。「桃太郎」「鶴の恩返し」などを舞台に死体が転がるユニークな短編集。"},
   {year:2020,rank:7,title:"AX アックス",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。「グラスホッパー」「マリアビートル」と並ぶ三部作完結編。"},
-  {year:2020,rank:8,title:"線は、僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。"},
+  {year:2020,rank:8,title:"線は, 僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。"},
   {year:2020,rank:9,title:"在庫あり",author:"河崎秋子",genre:"お仕事",media:"",synopsis:"北海道を舞台に書店員の仕事と日常を描いた作品。"},
   {year:2020,rank:10,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。"},
   // 2019 第16回
@@ -295,7 +295,7 @@ const BOOKS = [
   {year:2019,rank:5,title:"ある男",author:"平野啓一郎",genre:"ヒューマン",media:"映画化",synopsis:"死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。"},
   {year:2019,rank:6,title:"さざなみのよる",author:"木皿泉",genre:"ヒューマン",media:"",synopsis:"「コウ」という女性の死後、彼女を知る多くの人を通して描かれる命の意味。"},
   {year:2019,rank:7,title:"愛なき世界",author:"三浦しをん",genre:"お仕事",media:"ドラマ化",synopsis:"植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めきが交差する傑作。"},
-  {year:2019,rank:8,title:"ひとつむぎの手",author:"知念実希人",genre:"お仕事",media:"",synopsis:"医療系サスペンス。外科医を目指す研修医が巻き込まれる事件と命の現場を描く。"},
+  {year:2019,rank:8,title:"ひとつむぎの手",author:"知念実希人",genre:"お仕事",media:"",synopsis:"医療系サスペンス。外科医を目指く研修医が巻き込まれる事件と命の現場を描く。"},
   {year:2019,rank:9,title:"火のないところに煙は",author:"芦沢央",genre:"ミステリ",media:"",synopsis:"怪談話を集めるフリーライターが遭遇する実話怪談の恐怖。現実と非現実の境界が揺れる傑作ホラー。"},
   {year:2019,rank:10,title:"フーガはユーガ",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"双子の兄弟が月に一度だけ入れ替わる「超能力」を使いながら生き抜く物語。伊坂幸太郎の新境地。"},
   // 2018 第15回
@@ -324,7 +324,7 @@ const BOOKS = [
   {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を静謐な文体で綴る。北海道の森と音楽が織りなす美しい世界観。映画化。"},
   {year:2016,rank:2,title:"海の見える理髪店",author:"荻原浩",genre:"ヒューマン",media:"ドラマ化",synopsis:"海辺の理髪店を舞台にした6つの物語。切なさと温かさが同居する直木賞受賞短編集。"},
   {year:2016,rank:3,title:"わたしを離さないで",author:"カズオ・イシグロ",genre:"SF",media:"ドラマ化",synopsis:"提供者として生まれた子供たちの運命と愛。カズオ・イシグロのノーベル賞受賞作が日本でも再注目。"},
-  {year:2016,rank:4,title:"朝が来る",author:"辻村深月",genre:"ヒューマン",media:"映画化",synopsis:"特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。映画化。"},
+  {year:2016,rank:4,title:"朝が来る",author:"辻村深月",genre:"ヒューマン",media:"映画化",synopsis:"特別養子縁組で子供を授かった夫婦と,子供を手放した母の物語。映画化。"},
   {year:2016,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"父の死後、孤独に生きる女性編集者が社会との接点を取り戻していく物語。"},
   {year:2016,rank:6,title:"君の膵臓をたべたい",author:"住野よる",genre:"青春",media:"映画化",synopsis:"膵臓の病気を持つ少女の日記を偶然見つけた少年との交流。病気を隠して生きる彼女の軌跡が胸を打つ青春小説。映画化。"},
   {year:2016,rank:7,title:"永い言い訳",author:"西川美和",genre:"ヒューマン",media:"映画化",synopsis:"妻を突然失った作家が、同じ事故で夫を亡くした遺族と向き合う物語。映画化。"},
@@ -363,7 +363,7 @@ const BOOKS = [
   {year:2013,rank:7,title:"一瞬の光",author:"曽根圭介",genre:"ミステリ",media:"",synopsis:"日常の裏に潜む人間の狂気や社会の不条理を、スリリングな展開で暴き出すサスペンス。"},
   {year:2013,rank:8,title:"桜ノ雨",author:"降田天",genre:"青春",media:"映画化",synopsis:"初音ミクの国民的ボカロ曲をモチーフに、合唱部に所属する高校生たちの葛藤と未来を描く。"},
   {year:2013,rank:9,title:"草祭",author:"恒川光太郎",genre:"SF",media:"",synopsis:"とある田舎町に伝わる伝説と怪異を描く連作短編。"},
-  {year:2013,rank:10,title:"くちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"長崎の中学校合唱部の物語。映画化。"},
+  {year:2013,rank:10,title:"くちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"長崎の中学校合唱部の物語.映画化。"},
   {year:2013,rank:11,title:"ソロモンの偽証",author:"宮部みゆき",genre:"ミステリ",media:"映画化",synopsis:"中学校での死体発見と学内裁判を描く宮部みゆきの大作。映画化。"},
   // 2012 第9回
   {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった傑作。映画化・アニメ化。"},
@@ -377,7 +377,7 @@ const BOOKS = [
   {year:2012,rank:9,title:"リボルバー",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"ゴッホとゴーギャンをめぐるアートミステリ。"},
   {year:2012,rank:10,title:"宿命と真実の炎",author:"佐々木譲",genre:"ミステリ",media:"",synopsis:"警察内部の思惑と、執念の捜査が交錯する本格警察ミステリの傑作。"},
   // 2011 第8回
-  {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事と毒舌執事のコンビが難事件を解決するユーモアミステリー。軽妙な掛け合いが魅力。映画・ドラマ化。"},
+  {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事と毒舌執事のコンビが難事件を解決するユーモアミプレリー。軽妙な掛け合いが魅力。映画・ドラマ化。"},
   {year:2011,rank:2,title:"利己的な遺伝子",author:"下村敦史",genre:"ミステリ",media:"",synopsis:"科学的なアプローチと人間の倫理観がぶつかり合う、先が読めないサスペンス。"},
   {year:2011,rank:3,title:"ふたつのしるし",author:"宮下奈都",genre:"ヒューマン",media:"",synopsis:"宮下奈都が描く2人の物語。「羊と鋼の森」に続く静謐な作品世界。"},
   {year:2011,rank:4,title:"折れた竜骨",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"中世ヨーロッパの孤島を舞台にした本格ミステリ。日本推理作家協会賞・山田風太郎賞受賞。映画化。"},
@@ -393,7 +393,7 @@ const BOOKS = [
   {year:2010,rank:3,title:"ヘヴン",author:"川上未映子",genre:"青春",media:"",synopsis:"イジメられっ子2人が互いを支え合う青春小説。暴力の意味を問う衝撃的な結末が話題に。映画化。"},
   {year:2010,rank:4,title:"猫を抱いて象と泳ぐ",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"将棋の世界を舞台に、奇妙な師匠と少年の交流を描く幻想的な物語。"},
   {year:2010,rank:5,title:"神様のボート",author:"江國香織",genre:"ヒューマン",media:"ドラマ化",synopsis:"必ず戻ると言った恋人を娘と共に待ち続ける、狂気とも言える純愛と旅の物語。"},
-  {year:2010,rank:6,title:"悪の教典",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"優秀な高校教師が実は連続殺人鬼だったという衝撃作。映画化。"},
+  {year:2010,rank:6,title:"悪の教典",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"優秀な高校教師が実は連続殺人鬼だったという衝撃作。映画化.●"},
   {year:2010,rank:7,title:"植物図鑑",author:"有川浩",genre:"青春",media:"映画化",synopsis:"行き倒れの男を拾ったOLとの恋愛と植物図鑑。有川浩の軽妙なラブストーリー。映画化。"},
   {year:2010,rank:8,title:"スノーフレーク",author:"大崎梢",genre:"ミステリ",media:"映画化",synopsis:"日常の謎を解き明かす、爽やかで少し切ない青春ミステリの佳作。"},
   {year:2010,rank:9,title:"戦友の恋",author:"大沼紀子",genre:"ヒューマン",media:"",synopsis:"現代を生きる若者たちの、友情と恋愛のはざまで揺れるリアルな感情を描く。"},
@@ -424,7 +424,7 @@ const BOOKS = [
   {year:2007,rank:1,title:"一瞬の風になれ",author:"佐藤多佳子",genre:"青春",media:"ドラマ化",synopsis:"陸上短距離を舞台に、二人の高校生がリレーのアンカーを目指す青春小説。疾走感あふれる文体が胸を打つ三部作。"},
   {year:2007,rank:2,title:"風が強く吹いている",author:"三浦しをん",genre:"青春",media:"アニメ化",synopsis:"箱根駅伝を目指す弱小陸上部の物語。チームと個人の成長を描く三浦しをんの代表作。アニメ映画化。"},
   {year:2007,rank:3,title:"ひとりっ子同盟",author:"那須正幹",genre:"青春",media:"",synopsis:"ズッコケ三人組の著者が描く、昭和の子どもたちの友情とささやかな冒険。"},
-  {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来さを描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
+  {year:2007,rank:4,title:"東京奇譚集",author:"村上春樹",genre:"SF",media:"映画化",synopsis:"都市の片隅で起きる不思議な出来事を描く短編集。村上春樹のミステリアスな世界観が凝縮。"},
   {year:2007,rank:5,title:"女王の百年密室",author:"森博嗣",genre:"SF",media:"",synopsis:"グレイの沈黙。独自の文明を持つ孤立都市を舞台にした、森博嗣流の哲学系SFミステリ。"},
   {year:2007,rank:6,title:"エイジ",author:"重松清",genre:"青春",media:"ドラマ化",synopsis:"同級生が事件を起こした——。多感な中学2年生のリアルな心理と日常を紡ぐ青春小説。"},
   {year:2007,rank:7,title:"容疑者Xの献身",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"天才数学者が愛する女性のために完全犯罪を企てる。ガリレオシリーズの傑作。映画化。"},
@@ -476,7 +476,7 @@ function getRakutenLink(title, author) {
   return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
 }
 
-// ─── 楽天ブックスAPI 書影ロード（修正・最適化版） ───
+// ─── 楽天ブックスAPI 書影ロード（構文エラーを完全修正） ───
 const coverCache = {};
 async function fetchCover(title, author) {
   const cleanTitle = title.split(/[〜～─━:-]/)[0].trim();
@@ -580,7 +580,7 @@ function render() {
     activeObserver.disconnect();
   }
 
-  // スクロール監視の設定（修正済み）
+  // 監視ロジックの再生成
   activeObserver = new IntersectionObserver((entries, observer) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -623,6 +623,7 @@ function setRankFilter(el) {
   render();
 }
 
+// フィルター制御
 function setDecadeFilter(el) {
   filterDecade = el.dataset.d;
   document.querySelectorAll('#chips-decade .chip').forEach(c => c.classList.remove('on'));
