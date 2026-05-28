@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>本屋大賞 電子書籍ナビ</title>
     <style>
+        /* --- デザイン（CSS） --- */
         body {
             margin: 0; padding: 0;
             font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
@@ -26,7 +27,6 @@
         }
         .btn-filter.active { background-color: #1a365d; color: #fff; border-color: #1a365d; }
         
-        /* 年選択セレクトボックス */
         .select-year {
             padding: 8px 16px; font-size: 0.9rem; border-radius: 4px;
             border: 1px solid #ddd; background: #fff; width: 150px; cursor: pointer;
@@ -72,7 +72,6 @@
     </header>
 
     <div class="container">
-        
         <div class="filter-section">
             <div class="filter-group" id="category-filters">
                 <button class="btn-filter active" data-category="all">すべて表示</button>
@@ -83,26 +82,95 @@
             <div class="filter-group">
                 <select id="year-select" class="select-year">
                     <option value="all">全年代</option>
-                    </select>
+                </select>
             </div>
         </div>
 
         <main id="book-list"></main>
     </div>
 
-    <script src="data.js"></script>
+    <script id="markdown-raw" type="text/markdown">
+ここに「本屋大賞 歴代ランキング（1位〜10位）完全版.md」のテキストを丸ごと全部貼り付けてください！
+    </script>
+
     <script>
+        const RAKUTEN_ID = "1baffa53.9767f76d.1baffa54.f4870c64";
+        const bookData = [];
+
+        // Markdownを解析してデータ化するシステム
+        function parseMarkdown() {
+            const rawText = document.getElementById('markdown-raw').textContent;
+            const lines = rawText.split('\n');
+            let currentYear = '';
+            let currentSection = 'main';
+
+            lines.forEach(line => {
+                const trimmed = line.trim();
+                if (!trimmed) return;
+
+                if (trimmed.startsWith('## 本屋大賞')) {
+                    const match = trimmed.match(/## 本屋大賞\s*(\d+)年/);
+                    if (match) { currentYear = match[1]; currentSection = 'main'; }
+                } else if (trimmed.startsWith('### 翻訳小説部門')) {
+                    currentSection = 'translation';
+                } else if (trimmed.startsWith('### 発掘部門')) {
+                    currentSection = 'discovery';
+                }
+
+                if (trimmed.startsWith('|') && !trimmed.includes('---|') && !trimmed.includes('順位') && !trimmed.includes('年 | タイトル')) {
+                    const parts = trimmed.split('|').map(p => p.trim());
+                    if (parts.length >= 5) {
+                        const col1 = parts[1];
+                        const title = parts[2];
+                        const author = parts[3];
+                        const linkPart = parts[4];
+
+                        // Amazonリンク抽出
+                        let kindleUrl = '';
+                        const urlMatch = linkPart.match(/\((https:\/\/[^)]+)\)/);
+                        if (urlMatch) kindleUrl = urlMatch[1];
+
+                        // 楽天Kobo自動リンク生成
+                        const searchQuery = encodeURIComponent(`${title} ${author} 電子書籍`);
+                        const koboUrl = `https://hb.afl.rakuten.co.jp/ichiba/${RAKUTEN_ID}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${searchQuery}%2F`;
+
+                        if (currentSection === 'main') {
+                            const rank = parseInt(col1);
+                            const category = rank === 1 ? 'grand' : 'nominate';
+                            const badge = rank === 1 ? `${currentYear}年 本屋大賞` : `${currentYear}年 第${rank}位`;
+                            bookData.push({
+                                year: currentYear, title, author, badge, category, kindleUrl, koboUrl,
+                                catch: "全国の書店員が選んだ、絶対に失敗しない名作。",
+                                story: ["本屋大賞に選ばれた傑作小説。ストーリーに一気に引き込まれ、普段あまり読書をしない方にもおすすめです。"],
+                                meta: [f`🏆第{rank}位`, "⏱目安：約4時間"],
+                                coverImg: `https://placehold.co/140x200?text=${currentYear}_${rank}`
+                            });
+                        } else {
+                            const badgeName = currentSection === 'translation' ? '翻訳小説部門 1位' : '発掘部門 1位';
+                            const metaTag = currentSection === 'translation' ? '🌍海外文学' : '💎隠れた名作';
+                            bookData.push({
+                                year: col1, title, author, badge: `${col1}年 ${badgeName}`, category: 'department', kindleUrl, koboUrl,
+                                catch: "今こそ読みたい、読書好き絶賛の傑作。",
+                                story: ["本屋大賞の部門賞を受賞した、間違いのない名著。新しい読書体験を今すぐスマホで。"],
+                                meta: [metaTag],
+                                coverImg: `https://placehold.co/140x200?text=${col1}_DEPT`
+                            });
+                        }
+                    }
+                }
+            });
+        }
+
+        // 画面描画の処理
         let currentCategory = 'all';
         let currentYear = 'all';
 
-        // セレクトボックスの「年」を自動生成
         function initYearSelect() {
             const yearSelect = document.getElementById('year-select');
             const years = [...new Set(bookData.map(b => b.year))].sort((a, b) => b - a);
             years.forEach(year => {
                 const opt = document.createElement('option');
-                opt.value = year;
-                opt.textContent = `${year}年`;
+                opt.value = year; opt.textContent = `${year}年`;
                 yearSelect.appendChild(opt);
             });
         }
@@ -126,7 +194,7 @@
                 const storyList = book.story.map(item => `<li>${item}</li>`).join('');
                 const metaSpan = book.meta.map(item => `<span>${item}</span>`).join('');
 
-                const cardHTML = `
+                container.innerHTML += `
                     <article class="book-card">
                         <span class="badge">${book.badge}</span>
                         <div class="book-cover">
@@ -145,10 +213,15 @@
                         </div>
                     </article>
                 `;
-                container.innerHTML += cardHTML;
             });
         }
 
+        // 起動処理
+        parseMarkdown();
+        initYearSelect();
+        renderBooks();
+
+        // イベント設定
         document.getElementById('category-filters').addEventListener('click', (e) => {
             if (!e.target.classList.contains('btn-filter')) return;
             document.querySelectorAll('#category-filters .btn-filter').forEach(btn => btn.classList.remove('active'));
@@ -161,9 +234,6 @@
             currentYear = e.target.value;
             renderBooks();
         });
-
-        initYearSelect();
-        renderBooks();
     </script>
 </body>
 </html>
