@@ -79,7 +79,6 @@ h1 span{color:var(--gold)}
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
 
-/* 👑 大賞バッジ：金メダルサークル仕様 */
 .rank-badge.r1 {
   top: -8px; left: -8px; border-radius: 50%; width: 54px; height: 54px;
   display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
@@ -169,10 +168,10 @@ let filterMedia = 'all';
 function toggleFilterPanel() {
   const panel = document.getElementById('filter-panel');
   const arrow = document.getElementById('toggle-arrow');
-  if (panel.classList.contains('open')) {
-    panel.classList.remove('open'); arrow.innerText = '▼';
-  } else {
-    panel.classList.add('open'); arrow.innerText = '▲';
+  if (panel && panel.classList.contains('open')) {
+    panel.classList.remove('open'); if(arrow) arrow.innerText = '▼';
+  } else if(panel) {
+    panel.classList.add('open'); if(arrow) arrow.innerText = '▲';
   }
 }
 
@@ -246,7 +245,10 @@ function getDecade(y) {
 }
 
 function updateFilteredList() {
-  const q = document.getElementById('search').value.toLowerCase().trim();
+  // 💡 【核心の修正】検索窓要素が存在するか安全チェックを行い、null文字エラーを完全排除
+  const searchInput = document.getElementById('search');
+  const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
+  
   filteredBooks = BOOKS.filter(b => {
     if (!b || !b.title) return false; 
     const isDept = b.rank >= 11;
