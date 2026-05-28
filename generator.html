@@ -21,7 +21,7 @@
         
         <div class="key-input-box">
             <strong>🔑 Google Books APIキーを入力してください：</strong><br>
-            <input type="text" id="api-key-field" placeholder="AIzaSyDqGFfU5G8DEbTNXJhG88Rcw6TlIyKsldM">
+            <input type="text" id="api-key-field" placeholder="AIzaSy...から始まるキーをここに貼り付け">
         </div>
 
         <button id="start-btn" onclick="startGeneration()">🔥 抽出を開始する</button>
@@ -30,7 +30,6 @@
     </div>
 
 <script>
-// ベースとなる240冊のデータ
 const BASE_BOOKS = [
   // 2026年
   {year:2026,rank:1,title:"イン・ザ・メガチャーチ",author:"朝井リョウ",genre:"ヒューマン",media:"",synopsis:"ファンダム経済を仕掛ける側、のめり込む側——人の心を動かす「物語」の功罪をあぶり出す意欲作。",audible:true},
@@ -46,7 +45,7 @@ const BASE_BOOKS = [
   {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草を意味する言葉「カフネ」。言葉の温もりをテーマにした愛の物語。",audible:true},
   {year:2025,rank:2,title:"アルプス席の母",author:"早見和真",genre:"ヒューマン",media:"",synopsis:"野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く、家族の感動作。"},
   {year:2025,rank:3,title:"小説",author:"野崎まど",genre:"SF",media:"",synopsis:"物語の構造そのものを問い直す実験的かつ読みやすい、野崎まどならではのエンタメ。"},
-  {year:2025,rank:4,title:"禁忌の子",author:"山口未桜",genre:"ミステリ",media:"",synopsis:"触れてはいけない真真を抱えた子どもたちの物語。新鋭・山口未桜が放つ衝撃のデビュー作。"},
+  {year:2025,rank:4,title:"禁忌の子",author:"山口未桜",genre:"ミステリ",media:"",synopsis:"触れてはいけない真実を抱えた子どもたちの物語。新鋭・山口未桜が放つ衝撃のデビュー作。"},
   {year:2025,rank:5,title:"人魚が逃げた",author:"青山美智子",genre:"青春",media:"",synopsis:"「人魚が逃げた」という謎の書き置きから始まる連作短編。青山美智子の温かく不思議な世界観が光る。"},
   {year:2025,rank:6,title:"spring",author:"恩田陸",genre:"青春",media:"",synopsis:"バレエを通じて描かれる才能と情熱、嫉妬と愛。恩田陸が「蜜蜂と遠雷」に続いてアートの世界に挑んだ大作。"},
   {year:2025,rank:7,title:"恋とか愛とかやさしさなら",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"さまざまな形の愛の物語を集めた連作短編集。一穂ミチが紡ぐ多様な関係性と感情の機微。"},
@@ -91,7 +90,7 @@ const BASE_BOOKS = [
   {year:2021,rank:6,title:"八月の銀の雪",author:"伊与原新",genre:"お仕事",media:"",synopsis:"不器用な理系学生や外国人労働者が、科学の美しさを通じて心を通わせる感動短編。"},
   {year:2021,rank:7,title:"滅びの前のシャングリラ",author:"凪良ゆう",genre:"SF",media:"",synopsis:"小惑星が衝突し世界が終わる。その時、名もなき人々はどう生き、誰を愛するのか。"},
   {year:2021,rank:8,title:"オルタネート",author:"加藤シゲアキ",genre:"青春",media:"",synopsis:"高校生限定のマッチングアプリがもたらす、3人の若者の瑞々しい恋と挫折の物語。"},
-  {year:2021,rank:9,title:"推し、燃ゆ",author:"宇佐見りん",genre:"青春",media:"",synopsis:"推しのアイドルがファンを殴って炎上した。背骨を失った少女の狂おしい純粋さ。"},
+  {year:2021,rank:9,title:"推し、燃ゆ",author:"宇佐見りん",genre:"青春",media:"|推しのアイドルが炎上した。それでも推し続ける少女の狂おしい純粋さを描く。芥川賞受賞作。"},
   {year:2021,rank:10,title:"この本を盗む者は",author:"深緑野分",genre:"SF",media:"",synopsis:"本に呪われた街。盗まれた本を取り戻すため、少女が物語の世界を旅するファンタジー。"},
   {year:2020,rank:1,title:"流浪の月",author:"凪良ゆう",genre:"ヒューマン",media:"映画化",synopsis:"世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。",audible:true},
   {year:2020,rank:2,title:"ライオンのおやつ",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"余命わずかな女性が過ごすホスピス。毎週日曜に出される思い出のおやつの温かさ。"},
@@ -124,7 +123,7 @@ const BASE_BOOKS = [
   {year:2018,rank:9,title:"百貨の魔法",author:"村山早紀",genre:"SF",media:"",synopsis:"時代の波に押される老舗百貨店を舞台に描かれる、温かく切ないファンタジー。"},
   {year:2018,rank:10,title:"青くて痛くて脆い",author:"住野よる",genre:"青春",media:"映画化",synopsis:"大学生が始めた秘密結社が、次第に肥大化し歪んでいく。歪んだ正義と挫折。"},
   {year:2017,rank:1,title:"蜜蜂と遠雷",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"国際ピアノコンクールを舞台に、4人のピアニストの葛藤と情熱を描く。W受賞作。",audible:true},
-  {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒスタミン",media:"ドラマ化",synopsis:"学習塾を舞台に、昭和から平成まで3世代にわたる家族と教育の物語。"},
+  {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒューマン",media:"ドラマ化",synopsis:"学習塾を舞台に、昭和から平成まで3世代にわたる家族と教育の物語。"},
   {year:2017,rank:3,title:"罪の声",author:"塩田武士",genre:"ミステリ",media:"映画化",synopsis:"グリコ・森永事件をモデルに、未解決事件に翻弄された人々の人生を描く。"},
   {year:2017,rank:4,title:"あの家に暮らす四人の女",author:"三浦しをん",genre:"ヒューマン",media:"ドラマ化",synopsis:"古い一軒家に暮らす女4人の、おかしくも温かな共同生活を描くコメディ。"},
   {year:2017,rank:5,title:"コンビニ人間",author:"村田沙耶香",genre:"ヒューマン",media:"",synopsis:"「普通」の人間社会に馴染めない女性が、コンビニという居場所で見つけた生き方。"},
@@ -133,7 +132,7 @@ const BASE_BOOKS = [
   {year:2017,rank:8,title:"i",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"シリア人の父を持つ女性が、自らのアイデンティティと向き合い続ける姿を描く。"},
   {year:2017,rank:9,title:"真夜中の探偵",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"謎多き事件の裏側にある、人と人との心理的な繋がりを辻村深月が描く。"},
   {year:2017,rank:10,title:"影裏",author:"沼田真佑",genre:"ヒューマン",media:"映画化",synopsis:"岩手県を舞台に、男二人の友情と、その裏にある喪失と再生を描く。"},
-  {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を、美しい森 of 描写とともに描く。",audible:true},
+  {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を、美しい森の描写とともに描く。",audible:true},
   {year:2016,rank:2,title:"海の見える理髪店",author:"荻原浩",genre:"ヒューマン",media:"ドラマ化",synopsis:"海辺の理髪店を舞台にした6つの短編集。切なさと温かさが同居する。"},
   {year:2016,rank:3,title:"わたしを離さないで",author:"カズオ・イシグロ",genre:"SF",media:"ドラマ化",synopsis:"提供者として生まれた子供たちの運命と愛を描いた、世界的傑作。"},
   {year:2016,rank:4,title:"朝が来る",author:"辻村深月",genre:"ヒューマン",media:"映画化",synopsis:"特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。"},
@@ -155,7 +154,7 @@ const BASE_BOOKS = [
   {year:2015,rank:10,title:"永遠と横道世之介",author:"吉田修一",genre:"青春",media:"映画化",synopsis:"横道世之介の大学生活を描いた、心温まる青春小説 the end。"},
   {year:2014,rank:1,title:"村上海賊の娘",author:"和田竜",genre:"歴史",media:"",synopsis:"戦国時代、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンタメ。",audible:true},
   {year:2014,rank:2,title:"旅猫リポート",author:"有川浩",genre:"ヒューマン",media:"映画化",synopsis:"猫の「ナナ」と飼い主が、旅をしながら昔の友人を訪ねる感動作。"},
-  {year:2014,rank:3,title:"ゼロ、ハチ、ゼロ、ナナ。",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"親友の母親殺しという衝撃的な出来さをめぐり、2人の女性の人生と友情を描く問題作。"},
+  {year:2014,rank:3,title:"ゼロ、ハチ、ゼロ、ナナ。",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"親友の母親殺しという衝撃的な出来事をめぐり、2人の女性を描く問題作。"},
   {year:2014,rank:4,title:"キャプテンサンダーボルト",author:"阿部和重・伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"二大作家がコラボした、ロードノベル×サスペンスの痛快作。"},
   {year:2014,rank:5,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性と精神科医の、百田尚樹流メインミステリ。"},
   {year:2014,rank:6,title:"四十九日のレシピ",author:"伊吹有喜",genre:"ヒューマン",media:"映画化",synopsis:"母の四十九日に集まった家族が、レシピを通じて絆を取り戻す物語。"},
@@ -168,7 +167,7 @@ const BASE_BOOKS = [
   {year:2013,rank:3,title:"楽園のカンヴァス",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"天才絵師ルソーの名画の真贋をめぐる、鑑定勝負の芸術ミステリ。"},
   {year:2013,rank:4,title:"きみはいい子",author:"中脇初枝",genre:"ヒューマン",media:"映画化",synopsis:"現代の生きづらさのなかで、小さな「やさしさ」が連鎖する感動作。"},
   {year:2013,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"感情を持たずに育った女性が、個性豊かな人々と出会い心を取り戻す。"},
-  {year:2013,rank:6,title:"君のクイズ",author:"小川哲",genre:"ミステリ",media:"",synopsis:"クイズ番組の決勝、なぜเขาは問題が読まれる前に正解できたのか？思考ミステリ。"},
+  {year:2013,rank:6,title:"君のクイズ",author:"小川哲",genre:"ミステリ",media:"",synopsis:"クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。"},
   {year:2013,rank:7,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"映画化",synopsis:"地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。"},
   {year:2013,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。"},
   {year:2013,rank:9,title:"掬えば手には",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。"},
@@ -183,7 +182,7 @@ const BASE_BOOKS = [
   {year:2012,rank:8,title:"ビブリア古書堂の事件手帖",author:"三上延",genre:"ミステリ",media:"映画化",synopsis:"古書店の美しい店主が古書に秘められた謎を解き明かすライトミステリ。"},
   {year:2012,rank:9,title:"偉大なる、しゅららぼん",author:"万城目学",genre:"SF",media:"映画化",synopsis:"琵琶湖の畔、不思議な力を受け継ぐ一族。宿敵との戦いが街を巻き込む。"},
   {year:2012,rank:10,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性。彼女のなかの別の格に、青年は恋をしてしまう。"},
-  {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事の推理はいつも的外れ。毒舌執さんがディナーのあとに謎を解く。",audible:true},
+  {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事の推理はいつも的外れ。毒舌執事がディナーのあとに謎を解く。",audible:true},
   {year:2011,rank:2,title:"ふがいない僕は空を見た",author:"窪美澄",genre:"ヒューマン",media:"映画化",synopsis:"主婦と男子高校生の許されざる関係。生きることの泥臭さと救いを描く。"},
   {year:2011,rank:3,title:"ペンギン・ハイウェイ",author:"森見登美彦",genre:"SF",media:"アニメ化",synopsis:"街に突然現れたペンギン。小学4年生の男の子が、お姉さんの謎を追う。"},
   {year:2011,rank:4,title:"錨を上げよ",author:"百田尚樹",genre:"ヒューマン",media:"",synopsis:"戦後の激動期、自らの力だけでのし上がろうとした男の破天荒な自伝。"},
@@ -202,7 +201,7 @@ const BASE_BOOKS = [
   {year:2010,rank:7,title:"植物図鑑",author:"有川浩",genre:"青春",media:"映画化",synopsis:"行き倒れていたイケメンは、野草に詳しい料理上手な王子様だった。"},
   {year:2010,rank:8,title:"新参者",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"日本橋で起きた殺人事件。赴任したばかりの加賀恭一郎が、人の心を解く。"},
   {year:2010,rank:9,title:"1Q84",author:"村上春樹",genre:"SF",media:"",synopsis:"二つの月が浮かぶ奇妙な世界で、二人が再び巡り会うまでの壮大な物語。"},
-  {year:2010,rank:10,title:"船に乗れ!",author:"藤谷治",genre:"青春",media:"",synopsis:"音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、精度初恋。"},
+  {year:2010,rank:10,title:"船に乗れ!",author:"藤谷治",genre:"青春",media:"",synopsis:"音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、そしてほろ苦い初恋。"},
   {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"我が娘を殺した生徒への、女教師の衝撃の復讐から始まるイヤミスの金字塔。",audible:true},
   {year:2009,rank:2,title:"忍びの国",author:"和田竜",genre:"歴史",media:"映画化",synopsis:"織田軍VS伊賀忍者。最強だが冷酷な忍者・無門が、天下の軍勢を迎え撃つ。"},
   {year:2009,rank:3,title:"ジョーカー・ゲーム",author:"柳広司",genre:"ミステリ",media:"映画化",synopsis:"秘密スパイ養成機関「D機関」。世界を騙すスパイたちの知略とアクション。"},
@@ -214,11 +213,11 @@ const BASE_BOOKS = [
   {year:2009,rank:9,title:"流星の絆",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"幼い頃に両親を殺された3兄妹。詐欺を働きながら犯人を探す彼らの哀しい宿命。"},
   {year:2009,rank:10,title:"モダンタイムス",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"検索すると人が死ぬ？国家の巨大な監視網に立ち向かうプログラマー。"},
   {year:2008,rank:1,title:"ゴールデンスランバー",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"首相暗殺の濡れ衣を着せられた青年。仙台の街を舞台にした決死の逃亡。",audible:true},
-  {year:2008,rank:2,title:"パレードの凱歌",author:"吉田修一",genre:#ヒューマン,media:"",synopsis:"若者たちの共同生活。平穏のなかに潜む、冷たい狂気を描く。"},
+  {year:2008,rank:2,title:"パレードの凱歌",author:"吉田修一",genre:"ヒューマン",media:"",synopsis:"若者たちの共同生活。平穏のなかに潜む、冷たい狂気を描く。"},
   {year:2008,rank:3,title:"悪人",author:"吉田修一",genre:"ヒューマン",media:"映画化",synopsis:"殺人事件を起こした青年と逃避行を共にした女性。本当の悪人は誰か。"},
   {year:2008,rank:4,title:"昨日の海は",author:"近藤史恵",genre:"青春",media:"",synopsis:"少年時代のほろ苦い記憶と、小さな事件を瑞々しく描く青春ミステリ。"},
   {year:2008,rank:5,title:"サウスバウンド",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"元過激派の父親が国家相手に大暴れ。破天荒な家族の沖縄移住計画。"},
-  {year:2008,rank:6,title:"楽園",author:"宮部みゆき",genre:"ミステリ",media:"ドラマ化",synopsis:"『模倣犯』から9年。ライターが再び挑む、少年の死をめぐる難事件。"},
+  {year:2008,rank:6,title:"楽園",author:"宮部みゆき",genre:"ミステリ",media:"ドラマ化",synopsis:"『模倣犯』から9年。ライターが再び挑む、少年の死をめぐる難事件.●"},
   {year:2008,rank:7,title:"喋れどもしゃべれども",author:"佐藤多佳子",genre:"青春",media:"映画化",synopsis:"話すのが不器用な人々が、落語を通じて心を通わせる、癒やしの青春。"},
   {year:2008,rank:8,title:"赤い指",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"平凡な家庭で起きた殺人。保身のため我が子を庇う親と、それを追う加賀恭一郎。"},
   {year:2008,rank:9,title:"鹿男あをによし",author:"万城目学",genre:"SF",media:"ドラマ化",synopsis:"奈良に赴任した教師が喋る鹿から命令される、奇想天外ファンタジー。"},
@@ -276,6 +275,78 @@ const BASE_BOOKS = [
   {year:2023,rank:12,title:"おもろい本",author:"木下半太",genre:"青春",media:"",synopsis:"一気読み必至のノンストップおもしろ劇。木下半太の隠れた傑作。"},
   {year:2022,rank:12,title:"破船",author:"吉村昭",genre:"歴史",media:"",synopsis:"荒ぶる海辺の村。生き延びるために彼らが犯したおぞましき因習。"}
 ];
+
+async function startGeneration() {
+    const keyField = document.getElementById('api-key-field').value.trim();
+    if (!keyField || keyField === "") {
+        alert("🔑 Google APIキーを入力してください！");
+        return;
+    }
+
+    document.getElementById('start-btn').disabled = true;
+    const progress = document.getElementById('progress');
+    const output = document.getElementById('output');
+    const resultBooks = [];
+
+    for (let i = 0; i < BASE_BOOKS.length; i++) {
+        const book = BASE_BOOKS[i];
+        progress.innerText = `⏳ 抽出中 (${i + 1} / ${BASE_BOOKS.length}): ${book.title}`;
+        
+        let coverImg = "";
+        const cleanTitle = book.title.replace(/[〜～─━：:・\s\-\[（()）\]]/g, ' ').replace(/[―—■●★▲◆▶✔•…]/g, '').trim();
+        const cleanAuthor = book.author.replace(/（[^）]+）/g, '').trim();
+        
+        try {
+            const gUrl = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(cleanTitle)}+inauthor:${encodeURIComponent(cleanAuthor)}&maxResults=1&key=${keyField}`;
+            const gRes = await fetch(gUrl);
+            if (gRes.ok) {
+                const gData = await gRes.json();
+                if (gData.items && gData.items.length > 0) {
+                    const volumeInfo = gData.items[0].volumeInfo;
+                    if (volumeInfo.imageLinks) {
+                        const rawUrl = volumeInfo.imageLinks.thumbnail || volumeInfo.imageLinks.smallThumbnail;
+                        if (rawUrl) coverImg = rawUrl.replace("http:", "https:").replace(/zoom=\d/, "zoom=3");
+                    }
+                    
+                    let isbn = "";
+                    if (volumeInfo.industryIdentifiers) {
+                        const idfy = volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_13" || id.type === "ISBN_10");
+                        if (idfy) isbn = idfy.identifier.replace(/[^0-9X]/g, '');
+                    }
+                    
+                    if (isbn) {
+                        const obdRes = await fetch(`https://api.openbd.jp/v1/get?isbn=${isbn}`);
+                        if (obdRes.ok) {
+                          const obdData = await obdRes.json();
+                          if (obdData && obdData[0] && obdData[0].summary && obdData[0].summary.cover) {
+                              coverImg = obdData[0].summary.cover;
+                          }
+                        }
+                    }
+                }
+            }
+        } catch (e) {
+            console.error("スキップガード:", e);
+        }
+
+        resultBooks.push({
+            year: book.year,
+            rank: book.rank, // 💡 ここを「book.rank」に完全修正しました
+            title: book.title,
+            author: book.author,
+            genre: book.genre,
+            media: book.media,
+            synopsis: book.synopsis,
+            coverImg: coverImg,
+            ...(book.audible ? { audible: true } : {})
+        });
+
+        await new Promise(resolve => setTimeout(resolve, 1500));
+    }
+
+    progress.innerText = "🎉 完了しました！下のコードを丸ごとコピーしてください。";
+    output.value = "const BOOKS = " + JSON.stringify(resultBooks, null, 2) + ";";
+}
 </script>
 </body>
 </html>
