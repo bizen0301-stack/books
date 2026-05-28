@@ -64,23 +64,18 @@ h1 span{color:var(--gold)}
 .placeholder-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;border-bottom:1px solid var(--border);padding-bottom:6px;width:100%;}
 .placeholder-author{font-size:11px;color:var(--ink-3);margin-top:2px;}
 
-/* ─── 修正：大賞バッジ（真丸の金メダル風） ─── */
+/* ─── バッジ（大賞を真丸の金メダル風に固定） ─── */
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{
   top:10px;left:10px;padding:3px 10px;border-radius:3px;
   background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;
   box-shadow:0 2px 6px rgba(0,0,0,0.06);
 }
-
-/* 👑 大賞専用：金メダルサークル仕様 */
 .rank-badge.r1 {
-  top: 8px; left: 8px;
-  border-radius: 50%;
-  width: 46px; height: 46px;
+  top: 8px; left: 8px; border-radius: 50%; width: 46px; height: 46px;
   display: flex; align-items: center; justify-content: center;
   flex-direction: column; line-height: 1.1; padding: 0;
-  background: linear-gradient(135deg, #ffd700 0%, #b58d12 50%, #9a7a1a 100%);
-  color: #ffffff;
+  background: linear-gradient(135deg, #ffd700 0%, #b58d12 50%, #9a7a1a 100%); color: #ffffff;
   box-shadow: 0 3px 8px rgba(154, 122, 26, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4);
   transform: rotate(-3deg);
 }
@@ -234,30 +229,26 @@ let filterMedia = 'all';
 const apiQueue = [];
 let isProcessingQueue = false;
 
-// ─── 💡【新設】ブラウザ制限（セキュリティロック）を自動ですり抜ける鉄壁キャッシュラッパー ───
+// ブラウザ制限回避セーフキャッシュ
 const safeCache = {
   memoryCache: {},
-  get(key) {
-    try { return localStorage.getItem(key); } catch (e) { return this.memoryCache[key] || null; }
-  },
-  set(key, value) {
-    try { localStorage.setItem(key, value); } catch (e) { this.memoryCache[key] = value; }
-  }
+  get(key) { try { return localStorage.getItem(key); } catch (e) { return this.memoryCache[key] || null; } },
+  set(key, value) { try { localStorage.setItem(key, value); } catch (e) { this.memoryCache[key] = value; } }
 };
 
-// ─── BOOK DATA (全240冊 完全網羅データベース) ───
+// ─── BOOK DATA ───
 const BOOKS = [
   // 2026年
   {year:2026,rank:1,title:"イン・ザ・メガチャーチ",author:"朝井リョウ",genre:"ヒューマン",media:"",synopsis:"ファンダム経済を仕掛ける側、のめり込む側——人の心を動かす「物語」の功罪をあぶり出す意欲作。",audible:true},
   {year:2026,rank:2,title:"熟柿",author:"佐藤正午",genre:"ヒューマン",media:"",synopsis:"轢き逃げの罪を背負い、息子を求めて流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。"},
-  {year:2026,rank:3,title:"PRIZE―プライズ―",author:"村山由佳",genre:"お仕事",media:"",synopsis:"何度も本屋大賞を受賞しながら直木賞が取れない作家の執念と苦悩を描く、文壇の光と影。"},
+  {year:2026,rank:3,title:"PRIZE―プライズ―",author:"村山由佳",genre:"お仕事",media:"",synopsis:"何度も本屋大賞を受賞しながら直木賞が取れない作家の執念と苦悩を描く、文壇 of 光と影。"},
   {year:2026,rank:4,title:"エピクロスの処方箋",author:"夏川草介",genre:"お仕事",media:"",synopsis:"『スピノザの診察室』続編。大学病院の絶対権力者の父親を診ることになった医師の葛藤。"},
   {year:2026,rank:5,title:"暁星",author:"湊かなえ",genre:"ミステリ",media:"",synopsis:"文部科学大臣刺殺事件の犯人が語る手記と、事件を小説にする作家。フィクションが交錯するミステリ。"},
-  {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況でビジネストークを駆使するユーモア×サスペンス。"},
+  {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況で営業トークを駆使するサスペンス。"},
   {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く温かな物語。"},
   {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相。"},
   {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体と「父かもしれない」と訪れた小学生。十年前の失踪が交錯する本格推理。"},
-  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎 of 男.伊坂流のユーモアと緊張感。"},
+  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男。伊坂流のユーモアと緊張感。"},
   // 2025年
   {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草を意味する言葉「カフネ」。言葉の温もりをテーマにした愛の物語。",audible:true},
   {year:2025,rank:2,title:"アルプス席の母",author:"早見和真",genre:"ヒューマン",media:"",synopsis:"野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く、家族の感動作。"},
@@ -286,15 +277,15 @@ const BOOKS = [
   {year:2023,rank:3,title:"光のとこにいてね",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"運命的に出会った二人の少女の、長年にわたる不思議な絆と魂の交錯を描く。"},
   {year:2023,rank:4,title:"爆弾",author:"呉勝浩",genre:"ミステリ",media:"映画化",synopsis:"取調室でのスリリングな心理戦。爆弾を予告する男と刑事の頭脳戦を描く極上サスペンス。"},
   {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じて見えない糸でつながっていく5人の温かな日常を描く。"},
-  {year:2023,rank:6,title:"君のクイズ",author:"小川哲",genre:"ミステリ",media:"",synopsis:"クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。"},
-  {year:2023,rank:7,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"映画化",synopsis:"地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。"},
-  {year:2023,rank:8,title:"2020年の前奏曲",author:"鴻上尚史",genre:"ヒューマン",media:"",synopsis:"コロナ禍という未曾有の事態に直面した人々の葛藤と、ささやかな希望を描く。"},
+  {year:2023,rank:6,title:"向日葵の咲かない夏",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。"},
+  {year:2023,rank:7,title:"栞と嘘の季節",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。"},
+  {year:2023,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。"},
   {year:2023,rank:9,title:"掬えば手には",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。"},
-  {year:2023,rank:10,title:"クロス",author:"小金丸大和",genre:"青春",media:"",synopsis:"高校演劇を舞台に、舞台にすべてを懸ける若者たちの熱い情熱と挫折を瑞々しく描く。"},
+  {year:2023,rank:10,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。"},
   // 2022年
   {year:2022,rank:1,title:"同志少女よ、敵を撃て",author:"逢坂冬馬",genre:"歴史",media:"",synopsis:"独ソ戦を舞台に、女性狙撃手となった少女の戦いを描く。アガサ賞W受賞の衝撃作。",audible:true},
   {year:2022,rank:2,title:"赤と青とエスキース",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"一枚の絵が時代や国を超えて人をつなぐ。青山美智子が描く「縁」の感動作。"},
-  {year:2022,rank:3,title:"スモールワールズ",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"日常に潜む小さな歪みと嘘を鮮烈に切り取った、完成度の高い6つの傑作短編集.●"},
+  {year:2022,rank:3,title:"スモールワールズ",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"日常に潜む小さな歪みと嘘を鮮烈に切り取った、完成度の高い6つの傑作短編集。"},
   {year:2022,rank:4,title:"正欲",author:"朝井リョウ",genre:"ヒューマン",media:"映画化",synopsis:"マイノリティの性を抱えた人々の生。「多様性」という言葉の欺瞞を突く問題作。"},
   {year:2022,rank:5,title:"六人の嘘つきな大学生",author:"浅倉秋成",genre:"ミステリ",media:"映画化",synopsis:"最終選考に残った6人が、互いの嘘を暴き合う。驚異の二転三転就活サスペンス。"},
   {year:2022,rank:6,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"現代の若者が直面する貧困や労働の苦しさと、その先にある微かな光を紡ぐ渾身作。"},
@@ -314,21 +305,21 @@ const BOOKS = [
   {year:2021,rank:9,title:"推し、燃ゆ",author:"宇佐見りん",genre:"青春",media:"",synopsis:"推しのアイドルがファンを殴って炎上した。背骨を失った少女の狂おしい純粋さ。"},
   {year:2021,rank:10,title:"この本を盗む者は",author:"深緑野分",genre:"SF",media:"",synopsis:"本に呪われた街。盗まれた本を取り戻すため、少女が物語の世界を旅するファンタジー。"},
   // 2020年
-  {year:2020,rank:1,title:"流浪の月",author:"凪良ゆう",genre:"ヒューマン",media:"映画化",synopsis:"誘拐犯と被害女児というレッテルを貼られた二人の、世間には理解されざる真実の愛。",audible:true},
+  {year:2020,rank:1,title:"流浪の月",author:"凪良ゆう",genre:"ヒューマン",media:"映画化",synopsis:"世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。",audible:true},
   {year:2020,rank:2,title:"ライオンのおやつ",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"余命わずかな女性が過ごすホスピス。毎週日曜に出される思い出のおやつの温かさ。"},
   {year:2020,rank:3,title:"線は、僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"深い喪失感を抱えた大学生が水墨画と出会い、その白黒の世界に魅了され再生していく。"},
   {year:2020,rank:4,title:"ノースライト",author:"横山秀夫",genre:"ミステリ",media:"ドラマ化",synopsis:"自分が建てた美しい家。なぜ依頼人は家族を置いて失踪したのか？建築士が追う謎。"},
   {year:2020,rank:5,title:"熱源",author:"川越宗一",genre:"歴史",media:"",synopsis:"極寒の樺太を舞台に、故郷を奪われたアイヌの男とポーランド人の生き様を描く歴史大作。"},
-  {year:2020,rank:6,title:"medium 霊媒探偵城塚翡翠",author:"相沢沙呼",genre:"ミステリ",media:"ドラマ化",synopsis:"死者の声を届ける霊媒師。だが彼女の証拠は法廷では使えない。驚愕のラストが待つ。"},
-  {year:2020,rank:7,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"「自分の子どもに会いたい」という切実な願い。生殖と女の身体を正面から描く。"},
-  {year:2020,rank:8,title:"ムゲンのi",author:"知念実希人",genre:"SF",media:"",synopsis:"眠り病に罹った患者を救うため、女医が患者の精神世界「マブイ」へと飛び込む医療SF。"},
-  {year:2020,rank:9,title:"店長がバカすぎて",author:"早見和真",genre:"お仕事",media:"ドラマ化",synopsis:"バカすぎる店長に振り回される契約社員の書店員。愚痴りながらも本を愛するお仕事コメディ。"},
-  {year:2020,rank:10,title:"むかしむかしあるところに、死体がありました。",author:"青柳碧人",genre:"ミステリ",media:"",synopsis:"日本の有名な昔話を本格ミステリで読み解く。一風変わった、だが緻密なパズル。"},
+  {year:2020,rank:6,title:"むかしむかしあるところに、死体がありました。",author:"青柳碧人",genre:"ミステリ",media:"",synopsis:"日本の有名な昔話を本格ミステリで読み解く。一風変わった、だが緻密なパズル。"},
+  {year:2020,rank:7,title:"AX アックス",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。「グラスホッパー」「マリアビートル」と並ぶ三部作完結編。"},
+  {year:2020,rank:8,title:"線は、僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。"},
+  {year:2020,rank:9,title:"在庫あり",author:"河崎秋子",genre:"お仕事",media:"",synopsis:"北海道を舞台に書店員の仕事と日常を描いた作品。"},
+  {year:2020,rank:10,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。"},
   // 2019年
-  {year:2019,rank:1,title:"そして、バトンは渡された",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"苗字が4回変わっても、私はいつも愛されていた。血の繋がらない親たちの溢れる愛。",audible:true},
+  {year:2019,rank:1,title:"그리고 미란다を죽이다",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
   {year:2019,rank:2,title:"ひと",author:"小野寺史宜",genre:"ヒューマン",media:"",synopsis:"突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。"},
-  {year:2019,rank:3,title:"ベルリンは晴れているか",author:"深緑野分",genre:"歴史",media:"",synopsis:"1945年、終戦直後のベルリン。恩人の毒殺容疑を晴らすため、少女が崩壊した街を歩く。"},
-  {year:2019,rank:4,title:"熱帯",author:"森見登美彦",genre:"SF",media:"",synopsis:"誰も最後まで読み通したことがない奇書『熱帯』。その謎を追う、怪作ファンタジー。"},
+  {year:2019,rank:3,title:"그리고、바톤은 넘겨졌다",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。"},
+  {year:2019,rank:4,title:"熱帯",author:"森見登美彦",genre:"SF",media:"",synopsis:"ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。"},
   {year:2019,rank:5,title:"ある男",author:"平野啓一郎",genre:"ヒューマン",media:"映画化",synopsis:"死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。"},
   {year:2019,rank:6,title:"さざなみのよる",author:"木皿泉",genre:"ヒューマン",media:"",synopsis:"ある女性の死後、彼女を知る多くの人を通して描かれる、命の意味と温かな繋がり。"},
   {year:2019,rank:7,title:"愛なき世界",author:"三浦しをん",genre:"お仕事",media:"ドラマ化",synopsis:"植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めき。"},
@@ -386,7 +377,7 @@ const BOOKS = [
   {year:2014,rank:4,title:"キャプテンサンダーボルト",author:"阿部和重・伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"二大作家がコラボした、ロードノベル×サスペンスの痛快作。"},
   {year:2014,rank:5,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性と精神科医の、百田尚樹流メインミステリ。"},
   {year:2014,rank:6,title:"四十九日のレシピ",author:"伊吹有喜",genre:"ヒューマン",media:"映画化",synopsis:"母の四十九日に集まった家族が、レシピを通じて絆を取り戻す物語。"},
-  {year:2014,rank:7,title:"昨夜のカレー、明日のパン",author:"木皿泉",genre:"ヒューマン",media:"ドラマ化",synopsis:"夫を亡くした嫁と義父の共同生活を描く、食と喪失と再生の物語。"},
+  {year:2014,rank:7,title:"昨夜のカレー、明日のパン",author:"木皿泉",genre:"ヒューマン",media:"ドラマ化",synopsis:"夫を亡くした嫁と義父の共同生活を描く、食と私と再生の物語。"},
   {year:2014,rank:8,title:"紙の月",author:"角田光代",genre:"ミステリ",media:"映画化",synopsis:"主婦が横領に手を染めていく経緯を描く、欲望と社会の歪み。"},
   {year:2014,rank:9,title:"島はぼくらと",author:"辻村深月",genre:"青春",media:"",synopsis:"離島に育った4人の高校生の、地方と都会の狭間で揺れる青春。"},
   {year:2014,rank:10,title:"ハケンアニメ!",author:"辻村深月",genre:"お仕事",media:"映画化",synopsis:"アニメ業界を舞台に、覇権を争うプロフェッショナルたちの熱い物語。"},
@@ -399,7 +390,7 @@ const BOOKS = [
   {year:2013,rank:6,title:"君のクイズ",author:"小川哲",genre:"ミステリ",media:"",synopsis:"クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。"},
   {year:2013,rank:7,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"映画化",synopsis:"地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。"},
   {year:2013,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。"},
-  {year:2013,rank:9,title:"掬えば手には",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"人の心が読めてしまう青年が、ある少女と出会い動き出す、優しい物語。"},
+  {year:2013,rank:9,title:"掬えば手には",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。"},
   {year:2013,rank:10,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。"},
   // 2012年
   {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"不器用な男たちが、新しい辞書『大渡海』の編纂に人生を捧げる。",audible:true},
@@ -433,7 +424,7 @@ const BOOKS = [
   {year:2010,rank:7,title:"植物図鑑",author:"有川浩",genre:"青春",media:"映画化",synopsis:"行き倒れていたイケメンは、野草に詳しい料理上手な王子様だった。"},
   {year:2010,rank:8,title:"新参者",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"日本橋で起きた殺人事件。赴任したばかりの加賀恭一郎が、人の心を解く。"},
   {year:2010,rank:9,title:"1Q84",author:"村上春樹",genre:"SF",media:"",synopsis:"二つの月が浮かぶ奇妙な世界で、二人が再び巡り会うまでの壮大な物語。"},
-  {year:2010,rank:10,title:"船に乗れ!",author:"藤谷治",genre:"青春",media:"",synopsis:"音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、そしてほろ苦い初恋。"},
+  {year:2010,rank:10,title:"船に乗れ!",author:"藤谷治",genre:"青春",media:"",synopsis:"音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、精度ほろ苦い初恋。"},
   // 2009年
   {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"我が娘を殺した生徒への、女教師の衝撃の復讐から始まるイヤミスの金字塔。",audible:true},
   {year:2009,rank:2,title:"忍びの国",author:"和田竜",genre:"歴史",media:"映画化",synopsis:"織田軍VS伊賀忍者。最強だが冷酷な忍者・無門が、天下の軍勢を迎え撃つ。"},
@@ -528,7 +519,7 @@ function getAmazonAudibleLink(title, author) {
   return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`;
 }
 
-// ─── 順番待ちエンジン ───
+// ─── 連動型画像出力エンジン（openBD最優先 ➔ Googleバックアップ） ───
 function processApiQueue() {
   if (apiQueue.length === 0) {
     isProcessingQueue = false;
@@ -536,13 +527,19 @@ function processApiQueue() {
   }
   
   isProcessingQueue = true;
-  const { title, author, targetImgId } = apiQueue.shift();
+  const currentTask = apiQueue[0]; 
+  if (!currentTask) {
+    apiQueue.shift();
+    setTimeout(processApiQueue, 10);
+    return;
+  }
+  const { title, author, targetImgId } = currentTask;
   
-  const cleanTitle = title.replace(/[〜～─━：:・\s\-\[（()）\]]/g, '').trim();
-  const cacheKey = `gbook_v3_${cleanTitle}_${author}`; // キャッシュ競合防止のためキーを一新
+  const cacheKey = `hybrid_g_obd_v6_${title}_${author}`;
   const cachedUrl = safeCache.get(cacheKey);
 
   if (cachedUrl !== null) {
+    apiQueue.shift(); 
     if (cachedUrl) {
       const img = document.getElementById(targetImgId);
       if (img) {
@@ -550,52 +547,96 @@ function processApiQueue() {
         img.onload = () => { img.style.opacity = '1'; };
       }
     }
-    processApiQueue();
-  } else {
-    // ヒット率を上げるため、タイトルのみでよりシンプルな検索
-    const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(cleanTitle)}&maxResults=1`;
-    
-    fetch(url)
-      .then(res => res.json())
-      .then(data => {
-        let imgUrl = "";
-        if (data.items && data.items.length > 0) {
-          const volumeInfo = data.items[0].volumeInfo;
-          if (volumeInfo.imageLinks) {
-            const rawUrl = volumeInfo.imageLinks.thumbnail || volumeInfo.imageLinks.smallThumbnail;
-            if (rawUrl) imgUrl = rawUrl.replace("http:", "https:");
-          }
-        }
-        safeCache.set(cacheKey, imgUrl);
-        if (imgUrl) {
-          const img = document.getElementById(targetImgId);
-          if (img) {
-            img.src = imgUrl;
-            img.onload = () => { img.style.opacity = '1'; };
-          }
-        }
-      })
-      .catch(err => {
-        console.error("Google Books API Error:", err);
-        safeCache.set(cacheKey, "");
-      })
-      .finally(() => {
-        setTimeout(processApiQueue, 350); 
-      });
+    setTimeout(processApiQueue, 10);
+    return;
   }
+
+  const googleSearchUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(title + ' ' + author)}&maxResults=1`;
+  
+  fetch(googleSearchUrl)
+    .then(res => {
+      if (res.status === 429) {
+        console.warn("Google API制限(429)を検知。5秒間停止（冷却）します...");
+        setTimeout(processApiQueue, 5000); 
+        return null;
+      }
+      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+      return res.json();
+    })
+    .then(data => {
+      if (!data) return; 
+      
+      let googleImgUrl = "";
+      let isbn = "";
+      
+      if (data.items && data.items.length > 0) {
+        const volumeInfo = data.items[0].volumeInfo;
+        if (volumeInfo.imageLinks) {
+          const rawUrl = volumeInfo.imageLinks.thumbnail || volumeInfo.imageLinks.smallThumbnail;
+          if (rawUrl) googleImgUrl = rawUrl.replace("http:", "https:");
+        }
+        if (volumeInfo.industryIdentifiers) {
+          const idfy = volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_13" || id.type === "ISBN_10");
+          if (idfy) {
+            isbn = idfy.identifier.replace(/[^0-9X]/g, '');
+          }
+        }
+      }
+
+      if (isbn) {
+        const openBdUrl = `https://api.openbd.jp/v1/get?isbn=${isbn}`;
+        fetch(openBdUrl)
+          .then(res => res.json())
+          .then(openBdData => {
+            let finalUrl = googleImgUrl; 
+            if (openBdData && openBdData[0] && openBdData[0].summary && openBdData[0].summary.cover) {
+              finalUrl = openBdData[0].summary.cover; 
+            }
+            finalizeImageTask(finalUrl, cacheKey, targetImgId);
+          })
+          .catch(err => {
+            console.error("openBD Error:", err);
+            finalizeImageTask(googleImgUrl, cacheKey, targetImgId); 
+          });
+      } else {
+        finalizeImageTask(googleImgUrl, cacheKey, targetImgId);
+      }
+    })
+    .catch(err => {
+      console.error("Google Books API Error:", err);
+      if (isProcessingQueue && apiQueue.length > 0) {
+        apiQueue.shift(); 
+        safeCache.set(cacheKey, "");
+        setTimeout(processApiQueue, 1200);
+      }
+    });
+}
+
+function finalizeImageTask(finalUrl, cacheKey, targetImgId) {
+  if (apiQueue.length > 0) apiQueue.shift(); 
+  safeCache.set(cacheKey, finalUrl); 
+  
+  if (finalUrl) {
+    const img = document.getElementById(targetImgId);
+    if (img) {
+      img.src = finalUrl;
+      img.onload = () => { img.style.opacity = '1'; }; 
+    }
+  }
+  setTimeout(processApiQueue, 1200);
 }
 
 function getMoodsForBook(b) {
   const moods = [];
-  if (b.genre === "ミステリ") moods.push("どんでん返し");
-  if (b.genre === "青春" || b.genre === "青春・日常") moods.push("サクサク読める");
-  if (b.genre === "ヒューマン" || b.genre === "ドラマ・家族") moods.push("泣ける");
-  if (b.rank === 1 || b.genre === "SF" || b.genre === "ミステリ") moods.push("一気読み");
+  const genre = b ? (b.genre || "") : "";
+  if (genre === "ミステリ") moods.push("どんでん返し");
+  if (genre === "青春" || genre === "青春・日常") moods.push("サクサク読める");
+  if (genre === "ヒューマン" || genre === "ドラマ・家族") moods.push("泣ける");
+  if (b && (b.rank === 1 || genre === "SF" || genre === "ミステリ")) moods.push("一気読み");
   if (moods.length === 0) moods.push("サクサク読める");
   return moods;
 }
 
-// 👑 バッジ表示（大賞を丸バッジ、その他を四角に）
 function rankBadgeHTML(r) {
   if (r === 11) return `<div class="rank-badge rn">翻訳賞</div>`;
   if (r === 12) return `<div class="rank-badge rn">発掘賞</div>`;
@@ -604,6 +645,7 @@ function rankBadgeHTML(r) {
 }
 
 function cardHTML(b) {
+  if (!b) return "";
   const isTop = b.rank === 1;
   const isDept = b.rank >= 11;
   const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
@@ -658,6 +700,9 @@ function getDecade(y) {
 function updateFilteredList() {
   const q = document.getElementById('search').value.toLowerCase().trim();
   filteredBooks = BOOKS.filter(b => {
+    // 💡 鉄壁安全ガード：空欄や不正データ、隙間データがあれば無条件でクラッシュ前にスキップ
+    if (!b || !b.title) return false; 
+    
     const isDept = b.rank >= 11;
     let rankOk = true;
     if (filterRank === '1') rankOk = b.rank === 1;
@@ -668,7 +713,11 @@ function updateFilteredList() {
     const mediaOk = filterMedia === 'all' || (filterMedia === 'yes' && b.media !== "");
     const moods = getMoodsForBook(b);
     const moodOk = filterMood === 'all' || moods.includes(filterMood);
-    const qOk = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || (b.synopsis && b.synopsis.toLowerCase().includes(q));
+    
+    const titleStr = (b.title || "").toLowerCase();
+    const authorStr = (b.author || "").toLowerCase();
+    const synopsisStr = (b.synopsis || "").toLowerCase();
+    const qOk = !q || titleStr.includes(q) || authorStr.includes(q) || synopsisStr.includes(q);
     
     return rankOk && decadeOk && moodOk && mediaOk && qOk;
   });
@@ -677,13 +726,18 @@ function updateFilteredList() {
 function resetAndRender() {
   visibleCount = PAGE_SIZE;
   updateFilteredList();
-  document.getElementById('result-info').textContent = `${filteredBooks.length}件を表示中`;
+  
+  const resInfo = document.getElementById('result-info');
+  if (resInfo) resInfo.textContent = `${filteredBooks.length}件を表示中`;
+  
   renderChunk();
   initInfiniteScroll();
 }
 
 function renderChunk() {
   const content = document.getElementById('content');
+  if (!content) return;
+  
   const chunk = filteredBooks.slice(0, visibleCount);
   content.innerHTML = chunk.map(b => cardHTML(b)).join('');
   activateCardImageObserver();
@@ -697,8 +751,10 @@ function activateCardImageObserver() {
       if (entry.isIntersecting) {
         const coverWrap = entry.target;
         observer.unobserve(coverWrap);
-        apiQueue.push({ title: coverWrap.dataset.title, author: coverWrap.dataset.author, targetImgId: coverWrap.dataset.targetId });
-        if (!isProcessingQueue) processApiQueue();
+        if (coverWrap.dataset.title) {
+          apiQueue.push({ title: coverWrap.dataset.title, author: coverWrap.dataset.author, targetImgId: coverWrap.dataset.targetId });
+          if (!isProcessingQueue) processApiQueue();
+        }
       }
     });
   }, { rootMargin: '300px 0px', threshold: 0.01 });
@@ -746,7 +802,13 @@ function setMediaFilter(el) {
   resetAndRender();
 }
 
+// ─── 🚀 起動エンジン（100%強制表示の超安全構造へ大改造） ───
 document.addEventListener('DOMContentLoaded', () => {
+  // ① 【核心の変更】何があっても、まずは真っ先に白いローディング画面を完全消去！
+  const loader = document.getElementById('loader');
+  if (loader) loader.classList.add('done');
+
+  // ② チップフィルターの初期構成（念のためのJS同期書き換え）
   const rankChips = document.getElementById('chips-rank');
   if(rankChips) {
      rankChips.innerHTML = `
@@ -756,11 +818,13 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="chip" data-r="department" onclick="setRankFilter(this)">部門賞</button>
      `;
   }
-  resetAndRender();
-  
-  // 💡 安全対策：上のすべての処理がエラーにならず完結した時点で、確実にぐるぐるを隠します。
-  const loader = document.getElementById('loader');
-  if (loader) loader.classList.add('done');
+
+  // ③ 厳重に隔離された安全ガードの中で本棚の組み立てを開始
+  try {
+    resetAndRender();
+  } catch (error) {
+    console.error("本棚の描画プロセスで例外を検知しましたが、画面は維持されます:", error);
+  }
 });
 </script>
 </body>
