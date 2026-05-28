@@ -32,12 +32,23 @@ h1 span{color:var(--gold)}
 .hdr-lead{font-size:13.5px;color:var(--ink-2);font-weight:400;max-width:760px;margin-bottom:1rem;line-height:1.8}
 .hdr-sub{font-size:11px;color:var(--ink-3);font-weight:400;}
 
+/* ─── STICKY NAV（PCレイアウト） ─── */
 .nav-wrap{background:var(--paper-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.03)}
 .nav-inner{max-width:1140px;margin:0 auto;padding:.75rem 1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-.search-box{position:relative;flex:1;min-width:240px}
+.search-row { display: flex; gap: 0.5rem; flex: 1; min-width: 280px; align-items: center; }
+.search-box{position:relative;flex:1;}
 .search-box input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--border-2);border-radius:4px;background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:all .15s;}
 .search-box input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(0,0,0,.05)}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--ink-3);pointer-events:none}
+
+/* スマホ用アコーディオンボタン（PCでは隠す） */
+.btn-filter-toggle {
+  display: none; background: white; border: 1px solid var(--border-2);
+  padding: 8px 12px; font-size: 12px; font-weight: 700; border-radius: 4px;
+  cursor: pointer; align-items: center; gap: 4px; white-space: nowrap; transition: background 0.2s;
+}
+.btn-filter-toggle:hover { background: var(--paper-2); }
+
 .filter-groups{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;flex:3;min-width:280px}
 .filter-group{display:flex;align-items:center;gap:8px}
 .filter-label{font-size:11px;color:var(--ink-3);font-weight:700;white-space:nowrap}
@@ -46,6 +57,7 @@ h1 span{color:var(--gold)}
 .chip:hover{background:var(--paper-3);color:var(--ink)}
 .chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700;}
 
+/* ─── MAIN CONTENT ─── */
 .main{max-width:1140px;margin:0 auto;padding:2rem 1.5rem}
 .book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px 20px}
 
@@ -54,22 +66,27 @@ h1 span{color:var(--gold)}
 .card.rank-1{border-top:3px solid var(--gold);background:linear-gradient(to bottom, var(--gold-light) 0%, var(--paper-card) 120px)}
 
 .cover-wrap{position:relative;width:100%;padding-top:140%;background:var(--paper-2);overflow:hidden;border-bottom:1px solid var(--border)}
-.cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;z-index:2;opacity:0;}
-.cover-wrap .placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:'Noto Serif JP',serif;padding:1.5rem;text-align:center;background:linear-gradient(135deg, #ffffff, var(--paper-2));z-index:1}
+.cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;z-index:2;opacity:1;}
+.cover-wrap .placeholder {
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:'Noto Serif JP',serif;padding:1.5rem;text-align:center;
+  background:linear-gradient(135deg, #ffffff, var(--paper-2));z-index:1;
+}
 .placeholder-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;border-bottom:1px solid var(--border);padding-bottom:6px;width:100%;}
 .placeholder-author{font-size:11px;color:var(--ink-3);margin-top:2px;}
 
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
 
+/* 大賞サークルバッジ */
 .rank-badge.r1 {
-  top: 8px; left: 8px; border-radius: 50%; width: 46px; height: 46px;
+  top: -8px; left: -8px; border-radius: 50%; width: 54px; height: 54px;
   display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
-  background: linear-gradient(135deg, #ffd700 0%, #b58d12 50%, #9a7a1a 100%); color: #ffffff;
-  box-shadow: 0 3px 8px rgba(154, 122, 26, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.4); transform: rotate(-3deg);
+  background: linear-gradient(135deg, #fff3a1 0%, #f1c40f 50%, #b8860b 100%); color: #ffffff;
+  box-shadow: 0 4px 10px rgba(184, 134, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  border: 2px solid #ffffff; transform: rotate(-5deg); z-index: 10;
 }
-.rank-badge.r1 .crown { font-size: 13px; margin-bottom: -1px; }
-.rank-badge.r1 .txt { font-size: 10px; font-weight: 800; letter-spacing: 0.02em; }
+.rank-badge.r1 .crown { font-size: 14px; line-height: 1; }
+.rank-badge.r1 .txt { font-size: 11px; font-weight: 800; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
 
 .year-badge{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:3px;font-family:'Noto Sans JP',sans-serif;font-size:10px;font-weight:700;z-index:3;background:rgba(255,255,255,0.9);color:var(--ink);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.02)}
 
@@ -111,16 +128,37 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 .spinner{width:32px;height:32px;border:2px solid var(--paper-3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
+/* ─── 📱 モバイルビュー専用の最強レイアウト調整 ─── */
 @media(max-width:980px) {
-  .nav-inner { flex-direction: column; align-items: stretch; gap: 0.75rem; }
-  .filter-groups { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+  .nav-inner { flex-direction: column; align-items: stretch; gap: 0.5rem; }
+  .btn-filter-toggle { display: flex; } /* アコーディオン用ボタンを出現させる */
+  
+  /* スマホの時はデフォルトでフィルターを格納（非表示） */
+  .filter-groups {
+    display: none; width: 100%; flex-direction: column; align-items: flex-start;
+    gap: 0.75rem; background: rgba(0,0,0,0.02); padding: 12px; border-radius: 4px; margin-top: 4px;
+  }
+  /* ボタンタップで .open クラスがついたら展開 */
+  .filter-groups.open { display: flex; }
+  
+  .filter-group {
+    display: grid; grid-template-columns: 42px 1fr; /* 横一列に整列させて高さを節約 */
+    align-items: center; width: 100%; gap: 4px;
+  }
+  
+  /* 💡 チップ群を「折り返さず、指先でスルスル横スクロール」する設定 */
+  .chips {
+    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
+    padding-bottom: 4px; width: 100%;
+  }
+  .chips::-webkit-scrollbar { display: none; } /* スクロールバーを隠してアプリっぽく */
+  .chip { padding: 4px 14px; font-size: 11px; }
 }
+
 @media(max-width:640px){
   header{padding:2.5rem 0 2rem 0;}
   .hdr-inner,.nav-inner,.main{padding-left:1rem;padding-right:1rem}
   .book-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  .chips{gap:4px}
-  .chip{padding:3px 10px;font-size:10px}
   h1{font-size:1.5rem}
   .card-body,.card-foot{padding:0.75rem;}
 }
@@ -143,19 +181,21 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 
 <div class="nav-wrap">
   <div class="nav-inner">
-    <div class="search-box">
-      <span class="search-icon">🔍</span>
-      <input type="text" id="search" placeholder="タイトル・著者・あらすじから探す…" autocomplete="off" oninput="resetAndRender()">
+    <div class="search-row">
+      <div class="search-box">
+        <span class="search-icon">🔍</span>
+        <input type="text" id="search" placeholder="タイトル・著者・あらすじから探す…" autocomplete="off" oninput="resetAndRender()">
+      </div>
+      <button class="btn-filter-toggle" onclick="toggleFilterPanel()">
+        <span>⚙️</span> 絞り込み条件 <span id="toggle-arrow">▼</span>
+      </button>
     </div>
-    <div class="filter-groups">
+    
+    <div class="filter-groups" id="filter-panel">
       <div class="filter-group">
         <span class="filter-label">順位:</span>
         <div class="chips" id="chips-rank">
-          <button class="chip on" data-r="all" onclick="setRankFilter(this)">すべて</button>
-          <button class="chip" data-r="1" onclick="setRankFilter(this)">大賞のみ</button>
-          <button class="chip" data-r="nominate" onclick="setRankFilter(this)">2〜10位</button>
-          <button class="chip" data-r="department" onclick="setRankFilter(this)">部門賞</button>
-        </div>
+          </div>
       </div>
       <div class="filter-group">
         <span class="filter-label">年代:</span>
@@ -177,7 +217,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
         </div>
       </div>
       <div class="filter-group">
-        <span class="filter-label">映像化:</span>
+        <span class="filter-label">映像:</span>
         <div class="chips" id="chips-media">
           <button class="chip on" data-v="all" onclick="setMediaFilter(this)">すべて</button>
           <button class="chip" data-v="yes" onclick="setMediaFilter(this)">映像化あり</button>
@@ -199,33 +239,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
 
 <script>
-// ─── 🛡️ 1. ロジック・コアシステムエリア ───
-const AMAZON_TAG = 'wespressoblog-22'; 
-const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
-
-// 💡 【超重要】ここにGoogle Books APIキーを入力してください
-const GOOGLE_BOOKS_API_KEY = 'AIzaSyDqGFfU5G8DEbTNXJhG88Rcw6TlIyKsldM'; 
-
-const PAGE_SIZE = 24; 
-let visibleCount = PAGE_SIZE;
-let filteredBooks = [];
-let scrollObserver = null;
-let cardObserver = null;
-
-let filterRank = 'all';
-let filterDecade = 'all';
-let filterMood = 'all';
-let filterMedia = 'all';
-
-const apiQueue = [];
-let isProcessingQueue = false;
-
-const safeCache = {
-  memoryCache: {},
-  get(key) { try { return localStorage.getItem(key); } catch (e) { return this.memoryCache[key] || null; } },
-  set(key, value) { try { localStorage.setItem(key, value); } catch (e) { this.memoryCache[key] = value; } }
-};
-
+// ─── 🛡️ システム関数・制御コア ───
 function getAmazonKindleLink(title, author) {
   return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
 }
@@ -239,101 +253,17 @@ function getAmazonAudibleLink(title, author) {
   return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`;
 }
 
-function processApiQueue() {
-  if (apiQueue.length === 0) {
-    isProcessingQueue = false;
-    return;
+// 💡 スマホ用：アコーディオン開閉をトグルする関数
+function toggleFilterPanel() {
+  const panel = document.getElementById('filter-panel');
+  const arrow = document.getElementById('toggle-arrow');
+  if (panel.classList.contains('open')) {
+    panel.classList.remove('open');
+    arrow.innerText = '▼';
+  } else {
+    panel.classList.add('open');
+    arrow.innerText = '▲';
   }
-  isProcessingQueue = true;
-  const currentTask = apiQueue[0]; 
-  if (!currentTask) {
-    apiQueue.shift();
-    setTimeout(processApiQueue, 10);
-    return;
-  }
-  const { title, author, targetImgId } = currentTask;
-  
-  // 💡 【重要】ミスマッチ対策と画質向上を兼ねてキャッシュキーのバージョンを第8世代(v8)へ更新
-  const cacheKey = `hybrid_g_obd_v8_${title}_${author}`;
-  const cachedUrl = safeCache.get(cacheKey);
-
-  if (cachedUrl !== null) {
-    apiQueue.shift(); 
-    if (cachedUrl) {
-      const img = document.getElementById(targetImgId);
-      if (img) { img.src = cachedUrl; img.onload = () => { img.style.opacity = '1'; }; }
-    }
-    setTimeout(processApiQueue, 10);
-    return;
-  }
-
-  // 💡 【修正点1：ミスマッチ撲滅】intitle: と inauthor: プレフィックスを使い、関係のない雑誌や問題集の混入を100%遮断
-  const cleanTitle = title.replace(/[〜～─━：:・\s\-\[（()）\]]/g, ' ').replace(/[―—■●★▲◆▶✔•…]/g, '').trim();
-  const cleanAuthor = author.replace(/（[^）]+）/g, '').trim();
-
-  let googleSearchUrl = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(cleanTitle)}+inauthor:${encodeURIComponent(cleanAuthor)}&maxResults=1`;
-  if (GOOGLE_BOOKS_API_KEY && GOOGLE_BOOKS_API_KEY !== 'YOUR_API_KEY_HERE') {
-    googleSearchUrl += `&key=${GOOGLE_BOOKS_API_KEY}`;
-  }
-  
-  fetch(googleSearchUrl)
-    .then(res => {
-      if (res.status === 429) {
-        console.warn("Google API制限(429)を検知。5秒間停止冷却します...");
-        setTimeout(processApiQueue, 5000); 
-        return null;
-      }
-      if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-      return res.json();
-    })
-    .then(data => {
-      if (!data) return; 
-      let googleImgUrl = "";
-      let isbn = "";
-      if (data.items && data.items.length > 0) {
-        const volumeInfo = data.items[0].volumeInfo;
-        if (volumeInfo.imageLinks) {
-          const rawUrl = volumeInfo.imageLinks.thumbnail || volumeInfo.imageLinks.smallThumbnail;
-          if (rawUrl) {
-            // 💡 【修正点2：高画質化】zoom=1 などの圧縮モードを、最高画質の zoom=3 に強制書き換え
-            googleImgUrl = rawUrl.replace("http:", "https:").replace(/zoom=\d/, "zoom=3");
-          }
-        }
-        if (volumeInfo.industryIdentifiers) {
-          const idfy = volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_13" || id.type === "ISBN_10");
-          if (idfy) isbn = idfy.identifier.replace(/[^0-9X]/g, '');
-        }
-      }
-      if (isbn) {
-        fetch(`https://api.openbd.jp/v1/get?isbn=${isbn}`)
-          .then(res => res.json())
-          .then(openBdData => {
-            let finalUrl = googleImgUrl; 
-            if (openBdData && openBdData[0] && openBdData[0].summary && openBdData[0].summary.cover) {
-              finalUrl = openBdData[0].summary.cover; 
-            }
-            finalizeImageTask(finalUrl, cacheKey, targetImgId);
-          })
-          .catch(err => { finalizeImageTask(googleImgUrl, cacheKey, targetImgId); });
-      } else {
-        finalizeImageTask(googleImgUrl, cacheKey, targetImgId);
-      }
-    })
-    .catch(err => {
-      if (isProcessingQueue && apiQueue.length > 0) {
-        apiQueue.shift(); safeCache.set(cacheKey, ""); setTimeout(processApiQueue, 1200);
-      }
-    });
-}
-
-function finalizeImageTask(finalUrl, cacheKey, targetImgId) {
-  if (apiQueue.length > 0) apiQueue.shift(); 
-  safeCache.set(cacheKey, finalUrl); 
-  if (finalUrl) {
-    const img = document.getElementById(targetImgId);
-    if (img) { img.src = finalUrl; img.onload = () => { img.style.opacity = '1'; }; }
-  }
-  setTimeout(processApiQueue, 1200);
 }
 
 function getMoodsForBook(b) {
@@ -364,16 +294,20 @@ function cardHTML(b) {
   const imgId = `img-${b.year}-${b.rank}`;
   const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
 
+  const coverHTML = b.coverImg 
+    ? `<img src="${b.coverImg}" alt="${b.title}" loading="lazy">` 
+    : '';
+
   return `
 <article class="card${isTop?' rank-1':''}" data-year="${b.year}" data-rank="${b.rank}">
-  <div class="cover-wrap lazy-cover" data-title="${b.title}" data-author="${b.author}" data-target-id="${imgId}">
+  <div class="cover-wrap">
     ${rankBadgeHTML(b.rank)}
     <div class="year-badge">${b.year}年</div>
     <div class="placeholder">
       <span class="placeholder-title">${b.title}</span>
       <span class="placeholder-author">${b.author}</span>
     </div>
-    <img id="${imgId}" src="" alt="${b.title}">
+    ${coverHTML}
   </div>
   <div class="card-body">
     <div class="tag-container">
@@ -417,7 +351,7 @@ function updateFilteredList() {
     const mediaOk = filterMedia === 'all' || (filterMedia === 'yes' && b.media !== "");
     const moods = getMoodsForBook(b);
     const moodOk = filterMood === 'all' || moods.includes(filterMood);
-    const titleStr = (b.title || "").toLowerCase();
+    const titleStr = b.title.toLowerCase();
     const authorStr = (b.author || "").toLowerCase();
     const synopsisStr = (b.synopsis || "").toLowerCase();
     const qOk = !q || titleStr.includes(q) || authorStr.includes(q) || synopsisStr.includes(q);
@@ -436,23 +370,6 @@ function renderChunk() {
   const content = document.getElementById('content'); if (!content) return;
   const chunk = filteredBooks.slice(0, visibleCount);
   content.innerHTML = chunk.map(b => cardHTML(b)).join('');
-  activateCardImageObserver();
-}
-
-function activateCardImageObserver() {
-  if (cardObserver) cardObserver.disconnect();
-  cardObserver = new IntersectionObserver((entries, observer) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting) {
-        const coverWrap = entry.target; observer.unobserve(coverWrap);
-        if (coverWrap.dataset.title) {
-          apiQueue.push({ title: coverWrap.dataset.title, author: coverWrap.dataset.author, targetImgId: coverWrap.dataset.targetId });
-          if (!isProcessingQueue) processApiQueue();
-        }
-      }
-    });
-  }, { rootMargin: '300px 0px', threshold: 0.01 });
-  document.querySelectorAll('.lazy-cover').forEach(el => cardObserver.observe(el));
 }
 
 function initInfiniteScroll() {
@@ -498,250 +415,2429 @@ document.addEventListener('DOMContentLoaded', () => {
   try { resetAndRender(); } catch (error) { console.error("エラーログ:", error); }
 });
 
-// ─── 📦 2. データベースエリア ───
+// 👇 【ここにジェネレーターで抽出した完成データ「const BOOKS = [...]」を貼り付けて上書き公開してください！】
 const BOOKS = [
-  {year:2026,rank:1,title:"イン・ザ・メガチャーチ",author:"朝井リョウ",genre:"ヒューマン",media:"",synopsis:"ファンダム経済を仕掛ける側、のめり込む側——人の心を動かす「物語」の功罪をあぶり出す意欲作。",audible:true},
-  {year:2026,rank:2,title:"熟柿",author:"佐藤正午",genre:"ヒューマン",media:"",synopsis:"轢き逃げの罪を背負い、息子を求めて流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。"},
-  {year:2026,rank:3,title:"PRIZE―プライズ―",author:"村山由佳",genre:"お仕事",media:"",synopsis:"何度も本屋大賞を受賞しながら直木賞が取れない作家の執念と苦悩を描く、文壇の光と影。"},
-  {year:2026,rank:4,title:"エピクロスの処方箋",author:"夏川草介",genre:"お仕事",media:"",synopsis:"『スピノザの診察室』続編。大学病院の絶対権力者の父親を診ることになった医師の葛藤。"},
-  {year:2026,rank:5,title:"暁星",author:"湊かなえ",genre:"ミステリ",media:"",synopsis:"文部科学大臣刺殺事件の犯人が語る手記と、事件を小説にする作家。フィクションが交錯するミステリ。"},
-  {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況で営業トークを駆使するサスペンス。"},
-  {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く温かな物語。"},
-  {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相。"},
-  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体と「父かもしれない」と訪れた小学生。十年前の失踪が交錯する本格推理。"},
-  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男。伊坂流のユーモアと緊張感。"},
-  {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草を意味する言葉「カフネ」。言葉の温もりをテーマにした愛の物語。",audible:true},
-  {year:2025,rank:2,title:"アルプス席の母",author:"早見和真",genre:"ヒューマン",media:"",synopsis:"野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く、家族の感動作。"},
-  {year:2025,rank:3,title:"小説",author:"野崎まど",genre:"SF",media:"",synopsis:"物語の構造そのものを問い直す実験的かつ読みやすい、野崎まどならではのエンタメ。"},
-  {year:2025,rank:4,title:"禁忌の子",author:"山口未桜",genre:"ミステリ",media:"",synopsis:"触れてはいけない真実を抱えた子どもたち。現役医師の新鋭が放つ衝撃のデビュー作。"},
-  {year:2025,rank:5,title:"人魚が逃げた",author:"青山美智子",genre:"青春",media:"",synopsis:"謎の書き置きから始まる連作短編。青山美智子の温かく不思議な世界観が光る一編。"},
-  {year:2025,rank:6,title:"spring",author:"恩田陸",genre:"青春",media:"",synopsis:"バレエを通じて描かれる才能と情熱、嫉妬と愛。『蜜蜂と遠雷』に続くアート小説大作。"},
-  {year:2025,rank:7,title:"恋とか愛とかやさしさなら",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"さまざまな形の愛の物語を集めた連作短編集。多様な関係性と感情の機微を美しく描く。"},
-  {year:2025,rank:8,title:"生殖記",author:"朝井リョウ",genre:"SF",media:"",synopsis:"AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウの挑戦作。"},
-  {year:2025,rank:9,title:"死んだ山田と教室",author:"金子玲介",genre:"青春",media:"映画化",synopsis:"突然死した同級生が教室のスピーカーに宿り、クラスメートと会話する奇想天外な青春劇。"},
-  {year:2025,rank:10,title:"成瀬は信じた道をいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"前作『成瀬は天下を取りにいく』の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む。"},
-  {year:2024,rank:1,title:"成瀬は天下を取りにいく",author:"宮島未奈",genre:"青春",media:"漫画化",synopsis:"西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。痛快無比な青春小説。",audible:true},
-  {year:2024,rank:2,title:"水車小屋のネネ",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。"},
-  {year:2024,rank:3,title:"存在のすべてを",author:"塩田武士",genre:"ミステリ",media:"",synopsis:"二つの誘拐事件と芸術の謎が絡み合うサスペンス。スケールの大きな人間ドラマ。"},
-  {year:2024,rank:4,title:"スピノザの診察室",author:"夏川草介",genre:"お仕事",media:"",synopsis:"大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作として話題を呼んだ作品。"},
-  {year:2024,rank:5,title:"レーエンデ国物語",author:"多崎礼",genre:"SF",media:"",synopsis:"異世界の小国を舞台にした壮大なファンタジー。圧倒的な世界観で多くの読者を魅了。"},
-  {year:2024,rank:6,title:"黄色い家",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"貧困と孤独の中で生きる女たちの集まり。社会の底辺に生きる人々を圧倒的な筆力で描く。"},
-  {year:2024,rank:7,title:"リカバリー・カバヒコ",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"公園の古びた動物遊具「カバヒコ」に触れると回復するという噂をめぐる連作短編。"},
-  {year:2024,rank:8,title:"星を編む",author:"凪良ゆう",genre:"ヒューマン",media:"",synopsis:"『汝、星のごとく』の続編にあたる短編集。前作のキャラクターたちのその後を描く。"},
-  {year:2024,rank:9,title:"放課後ミステリクラブ",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"小学生探偵たちが学校の謎に挑む。本屋大賞初の児童書ノミネートとして話題に。"},
-  {year:2024,rank:10,title:"君が手にするはずだった黄金について",author:"小川哲",genre:"ヒューマン",media:"",synopsis:"才能と承認欲求、嘘と虚栄心をめぐる、直木賞作家が放つ鋭い文学的考察短編集。"},
-  {year:2023,rank:1,title:"汝、星のごとく",author:"凪良ゆう",genre:"ヒューマン",media:"ドラマ化",synopsis:"瀬戸内の島で出会った二人が、それぞれの夢と愛に苦しみながら生きていく。魂を揺さぶる傑作。",audible:true},
-  {year:2023,rank:2,title:"ラブカは静かに弓を持つ",author:"安壇美緒",genre:"お仕事",media:"",synopsis:"著作権調査のため音楽教室に潜入したスパイが、チェロとの出会いで心を取り戻していく。"},
-  {year:2023,rank:3,title:"光のとこにいてね",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"運命的に出会った二人の少女の、長年にわたる不思議な絆と魂の交錯を描く。"},
-  {year:2023,rank:4,title:"爆弾",author:"呉勝浩",genre:"ミステリ",media:"映画化",synopsis:"取調室でのスリリングな心理戦。爆弾を予告する男と刑事の頭脳戦を描く極上サスペンス。"},
-  {year:2023,rank:5,title:"月の立つ林で",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"ポッドキャストの声を通じて見えない糸でつながっていく5人の温かな日常を描く。"},
-  {year:2023,rank:6,title:"向日葵の咲かない夏",author:"道尾秀介",genre:"ミステリ",media:"",synopsis:"夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。"},
-  {year:2023,rank:7,title:"栞と嘘の季節",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。"},
-  {year:2023,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。"},
-  {year:2023,rank:9,title:"掬えば手には",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。"},
-  {year:2023,rank:10,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。"},
-  {year:2022,rank:1,title:"同志少女よ、敵を撃て",author:"逢坂冬馬",genre:"歴史",media:"",synopsis:"独ソ戦を舞台に、女性狙撃手となった少女の戦いを描く。アガサ賞W受賞の衝撃作。",audible:true},
-  {year:2022,rank:2,title:"赤と青とエスキース",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"一枚の絵が時代や国を超えて人をつなぐ。青山美智子が描く「縁」の感動作。"},
-  {year:2022,rank:3,title:"スモールワールズ",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"日常に潜む小さな歪みと嘘を鮮烈に切り取った、完成度の高い6つの傑作短編集。"},
-  {year:2022,rank:4,title:"正欲",author:"朝井リョウ",genre:"ヒューマン",media:"映画化",synopsis:"マイノリティの性を抱えた人々の生。「多様性」という言葉の欺瞞を突く問題作。"},
-  {year:2022,rank:5,title:"六人の嘘つきな大学生",author:"浅倉秋成",genre:"ミステリ",media:"映画化",synopsis:"最終選考に残った6人が、互いの嘘を暴き合う。驚異の二転三転就活サスペンス。"},
-  {year:2022,rank:6,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"現代の若者が直面する貧困や労働の苦しさと、その先にある微かな光を紡ぐ渾身作。"},
-  {year:2022,rank:7,title:"残月記",author:"小田雅久仁",genre:"SF",media:"",synopsis:"月をテーマにした、圧倒的な筆力と狂気に満ちた世界観で話題をさらったダークファンタジー。"},
-  {year:2022,rank:8,title:"硝子の塔の殺人",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"ミステリを愛するすべての人へ贈る、硝子の館で起きる本格クローズドサークル。"},
-  {year:2022,rank:9,title:"黒牢城",author:"米澤穂信",genre:"歴史",media:"",synopsis:"有岡城に幽閉された黒田官兵衛が、城内で起きる奇妙な難事件を解く歴史ミステリ。"},
-  {year:2022,rank:10,title:"星を掬う",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"DVから逃げ出した女性たちが身を寄せる家での、傷つきながらも寄り添う再生の物語。"},
-  {year:2021,rank:1,title:"52ヘルツのクジラたち",author:"町田そのこ",genre:"ヒューマン",media:"映画化",synopsis:"誰にも届かない声で鳴くクジラに自らを重ねた、孤独な魂たちの出会いと救済の物語。",audible:true},
-  {year:2021,rank:2,title:"お探し物は図書室まで",author:"青山美智子",genre:"お仕事",media:"",synopsis:"悩める人々が図書室の司書から勧められた一冊の本をきっかけに人生を変えてしていく。"},
-  {year:2021,rank:3,title:"犬がいた季節",author:"伊吹有喜",genre:"青春",media:"",synopsis:"ある高校に住み着いた白い犬と、バブル末期から平成を駆け抜けた生徒たちの青春。"},
-  {year:2021,rank:4,title:"逆ソクラテス",author:"伊坂幸太郎",genre:"青春",media:"",synopsis:"子供たちの視点から「大人の先入観」を軽快にひっくり返す、伊坂流の爽快な短編集。"},
-  {year:2021,rank:5,title:"自転しながら公転する",author:"山本文緒",genre:"ヒューマン",media:"ドラマ化",synopsis:"30代女性の結婚、仕事、家族へのリアルな悩み。ぐるぐる回る日常を優しく包む。"},
-  {year:2021,rank:6,title:"八月の銀の雪",author:"伊与原新",genre:"お仕事",media:"",synopsis:"不器用な理系学生や外国人労働者が、科学の美しさを通じて心を通わせる感動短編。"},
-  {year:2021,rank:7,title:"滅びの前のシャングリラ",author:"凪良ゆう",genre:"SF",media:"",synopsis:"小惑星が衝突し世界が終わる。その時、名もなき人々はどう生き、誰を愛するのか。"},
-  {year:2021,rank:8,title:"オルタネート",author:"加藤シゲアキ",genre:"青春",media:"",synopsis:"高校生限定のマッチングアプリがもたらす、3人の若者の瑞々しい恋と挫折の物語。"},
-  {year:2021,rank:9,title:"推し、燃ゆ",author:"宇佐見りん",genre:"青春",media:"",synopsis:"推しのアイドルがファンを殴って炎上した。背骨を失った少女の狂おしい純粋さ。"},
-  {year:2021,rank:10,title:"この本を盗む者は",author:"深緑野分",genre:"SF",media:"",synopsis:"本に呪われた街。盗まれた本を取り戻すため、少女が物語の世界を旅するファンタジー。"},
-  {year:2020,rank:1,title:"流浪の月",author:"凪良ゆう",genre:"ヒューマン",media:"映画化",synopsis:"世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。",audible:true},
-  {year:2020,rank:2,title:"ライオンのおやつ",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"余命わずかな女性が過ごすホスピス。毎週日曜に出される思い出のおやつの温かさ。"},
-  {year:2020,rank:3,title:"線は、僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"深い喪失感を抱えた大学生が水墨画と出会い、その白黒の世界に魅了され再生していく。"},
-  {year:2020,rank:4,title:"ノースライト",author:"横山秀夫",genre:"ミステリ",media:"ドラマ化",synopsis:"自分が建てた美しい家。なぜ依頼人は家族を置いて失踪したのか？建築士が追う謎。"},
-  {year:2020,rank:5,title:"熱源",author:"川越宗一",genre:"歴史",media:"",synopsis:"極寒の樺太を舞台に、故郷を奪われたアイヌの男とポーランド人の生き様を描く歴史大作。"},
-  {year:2020,rank:6,title:"むかしむかしあるところに、死体がありました。",author:"青柳碧人",genre:"ミステリ",media:"",synopsis:"日本の有名な昔話を本格ミステリで読み解く。一風変わった、だが緻密なパズル。"},
-  {year:2020,rank:7,title:"AX アックス",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。「グラスホッパー」「マリアビートル」と並ぶ三部作完結編。"},
-  {year:2020,rank:8,title:"線は、僕を描く",author:"砥上裕將",genre:"青春",media:"映画化",synopsis:"両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。"},
-  {year:2020,rank:9,title:"在庫あり",author:"河崎秋子",genre:"お仕事",media:"",synopsis:"北海道を舞台に書店員の仕事と日常を描いた作品。"},
-  {year:2020,rank:10,title:"夏物語",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。"},
-  {year:2019,rank:1,title:"그리고 미란다を죽이다",author:"ピーター・スワンソン",genre:"ミステリ",media:"",synopsis:"飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。"},
-  {year:2019,rank:2,title:"ひと",author:"小野寺史宜",genre:"ヒューマン",media:"",synopsis:"突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。"},
-  {year:2019,rank:3,title:"그리고、바톤은 넘겨졌다",author:"瀬尾まいこ",genre:"ヒューマン",media:"映画化",synopsis:"複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。"},
-  {year:2019,rank:4,title:"熱帯",author:"森見登美彦",genre:"SF",media:"",synopsis:"ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。"},
-  {year:2019,rank:5,title:"ある男",author:"平野啓一郎",genre:"ヒューマン",media:"映画化",synopsis:"死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。"},
-  {year:2019,rank:6,title:"さざなみのよる",author:"木皿泉",genre:"ヒューマン",media:"",synopsis:"ある女性の死後、彼女を知る多くの人を通して描かれる、命の意味と温かな繋がり。"},
-  {year:2019,rank:7,title:"愛なき世界",author:"三浦しをん",genre:"お仕事",media:"ドラマ化",synopsis:"植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めき。"},
-  {year:2019,rank:8,title:"ひとつむぎの手",author:"知念実希人",genre:"お仕事",media:"",synopsis:"医療系サスペンス。外科医を目指す研修医が巻き込まれる事件と命の現場を描く。"},
-  {year:2019,rank:9,title:"火のないところに煙は",author:"芦沢央",genre:"ミステリ",media:"",synopsis:"怪談話を集めるフリーライターが遭遇する、現実と非現実の境界が揺れる傑作ホラー。"},
-  {year:2019,rank:10,title:"フーガはユーガ",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"双子の兄弟が、特別な時間だけ入れ替われる超能力を使いながら生き抜く物語。"},
-  {year:2018,rank:1,title:"かがみの孤城",author:"辻村深月",genre:"SF",media:"アニメ化",synopsis:"学校に居場所を失った7人の中学生が、謎の城に招かれ「願いの部屋」の鍵を探す。",audible:true},
-  {year:2018,rank:2,title:"崩れる脳を抱きしめて",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"脳腫瘍を宣告された青年が故郷の島で出会った女性との純愛と、そこに隠された謎。"},
-  {year:2018,rank:3,title:"盤上の向日葵",author:"柚月裕子",genre:"ミステリ",media:"ドラマ化",synopsis:"将棋の駒に秘められた殺人事件の真実を追う。将棋ミステリの傑作。"},
-  {year:2018,rank:4,title:"AX アックス",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"恐妻家の殺し屋「兜」の日常を描く、ユーモラスで切ないサスペンス。"},
-  {year:2018,rank:5,title:"開人の殺人",author:"今村昌弘",genre:"ミステリ",media:"映画化",synopsis:"ゾンビが閉じ込める密室館で連続殺人が起きる。本格ミステリ+ゾンビの型破り作。"},
-  {year:2018,rank:6,title:"騙し絵の牙",author:"塩田武士",genre:"お仕事",media:"映画化",synopsis:"返刊寸前の雑誌を守るため、騙し騙されながら奮闘する編集長の物語。"},
-  {year:2018,rank:7,title:"ツバキ文具店",author:"小川糸",genre:"ヒューマン",media:"ドラマ化",synopsis:"鎌倉の文具店を舞台に、代書屋として人々の様々な「手紙」を書くヒロインを描く。"},
-  {year:2018,rank:8,title:"where to go, that summer",author:"仙田学",genre:"青春",media:"",synopsis:"少年時代の記憶と、あの夏に置き忘れてきた感情を瑞々しく描く青春小説。"},
-  {year:2018,rank:9,title:"百貨の魔法",author:"村山早紀",genre:"SF",media:"",synopsis:"時代の波に押される老舗百貨店を舞台に描かれる、温かく切ないファンタジー。"},
-  {year:2018,rank:10,title:"青くて痛くて脆い",author:"住野よる",genre:"青春",media:"映画化",synopsis:"大学生が始めた秘密結社が、次第に肥大化し歪んでいく。歪んだ正義と挫折。"},
-  {year:2017,rank:1,title:"蜜蜂と遠雷",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"国際ピアノコンクールを舞台に、4人のピアニストの葛藤と情熱を描く。W受賞作。",audible:true},
-  {year:2017,rank:2,title:"みかづき",author:"森絵都",genre:"ヒスタミン",media:"ドラマ化",synopsis:"学習塾を舞台に、昭和から平成まで3世代にわたる家族と教育の物語。"},
-  {year:2017,rank:3,title:"罪の声",author:"塩田武士",genre:"ミステリ",media:"映画化",synopsis:"グリコ・森永事件をモデルに、未解決事件に翻弄された人々の人生を描く。"},
-  {year:2017,rank:4,title:"あの家に暮らす四人の女",author:"三浦しをん",genre:"ヒューマン",media:"ドラマ化",synopsis:"古い一軒家に暮らす女4人の、おかしくも温かな共同生活を描くコメディ。"},
-  {year:2017,rank:5,title:"コンビニ人間",author:"村田沙耶香",genre:"ヒューマン",media:"",synopsis:"「普通」の人間社会に馴染めない女性が、コンビニという居場所で見つけた生き方。"},
-  {year:2017,rank:6,title:"夜中にチーズをかじりながら",author:"群ようこ",genre:"青春",media:"",synopsis:"日々のちょっとした可笑しみや、大人の女性の日常を軽妙に描くエッセイ。"},
-  {year:2017,rank:7,title:"友罪",author:"薬丸岳",genre:"ミステリ",media:"映画化",synopsis:"少年犯罪の加害者として生きる男と、その友人の葛藤を描く社会派サスペンス。"},
-  {year:2017,rank:8,title:"i",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"シリア人の父を持つ女性が、自らのアイデンティティと向き合い続ける姿を描く。"},
-  {year:2017,rank:9,title:"真夜中の探偵",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"謎多き事件の裏側にある、人と人との心理的な繋がりを辻村深月が描く。"},
-  {year:2017,rank:10,title:"影裏",author:"沼田真佑",genre:"ヒューマン",media:"映画化",synopsis:"岩手県を舞台に、男二人の友情と、その裏にある喪失と再生を描く。"},
-  {year:2016,rank:1,title:"羊と鋼の森",author:"宮下奈都",genre:"お仕事",media:"映画化",synopsis:"ピアノの調律師を目指す青年の成長を、美しい森の描写とともに描く。",audible:true},
-  {year:2016,rank:2,title:"海の見える理髪店",author:"荻原浩",genre:"ヒューマン",media:"ドラマ化",synopsis:"海辺の理髪店を舞台にした6つの短編集。切なさと温かさが同居する。"},
-  {year:2016,rank:3,title:"わたしを離さないで",author:"カズオ・イシグロ",genre:"SF",media:"ドラマ化",synopsis:"提供者として生まれた子供たちの運命と愛を描いた、世界的傑作。"},
-  {year:2016,rank:4,title:"朝が来る",author:"辻村深月",genre:"ヒューマン",media:"映画化",synopsis:"特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。"},
-  {year:2016,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"父の死後、孤独に生きる女性編集者が、社会との接点を取り戻していく。"},
-  {year:2016,rank:6,title:"君の膵臓をたべたい",author:"住野よる",genre:"青春",media:"映画化",synopsis:"病を抱えた少女と、彼女の秘密を知った少年の、切なくも美しい青春。",audible:true},
-  {year:2016,rank:7,title:"永い言い訳",author:"西川美和",genre:"ヒューマン",media:"映画化",synopsis:"妻を突然失った作家が、遺族と向き合う中で自らを見つめ直す。"},
-  {year:2016,rank:8,title:"ちょっと今から仕事やめてくる",author:"北川恵海",genre:"お仕事",media:"映画化",synopsis:"ブラック企業で働く青年を救ったのは、実は死んでいた同級生？癒しの物語。"},
-  {year:2016,rank:9,title:"本屋さんのダイアナ",author:"柚木麻子",genre:"青春",media:"",synopsis:"ミスマッチな名前を持つ2人の少女の、友情と決別を描く青春小説。"},
-  {year:2016,rank:10,title:"世界の果てのこどもたち",author:"中脇初枝",genre:"歴史",media:"",synopsis:"満洲からの引き揚げを通じて結ばれた女の子たちの、数奇な人生を描く大作。"},
-  {year:2015,rank:1,title:"鹿の王",author:"上橋菜穂子",genre:"SF",media:"アニメ化",synopsis:"謎の疫病と戦士の逃亡を軸に、壮大なファンタジー世界を描く。",audible:true},
-  {year:2015,rank:2,title:"サラバ!",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"エジプト生まれの男性の数奇な半生を、圧倒的な筆力で描く直木賞作。"},
-  {year:2015,rank:3,title:"ラプラスの魔女",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"ありえない事故を連続させる謎の少女をめぐる、SFミステリ。"},
-  {year:2015,rank:4,title:"火花",author:"又吉直樹",genre:"青春",media:"映画化",synopsis:"芸人の生き様と師弟関係を描き、社会現象となった芥川賞受賞作。"},
-  {year:2015,rank:5,title:"王とサーカス",author:"米澤穂信",genre:"ミステリ",media:"",synopsis:"ネパールで起きた王族殺害事件を追う、記者のジャーナリズムミステリ。"},
-  {year:2015,rank:6,title:"戦場のコックたち",author:"深緑野分",genre:"ミステリ",media:"",synopsis:"第二次大戦下、米軍のコックとして戦地を転戦する男の日常と謎。"},
-  {year:2015,rank:7,title:"か「」く「」し「」ご「」と「",author:"住野よる",genre:"青春",media:"",synopsis:"5人の高校生が、それぞれ少しだけ不思議な「能力」を持って生活する青春。"},
-  {year:2015,rank:8,title:"長いお別れ",author:"中島京子",genre:"ヒューマン",media:"映画化",synopsis:"アルツハイマー病の父と家族の10年を、温かく笑いと涙で描く。"},
-  {year:2015,rank:9,title:"コーヒーが冷めないうちに",author:"川口俊和",genre:"SF",media:"映画化",synopsis:"過去に戻れる喫茶店で、後悔を持つ人々が大切な人に会いに行く。"},
-  {year:2015,rank:10,title:"永遠と横道世之介",author:"吉田修一",genre:"青春",media:"映画化",synopsis:"横道世之介の大学生活を描いた、心温まる青春小説 the end。"},
-  {year:2014,rank:1,title:"村上海賊の娘",author:"和田竜",genre:"歴史",media:"",synopsis:"戦国時代、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンタメ。",audible:true},
-  {year:2014,rank:2,title:"旅猫リポート",author:"有川浩",genre:"ヒューマン",media:"映画化",synopsis:"猫の「ナナ」と飼い主が、旅をしながら昔の友人を訪ねる感動作。"},
-  {year:2014,rank:3,title:"ゼロ、ハチ、ゼロ、ナナ。",author:"辻村深月",genre:"ミステリ",media:"",synopsis:"親友の母親殺しという衝撃的な出来事をめぐり、2人の女性を描く問題作。"},
-  {year:2014,rank:4,title:"キャプテンサンダーボルト",author:"阿部和重・伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"二大作家がコラボした、ロードノベル×サスペンスの痛快作。"},
-  {year:2014,rank:5,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性と精神科医の、百田尚樹流メインミステリ。"},
-  {year:2014,rank:6,title:"四十九日のレシピ",author:"伊吹有喜",genre:"ヒューマン",media:"映画化",synopsis:"母の四十九日に集まった家族が、レシピを通じて絆を取り戻す物語。"},
-  {year:2014,rank:7,title:"昨夜のカレー、明日のパン",author:"木皿泉",genre:"ヒューマン",media:"ドラマ化",synopsis:"夫を亡くした嫁と義父の共同生活を描く、食と私と再生の物語。"},
-  {year:2014,rank:8,title:"紙の月",author:"角田光代",genre:"ミステリ",media:"映画化",synopsis:"主婦が横領に手を染めていく経緯を描く、欲望と社会の歪み。"},
-  {year:2014,rank:9,title:"島はぼくらと",author:"辻村深月",genre:"青春",media:"",synopsis:"離島に育った4人の高校生の、地方と都会の狭間で揺れる青春。"},
-  {year:2014,rank:10,title:"ハケンアニメ!",author:"辻村深月",genre:"お仕事",media:"映画化",synopsis:"アニメ業界を舞台に、覇権を争うプロフェッショナルたちの熱い物語。"},
-  {year:2013,rank:1,title:"海賊とよばれた男",author:"百田尚樹",genre:"歴史",media:"映画化",synopsis:"戦後、日本の復興に石油事業で挑んだ男の、熱き戦いの記録。",audible:true},
-  {year:2013,rank:2,title:"64",author:"横山秀夫",genre:"ミステリ",media:"映画化",synopsis:"昭和64年に起きた少女誘拐事件。警察内部の闇が動く難事件。"},
-  {year:2013,rank:3,title:"楽園のカンヴァス",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"天才絵師ルソーの名画の真贋をめぐる、鑑定勝負の芸術ミステリ。"},
-  {year:2013,rank:4,title:"きみはいい子",author:"中脇初枝",genre:"ヒューマン",media:"映画化",synopsis:"現代の生きづらさのなかで、小さな「やさしさ」が連鎖する感動作。"},
-  {year:2013,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"感情を持たずに育った女性が、個性豊かな人々と出会い心を取り戻する。"},
-  {year:2013,rank:6,title:"君のクイズ",author:"小川哲",genre:"ミステリ",media:"",synopsis:"クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。"},
-  {year:2013,rank:7,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"映画化",synopsis:"地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。"},
-  {year:2013,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。"},
-  {year:2013,rank:9,title:"掬えば手には",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"人の心が読めてしまう青年が、ある少女と出会い動き出す、優しい物語。"},
-  {year:2013,rank:10,title:"夜が明ける",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。"},
-  {year:2012,rank:1,title:"舟を編む",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった。"},
-  {year:2012,rank:2,title:"ジェノサイド",author:"高野和明",genre:"SF",media:"",synopsis:"人類を滅ぼす新人類の誕生。アフリカの傭兵と日本の院生が破滅を止める。"},
-  {year:2012,rank:3,title:"ピエタ",author:"大島真寿美",genre:"歴史",media:"",synopsis:"18世紀ヴェネツィア。孤児院の女性たちが音楽の巨匠の死を機に結ばれる。"},
-  {year:2012,rank:4,title:"くちびるに歌を",author:"中田永一",genre:"青春",media:"映画化",synopsis:"元天才ピアニストと、離島の中学校合唱部員たちのひと夏の青春。"},
-  {year:2012,rank:5,title:"人質の朗読会",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"人質となった人々が遺した、ささやかで愛おしい人生の朗読記録。"},
-  {year:2012,rank:6,title:"ユリゴコロ",author:"沼田まほかる",genre:"ミステリ",media:"映画化",synopsis:"押し入れで見つけた殺人者の日記。それは自分の家族の血塗られた過去。"},
-  {year:2012,rank:7,title:"誰かが足りない",author:"宮下奈都",genre:"ヒューマン",media:"",synopsis:"一つの団地、一つのレストラン。すれ違う住民たちの小さな幸福と繋がりの短編。"},
-  {year:2012,rank:8,title:"ビブリア古書堂の事件手帖",author:"三上延",genre:"ミステリ",media:"映画化",synopsis:"古書店の美しい店主が古書に秘められた謎を解き明かすライトミステリ。"},
-  {year:2012,rank:9,title:"偉大なる、しゅららぼん",author:"万城目学",genre:"SF",media:"映画化",synopsis:"琵琶湖の畔、不思議な力を受け継ぐ一族。宿敵との戦いが街を巻き込む。"},
-  {year:2012,rank:10,title:"プリズム",author:"百田尚樹",genre:"ミステリ",media:"",synopsis:"多重人格の女性。彼女のなかの別の格に、青年は恋をしてしまう。"},
-  {year:2011,rank:1,title:"謎解きはディナーのあとで",author:"東川篤哉",genre:"ミステリ",media:"映画化",synopsis:"お嬢様刑事の推理はいつも的外れ。毒舌執事がディナーのあとに謎を解く。",audible:true},
-  {year:2011,rank:2,title:"ふがいない僕は空を見た",author:"窪美澄",genre:"ヒューマン",media:"映画化",synopsis:"主婦と男子高校生の許されざる関係。生きることの泥臭さと救いを描く。"},
-  {year:2011,rank:3,title:"ペンギン・ハイウェイ",author:"森見登美彦",genre:"SF",media:"アニメ化",synopsis:"街に突然現れたペンギン。小学4年生の男の子が、お姉さんの謎を追う。"},
-  {year:2011,rank:4,title:"錨を上げよ",author:"百田尚樹",genre:"ヒューマン",media:"",synopsis:"戦後の激動期、自らの力だけでのし上がろうとした男の破天荒な自伝。"},
-  {year:2011,rank:5,title:"シューマンの指",author:"奥泉光",genre:"ミステリ",media:"",synopsis:"天才ピアニストの失踪と、音楽に魅了された男たちの狂気を描く芸術ミステリ。"},
-  {year:2011,rank:6,title:"叫びと祈り",author:"梓河人",genre:"ミステリ",media:"",synopsis:"世界の辺境で起きる事件を解く、ミステリ界の新鋭が放つ名作短編集。"},
-  {year:2011,rank:7,title:"悪の教典",author:"貴志祐介",genre:"ミステリ",media:"映画化",synopsis:"生徒に慕われる完璧な教師。だが彼は、他人の命を何とも思わないサイコパス。"},
-  {year:2011,rank:8,title:"神様のカルテ2",author:"夏川草介",genre:"お仕事",media:"映画化",synopsis:"信州の病院に同期の親友が赴任。だが彼は定時で帰る冷徹な医師に。"},
-  {year:2011,rank:9,title:"キケン",author:"有川浩",genre:"青春",media:"",synopsis:"理系大学の「機械制御研究部」。破天荒な部長が仕掛ける、爆発だらけの青春。"},
-  {year:2011,rank:10,title:"ストーリー・セラー",author:"有川浩",genre:"ヒューマン",media:"",synopsis:"命を削って物語を書く妻と、彼女を支え続けた夫の愛。有川浩の傑作。"},
-  {year:2010,rank:1,title:"天地明察",author:"冲方丁",genre:"歴史",media:"映画化",synopsis:"江戸時代、日本独自の正確な暦作りに生涯を捧げた渋川春海の、挫折と情熱。",audible:true},
-  {year:2010,rank:2,title:"神様のカルテ",author:"夏川草介",genre:"お仕事",media:"映画化",synopsis:"24時間病院で働く栗原一止。患者との触れ合いを通じて医師の宿命を見つめる。"},
-  {year:2010,rank:3,title:"横道世之介",author:"吉田修一",genre:"青春",media:"映画化",synopsis:"長崎から上京した横道世之介。彼の周りには、いつも温かな笑いがあった。"},
-  {year:2010,rank:4,title:"神去なあなあ日常",author:"三浦しをん",genre:"お仕事",media:"映画化",synopsis:"都会育ちの少年が山奥の林業の村へ。厳しい自然と、職人たちとの爆笑お仕事。"},
-  {year:2010,rank:5,title:"猫を抱いて象と泳ぐ",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"からくり人形のなかに隠れてチェスを指し続ける少年の、哀しく美しい物語。"},
-  {year:2010,rank:6,title:"ヘヴン",author:"川上未映子",genre:"青春",media:"",synopsis:"理不尽なイジメに遭う二人が共有した、傷だらけの秘密の世界。"},
-  {year:2010,rank:7,title:"植物図鑑",author:"有川浩",genre:"青春",media:"映画化",synopsis:"行き倒れていたイケメンは、野草に詳しい料理上手な王子様だった。"},
-  {year:2010,rank:8,title:"新参者",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"日本橋で起きた殺人事件。赴任したばかりの加賀恭一郎が、人の心を解く。"},
-  {year:2010,rank:9,title:"1Q84",author:"村上春樹",genre:"SF",media:"",synopsis:"二つの月が浮かぶ奇妙な世界で、二人が再び巡り会うまでの壮大な物語。"},
-  {year:2010,rank:10,title:"船に乗れ!",author:"藤谷治",genre:"青春",media:"",synopsis:"音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、そしてほろ苦い初恋。"},
-  {year:2009,rank:1,title:"告白",author:"湊かなえ",genre:"ミステリ",media:"映画化",synopsis:"我が娘を殺した生徒への、女教師の衝撃の復讐から始まるイヤミスの金字塔。",audible:true},
-  {year:2009,rank:2,title:"忍びの国",author:"和田竜",genre:"歴史",media:"映画化",synopsis:"織田軍VS伊賀忍者。最強だが冷酷な忍者・無門が、天下の軍勢を迎え撃つ。"},
-  {year:2009,rank:3,title:"ジョーカー・ゲーム",author:"柳広司",genre:"ミステリ",media:"映画化",synopsis:"秘密スパイ養成機関「D機関」。世界を騙すスパイたちの知略とアクション。"},
-  {year:2009,rank:4,title:"テンペスト",author:"池上永一",genre:"歴史",media:"ドラマ化",synopsis:"幕末の琉球王国。男と偽り王宮の難局に立ち向かった才女の激動の生涯。"},
-  {year:2009,rank:5,title:"ボックス!",author:"百田尚樹",genre:"青春",media:"映画化",synopsis:"天才肌と努力型。高校ボクシング部で競い合う、少年の友情と熱き戦い。"},
-  {year:2009,rank:6,title:"新世界より",author:"貴志祐介",genre:"SF",media:"アニメ化",synopsis:"呪力を得た人類の理想郷の裏に隠された、おぞましき真実。日本SF大賞。"},
-  {year:2009,rank:7,title:"出星前夜",author:"飯嶋和一",genre:"歴史",media:"",synopsis:"島原の乱前夜の、民衆の怒りと立ち上がった天草四郎の歴史大作。"},
-  {year:2009,rank:8,title:"悼む人",author:"天童荒太",genre:"ヒューマン",media:"映画化",synopsis:"非業の死を遂げた人々を「悼む」ため、全国を旅する青年の、生と死を見つめ直す。"},
-  {year:2009,rank:9,title:"流星の絆",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"幼い頃に両親を殺された3兄妹。詐欺を働きながら犯人を探す彼らの哀しい宿命。"},
-  {year:2009,rank:10,title:"モダンタイムス",author:"伊坂幸太郎",genre:"SF",media:"",synopsis:"検索すると人が死ぬ？国家の巨大な監視網に立ち向かうプログラマー。"},
-  {year:2008,rank:1,title:"ゴールデンスランバー",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"首相暗殺の濡れ衣を着せられた青年。仙台の街を舞台にした決死の逃亡。",audible:true},
-  {year:2008,rank:2,title:"パレードの凱歌",author:"吉田修一",genre:"ヒューマン",media:"",synopsis:"若者たちの共同生活。平穏のなかに潜む、冷たい狂気を描く。"},
-  {year:2008,rank:3,title:"悪人",author:"吉田修一",genre:"ヒューマン",media:"映画化",synopsis:"殺人事件を起こした青年と逃避行を共にした女性。本当の悪人は誰か。"},
-  {year:2008,rank:4,title:"昨日の海は",author:"近藤史恵",genre:"青春",media:"",synopsis:"少年時代のほろ苦い記憶と、小さな事件を瑞々しく描く青春ミステリ。"},
-  {year:2008,rank:5,title:"サウスバウンド",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"元過激派の父親が国家相手に大暴れ。破天荒な家族の沖縄移住計画。"},
-  {year:2008,rank:6,title:"楽園",author:"宮部みゆき",genre:"ミステリ",media:"ドラマ化",synopsis:"『模倣犯』から9年。ライターが再び挑む、少年の死をめぐる難事件。"},
-  {year:2008,rank:7,title:"喋れどもしゃべれども",author:"佐藤多佳子",genre:"青春",media:"映画化",synopsis:"話すのが不器用な人々が、落語を通じて心を通わせる、癒やしの青春。"},
-  {year:2008,rank:8,title:"赤い指",author:"東野圭吾",genre:"ミステリ",media:"ドラマ化",synopsis:"平凡な家庭で起きた殺人。保身のため我が子を庇う親と、それを追う加賀恭一郎。"},
-  {year:2008,rank:9,title:"鹿男あをによし",author:"万城目学",genre:"SF",media:"ドラマ化",synopsis:"奈良に赴任した教師が喋る鹿から命令される、奇想天外ファンタジー。"},
-  {year:2008,rank:10,title:"11",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"生きづらさを抱えながら、日々の小さな仕事と折り合いをつけていく女性たち。"},
-  {year:2007,rank:1,title:"一瞬の風になれ",author:"佐藤多佳子",genre:"青春",media:"ドラマ化",synopsis:"陸上短距離走にすべてを懸ける高校生たちの、圧倒的疾走感。",audible:true},
-  {year:2007,rank:2,title:"夜は短し歩けよ乙女",author:"森見登美彦",genre:"SF",media:"アニメ化",synopsis:"京都の夜を突き進む乙女と、空回りする先輩の恋。森見ワールド。"},
-  {year:2007,rank:3,title:"風が強く吹いている",author:"三浦しをん",genre:"青春",media:"アニメ化",synopsis:"素人ばかりのボロアパート住人が箱根駅伝を目指す、熱すぎる青春。"},
-  {year:2007,rank:4,title:"終末のフール",author:"伊坂幸太郎",genre:"SF",media:"ドラマ化",synopsis:"「あと3年で世界が終わる」。その時、人々は残された日々をどう生きるか。"},
-  {year:2007,rank:5,title:"図書館戦争",author:"有川浩",genre:"お仕事",media:"映画化",synopsis:"本を読む自由を守るため、検閲に武力で抗う図書隊員たちの熱血お仕事恋。"},
-  {year:2007,rank:6,title:"鴨川ホルモー",author:"万城目学",genre:"SF",media:"映画化",synopsis:"京都の大学生が謎のサークルでオニを操って戦う、前代未聞の競技。"},
-  {year:2007,rank:7,title:"ミーナの行進",author:"小川洋子",genre:"ヒューマン",media:"",synopsis:"コビトカバに乗って学校へ通う美少女。昭和の大邸宅で過ごした、切なく美しい日々。"},
-  {year:2007,rank:8,title:"陰日向に咲く",author:"劇団ひとり",genre:"ヒューマン",media:"映画化",synopsis:"日陰で生きる人々を優しく照らす、連作短編集。劇団ひとりのベストセラー。"},
-  {year:2007,rank:9,title:"失はれる物語",author:"乙一",genre:"ヒューマン",media:"",synopsis:"事故で感覚を失い右手の触覚だけが残った男。妻が紡ぐ切なすぎる愛。"},
-  {year:2007,rank:10,title:"アイの物語",author:"山本弘",genre:"SF",media:"",synopsis:"人類滅亡へ向かう未来。アンドロイドが語る、ロマン溢れるSF。"},
-  {year:2006,rank:1,title:"東京タワー",author:"リリー・フランキー",genre:"ヒューマン",media:"映画化",synopsis:"オカン、これまで育ててくれてありがとう。日本中を濡らした自伝的小説。",audible:true},
-  {year:2006,rank:2,title:"サウスバウンド",author:"奥田英朗",genre:"ヒューマン",media:"映画化",synopsis:"元過激派の父親に振り回される家族。東京を飛び出し、沖縄の島へ！"},
-  {year:2006,rank:3,title:"死神の精度",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"音楽を愛する死神が、7日間の観察を経て対象者の「死」を判定する、小粋な連作。"},
-  {year:2006,rank:4,title:"容疑者Xの献身",author:"東野圭吾",genre:"ミステリ",media:"映画化",synopsis:"天才数学者が仕掛けた完璧な殺人アリバイ。物理学者・湯川学が挑む。"},
-  {year:2006,rank:5,title:"その日のまえに",author:"重松清",genre:"ヒューマン",media:"映画化",synopsis:"余命宣告された妻と家族が過ごした、最後の短い時間。重松清の感動作。"},
-  {year:2006,rank:6,title:"ナラタージュ",author:"島本理生",genre:"ヒューマン",media:"映画化",synopsis:"高校の教師に狂おしいほどの恋をした少女の、一生消えない痛みの。"},
-  {year:2006,rank:7,title:"告白",author:"町田康",genre:"ヒューマン",media:"",synopsis:"実在した大量殺人事件を、町田康の独特な言語センスで描く圧倒的大作。"},
-  {year:2006,rank:8,title:"ベルカ、吠えないのか?",author:"古川日出男",genre:"歴史",media:"",synopsis:"犬たちの目線から、世界大戦と冷戦の歴史を駆け抜ける奇作。"},
-  {year:2006,rank:9,title:"嫌われ松子の一生",author:"山田宗樹",genre:"ヒューマン",media:"映画化",synopsis:"なぜ彼女の人生はこれほど転落したのか？悲惨なのに愛おしい一人の生涯。"},
-  {year:2006,rank:10,title:"ワークス・フェイバリット",author:"有川浩",genre:"青春",media:"",synopsis:"本を愛する人々の日々と不器用な恋模様。有川浩の原点。"},
-  {year:2005,rank:1,title:"夜のピクニック",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"80キロを歩く高校の行事「歩行祭」。胸に秘めた約束と、忘れられない夜。",audible:true},
-  {year:2005,rank:2,title:"明日の記憶",author:"荻原浩",genre:"ヒューマン",media:"映画化",synopsis:"若年性アルツハイマーを発症した広告マン。消えゆく記憶と妻の愛。"},
-  {year:2005,rank:3,title:"家守綺譚",author:"梨木香歩",genre:"SF",media:"",synopsis:"亡き友人の家を守る文筆家と、カッパや亡霊たちとの不思議な日常。"},
-  {year:2005,rank:4,title:"袋小路の男",author:"糸山秋子",genre:"ヒューマン",media:"",synopsis:"ままならない恋愛に溺れてしまう、大人の男女の繊謝な心理。"},
-  {year:2005,rank:5,title:"チルドレン",author:"伊坂幸太郎",genre:"ヒューマン",media:"ドラマ化",synopsis:"破天荒な家裁調査官が、周囲に奇跡のような変化を起こす爽快な連作。"},
-  {year:2005,rank:6,title:"対岸の彼女",author:"角田光代",genre:"ヒューマン",media:"映画化",synopsis:"主婦と女社長。異なる道を歩む二人の女性の孤独と奇跡の友情。"},
-  {year:2005,rank:7,title:"犯人に告ぐ",author:"雫井脩介",genre:"ミステリ",media:"映画化",synopsis:"「テレビを通じて犯人と対話する」。劇場型捜査に打って出た警察官の戦い。"},
-  {year:2005,rank:8,title:"黄金の羅針盤",author:"フィリップ・プルマン",genre:"SF",media:"映画化",synopsis:"魂が動物となって寄り添う世界。少女ライラが世界の危機に立ち向かう冒険。"},
-  {year:2005,rank:9,title:"私たちが好きだったこと",author:"宮本輝",genre:"ヒューマン",media:"",synopsis:"若き日の淡い恋と共有していた夢を振り返る、宮本輝の文学名作。"},
-  {year:2005,rank:10,title:"逃亡作法",author:"東山彰良",genre:"ミステリ",media:"",synopsis:"脱獄した男たちの逃亡劇とそれぞれの過去を描くハードボイル。"},
-  {year:2004,rank:1,title:"博士の愛した数式",author:"小川洋子",genre:"ヒューマン",media:"映画化",synopsis:"記憶が80分しか持たない天才数学博士と、家政婦と息子の、素数で結ばれた愛。",audible:true},
-  {year:2004,rank:2,title:"クライマーズ・ハイ",author:"横山秀夫",genre:"お仕事",media:"映画化",synopsis:"日航機墜落事故。未曾有のスクープに命を懸けた、地方新聞記者たち。"},
-  {year:2004,rank:3,title:"アヒルと鴨のコインロッカー",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"一緒に本屋で広辞苑を盗まないか？切なすぎる伏線回収。伊坂幸太郎の傑作。"},
-  {year:2004,rank:4,title:"永遠の出口",author:"森絵都",genre:"青春",media:"",synopsis:"少女から大人へ変わる日々の、輝きとほろ苦さを描く青春小説。森絵都。"},
-  {year:2004,rank:5,title:"重力ピエロ",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"謎のグラフィティアートと連続放火。家族の過去に隠された哀しい真実。"},
-  {year:2004,rank:6,title:"4TEEN",author:"石田衣良",genre:"青春",media:"映画化",synopsis:"東京の下町・月島。14歳の少年4人組が過ごした、一生モノの特別な夏休み。"},
-  {year:2004,rank:7,title:"デッドエンドの思い出",author:"吉本ばなな",genre:"ヒューマン",media:"",synopsis:"傷ついた心が、静かにほぐされていく。吉本ばななが描く再生の短編集。"},
-  {year:2004,rank:8,title:"終戦のローレライ",author:"福井晴敏",genre:"歴史",media:"映画化",synopsis:"終戦直前の日本。歴史を書き換える決死の作戦に挑む特殊潜水艦。"},
-  {year:2004,rank:9,title:"陰陽師",author:"夢枕獏",genre:"歴史",media:"映画化",synopsis:"平安の闇を払う安倍晴明と源博雅。凸凹コンビの伝奇ファンタジー。"},
-  {year:2004,rank:10,title:"蛇にピアス",author:"金原ひとみ",genre:"ヒューマン",media:"映画化",synopsis:"痛みのなかにしか存在を感じられない若者たちの、鮮烈なデビュー作。"},
-  // 翻訳小説部門
-  {year:2026,rank:11,title:"空、はてしない青",author:"メリッサ・ダ・コスタ",genre:"ヒューマン",media:"",synopsis:"フランス発、若年性アルツハイマーの青年と少女の切ない旅を描く。"},
-  {year:2025,rank:11,title:"フォース・ウィング",author:"レベッカ・ヤロス",genre:"SF",media:"",synopsis:"竜と契約を結び戦う過酷な軍事エリート学校のファンタジー。全米大ヒット。"},
-  {year:2024,rank:11,title:"ようこそ、ヒュナム洞書店へ",author:"ファン・ボルム",genre:"ヒューマン",media:"",synopsis:"韓国で大ベストセラー。小さな書店に集まる人々の癒やしお仕事。"},
-  {year:2023,rank:11,title:"われら闇より天を見る",author:"クリス・ウィタカー",genre:"ミステリ",media:"",synopsis:"|無法者の少女が家族を守るため戦う、慟哭のミステリ。"},
-  {year:2022,rank:11,title:"三十の反撃",author:"ソン・ウォンピョン",genre:"青春",media:"",synopsis:"現代を生きる30歳前後の若者たちの、静かな逆襲劇。ソン・ウォンピョン。"},
-  // 発掘部門
-  {year:2026,rank:12,title:"夏時記",author:"星野立子",genre:"歴史",media:"",synopsis:"書店員が発掘した、美しい日本語が光る隠れた名作。"},
-  {year:2025,rank:12,title:"ありますもの",author:"中野翠",genre:"ヒューマン",media:"",synopsis:"日常のささやかな楽しさを見つける、大人のためのセレクト名著。"},
-  {year:2024,rank:12,title:"プラスティック",author:"井上夢人",genre:"ミステリ",media:"",synopsis:"読む者を恐怖の迷宮へ誘う、伝説のサスペンス。井上夢人。"},
-  {year:2023,rank:12,title:"おもろい本",author:"木下半太",genre:"青春",media:"",synopsis:"一気読み必至のノンストップおもしろ劇。木下半太の隠れた傑作。"},
-  {year:2022,rank:12,title:"破船",author:"吉村昭",genre:"歴史",media:"",synopsis:"荒ぶる海辺の村。生き延びるために彼らが犯したおぞましき因習。"}
+  {
+    "year": 2026,
+    "rank": 1,
+    "title": "イン・ザ・メガチャーチ",
+    "author": "朝井リョウ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "ファンダム経済を仕掛ける側、のめり込む側——人の心を動かす「物語」の功罪をあぶり出す意欲作。",
+    "coverImg": "https://books.google.com/books/content?id=c7WBEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2026,
+    "rank": 2,
+    "title": "熟柿",
+    "author": "佐藤正午",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "轢き逃げの罪を背負い、息子を求めて流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。",
+    "coverImg": "https://books.google.com/books/content?id=fwxOEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 3,
+    "title": "PRIZE―プライズ―",
+    "author": "村山由佳",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "何度も本屋大賞を受賞しながら直木賞が取れない作家の執念と苦悩を描く、文壇の光と影。",
+    "coverImg": "https://books.google.com/books/content?id=VDTx0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 4,
+    "title": "エピクロスの処方箋",
+    "author": "夏川草介",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "『スピノザの診察室』続編。大学病院の絶対権力者の父親を診ることになった医師の葛藤。",
+    "coverImg": "https://books.google.com/books/content?id=Fdh3EQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 5,
+    "title": "暁星",
+    "author": "湊かなえ",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "文部科学大臣刺殺事件の犯人が語る手記と、事件を小説にする作家。フィクションが交錯するミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=7KeXEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 6,
+    "title": "殺し屋の営業術",
+    "author": "野宮有",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況で営業トークを駆使するサスペンス。",
+    "coverImg": "https://books.google.com/books/content?id=j1l5EQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 7,
+    "title": "ありか",
+    "author": "瀬尾まいこ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く温かな物語。",
+    "coverImg": "https://books.google.com/books/content?id=dukd0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 8,
+    "title": "探偵小石は恋しない",
+    "author": "森バジル",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相。",
+    "coverImg": "https://books.google.com/books/content?id=txGGEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 9,
+    "title": "失われた貌",
+    "author": "櫻田智也",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "顔を潰された身元不明の死体と「父かもしれない」と訪れた小学生。十年前の失踪が交錯する本格推理。",
+    "coverImg": "https://books.google.com/books/content?id=E053EQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 10,
+    "title": "さよならジャバウォック",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "咄嗟に夫を殺してしまった女性のもとに現れる謎の男。伊坂流のユーモアと緊張感。",
+    "coverImg": "https://books.google.com/books/content?id=dMSPEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 1,
+    "title": "カフネ",
+    "author": "阿部暁子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草を意味する言葉「カフネ」。言葉の温もりをテーマにした愛の物語。",
+    "coverImg": "https://books.google.com/books/content?id=xnoHEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2025,
+    "rank": 2,
+    "title": "アルプス席の母",
+    "author": "早見和真",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く、家族の感動作。",
+    "coverImg": "https://books.google.com/books/content?id=TDCQ0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 3,
+    "title": "小説",
+    "author": "野崎まど",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "物語の構造そのものを問い直す実験的かつ読みやすい、野崎まどならではのエンタメ。",
+    "coverImg": "https://books.google.com/books/content?id=XjMwEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 4,
+    "title": "禁忌の子",
+    "author": "山口未桜",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "触れてはいけない真実を抱えた子どもたちの物語。新鋭・山口未桜が放つ衝撃のデビュー作。",
+    "coverImg": "https://books.google.com/books/content?id=ETMmEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 5,
+    "title": "人魚が逃げた",
+    "author": "青山美智子",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "「人魚が逃げた」という謎の書き置きから始まる連作短編。青山美智子の温かく不思議な世界観が光る。",
+    "coverImg": "https://books.google.com/books/content?id=eTzh0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 6,
+    "title": "spring",
+    "author": "恩田陸",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "バレエを通じて描かれる才能と情熱、嫉妬と愛。恩田陸が「蜜蜂と遠雷」に続いてアートの世界に挑んだ大作。",
+    "coverImg": "https://books.google.com/books/content?id=5eNaEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 7,
+    "title": "恋とか愛とかやさしさなら",
+    "author": "一穂ミチ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "さまざまな形の愛の物語を集めた連作短編集。一穂ミチが紡ぐ多様な関係性と感情の機微。",
+    "coverImg": "https://books.google.com/books/content?id=y0MsEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 8,
+    "title": "生殖記",
+    "author": "朝井リョウ",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウの挑戦作。",
+    "coverImg": "https://books.google.com/books/content?id=c5kREQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 9,
+    "title": "死んだ山田と教室",
+    "author": "金子玲介",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "突然死した同級生・山田が教室のスピーカーに宿り、クラスメートと会話するという奇想天外な青春小説。",
+    "coverImg": "https://books.google.com/books/content?id=wVgFEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 10,
+    "title": "成瀬は信じた道をいく",
+    "author": "宮島未奈",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "前作「成瀬は天下を取りにいく」の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む痛快青春小説。",
+    "coverImg": "https://books.google.com/books/content?id=p48zEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 1,
+    "title": "成瀬は天下を取りにいく",
+    "author": "宮島未奈",
+    "genre": "青春",
+    "media": "漫画化",
+    "synopsis": "西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。痛快無比な青春小説。",
+    "coverImg": "https://books.google.com/books/content?id=DTi0EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2024,
+    "rank": 2,
+    "title": "水車小屋のネネ",
+    "author": "津村記久子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。",
+    "coverImg": "https://books.google.com/books/content?id=itbd0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 3,
+    "title": "存在のすべてを",
+    "author": "塩田武士",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "二つの誘拐事件と芸術の謎が絡み合うサスペンス。スケールの大きな人間ドラマ。",
+    "coverImg": "https://books.google.com/books/content?id=_twW0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 4,
+    "title": "スピノザの診察室",
+    "author": "夏川草介",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作として話題を呼んだ作品。",
+    "coverImg": "https://books.google.com/books/content?id=KmrfEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 5,
+    "title": "レーエンデ国物語",
+    "author": "多崎礼",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "異世界の小国を舞台にした壮大なファンタジー。圧倒的な世界観で多くの読者を魅了。",
+    "coverImg": "https://books.google.com/books/content?id=u5hNEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 6,
+    "title": "黄色い家",
+    "author": "川上未映子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "貧困と孤独の中で生きる女たちの集まり。社会の底辺に生きる人々を圧倒的な筆力で描く。",
+    "coverImg": "https://books.google.com/books/content?id=C9eazwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 7,
+    "title": "リカバリー・カバヒコ",
+    "author": "青山美智子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "公園の古びた動物遊具「カバヒコ」に触れると回復するという噂をめぐる連作短編。",
+    "coverImg": "https://books.google.com/books/content?id=yUzl0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 8,
+    "title": "星を編む",
+    "author": "凪良ゆう",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "『汝、星のごとく』の続編にあたる短編集。前作のキャラクターたちのその後を描く。",
+    "coverImg": "https://books.google.com/books/content?id=-PLfEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 9,
+    "title": "放課後ミステリクラブ",
+    "author": "知念実希人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "小学生探偵たちが学校の謎に挑む。本屋大賞初の児童書ノミネートとして話題に。",
+    "coverImg": "https://books.google.com/books/content?id=J5VB0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 10,
+    "title": "君が手にするはずだった黄金について",
+    "author": "小川哲",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "才能と承認欲求、嘘と虚栄心をめぐる、直木賞作家が放つ鋭い文学的考察短編集。",
+    "coverImg": "https://books.google.com/books/content?id=ff0Y0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 1,
+    "title": "汝、星のごとく",
+    "author": "凪良ゆう",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "瀬戸内の島で出会った二人が、それぞれの夢と愛に苦しみながら生きていく。魂を揺さぶる傑作。",
+    "coverImg": "https://books.google.com/books/content?id=RUt9EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2023,
+    "rank": 2,
+    "title": "ラブカは静かに弓を持つ",
+    "author": "安壇美緒",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "著作権調査のため音楽教室に潜入したスパイが、チェロとの出会いで心を取り戻していく。",
+    "coverImg": "https://books.google.com/books/content?id=63O4EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 3,
+    "title": "光のとこにいてね",
+    "author": "一穂ミチ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "運命的に出会った二人の少女の、長年にわたる不思議な絆と魂の交錯を描く。",
+    "coverImg": "https://books.google.com/books/content?id=aFBozwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 4,
+    "title": "爆弾",
+    "author": "呉勝浩",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "取調室でのスリリングな心理戦。爆弾を予告する男と刑事の頭脳戦を描く極上サスペンス。",
+    "coverImg": "https://books.google.com/books/content?id=FrdpEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 5,
+    "title": "月の立つ林で",
+    "author": "青山美智子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "ポッドキャストの声を通じて見えない糸でつながっていく5人の温かな日常を描く。",
+    "coverImg": "https://books.google.com/books/content?id=UVGZEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 6,
+    "title": "向日葵の咲かない夏",
+    "author": "道尾秀介",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=s89RPwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 7,
+    "title": "栞と嘘の季節",
+    "author": "米澤穂信",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=N1CZEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 8,
+    "title": "宙ごはん",
+    "author": "町田そのこ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。",
+    "coverImg": "https://books.google.com/books/content?id=4whxEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 9,
+    "title": "掬えば手には",
+    "author": "瀬尾まいこ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。",
+    "coverImg": "https://books.google.com/books/content?id=-mB3EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 10,
+    "title": "夜が明ける",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。",
+    "coverImg": "https://books.google.com/books/content?id=oXAQEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 1,
+    "title": "同志少女よ、敵を撃て",
+    "author": "逢坂冬馬",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "独ソ戦を舞台に、女性狙撃手となった少女の戦いを描く。アガサ賞W受賞の衝撃作。",
+    "coverImg": "https://books.google.com/books/content?id=7voyEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2022,
+    "rank": 2,
+    "title": "赤と青とエスキース",
+    "author": "青山美智子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "一枚の絵が時代や国を超えて人をつなぐ。青山美智子が描く「縁」の感動作。",
+    "coverImg": "https://books.google.com/books/content?id=amEeEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 3,
+    "title": "スモールワールズ",
+    "author": "一穂ミチ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "日常に潜む小さな歪みと嘘を鮮烈に切り取った、完成度の高い6つの傑作短編集。",
+    "coverImg": "https://books.google.com/books/content?id=4ywiEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 4,
+    "title": "正欲",
+    "author": "朝井リョウ",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "マイノリティの性を抱えた人々の生。「多様性」という言葉の欺瞞を突く問題作。",
+    "coverImg": "https://books.google.com/books/content?id=kspbzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 5,
+    "title": "六人の嘘つきな大学生",
+    "author": "浅倉秋成",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "最終選考に残った6人が、互いの嘘を暴き合う。驚異の二転三転就活サスペンス。",
+    "coverImg": "https://books.google.com/books/content?id=Tn7BEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 6,
+    "title": "夜が明ける",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "現代の若者が直面する貧困や労働の苦しさと、その先にある微かな光を紡ぐ渾身作。",
+    "coverImg": "https://books.google.com/books/content?id=oXAQEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 7,
+    "title": "残月記",
+    "author": "小田雅久仁",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "月をテーマにした、圧倒的な筆力と狂気に満ちた世界観で話題をさらったダークファンタジー。",
+    "coverImg": "https://books.google.com/books/content?id=TyVOEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 8,
+    "title": "硝子の塔の殺人",
+    "author": "知念実希人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "ミステリを愛するすべての人へ贈る、硝子の館で起きる本格クローズドサークル。",
+    "coverImg": "https://books.google.com/books/content?id=yqY5EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 9,
+    "title": "黒牢城",
+    "author": "米澤穂信",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "荒木村重の有岡城を舞台にした歴史ミステリ。信長への反旗のさ中に起きる密室殺人を探偵・黒田官兵衛が解く。",
+    "coverImg": "https://books.google.com/books/content?id=gv0KEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 10,
+    "title": "星を掬う",
+    "author": "町田そのこ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "DVから逃げ出した女性たちが身を寄せる家での、傷つきながらも寄り添う再生の物語。",
+    "coverImg": "https://books.google.com/books/content?id=bZvT0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 1,
+    "title": "52ヘルツのクジラたち",
+    "author": "町田そのこ",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "誰にも届かない声で鳴くクジラに自らを重ねた、孤独な魂たちの出会いと救済の物語。",
+    "coverImg": "https://books.google.com/books/content?id=V5nVzwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2021,
+    "rank": 2,
+    "title": "お探し物は図書室まで",
+    "author": "青山美智子",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "悩める人々が図書室の司書から勧められた一冊の本をきっかけに人生を変えてしていく。",
+    "coverImg": "https://books.google.com/books/content?id=-PwGEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 3,
+    "title": "犬がいた季節",
+    "author": "伊吹有喜",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "ある高校に住み着いた白い犬と、バブル末期から平成を駆け抜けた生徒たちの青春。",
+    "coverImg": "https://books.google.com/books/content?id=-v8BEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 4,
+    "title": "逆ソクラテス",
+    "author": "伊坂幸太郎",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "子供たちの視点から「大人の先入観」を軽快にひっくり返す、伊坂流の爽快な短編集。",
+    "coverImg": "https://books.google.com/books/content?id=GK3FEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 5,
+    "title": "自転しながら公転する",
+    "author": "山本文緒",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "30代女性の結婚、仕事、家族へのリアルな悩み。ぐるぐる回る日常を優しく包む。",
+    "coverImg": "https://books.google.com/books/content?id=iDeYEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 6,
+    "title": "八月の銀の雪",
+    "author": "伊与原新",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "不器用な理系学生や外国人労働者が、科学の美しさを通じて心を通わせる感動短編。",
+    "coverImg": "https://books.google.com/books/content?id=IojxzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 7,
+    "title": "滅びの前のシャングリラ",
+    "author": "凪良ゆう",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "小惑星が衝突し世界が終わる。その時、名もなき人々はどう生き、誰を愛するのか。",
+    "coverImg": "https://books.google.com/books/content?id=ya1e0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 8,
+    "title": "オルタネート",
+    "author": "加藤シゲアキ",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "高校生限定のマッチングアプリがもたらす、3人の若者の瑞々しい恋と挫折の物語。",
+    "coverImg": "https://books.google.com/books/content?id=u2krEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 9,
+    "title": "推し、燃ゆ",
+    "author": "宇佐見りん",
+    "genre": "青春",
+    "media": "|推しのアイドルが炎上した。それでも推し続ける少女の狂おしい純粋さを描く。芥川賞受賞作。",
+    "coverImg": "https://books.google.com/books/content?id=jyH7DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2021,
+    "rank": 10,
+    "title": "この本を盗む者は",
+    "author": "深緑野分",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "本に呪われた街。盗まれた本を取り戻すため、少女が物語の世界を旅するファンタジー。",
+    "coverImg": "https://books.google.com/books/content?id=oWTlzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 1,
+    "title": "流浪の月",
+    "author": "凪良ゆう",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。",
+    "coverImg": "https://books.google.com/books/content?id=znWqDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2020,
+    "rank": 2,
+    "title": "ライオンのおやつ",
+    "author": "小川糸",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "余命わずかな女性が過ごすホスピス。毎週日曜に出される思い出のおやつの温かさ。",
+    "coverImg": "https://books.google.com/books/content?id=mo26DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 3,
+    "title": "線は、僕を描く",
+    "author": "砥上裕將",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "深い喪失感を抱えた大学生が水墨画と出会い、その白黒の世界に魅了され再生していく。",
+    "coverImg": "https://books.google.com/books/content?id=OJ6dDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 4,
+    "title": "ノースライト",
+    "author": "横山秀夫",
+    "genre": "ミステリ",
+    "media": "ドラマ化",
+    "synopsis": "自分が建てた美しい家。なぜ依頼人は家族を置いて失踪したのか？建築士が追う謎。",
+    "coverImg": "https://books.google.com/books/content?id=vcmlDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 5,
+    "title": "熱源",
+    "author": "川越宗一",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "極寒の樺太を舞台に、故郷を奪われたアイヌの男とポーランド人の生き様を描く歴史大作。",
+    "coverImg": "https://books.google.com/books/content?id=VHl5EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 6,
+    "title": "むかしむかしあるところに、死体がありました。",
+    "author": "青柳碧人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "日本の有名な昔話を本格ミステリで読み解く。一風変わった、だが緻密なパズル。",
+    "coverImg": "https://books.google.com/books/content?id=VkZIEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 7,
+    "title": "AX アックス",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。「グラスホッパー」「マリアビートル」と並ぶ三部作完結編。",
+    "coverImg": "https://books.google.com/books/content?id=9APQDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 8,
+    "title": "線は、僕を描く",
+    "author": "砥上裕將",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。",
+    "coverImg": "https://books.google.com/books/content?id=OJ6dDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2020,
+    "rank": 9,
+    "title": "在庫あり",
+    "author": "河崎秋子",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "北海道を舞台に書店員の仕事と日常を描いた作品。",
+    "coverImg": ""
+  },
+  {
+    "year": 2020,
+    "rank": 10,
+    "title": "夏物語",
+    "author": "川上未映子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。",
+    "coverImg": "https://books.google.com/books/content?id=35OKzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 1,
+    "title": "그리고 미란다を죽이다",
+    "author": "ピーター・スワンソン",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。",
+    "coverImg": ""
+  },
+  {
+    "year": 2019,
+    "rank": 2,
+    "title": "ひと",
+    "author": "小野寺史宜",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。",
+    "coverImg": "https://books.google.com/books/content?id=3YqVtgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 3,
+    "title": "그리고、바톤은 넘겨졌다",
+    "author": "瀬尾まいこ",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。",
+    "coverImg": ""
+  },
+  {
+    "year": 2019,
+    "rank": 4,
+    "title": "熱帯",
+    "author": "森見登美彦",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。",
+    "coverImg": "https://books.google.com/books/content?id=Yi9AEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 5,
+    "title": "ある男",
+    "author": "平野啓一郎",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。",
+    "coverImg": "https://books.google.com/books/content?id=NAFvvQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 6,
+    "title": "さざなみのよる",
+    "author": "木皿泉",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "ある女性の死後、彼女を知る多くの人を通して描かれる、命の意味と温かな繋がり。",
+    "coverImg": "https://books.google.com/books/content?id=v4ZVDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 7,
+    "title": "愛なき世界",
+    "author": "三浦しをん",
+    "genre": "お仕事",
+    "media": "ドラマ化",
+    "synopsis": "植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めき。",
+    "coverImg": "https://books.google.com/books/content?id=BzSzzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 8,
+    "title": "ひとつむぎの手",
+    "author": "知念実希人",
+    "genre": "お仕事",
+    "media": "",
+    "synopsis": "医療系サスペンス。外科医を目指す研修医が巻き込まれる事件と命の現場を描く。",
+    "coverImg": "https://books.google.com/books/content?id=h0JvzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 9,
+    "title": "火のないところに煙は",
+    "author": "芦沢央",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "怪談話を集めるフリーライターが遭遇する、現実と非現実の境界が揺れる傑作ホラー。",
+    "coverImg": "https://books.google.com/books/content?id=BdMzEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2019,
+    "rank": 10,
+    "title": "フーガはユーガ",
+    "author": "伊坂幸太郎",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "双子の兄弟が、特別な時間だけ入れ替われる超能力を使いながら生き抜く物語。",
+    "coverImg": "https://books.google.com/books/content?id=9rZ9DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 1,
+    "title": "かがみの孤城",
+    "author": "辻村深月",
+    "genre": "SF",
+    "media": "アニメ化",
+    "synopsis": "学校に居場所を失った7人の中学生が、謎の城に招かれ「願いの部屋」の鍵を探す。",
+    "coverImg": "https://books.google.com/books/content?id=p6QgEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2018,
+    "rank": 2,
+    "title": "崩れる脳を抱きしめて",
+    "author": "知念実希人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "脳腫瘍を宣告された青年が故郷の島で出会った女性との純愛と、そこに隠された謎。",
+    "coverImg": "https://books.google.com/books/content?id=-Or_DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 3,
+    "title": "盤上の向日葵",
+    "author": "柚月裕子",
+    "genre": "ミステリ",
+    "media": "ドラマ化",
+    "synopsis": "将棋の駒に秘められた殺人事件の真実を追う。将棋ミステリの傑作。",
+    "coverImg": "https://books.google.com/books/content?id=MKLbzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 4,
+    "title": "AX アックス",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "恐妻家の殺し屋「兜」の日常を描く、ユーモラスで切ないサスペンス。",
+    "coverImg": "https://books.google.com/books/content?id=9APQDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 5,
+    "title": "開人の殺人",
+    "author": "今村昌弘",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "ゾンビが閉じ込める密室館で連続殺人が起きる。本格ミステリ+ゾンビの型破り作。",
+    "coverImg": ""
+  },
+  {
+    "year": 2018,
+    "rank": 6,
+    "title": "騙し絵の牙",
+    "author": "塩田武士",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "返刊寸前の雑誌を守るため、騙し騙されながら奮闘する編集長の物語。",
+    "coverImg": "https://books.google.com/books/content?id=1AYozAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 7,
+    "title": "ツバキ文具店",
+    "author": "小川糸",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "鎌倉の文具店を舞台に、代書屋として人々の様々な「手紙」を書くヒロインを描く。",
+    "coverImg": "https://books.google.com/books/content?id=yEvvjwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 8,
+    "title": "where to go, that summer",
+    "author": "仙田学",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "少年時代の記憶と、あの夏に置き忘れてきた感情を瑞々しく描く青春小説。",
+    "coverImg": ""
+  },
+  {
+    "year": 2018,
+    "rank": 9,
+    "title": "百貨の魔法",
+    "author": "村山早紀",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "時代の波に押される老舗百貨店を舞台に描かれる、温かく切ないファンタジー。",
+    "coverImg": "https://books.google.com/books/content?id=3W84DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2018,
+    "rank": 10,
+    "title": "青くて痛くて脆い",
+    "author": "住野よる",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "大学生が始めた秘密結社が、次第に肥大化し歪んでいく。歪んだ正義と挫折。",
+    "coverImg": "https://books.google.com/books/content?id=yuznDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2017,
+    "rank": 1,
+    "title": "蜜蜂と遠雷",
+    "author": "恩田陸",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "国際ピアノコンクールを舞台に、4人のピアニストの葛藤と情熱を描く。W受賞作。",
+    "coverImg": "https://books.google.com/books/content?id=eGNVygEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2017,
+    "rank": 2,
+    "title": "みかづき",
+    "author": "森絵都",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "学習塾を舞台に、昭和から平成まで3世代にわたる家族と教育の物語。",
+    "coverImg": "https://books.google.com/books/content?id=Uc81EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2017,
+    "rank": 3,
+    "title": "罪の声",
+    "author": "塩田武士",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "グリコ・森永事件をモデルに、未解決事件に翻弄された人々の人生を描く。",
+    "coverImg": "https://books.google.com/books/content?id=v2GUDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2017,
+    "rank": 4,
+    "title": "あの家に暮らす四人の女",
+    "author": "三浦しをん",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "古い一軒家に暮らす女4人の、おかしくも温かな共同生活を描くコメディ。",
+    "coverImg": ""
+  },
+  {
+    "year": 2017,
+    "rank": 5,
+    "title": "コンビニ人間",
+    "author": "村田沙耶香",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "「普通」の人間社会に馴染めない女性が、コンビニという居場所で見つけた生き方。",
+    "coverImg": "https://books.google.com/books/content?id=mxDNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2017,
+    "rank": 6,
+    "title": "夜中にチーズをかじりながら",
+    "author": "群ようこ",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "日々のちょっとした可笑しみや、大人の女性の日常を軽妙に描くエッセイ。",
+    "coverImg": ""
+  },
+  {
+    "year": 2017,
+    "rank": 7,
+    "title": "友罪",
+    "author": "薬丸岳",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "少年犯罪の加害者として生きる男と、その友人の葛藤を描く社会派サスペンス。",
+    "coverImg": "https://books.google.com/books/content?id=I3g1EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2017,
+    "rank": 8,
+    "title": "i",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "シリア人の父を持つ女性が、自らのアイデンティティと向き合い続ける姿を描く。",
+    "coverImg": "https://books.google.com/books/content?id=uBIZzAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2017,
+    "rank": 9,
+    "title": "真夜中の探偵",
+    "author": "辻村深月",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "謎多き事件の裏側にある、人と人との心理的な繋がりを辻村深月が描く。",
+    "coverImg": ""
+  },
+  {
+    "year": 2017,
+    "rank": 10,
+    "title": "影裏",
+    "author": "沼田真佑",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "岩手県を舞台に、男二人の友情と、その裏にある喪失と再生を描く。",
+    "coverImg": "https://books.google.com/books/content?id=PRfNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 1,
+    "title": "羊と鋼の森",
+    "author": "宮下奈都",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "ピアノの調律師を目指す青年の成長を、美しい森の描写とともに描く。",
+    "coverImg": "https://books.google.com/books/content?id=vw_NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2016,
+    "rank": 2,
+    "title": "海の見える理髪店",
+    "author": "荻原浩",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "海辺の理髪店を舞台にした6つの短編集。切なさと温かさが同居する。",
+    "coverImg": ""
+  },
+  {
+    "year": 2016,
+    "rank": 3,
+    "title": "わたしを離さないで",
+    "author": "カズオ・イシグロ",
+    "genre": "SF",
+    "media": "ドラマ化",
+    "synopsis": "提供者として生まれた子供たちの運命と愛を描いた、世界的傑作。",
+    "coverImg": "https://books.google.com/books/content?id=u2vaTWhcEBsC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 4,
+    "title": "朝が来る",
+    "author": "辻村深月",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。",
+    "coverImg": "https://books.google.com/books/content?id=NxLNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 5,
+    "title": "ふくわらい",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "父の死後、孤独に生きる女性編集者が、社会との接点を取り戻していく。",
+    "coverImg": "https://books.google.com/books/content?id=FggcjgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 6,
+    "title": "君の膵臓をたべたい",
+    "author": "住野よる",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "病を抱えた少女と、彼女の秘密を知った少年の、切なくも美しい青春。",
+    "coverImg": "https://books.google.com/books/content?id=s3C7DgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2016,
+    "rank": 7,
+    "title": "永い言い訳",
+    "author": "西川美和",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "妻を突然失った作家が、遺族と向き合う中で自らを見つめ直す。",
+    "coverImg": "https://books.google.com/books/content?id=wQ3NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 8,
+    "title": "ちょっと今から仕事やめてくる",
+    "author": "北川恵海",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "ブラック企業で働く青年を救ったのは、実は死んでいた同級生？癒しの物語。",
+    "coverImg": "https://books.google.com/books/content?id=b5h8DwAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 9,
+    "title": "本屋さんのダイアナ",
+    "author": "柚木麻子",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "ミスマッチな名前を持つ2人の少女の、友情と決別を描く青春小説。",
+    "coverImg": "https://books.google.com/books/content?id=UlYZCgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2016,
+    "rank": 10,
+    "title": "世界の果てのこどもたち",
+    "author": "中脇初枝",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "満洲からの引き揚げを通じて結ばれた女の子たちの、数奇な人生を描く大作。",
+    "coverImg": "https://books.google.com/books/content?id=siNauAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 1,
+    "title": "鹿の王",
+    "author": "上橋菜穂子",
+    "genre": "SF",
+    "media": "アニメ化",
+    "synopsis": "謎の疫病と戦士の逃亡を軸に、壮大なファンタジー世界を描く。",
+    "coverImg": "https://books.google.com/books/content?id=ouvnDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2015,
+    "rank": 2,
+    "title": "サラバ!",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "エジプト生まれの男性の数奇な半生を、圧倒的な筆力で描く直木賞作。",
+    "coverImg": "https://books.google.com/books/content?id=yPALogEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 3,
+    "title": "ラプラスの魔女",
+    "author": "東野圭吾",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "ありえない事故を連続させる謎の少女をめぐる、SFミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=mGOCrgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 4,
+    "title": "火花",
+    "author": "又吉直樹",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "芸人の生き様と師弟関係を描き、社会現象となった芥川賞受賞作。",
+    "coverImg": "https://books.google.com/books/content?id=ew7NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 5,
+    "title": "王とサーカス",
+    "author": "米澤穂信",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "ネパールで起きた王族殺害事件を追う、記者のジャーナリズムミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=mX5oDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 6,
+    "title": "戦場のコックたち",
+    "author": "深緑野分",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "第二次大戦下、米軍のコックとして戦地を転戦する男の日常と謎。",
+    "coverImg": "https://books.google.com/books/content?id=a_37xwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 7,
+    "title": "か「」く「」し「」ご「」と「",
+    "author": "住野よる",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "5人の高校生が、それぞれ少しだけ不思議な「能力」を持って生活する青春。",
+    "coverImg": "https://books.google.com/books/content?id=9JUyDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 8,
+    "title": "長いお別れ",
+    "author": "中島京子",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "アルツハイマー病の父と家族の10年を、温かく笑いと涙で描く。",
+    "coverImg": "https://books.google.com/books/content?id=3w_NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 9,
+    "title": "コーヒーが冷めないうちに",
+    "author": "川口俊和",
+    "genre": "SF",
+    "media": "映画化",
+    "synopsis": "過去に戻れる喫茶店で、後悔を持つ人々が大切な人に会いに行く。",
+    "coverImg": "https://books.google.com/books/content?id=Lb9WDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2015,
+    "rank": 10,
+    "title": "永遠と横道世之介",
+    "author": "吉田修一",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "横道世之介の大学生活を描いた、心温まる青春小説 the end。",
+    "coverImg": "https://books.google.com/books/content?id=cc7x0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 1,
+    "title": "村上海賊の娘",
+    "author": "和田竜",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "戦国時代、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンタメ。",
+    "coverImg": "https://books.google.com/books/content?id=UE_XCwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2014,
+    "rank": 2,
+    "title": "旅猫リポート",
+    "author": "有川浩",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "猫の「ナナ」と飼い主が、旅をしながら昔の友人を訪ねる感動作。",
+    "coverImg": "https://books.google.com/books/content?id=KFxArgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 3,
+    "title": "ゼロ、ハチ、ゼロ、ナナ。",
+    "author": "辻村深月",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "親友の母親殺しという衝撃的な出来事をめぐり、2人の女性を描く問題作。",
+    "coverImg": "https://books.google.com/books/content?id=qe5kuQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 4,
+    "title": "キャプテンサンダーボルト",
+    "author": "阿部和重・伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "二大作家がコラボした、ロードノベル×サスペンスの痛快作。",
+    "coverImg": "https://books.google.com/books/content?id=bBnNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 5,
+    "title": "プリズム",
+    "author": "百田尚樹",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "多重人格の女性と精神科医の、百田尚樹流メインミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=ucjSygAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 6,
+    "title": "四十九日のレシピ",
+    "author": "伊吹有喜",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "母の四十九日に集まった家族が、レシピを通じて絆を取り戻す物語。",
+    "coverImg": "https://books.google.com/books/content?id=uYggnwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 7,
+    "title": "昨夜のカレー、明日のパン",
+    "author": "木皿泉",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "夫を亡くした嫁と義父の共同生活を描く、食と私と再生の物語。",
+    "coverImg": "https://books.google.com/books/content?id=MTe7DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 8,
+    "title": "紙の月",
+    "author": "角田光代",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "主婦が横領に手を染めていく経緯を描く、欲望と社会の歪み。",
+    "coverImg": "https://books.google.com/books/content?id=21r0DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 9,
+    "title": "島はぼくらと",
+    "author": "辻村深月",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "離島に育った4人の高校生の、地方と都会の狭間で揺れる青春。",
+    "coverImg": "https://books.google.com/books/content?id=kvKqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2014,
+    "rank": 10,
+    "title": "ハケンアニメ!",
+    "author": "辻村深月",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "アニメ業界を舞台に、覇権を争うプロフェッショナルたちの熱い物語。",
+    "coverImg": "https://books.google.com/books/content?id=Mna5DAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 1,
+    "title": "海賊とよばれた男",
+    "author": "百田尚樹",
+    "genre": "歴史",
+    "media": "映画化",
+    "synopsis": "戦後、日本の復興に石油事業で挑んだ男の、熱き戦いの記録。",
+    "coverImg": "https://books.google.com/books/content?id=CtBvBgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2013,
+    "rank": 2,
+    "title": "64",
+    "author": "横山秀夫",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "昭和64年に起きた少女誘拐事件。警察内部の闇が動く難事件。",
+    "coverImg": "https://books.google.com/books/content?id=BwzNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 3,
+    "title": "楽園のカンヴァス",
+    "author": "原田マハ",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "天才絵師ルソーの名画の真贋をめぐる、鑑定勝負の芸術ミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=We6etgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 4,
+    "title": "きみはいい子",
+    "author": "中脇初枝",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "現代の生きづらさのなかで、小さな「やさしさ」が連鎖する感動作。",
+    "coverImg": "https://books.google.com/books/content?id=CgTzCwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 5,
+    "title": "ふくわらい",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "感情を持たずに育った女性が、個性豊かな人々と出会い心を取り戻す。",
+    "coverImg": "https://books.google.com/books/content?id=FggcjgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 6,
+    "title": "君のクイズ",
+    "author": "小川哲",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=LEtYEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 7,
+    "title": "方舟",
+    "author": "夕木春央",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。",
+    "coverImg": "https://books.google.com/books/content?id=-JaFEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 8,
+    "title": "宙ごはん",
+    "author": "町田そのこ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。",
+    "coverImg": "https://books.google.com/books/content?id=4whxEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 9,
+    "title": "掬えば手には",
+    "author": "瀬尾まいこ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。",
+    "coverImg": "https://books.google.com/books/content?id=-mB3EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2013,
+    "rank": 10,
+    "title": "夜が明ける",
+    "author": "西加奈子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。",
+    "coverImg": "https://books.google.com/books/content?id=oXAQEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 1,
+    "title": "舟を編む",
+    "author": "三浦しをん",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった。",
+    "coverImg": "https://books.google.com/books/content?id=EMUPrgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 2,
+    "title": "ジェノサイド",
+    "author": "高野和明",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "人類を滅ぼす新人類の誕生。アフリカの傭兵と日本の院生が破滅を止める。",
+    "coverImg": "https://books.google.com/books/content?id=Mui7uAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 3,
+    "title": "ピエタ",
+    "author": "大島真寿美",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "18世紀ヴェネツィア。孤児院の女性たちが音楽の巨匠の死を機に結ばれる。",
+    "coverImg": "https://books.google.com/books/content?id=nkdKYgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 4,
+    "title": "くちびるに歌を",
+    "author": "中田永一",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "元天才ピアニストと、離島の中学校合唱部員たちのひと夏の青春。",
+    "coverImg": "https://books.google.com/books/content?id=JvKBDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 5,
+    "title": "人質の朗読会",
+    "author": "小川洋子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "人質となった人々が遺した、ささやかで愛おしい人生の朗読記録。",
+    "coverImg": "https://books.google.com/books/content?id=mMKkuAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 6,
+    "title": "ユリゴコロ",
+    "author": "沼田まほかる",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "押し入れで見つけた殺人者の日記。それは自分の家族の血塗られた過去。",
+    "coverImg": "https://books.google.com/books/content?id=9fWnuAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 7,
+    "title": "誰かが足りない",
+    "author": "宮下奈都",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "一つの団地、一つのレストラン。すれ違う住民たちの小さな幸福と繋がりの短編。",
+    "coverImg": "https://books.google.com/books/content?id=0d7VoQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 8,
+    "title": "ビブリア古書堂の事件手帖",
+    "author": "三上延",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "古書店の美しい店主が古書に秘められた謎を解き明かすライトミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=wYjqzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 9,
+    "title": "偉大なる、しゅららぼん",
+    "author": "万城目学",
+    "genre": "SF",
+    "media": "映画化",
+    "synopsis": "琵琶湖の畔、不思議な力を受け継ぐ一族。宿敵との戦いが街を巻き込む。",
+    "coverImg": "https://books.google.com/books/content?id=-ETNCwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2012,
+    "rank": 10,
+    "title": "プリズム",
+    "author": "百田尚樹",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "多重人格の女性。彼女のなかの別の格に、青年は恋をしてしまう。",
+    "coverImg": "https://books.google.com/books/content?id=ucjSygAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 1,
+    "title": "謎解きはディナーのあとで",
+    "author": "東川篤哉",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "お嬢様刑事の推理はいつも的外れ。毒舌執事がディナーのあとに謎を解く。",
+    "coverImg": "https://books.google.com/books/content?id=BUKUDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2011,
+    "rank": 2,
+    "title": "ふがいない僕は空を見た",
+    "author": "窪美澄",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "主婦と男子高校生の許されざる関係。生きることの泥臭さと救いを描く。",
+    "coverImg": "https://books.google.com/books/content?id=_9b6MQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 3,
+    "title": "ペンギン・ハイウェイ",
+    "author": "森見登美彦",
+    "genre": "SF",
+    "media": "アニメ化",
+    "synopsis": "街に突然現れたペンギン。小学4年生の男の子が、お姉さんの謎を追う。",
+    "coverImg": "https://books.google.com/books/content?id=xNVfDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 4,
+    "title": "錨を上げよ",
+    "author": "百田尚樹",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "戦後の激動期、自らの力だけでのし上がろうとした男の破天荒な自伝。",
+    "coverImg": "https://books.google.com/books/content?id=5EAgEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 5,
+    "title": "シューマンの指",
+    "author": "奥泉光",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "天才ピアニストの失踪と、音楽に魅了された男たちの狂気を描く芸術ミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=TOeqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 6,
+    "title": "叫びと祈り",
+    "author": "梓河人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "世界の辺境で起きる事件を解く、ミステリ界の新鋭が放つ名作短編集。",
+    "coverImg": ""
+  },
+  {
+    "year": 2011,
+    "rank": 7,
+    "title": "悪の教典",
+    "author": "貴志祐介",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "生徒に慕われる完璧な教師。だが彼は、他人の命を何とも思わないサイコパス。",
+    "coverImg": "https://books.google.com/books/content?id=sQrNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 8,
+    "title": "神様のカルテ2",
+    "author": "夏川草介",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "信州の病院に同期の親友が赴任。だが彼は定時で帰る冷徹な医師に。",
+    "coverImg": "https://books.google.com/books/content?id=DIE9DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 9,
+    "title": "キケン",
+    "author": "有川浩",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "理系大学の「機械制御研究部」。破天荒な部長が仕掛ける、爆発だらけの青春。",
+    "coverImg": "https://books.google.com/books/content?id=u59dDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2011,
+    "rank": 10,
+    "title": "ストーリー・セラー",
+    "author": "有川浩",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "命を削って物語を書く妻と、彼女を支え続けた夫の愛。有川浩の傑作。",
+    "coverImg": "https://books.google.com/books/content?id=XTzXcQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 1,
+    "title": "天地明察",
+    "author": "冲方丁",
+    "genre": "歴史",
+    "media": "映画化",
+    "synopsis": "江戸時代、日本独自の正確な暦作りに生涯を捧げた渋川春海の、挫折と情熱。",
+    "coverImg": "https://books.google.com/books/content?id=5ZzGBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2010,
+    "rank": 2,
+    "title": "神様のカルテ",
+    "author": "夏川草介",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "24時間病院で働く栗原一止。患者との触れ合いを通じて医師の宿命を見つめる。",
+    "coverImg": "https://books.google.com/books/content?id=sFP8CgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 3,
+    "title": "横道世之介",
+    "author": "吉田修一",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "長崎から上京した横道世之介。彼の周りには、いつも温かな笑いがあった。",
+    "coverImg": "https://books.google.com/books/content?id=-QXNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 4,
+    "title": "神去なあなあ日常",
+    "author": "三浦しをん",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "都会育ちの少年が山奥の林業の村へ。厳しい自然と、職人たちとの爆笑お仕事。",
+    "coverImg": ""
+  },
+  {
+    "year": 2010,
+    "rank": 5,
+    "title": "猫を抱いて象と泳ぐ",
+    "author": "小川洋子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "からくり人形のなかに隠れてチェスを指し続ける少年の、哀しく美しい物語。",
+    "coverImg": "https://books.google.com/books/content?id=9wPNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 6,
+    "title": "ヘヴン",
+    "author": "川上未映子",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "理不尽なイジメに遭う二人が共有した、傷だらけの秘密の世界。",
+    "coverImg": "https://books.google.com/books/content?id=CRqvBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 7,
+    "title": "植物図鑑",
+    "author": "有川浩",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "行き倒れていたイケメンは、野草に詳しい料理上手な王子様だった。",
+    "coverImg": "https://books.google.com/books/content?id=U5pTHSxxf40C&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 8,
+    "title": "新参者",
+    "author": "東野圭吾",
+    "genre": "ミステリ",
+    "media": "ドラマ化",
+    "synopsis": "日本橋で起きた殺人事件。赴任したばかりの加賀恭一郎が、人の心を解く。",
+    "coverImg": "https://books.google.com/books/content?id=NdiUQgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 9,
+    "title": "1Q84",
+    "author": "村上春樹",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "二つの月が浮かぶ奇妙な世界で、二人が再び巡り会うまでの壮大な物語。",
+    "coverImg": "https://books.google.com/books/content?id=KYxNAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2010,
+    "rank": 10,
+    "title": "船に乗れ!",
+    "author": "藤谷治",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、そしてほろ苦い初恋。",
+    "coverImg": "https://books.google.com/books/content?id=IpFuPgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 1,
+    "title": "告白",
+    "author": "湊かなえ",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "我が娘を殺した生徒への、女教師の衝撃の復讐から始まるイヤミスの金字塔。",
+    "coverImg": "https://books.google.com/books/content?id=-V6YzwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2009,
+    "rank": 2,
+    "title": "忍びの国",
+    "author": "和田竜",
+    "genre": "歴史",
+    "media": "映画化",
+    "synopsis": "織田軍VS伊賀忍者。最強だが冷酷な忍者・無門が、天下の軍勢を迎え撃つ。",
+    "coverImg": "https://books.google.com/books/content?id=juu_DgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 3,
+    "title": "ジョーカー・ゲーム",
+    "author": "柳広司",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "秘密スパイ養成機関「D機関」。世界を騙すスパイたちの知略とアクション。",
+    "coverImg": ""
+  },
+  {
+    "year": 2009,
+    "rank": 4,
+    "title": "テンペスト",
+    "author": "池上永一",
+    "genre": "歴史",
+    "media": "ドラマ化",
+    "synopsis": "幕末の琉球王国。男と偽り王宮の難局に立ち向かった才女の激動の生涯。",
+    "coverImg": "https://books.google.com/books/content?id=GA9tBAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 5,
+    "title": "ボックス!",
+    "author": "百田尚樹",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "天才肌と努力型。高校ボクシング部で競い合う、少年の友情と熱き戦い。",
+    "coverImg": "https://books.google.com/books/content?id=6amqAQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 6,
+    "title": "新世界より",
+    "author": "貴志祐介",
+    "genre": "SF",
+    "media": "アニメ化",
+    "synopsis": "呪力を得た人類の理想郷の裏に隠された、おぞましき真実。日本SF大賞。",
+    "coverImg": "https://books.google.com/books/content?id=LGqtBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 7,
+    "title": "出星前夜",
+    "author": "飯嶋和一",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "島原の乱前夜の、民衆の怒りと立ち上がった天草四郎の歴史大作。",
+    "coverImg": "https://books.google.com/books/content?id=ULwumQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 8,
+    "title": "悼む人",
+    "author": "天童荒太",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "非業の死を遂げた人々を「悼む」ため、全国を旅する青年の、生と死を見つめ直す。",
+    "coverImg": "https://books.google.com/books/content?id=CQrNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 9,
+    "title": "流星の絆",
+    "author": "東野圭吾",
+    "genre": "ミステリ",
+    "media": "ドラマ化",
+    "synopsis": "幼い頃に両親を殺された3兄妹。詐欺を働きながら犯人を探す彼らの哀しい宿命。",
+    "coverImg": "https://books.google.com/books/content?id=SSbdDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2009,
+    "rank": 10,
+    "title": "モダンタイムス",
+    "author": "伊坂幸太郎",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "検索すると人が死ぬ？国家の巨大な監視網に立ち向かうプログラマー。",
+    "coverImg": "https://books.google.com/books/content?id=TJ2qBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 1,
+    "title": "ゴールデンスランバー",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "首相暗殺の濡れ衣を着せられた青年。仙台の街を舞台にした決死の逃亡。",
+    "coverImg": "https://books.google.com/books/content?id=XdNYewAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2008,
+    "rank": 2,
+    "title": "パレードの凱歌",
+    "author": "吉田修一",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "若者たちの共同生活。平穏のなかに潜む、冷たい狂気を描く。",
+    "coverImg": ""
+  },
+  {
+    "year": 2008,
+    "rank": 3,
+    "title": "悪人",
+    "author": "吉田修一",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "殺人事件を起こした青年と逃避行を共にした女性。本当の悪人は誰か。",
+    "coverImg": "https://books.google.com/books/content?id=WtYrAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 4,
+    "title": "昨日の海は",
+    "author": "近藤史恵",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "少年時代のほろ苦い記憶と、小さな事件を瑞々しく描く青春ミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=PlDQmkWL24sC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 5,
+    "title": "サウスバウンド",
+    "author": "奥田英朗",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "元過激派の父親が国家相手に大暴れ。破天荒な家族の沖縄移住計画。",
+    "coverImg": "https://books.google.com/books/content?id=fGKgCgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 6,
+    "title": "楽園",
+    "author": "宮部みゆき",
+    "genre": "ミステリ",
+    "media": "ドラマ化",
+    "synopsis": "『模倣犯』から9年。ライターが再び挑む、少年の死をめぐる難事件.●",
+    "coverImg": "https://books.google.com/books/content?id=mSrRswEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 7,
+    "title": "喋れどもしゃべれども",
+    "author": "佐藤多佳子",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "話すのが不器用な人々が、落語を通じて心を通わせる、癒やしの青春。",
+    "coverImg": ""
+  },
+  {
+    "year": 2008,
+    "rank": 8,
+    "title": "赤い指",
+    "author": "東野圭吾",
+    "genre": "ミステリ",
+    "media": "ドラマ化",
+    "synopsis": "平凡な家庭で起きた殺人。保身のため我が子を庇う親と、それを追う加賀恭一郎。",
+    "coverImg": "https://books.google.com/books/content?id=ArUrAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 9,
+    "title": "鹿男あをによし",
+    "author": "万城目学",
+    "genre": "SF",
+    "media": "ドラマ化",
+    "synopsis": "奈良に赴任した教師が喋る鹿から命令される、奇想天外ファンタジー。",
+    "coverImg": "https://books.google.com/books/content?id=2-W4DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2008,
+    "rank": 10,
+    "title": "11",
+    "author": "津村記久子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "生きづらさを抱えながら、日々の小さな仕事と折り合いをつけていく女性たち。",
+    "coverImg": ""
+  },
+  {
+    "year": 2007,
+    "rank": 1,
+    "title": "一瞬の風になれ",
+    "author": "佐藤多佳子",
+    "genre": "青春",
+    "media": "ドラマ化",
+    "synopsis": "陸上短距離走にすべてを懸ける高校生たちの、圧倒的疾走感。",
+    "coverImg": "https://books.google.com/books/content?id=9k6qBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2007,
+    "rank": 2,
+    "title": "夜は短し歩けよ乙女",
+    "author": "森見登美彦",
+    "genre": "SF",
+    "media": "アニメ化",
+    "synopsis": "京都の夜を突き進む乙女と、空回りする先輩の恋。森見ワールド。",
+    "coverImg": "https://books.google.com/books/content?id=Ok-u0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 3,
+    "title": "風が強く吹いている",
+    "author": "三浦しをん",
+    "genre": "青春",
+    "media": "アニメ化",
+    "synopsis": "素人ばかりのボロアパート住人が箱根駅伝を目指す、熱すぎる青春。",
+    "coverImg": "https://books.google.com/books/content?id=y7xaEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 4,
+    "title": "終末のフール",
+    "author": "伊坂幸太郎",
+    "genre": "SF",
+    "media": "ドラマ化",
+    "synopsis": "「あと3年で世界が終わる」。その時、人々は残された日々をどう生きるか。",
+    "coverImg": "https://books.google.com/books/content?id=ONomEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 5,
+    "title": "図書館戦争",
+    "author": "有川浩",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "本を読む自由を守るため、検閲に武力で抗う図書隊員たちの熱血お仕事恋。",
+    "coverImg": "https://books.google.com/books/content?id=q1imYpx_hbUC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 6,
+    "title": "鴨川ホルモー",
+    "author": "万城目学",
+    "genre": "SF",
+    "media": "映画化",
+    "synopsis": "京都の大学生が謎のサークルでオニを操って戦う、前代未聞の競技。",
+    "coverImg": "https://books.google.com/books/content?id=a6ETCMQffIUC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 7,
+    "title": "ミーナの行進",
+    "author": "小川洋子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "コビトカバに乗って学校へ通う美少女。昭和の大邸宅で過ごした、切なく美しい日々。",
+    "coverImg": "https://books.google.com/books/content?id=_QQsAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 8,
+    "title": "陰日向に咲く",
+    "author": "劇団ひとり",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "日陰で生きる人々を優しく照らす、連作短編集。劇団ひとりのベストセラー。",
+    "coverImg": "https://books.google.com/books/content?id=3eW4DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 9,
+    "title": "失はれる物語",
+    "author": "乙一",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "事故で感覚を失い右手の触覚だけが残った男。妻が紡ぐ切なすぎる愛。",
+    "coverImg": "https://books.google.com/books/content?id=QU-qtUZ8bRUC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2007,
+    "rank": 10,
+    "title": "アイの物語",
+    "author": "山本弘",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "人類滅亡へ向かう未来。アンドロイドが語る、ロマン溢れるSF。",
+    "coverImg": "https://books.google.com/books/content?id=IXUgNwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 1,
+    "title": "東京タワー",
+    "author": "リリー・フランキー",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "オカン、これまで育ててくれてありがとう。日本中を濡らした自伝的小説。",
+    "coverImg": "https://books.google.com/books/content?id=T_crAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2006,
+    "rank": 2,
+    "title": "サウスバウンド",
+    "author": "奥田英朗",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "元過激派の父親に振り回される家族。東京を飛び出し、沖縄の島へ！",
+    "coverImg": "https://books.google.com/books/content?id=fGKgCgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 3,
+    "title": "死神の精度",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "音楽を愛する死神が、7日間の観察を経て対象者の「死」を判定する、小粋な連作。",
+    "coverImg": "https://books.google.com/books/content?id=pZ9DEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 4,
+    "title": "容疑者Xの献身",
+    "author": "東野圭吾",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "天才数学者が仕掛けた完璧な殺人アリバイ。物理学者・湯川学が挑む。",
+    "coverImg": "https://books.google.com/books/content?id=hQDeDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 5,
+    "title": "その日のまえに",
+    "author": "重松清",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "余命宣告された妻と家族が過ごした、最後の短い時間。重松清の感動作。",
+    "coverImg": "https://books.google.com/books/content?id=JQbNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 6,
+    "title": "ナラタージュ",
+    "author": "島本理生",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "高校の教師に狂おしいほどの恋をした少女の、一生消えない痛みの。",
+    "coverImg": "https://books.google.com/books/content?id=xaWsDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 7,
+    "title": "告白",
+    "author": "町田康",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "実在した大量殺人事件を、町田康の独特な言語センスで描く圧倒的大作。",
+    "coverImg": "https://books.google.com/books/content?id=PO0rAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 8,
+    "title": "ベルカ、吠えないのか?",
+    "author": "古川日出男",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "犬たちの目線から、世界大戦と冷戦の歴史を駆け抜ける奇作。",
+    "coverImg": "https://books.google.com/books/content?id=KDYsAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2006,
+    "rank": 9,
+    "title": "嫌われ松子の一生",
+    "author": "山田宗樹",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "なぜ彼女の人生はこれほど転落したのか？悲惨なのに愛おしい一人の生涯。",
+    "coverImg": ""
+  },
+  {
+    "year": 2006,
+    "rank": 10,
+    "title": "ワークス・フェイバリット",
+    "author": "有川浩",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "本を愛する人々の日々と不器用な恋模様。有川浩の原点。",
+    "coverImg": ""
+  },
+  {
+    "year": 2005,
+    "rank": 1,
+    "title": "夜のピクニック",
+    "author": "恩田陸",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "80キロを歩く高校の行事「歩行祭」。胸に秘めた約束と、忘れられない夜。",
+    "coverImg": "https://books.google.com/books/content?id=E1SeBwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2005,
+    "rank": 2,
+    "title": "明日の記憶",
+    "author": "荻原浩",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "若年性アルツハイマーを発症した広告マン。消えゆく記憶と妻の愛。",
+    "coverImg": "https://books.google.com/books/content?id=A08uPQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2005,
+    "rank": 3,
+    "title": "家守綺譚",
+    "author": "梨木香歩",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "亡き友人の家を守る文筆家と、カッパや亡霊たちとの不思議な日常。",
+    "coverImg": "https://books.google.com/books/content?id=eKBxEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2005,
+    "rank": 4,
+    "title": "袋小路の男",
+    "author": "糸山秋子",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "ままならない恋愛に溺れてしまう、大人の男女の繊細な心理。",
+    "coverImg": ""
+  },
+  {
+    "year": 2005,
+    "rank": 5,
+    "title": "チルドレン",
+    "author": "伊坂幸太郎",
+    "genre": "ヒューマン",
+    "media": "ドラマ化",
+    "synopsis": "破天荒な家裁調査官が、周囲に奇跡のような変化を起こす爽快な連作。",
+    "coverImg": "https://books.google.com/books/content?id=PkutBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2005,
+    "rank": 6,
+    "title": "対岸の彼女",
+    "author": "角田光代",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "主婦と女社長。異なる道を歩む二人の女性の孤独と奇跡の友情。",
+    "coverImg": "https://books.google.com/books/content?id=YQbNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2005,
+    "rank": 7,
+    "title": "犯人に告ぐ",
+    "author": "雫井脩介",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "「テレビを通じて犯人と対話する」。劇場型捜査に打って出た警察官の戦い。",
+    "coverImg": "https://books.google.com/books/content?id=DSkhNwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2005,
+    "rank": 8,
+    "title": "黄金の羅針盤",
+    "author": "フィリップ・プルマン",
+    "genre": "SF",
+    "media": "映画化",
+    "synopsis": "魂が動物となって寄り添う世界。少女ライラが世界の危機に立ち向かう冒険。",
+    "coverImg": "https://books.google.com/books/content?id=SMshNwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2005,
+    "rank": 9,
+    "title": "私たちが好きだったこと",
+    "author": "宮本輝",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "若き日の淡い恋と共有していた夢を振り返る、宮本輝の文学名作。",
+    "coverImg": ""
+  },
+  {
+    "year": 2005,
+    "rank": 10,
+    "title": "逃亡作法",
+    "author": "東山彰良",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "脱獄した男たちの逃亡劇とそれぞれの過去を描くハードボイルド。",
+    "coverImg": "https://books.google.com/books/content?id=HhPGQgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 1,
+    "title": "博士の愛した数式",
+    "author": "小川洋子",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "記憶が80分しか持たない天才数学博士と、家政婦と息子の、素数で結ばれた愛。",
+    "coverImg": "https://books.google.com/books/content?id=k71aEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "audible": true
+  },
+  {
+    "year": 2004,
+    "rank": 2,
+    "title": "クライマーズ・ハイ",
+    "author": "横山秀夫",
+    "genre": "お仕事",
+    "media": "映画化",
+    "synopsis": "日航機墜落事故。未曾有のスクープに命を懸けた、地方新聞記者たち。",
+    "coverImg": "https://books.google.com/books/content?id=cwXNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 3,
+    "title": "アヒルと鴨のコインロッカー",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "一緒に本屋で広辞苑を盗まないか？切なすぎる伏線回収。伊坂幸太郎の傑作。",
+    "coverImg": "https://books.google.com/books/content?id=qvkQCN5x2UkC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 4,
+    "title": "永遠の出口",
+    "author": "森絵都",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "少女から大人へ変わる日々の、輝きとほろ苦さを描く青春小説。森絵都。",
+    "coverImg": "https://books.google.com/books/content?id=Icm2PAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 5,
+    "title": "重力ピエロ",
+    "author": "伊坂幸太郎",
+    "genre": "ミステリ",
+    "media": "映画化",
+    "synopsis": "謎のグラフィティアートと連続放火。家族の過去に隠された哀しい真実。",
+    "coverImg": "https://books.google.com/books/content?id=YbxaEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 6,
+    "title": "4TEEN",
+    "author": "石田衣良",
+    "genre": "青春",
+    "media": "映画化",
+    "synopsis": "東京の下町・月島。14歳の少年4人組が過ごした、一生モノの特別な夏休み。",
+    "coverImg": "https://books.google.com/books/content?id=r0SpCgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 7,
+    "title": "デッドエンドの思い出",
+    "author": "吉本ばなな",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "傷ついた心が、静かにほぐされていく。吉本ばななが描く再生の短編集。",
+    "coverImg": "https://books.google.com/books/content?id=_9orAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 8,
+    "title": "終戦のローレライ",
+    "author": "福井晴敏",
+    "genre": "歴史",
+    "media": "映画化",
+    "synopsis": "終戦直前の日本。歴史を書き換える決死の作戦に挑む特殊潜水艦。",
+    "coverImg": "https://books.google.com/books/content?id=m_WqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 9,
+    "title": "陰陽師",
+    "author": "夢枕獏",
+    "genre": "歴史",
+    "media": "映画化",
+    "synopsis": "平安の闇を払う安倍晴明と源博雅。凸凹コンビの伝奇ファンタジー。",
+    "coverImg": "https://books.google.com/books/content?id=HGqlEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2004,
+    "rank": 10,
+    "title": "蛇にピアス",
+    "author": "金原ひとみ",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "痛みのなかにしか存在を感じられない若者たちの、鮮烈なデビュー作。",
+    "coverImg": "https://books.google.com/books/content?id=gwrsAAAAMAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 11,
+    "title": "空、はてしない青",
+    "author": "メリッサ・ダ・コスタ",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "フランス発、若年性アルツハイマーの青年と少女の切ない旅を描く。",
+    "coverImg": "https://books.google.com/books/content?id=AwmFEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2025,
+    "rank": 11,
+    "title": "フォース・ウィング",
+    "author": "レベッカ・ヤロス",
+    "genre": "SF",
+    "media": "",
+    "synopsis": "竜と契約を結び戦う過酷な軍事エリート学校のファンタジー。全米大ヒット。",
+    "coverImg": "https://books.google.com/books/content?id=hKKp0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2024,
+    "rank": 11,
+    "title": "ようこそ、ヒュナム洞書店へ",
+    "author": "ファン・ボルム",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "韓国で大ベストセラー。小さな書店に集まる人々の癒やしお仕事。",
+    "coverImg": "https://books.google.com/books/content?id=IuvWEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 11,
+    "title": "われら闇より天を見る",
+    "author": "クリス・ウィタカー",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "無法者の少女が家族を守るため戦う、慟哭のミステリ。",
+    "coverImg": "https://books.google.com/books/content?id=7ta10QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2022,
+    "rank": 11,
+    "title": "三十の反撃",
+    "author": "ソン・ウォンピョン",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "現代を生きる30歳前後の若者たちの、静かな逆襲劇。ソン・ウォンピョン。",
+    "coverImg": "https://books.google.com/books/content?id=9qyLzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+  },
+  {
+    "year": 2026,
+    "rank": 12,
+    "title": "夏時記",
+    "author": "星野立子",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "書店員が発掘した、美しい日本語が光る隠れた名作。",
+    "coverImg": ""
+  },
+  {
+    "year": 2025,
+    "rank": 12,
+    "title": "ありますもの",
+    "author": "中野翠",
+    "genre": "ヒューマン",
+    "media": "",
+    "synopsis": "日常のささやかな楽しさを見つける、大人のためのセレクト名著。",
+    "coverImg": ""
+  },
+  {
+    "year": 2024,
+    "rank": 12,
+    "title": "プラスティック",
+    "author": "井上夢人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "読む者を恐怖の迷宮へ誘う、伝説のサスペンス。井上夢人。",
+    "coverImg": "https://books.google.com/books/content?id=kOWqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+  },
+  {
+    "year": 2023,
+    "rank": 12,
+    "title": "おもろい本",
+    "author": "木下半太",
+    "genre": "青春",
+    "media": "",
+    "synopsis": "一気読み必至のノンストップおもしろ劇。木下半太の隠れた傑作。",
+    "coverImg": ""
+  },
+  {
+    "year": 2022,
+    "rank": 12,
+    "title": "破船",
+    "author": "吉村昭",
+    "genre": "歴史",
+    "media": "",
+    "synopsis": "荒ぶる海辺の村。生き延びるために彼らが犯したおぞましき因習。",
+    "coverImg": ""
+  }
 ];
 </script>
 </body>
