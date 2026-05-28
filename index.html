@@ -124,11 +124,6 @@ h1 span{color:var(--gold)}
 .affiliate{max-width:1140px;margin:0 auto;padding:2rem 1.5rem 1rem;font-size:11px;color:var(--ink-3);border-top:1px solid var(--border);text-align:center;line-height:1.6;}
 footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:center;font-size:11px;letter-spacing:.05em;margin-top:4rem}
 
-.loading-overlay{position:fixed;inset:0;background:var(--paper);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .3s}
-.loading-overlay.done{opacity:0;pointer-events:none}
-.spinner{width:32px;height:32px;border:2px solid var(--paper-3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite}
-@keyframes spin{to{transform:rotate(360deg)}}
-
 @media(max-width:980px) {
   .nav-inner { flex-direction: column; align-items: stretch; gap: 0.5rem; }
   .btn-filter-toggle { display: flex; }
@@ -156,90 +151,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 
 <div class="loading-overlay" id="loader"><div class="spinner"></div></div>
 
-<header>
-  <div class="hdr-inner">
-    <div class="hdr-kana">全国書店員が選んだ、いちばん売りたい本</div>
-    <h1>本屋大賞 <span>歴代全作品ガイド</span></h1>
-    <p class="hdr-lead">
-      2004年の第1回開催から現在に至るまで、全国の書店員が「本当に売りたい、面白い」と情熱を注いだ名作たち。本ギャラリーでは、歴代の大賞受賞作から隠れた傑作ノミネート作までを美しく網羅しました。あらすじや初心者に優しい「気分タグ」から、あなたの読書人生を満たす至高の一冊がすぐに見つかります。
-    </p>
-    <p class="hdr-sub">※各作品カードから、お使いの端末（Kindle電子書籍）や楽天ブックス、話題のAudibleオーディオブックへ直接アクセスして、今すぐスマホで読書を始められます。</p>
-  </div>
-</header>
-
-<div class="nav-wrap">
-  <div class="nav-inner">
-    <div class="search-row">
-      <div class="search-box">
-        <span class="search-icon">🔍</span>
-        <input type="text" id="search" placeholder="タイトル・著者・あらすじから探す…" autocomplete="off" oninput="resetAndRender()">
-      </div>
-      <button class="btn-filter-toggle" onclick="toggleFilterPanel()">
-        <span>⚙️</span> 絞り込み条件 <span id="toggle-arrow">▼</span>
-      </button>
-    </div>
-    
-    <div class="filter-groups" id="filter-panel">
-      <div class="filter-group">
-        <span class="filter-label">順位:</span>
-        <div class="chips" id="chips-rank"></div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">年代:</span>
-        <div class="chips" id="chips-decade">
-          <button class="chip on" data-d="all" onclick="setDecadeFilter(this)">すべて</button>
-          <button class="chip" data-d="2020s" onclick="setDecadeFilter(this)">2020年代</button>
-          <button class="chip" data-d="2010s" onclick="setDecadeFilter(this)">2010年代</button>
-          <button class="chip" data-d="2000s" onclick="setDecadeFilter(this)">2000年代</button>
-        </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">気分:</span>
-        <div class="chips" id="chips-mood">
-          <button class="chip on" data-m="all" onclick="setMoodFilter(this)">すべての気分</button>
-          <button class="chip" data-m="どんでん返し" onclick="setMoodFilter(this)">#どんでん返し</button>
-          <button class="chip" data-m="サクサク読める" onclick="setMoodFilter(this)">#サクサク読める</button>
-          <button class="chip" data-m="泣ける" onclick="setMoodFilter(this)">#泣ける</button>
-          <button class="chip" data-m="一気読み" onclick="setMoodFilter(this)">#一気読み</button>
-        </div>
-      </div>
-      <div class="filter-group">
-        <span class="filter-label">映像:</span>
-        <div class="chips" id="chips-media">
-          <button class="chip on" data-v="all" onclick="setMediaFilter(this)">すべて</button>
-          <button class="chip" data-v="yes" onclick="setMediaFilter(this)">映像化あり</button>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<main class="main" id="main">
-  <p class="result-info" id="result-info"></p>
-  <div class="book-grid" id="content"></div>
-  <div id="load-more" class="load-trigger"></div>
-</main>
-
-<div class="affiliate">
-  ※ 当サイトはAmazonアソシエイト・プログラム、および楽天アフィリエイトの参加者です。リンクを経由してご購入いただくと、サイト運営者に紹介料が支払われます。
-</div>
-<footer>© 2026 本屋大賞受賞作ガイド</footer>
-
 <script>
-// ─── 🛡️ 💡【追加】システムに大前提となる変数を完全復元 ───
-const AMAZON_TAG = 'wespressoblog-22'; 
-const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
-
-const PAGE_SIZE = 24; 
-let visibleCount = PAGE_SIZE;
-let filteredBooks = [];
-let scrollObserver = null;
-
-let filterRank = 'all';
-let filterDecade = 'all';
-let filterMood = 'all';
-let filterMedia = 'all';
-
 function toggleFilterPanel() {
   const panel = document.getElementById('filter-panel');
   const arrow = document.getElementById('toggle-arrow');
@@ -277,9 +189,7 @@ function cardHTML(b) {
   const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
   const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
 
-  const coverHTML = b.coverImg 
-    ? `<img src="${b.coverImg}" alt="${b.title}" loading="lazy">` 
-    : '';
+  const coverHTML = b.coverImg ? `<img src="${b.coverImg}" alt="${b.title}" loading="lazy">` : '';
 
   return `
 <article class="card${isTop?' rank-1':''}" data-year="${b.year}" data-rank="${b.rank}">
@@ -383,22 +293,11 @@ function setMediaFilter(el) {
   filterMedia = el.dataset.v; document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on'));
   el.classList.add('on'); resetAndRender();
 }
+</script>
 
-document.addEventListener('DOMContentLoaded', () => {
-  const loader = document.getElementById('loader'); if (loader) loader.classList.add('done');
-  const rankChips = document.getElementById('chips-rank');
-  if(rankChips) {
-     rankChips.innerHTML = `
-        <button class="chip on" data-r="all" onclick="setRankFilter(this)">すべて</button>
-        <button class="chip" data-r="1" onclick="setRankFilter(this)">大賞のみ</button>
-        <button class="chip" data-r="nominate" onclick="setRankFilter(this)">2〜10位</button>
-        <button class="chip" data-r="department" onclick="setRankFilter(this)">部門賞</button>
-     `;
-  }
-  try { resetAndRender(); } catch (error) { console.error("エラーログ:", error); }
-});
 
-// 👇 【ここにジェネレーターで抽出した完成データ「const BOOKS = [...]」を貼り付けて上書き公開してください！】
+<script id="database-area">
+// 👇 【ジェネレーターの完了画面にでてきた「const BOOKS = [...]」を、この下にそのままペーストして上書きしてください】
 const BOOKS = [
   {
     "year": 2026,
@@ -2822,6 +2721,23 @@ const BOOKS = [
     "coverImg": ""
   }
 ];
+</script>
+
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const loader = document.getElementById('loader'); if (loader) loader.classList.add('done');
+  const rankChips = document.getElementById('chips-rank');
+  if(rankChips) {
+     rankChips.innerHTML = `
+        <button class="chip on" data-r="all" onclick="setRankFilter(this)">すべて</button>
+        <button class="chip" data-r="1" onclick="setRankFilter(this)">大賞のみ</button>
+        <button class="chip" data-r="nominate" onclick="setRankFilter(this)">2〜10位</button>
+        <button class="chip" data-r="department" onclick="setRankFilter(this)">部門賞</button>
+     `;
+  }
+  try { resetAndRender(); } catch (error) { console.error("エラーログ:", error); }
+});
 </script>
 </body>
 </html>
