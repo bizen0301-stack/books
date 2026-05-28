@@ -1,611 +1,484 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>本屋大賞 電子書籍ナビ</title>
-    <style>
-        /* --- デザイン（CSS） --- */
-        body {
-            margin: 0; padding: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
-            background-color: #ffffff; color: #333333; line-height: 1.6;
-        }
-        header { text-align: center; padding: 60px 20px 40px 20px; background-color: #f8f9fa; }
-        header h1 { font-size: 1.8rem; font-weight: 700; letter-spacing: 0.05em; margin-bottom: 10px; }
-        header p { color: #666; font-size: 0.95rem; margin: 0; }
-        
-        .container { max-width: 800px; margin: 0 auto; padding: 40px 20px; }
-        
-        /* コントローラー */
-        .filter-section { margin-bottom: 40px; text-align: center; }
-        .filter-group { margin-bottom: 15px; }
-        .btn-filter {
-            background-color: #fff; border: 1px solid #ddd; padding: 8px 18px;
-            font-size: 0.9rem; cursor: pointer; border-radius: 20px; margin: 4px;
-            transition: all 0.2s;
-        }
-        .btn-filter.active { background-color: #1a365d; color: #fff; border-color: #1a365d; }
-        
-        .select-year {
-            padding: 8px 16px; font-size: 0.9rem; border-radius: 4px;
-            border: 1px solid #ddd; background: #fff; width: 150px; cursor: pointer;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>本屋大賞ガイド｜2004〜2026年 全受賞・ノミネート作品一覧</title>
+<meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで,Amazon・Kindle・楽天ブックスからすぐ購入できます。">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#111111;--ink-2:#333333;--ink-3:#666666;--ink-4:#999999;
+  --paper:#ffffff;--paper-2:#f8f9fa;--paper-3:#eeeeee;--paper-card:#ffffff;
+  --red:#b5301f;--red-light:#f5e6e4;--gold:#9a7a1a;--gold-light:#faf6e8;
+  --amazon:#ff9900;--amazon-dk:#e68000;
+  --rakuten:#bf0000;--rakuten-dk:#990000;
+  --audible:#252f3d;--audible-dk:#19222d;
+  --border:rgba(0,0,0,.08);--border-2:rgba(0,0,0,.15);
+  --r:6px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;letter-spacing:0.03em;}
 
-        /* 本のリスト */
-        #book-list { display: flex; flex-direction: column; gap: 50px; }
-        .book-card {
-            position: relative; display: flex; gap: 40px;
-            border-bottom: 1px solid #f0f0f0; padding-bottom: 40px; padding-top: 25px;
-        }
-        @media (max-width: 600px) { .book-card { flex-direction: column; gap: 20px; } }
-        
-        .badge { position: absolute; top: 0; left: 0; font-size: 0.75rem; font-weight: bold; color: #1a365d; }
-        .book-cover img { width: 130px; height: auto; box-shadow: 0 4px 12px rgba(0,0,0,0.08); background-color: #f0f0f0; }
-        
-        .book-info { flex: 1; }
-        .book-info h2 { font-size: 1.25rem; margin: 0 0 5px 0; font-weight: 700; }
-        .author { font-size: 0.85rem; color: #666; margin-bottom: 15px; }
-        .catch { font-weight: bold; font-size: 1rem; margin-bottom: 10px; color: #111; }
-        .story-summary { padding-left: 20px; font-size: 0.9rem; margin-bottom: 15px; color: #444; }
-        
-        .book-meta { font-size: 0.75rem; color: #888; margin-bottom: 20px; }
-        .book-meta span { margin-right: 8px; background: #f4f4f4; padding: 3px 8px; border-radius: 4px; }
-        
-        /* アフィリエイトボタン */
-        .link-buttons { display: flex; gap: 12px; max-width: 360px; }
-        .btn-link {
-            display: inline-block; padding: 10px 15px; font-size: 0.85rem; font-weight: bold;
-            text-decoration: none; text-align: center; border-radius: 4px; transition: opacity 0.2s; flex: 1;
-        }
-        .btn-link:hover { opacity: 0.8; }
-        .kindle { background-color: #ff9900; color: #fff; }
-        .kobo { background-color: #bf0000; color: #fff; }
-        .no-results { text-align: center; color: #999; padding: 40px; }
-    </style>
+/* ─── HEADER ─── */
+header{background:var(--paper);color:var(--ink);border-bottom:1px solid var(--border);padding:4rem 0 3rem 0;}
+.hdr-inner{max-width:1140px;margin:0 auto;padding:0 1.5rem;position:relative}
+.hdr-kana{font-family:'Noto Sans JP',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:10px}
+.hdr-kana::before{content:'';width:15px;height:2px;background:var(--gold)}
+h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:700;line-height:1.3;margin-bottom:1.5rem;color:#000;}
+h1 span{color:var(--gold)}
+.hdr-lead{font-size:13.5px;color:var(--ink-2);font-weight:400;max-width:760px;margin-bottom:1rem;line-height:1.8}
+.hdr-sub{font-size:11px;color:var(--ink-3);font-weight:400;}
+
+/* ─── STICKY NAV ─── */
+.nav-wrap{background:var(--paper-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.03)}
+.nav-inner{max-width:1140px;margin:0 auto;padding:.75rem 1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
+.search-box{position:relative;flex:1;min-width:240px}
+.search-box input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--border-2);border-radius:4px;background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:all .15s;}
+.search-box input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(0,0,0,.05)}
+.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--ink-3);pointer-events:none}
+.filter-groups{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;flex:3;min-width:280px}
+.filter-group{display:flex;align-items:center;gap:8px}
+.filter-label{font-size:11px;color:var(--ink-3);font-weight:700;white-space:nowrap}
+.chips{display:flex;gap:4px;flex-wrap:wrap}
+.chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border-2);background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--ink-2);cursor:pointer;transition:all .15s;white-space:nowrap;font-weight:400;}
+.chip:hover{background:var(--paper-3);color:var(--ink)}
+.chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700;}
+
+/* ─── MAIN CONTENT ─── */
+.main{max-width:1140px;margin:0 auto;padding:2rem 1.5rem}
+.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px 20px}
+
+/* ─── CARD ─── */
+.card{background:var(--paper-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:all .2s ease}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:var(--border-2)}
+.card.rank-1{border-top:3px solid var(--gold);background:linear-gradient(to bottom, var(--gold-light) 0%, var(--paper-card) 120px)}
+
+/* cover */
+.cover-wrap{position:relative;width:100%;padding-top:140%;background:var(--paper-2);overflow:hidden;border-bottom:1px solid var(--border)}
+.cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .3s;z-index:2;opacity:0;}
+.cover-wrap .placeholder{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:'Noto Serif JP',serif;padding:1.5rem;text-align:center;background:linear-gradient(135deg, #ffffff, var(--paper-2));z-index:1}
+.placeholder-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;border-bottom:1px solid var(--border);padding-bottom:6px;width:100%;}
+.placeholder-author{font-size:11px;color:var(--ink-3);margin-top:2px;}
+
+/* badges */
+.rank-badge{position:absolute;top:10px;left:10px;padding:3px 10px;border-radius:3px;font-family:'Noto Sans JP',sans-serif;font-size:10px;font-weight:700;z-index:3;box-shadow:0 2px 6px rgba(0,0,0,0.06)}
+.rank-badge.r1{background:var(--gold);color:#fff}
+.rank-badge.rn{background:var(--ink-2);color:#fff}
+.year-badge{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:3px;font-family:'Noto Sans JP',sans-serif;font-size:10px;font-weight:700;z-index:3;background:rgba(255,255,255,0.9);color:var(--ink);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.02)}
+
+/* card body */
+.card-body{padding:1rem 1rem .6rem;flex:1;display:flex;flex-direction:column}
+.tag-container{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
+.genre-badge{font-size:10px;background:var(--paper-2);color:var(--ink-2);padding:2px 8px;border-radius:3px;font-weight:500;border:1px solid var(--border);}
+.mood-badge{font-size:10px;background:#f0f7ff;color:#0055b3;padding:2px 8px;border-radius:3px;font-weight:700;}
+.media-badge{font-size:10px;background:var(--red-light);color:var(--red);padding:2px 8px;border-radius:3px;font-weight:700}
+
+.book-title{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:4px}
+.book-author{font-size:11px;color:var(--ink-3);margin-bottom:.75rem}
+.synopsis{font-size:11.5px;color:var(--ink-2);line-height:1.8;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-align:justify;}
+
+/* ─── CARD FOOTER ─── */
+.card-foot{padding:.4rem 1rem 1rem;display:flex;flex-direction:column;gap:6px;margin-top:auto}
+.btn-group-main, .btn-group-sub { display: flex; gap: 6px; width: 100%; }
+
+.btn-link {
+    display: flex; align-items: center; justify-content: center; gap: 4px;
+    text-decoration: none; font-size: 11.5px; font-weight: 700;
+    font-family:'Noto Sans JP',sans-serif; padding: 8px 4px; border-radius: 4px; transition: background .15s; flex: 1;
+}
+.btn-kindle{ background:var(--amazon); color:#111; }
+.btn-kindle:hover{ background:var(--amazon-dk); }
+.btn-rakuten{ background:var(--rakuten); color:#fff; }
+.btn-rakuten:hover{ background:var(--rakuten-dk); }
+.btn-audible{ background:var(--audible); color:#fff; }
+.btn-audible:hover{ background:var(--audible-dk); }
+.btn-paper{ border:1px solid var(--border-2); color:var(--ink-3); font-weight: 500; background:#fff; }
+.btn-paper:hover{ background:var(--paper-2); color:var(--ink); }
+
+.result-info{font-size:12px;color:var(--ink-3);margin-bottom:1.5rem;text-align:right;font-weight:500;}
+.load-trigger{width:100%;height:40px;margin-top:2rem;display:flex;align-items:center;justify-content:center;}
+.no-res{text-align:center;padding:5rem 1rem;color:var(--ink-3);font-size:14px;grid-column:1/-1;}
+.affiliate{max-width:1140px;margin:0 auto;padding:2rem 1.5rem 1rem;font-size:11px;color:var(--ink-3);border-top:1px solid var(--border);text-align:center;line-height:1.6;}
+footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:center;font-size:11px;letter-spacing:.05em;margin-top:4rem}
+
+.loading-overlay{position:fixed;inset:0;background:var(--paper);display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .3s}
+.loading-overlay.done{opacity:0;pointer-events:none}
+.spinner{width:32px;height:32px;border:2px solid var(--paper-3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+@media(max-width:980px) {
+  .nav-inner { flex-direction: column; align-items: stretch; gap: 0.75rem; }
+  .filter-groups { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+}
+@media(max-width:640px){
+  header{padding:2.5rem 0 2rem 0;}
+  .hdr-inner,.nav-inner,.main{padding-left:1rem;padding-right:1rem}
+  .book-grid{grid-template-columns:repeat(2,1fr);gap:12px}
+  .chips{gap:4px}
+  .chip{padding:3px 10px;font-size:10px}
+  h1{font-size:1.5rem}
+  .card-body,.card-foot{padding:0.75rem;}
+}
+</style>
 </head>
 <body>
 
-    <header>
-        <h1>本屋大賞 電子書籍ナビ</h1>
-        <p>普段本を読まない人のための、絶対に失敗しない名作ガイド</p>
-    </header>
+<div class="loading-overlay" id="loader"><div class="spinner"></div></div>
 
-    <div class="container">
-        <div class="filter-section">
-            <div class="filter-group" id="category-filters">
-                <button class="btn-filter active" data-category="all">すべて表示</button>
-                <button class="btn-filter" data-category="grand">歴代大賞（1位）</button>
-                <button class="btn-filter" data-category="nominate">ノミネート（2〜10位）</button>
-                <button class="btn-filter" data-category="department">各部門賞</button>
-            </div>
-            <div class="filter-group">
-                <select id="year-select" class="select-year">
-                    <option value="all">全年代</option>
-                </select>
-            </div>
-        </div>
+<header>
+  <div class="hdr-inner">
+    <div class="hdr-kana">全国書店員が選んだ、いちばん売りたい本</div>
+    <h1>本屋大賞 <span>歴代全作品ガイド</span></h1>
+    <p class="hdr-lead">
+      2004年の第1回開催から現在に至るまで、全国の書店員が「本当に売りたい、面白い」と情熱を注いだ名作たち。本ギャラリーでは、歴代の大賞受賞作から隠れた傑作ノミネート作までを美しく網羅しました。あらすじや初心者に優しい「気分タグ」から、あなたの読書人生を満たす至高の一冊がすぐに見つかります。
+    </p>
+    <p class="hdr-sub">※各作品カードから、お使いの端末（Kindle電子書籍）や楽天ブックス、話題のAudibleオーディオブックへ直接アクセスして、今すぐスマホで読書を始められます。</p>
+  </div>
+</header>
 
-        <main id="book-list"></main>
+<div class="nav-wrap">
+  <div class="nav-inner">
+    <div class="search-box">
+      <span class="search-icon">🔍</span>
+      <input type="text" id="search" placeholder="タイトル・著者・あらすじから探す…" autocomplete="off" oninput="resetAndRender()">
     </div>
+    <div class="filter-groups">
+      <div class="filter-group">
+        <span class="filter-label">順位:</span>
+        <div class="chips" id="chips-rank">
+          <button class="chip on" data-r="all" onclick="setRankFilter(this)">すべて</button>
+          <button class="chip" data-r="1" onclick="setRankFilter(this)">大賞のみ</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">年代:</span>
+        <div class="chips" id="chips-decade">
+          <button class="chip on" data-d="all" onclick="setDecadeFilter(this)">すべて</button>
+          <button class="chip" data-d="2020s" onclick="setDecadeFilter(this)">2020年代</button>
+          <button class="chip" data-d="2010s" onclick="setDecadeFilter(this)">2010年代</button>
+          <button class="chip" data-d="2000s" onclick="setDecadeFilter(this)">2000年代</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">気分:</span>
+        <div class="chips" id="chips-mood">
+          <button class="chip on" data-m="all" onclick="setMoodFilter(this)">すべての気分</button>
+          <button class="chip" data-m="どんでん返し" onclick="setMoodFilter(this)">#どんでん返し</button>
+          <button class="chip" data-m="サクサク読める" onclick="setMoodFilter(this)">#サクサク読める</button>
+          <button class="chip" data-m="泣ける" onclick="setMoodFilter(this)">#泣ける</button>
+          <button class="chip" data-m="一気読み" onclick="setMoodFilter(this)">#一気読み</button>
+        </div>
+      </div>
+      <div class="filter-group">
+        <span class="filter-label">映像化:</span>
+        <div class="chips" id="chips-media">
+          <button class="chip on" data-v="all" onclick="setMediaFilter(this)">すべて</button>
+          <button class="chip" data-v="yes" onclick="setMediaFilter(this)">映像化あり</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-    <script id="markdown-raw" type="text/markdown">
-# 本屋大賞 歴代ランキング（1位〜10位）完全版
+<main class="main" id="main">
+  <p class="result-info" id="result-info"></p>
+  <div class="book-grid" id="content"></div>
+  <div id="load-more" class="load-trigger"></div>
+</main>
 
-本屋大賞の歴代1位から10位までの全リストです。AmazonアソシエイトID【wespressoblog-22】を適用したリンクを掲載しています。
+<div class="affiliate">
+  ※ 当サイトはAmazonアソシエイト・プログラム、および楽天アフィリエイトの参加者です。リンクを経由してご購入いただくと、サイト運営者に紹介料が支払われます。
+</div>
+<footer>© 2026 本屋大賞受賞作ガイド</footer>
 
-## 本屋大賞 2026年（第23回）
+<script>
+const AMAZON_TAG = 'wespressoblog-22'; 
+const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
 
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | イン・ザ・メガチャーチ | 朝井リョウ | [商品詳細](https://www.amazon.co.jp/dp/4296121049/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E3%82%A4%E3%83%B3%E3%83%BB%E3%82%B6%E3%83%BB%E3%83%A1%E3%82%AC%E3%83%81%E3%83%A3%E3%83%BC%E3%83%81%20%E6%9C%9D%E4%BA%95%E3%83%AA%E3%83%A7%E3%82%A6&tag=wespressoblog-22) |
-| 2 | 熟柿 | 佐藤正午 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%86%9F%E6%9F%BF%20%E4%BD%90%E8%97%A4%E6%AD%A3%E5%8D%88&tag=wespressoblog-22) |
-| 3 | PRIZE―プライズ― | 村山由佳 | [Amazon検索](https://www.amazon.co.jp/s?k=PRIZE%E2%80%95%E3%83%97%E3%83%A9%E3%82%A4%E3%82%BA%E2%80%95%20%E6%9D%91%E5%B1%B1%E7%94%B1%E4%BD%B3&tag=wespressoblog-22) |
-| 4 | エピクロスの処方箋 | 夏川草介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%A8%E3%83%94%E3%82%AF%E3%83%AD%E3%82%B9%E3%81%AE%E5%87%A6%E6%96%B9%E7%AE%8B%20%E5%A4%8F%E5%B7%9D%E8%8D%89%E4%BB%8B&tag=wespressoblog-22) |
-| 5 | 暁星 | 湊かなえ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9A%81%E6%98%9F%20%E6%B9%8A%E3%81%8B%E3%81%AA%E3%81%88&tag=wespressoblog-22) |
-| 6 | 殺し屋の営業術 | 野宮有 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%AE%BA%E3%81%97%E5%B1%8B%E3%81%AE%E5%96%B6%E6%A5%AD%E8%A1%93%20%E9%87%8E%E5%AE%AE%E6%9C%89&tag=wespressoblog-22) |
-| 7 | ありか | 瀬尾まいこ | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%82%E3%82%8A%E3%81%8B%20%E7%80%AC%E5%B0%BE%E3%81%BE%E3%81%84%E3%81%93&tag=wespressoblog-22) |
-| 8 | 探偵小石は恋しない | 森バジル | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%8E%A2%E5%81%B5%E5%B0%8F%E7%9F%B3%E3%81%AF%E6%81%8B%E3%81%97%E3%81%AA%E3%81%84%20%E6%A3%AE%E3%83%90%E3%82%B8%E3%83%AB&tag=wespressoblog-22) |
-| 9 | 失われた貌 | 櫻田智也 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%B1%E3%82%8F%E3%82%8C%E3%81%9F%E8%B2%8C%20%E6%AB%BB%E7%94%B0%E6%99%BA%E4%B9%9F&tag=wespressoblog-22) |
-| 10 | さよならジャバウォック | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%95%E3%82%88%E3%81%AA%E3%82%89%E3%82%B8%E3%83%A3%E3%83%90%E3%82%A6%E3%82%A9%E3%83%83%E3%82%AF%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
+const PAGE_SIZE = 24; 
+let visibleCount = PAGE_SIZE;
+let filteredBooks = [];
+let scrollObserver = null;
+let cardObserver = null; // 【新設】カード単体の画面突入を検知する用
 
-## 本屋大賞 2025年（第22回）
+let filterRank = 'all';
+let filterDecade = 'all';
+let filterMood = 'all';
+let filterMedia = 'all';
 
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | カフネ | 阿部暁子 | [商品詳細](https://www.amazon.co.jp/dp/4065350263/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E3%82%AB%E3%83%95%E3%83%8D%20%E9%98%BF%E9%83%A8%E6%9A%81%E5%AD%90&tag=wespressoblog-22) |
-| 2 | アルプス席の母 | 早見和真 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%AB%E3%83%97%E3%82%B9%E5%B8%AD%E3%81%AE%E6%AF%8D%20%E6%97%A9%E8%A6%8B%E5%92%8C%E7%9C%9F&tag=wespressoblog-22) |
-| 3 | 小説 | 野崎まど | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%B0%8F%E8%AA%AC%20%E9%87%8E%E5%B4%8E%E3%81%BE%E3%81%A9&tag=wespressoblog-22) |
-| 4 | 禁忌の子 | 山口未桜 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A6%81%E5%BF%8C%E3%81%AE%E5%AD%90%20%E5%B1%B1%E5%8F%A3%E6%9C%AA%E6%A1%9C&tag=wespressoblog-22) |
-| 5 | 人魚が逃げた | 青山美智子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E4%BA%BA%E9%AD%9A%E3%81%8C%E9%80%83%E3%81%92%E3%81%9F%20%E9%9D%92%E5%B1%B1%E7%BE%8E%E6%99%BA%E5%AD%90&tag=wespressoblog-22) |
-| 6 | spring | 恩田陸 | [Amazon検索](https://www.amazon.co.jp/s?k=spring%20%E6%81%A9%E7%94%B0%E9%99%B8&tag=wespressoblog-22) |
-| 7 | 恋とか愛とかやさしさなら | 一穂ミチ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%81%8B%E3%81%A8%E3%81%8B%E6%84%9B%E3%81%A8%E3%81%8B%E3%82%84%E3%81%95%E3%81%97%E3%81%95%E3%81%AA%E3%82%89%20%E4%B8%80%E7%A9%82%E3%83%9F%E3%83%81&tag=wespressoblog-22) |
-| 8 | 生殖記 | 朝井リョウ | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%94%9F%E6%AE%96%E8%A8%98%20%E6%9C%9D%E4%BA%95%E3%83%AA%E3%83%A7%E3%82%A6&tag=wespressoblog-22) |
-| 9 | 死んだ山田と教室 | 金子玲介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%AD%BB%E3%82%93%E3%81%A0%E5%B1%B1%E7%94%B0%E3%81%A8%E6%95%99%E5%AE%A4%20%E9%87%91%E5%AD%90%E7%8E%B2%E4%BB%8B&tag=wespressoblog-22) |
-| 10 | 成瀬は信じた道をいく | 宮島未奈 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%88%90%E7%80%AC%E3%81%AF%E4%BF%A1%E3%81%98%E3%81%9F%E9%81%93%E3%82%92%E3%81%84%E3%81%8F%20%E5%AE%AE%E5%B3%B6%E6%9C%AA%E5%A5%88&tag=wespressoblog-22) |
+// ─── BOOK DATA ───
+const BOOKS = [
+  // 2026 第23回
+  {year:2026,rank:1,title:"イン・ザ・メガチャーチ",author:"朝井リョウ",genre:"ヒューマン",media:"",synopsis:"ファンダム経済を仕掛ける側、のめり込む側、かつてのめり込んでいた側——3つの視点から、人の心を動かす「物語」の功罪をあぶり出す意欲作。", audible: true},
+  {year:2026,rank:2,title:"熟柿",author:"佐藤正午",genre:"ヒューマン",media:"",synopsis:"轢き逃げの罪を背負い、息子を求めて西へ西へと流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。"},
+  {year:2026,rank:3,title:"PRIZE―プライズ―",author:"村山由佳",genre:"お仕事",media:"",synopsis:"何度も本屋大賞を受を受賞しながら直木賞が取れない作家・天羽カインの執念と苦悩を描く、文壇の光と影。"},
+  {year:2026,rank:4,title:"エピクロスの処方箋",author:"夏川草介",genre:"お仕事",media:"",synopsis:"スピノザの診察室の続編。大学病院の絶対権力者の父親を診ることになった医師・雄町の葛藤と使命を描く医療小説。"},
+  {year:2026,rank:5,title:"暁星",author:"湊かなえ",genre:"ミステリ",media:"",synopsis:"文部科学大臣刺殺事件の犯人が語る手記と、事件を小説にする作家。ノンフィクションとフィクションが交錯するミステリ。"},
+  {year:2026,rank:6,title:"殺し屋の営業術",author:"野宮有",genre:"ミステリ",media:"",synopsis:"凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況でビジネストークを駆使するユーモア×サスペンス。"},
+  {year:2026,rank:7,title:"ありか",author:"瀬尾まいこ",genre:"ヒューマン",media:"",synopsis:"シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く、瀬尾まいこらしい温かな物語。"},
+  {year:2026,rank:8,title:"探偵小石は恋しない",author:"森バジル",genre:"ミステリ",media:"",synopsis:"色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相が楽しいエンタメ作。"},
+  {year:2026,rank:9,title:"失われた貌",author:"櫻田智也",genre:"ミステリ",media:"",synopsis:"顔を潰された身元不明の死体。「父かもしれない」と訪れた小学生。十年前の失踪が現在と交錯する本格ミステリ。"},
+  {year:2026,rank:10,title:"さよならジャバウォック",author:"伊坂幸太郎",genre:"ミステリ",media:"",synopsis:"咄嗟に夫を殺してしまった女性のもとに現れる謎の男.伊坂幸太郎流のユーモアと緊張感が同居するサスペンス。"},
+  // 2025 第22回
+  {year:2025,rank:1,title:"カフネ",author:"阿部暁子",genre:"ヒューマン",media:"",synopsis:"「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草のこと。言葉の温もりをテーマにした愛の物語。", audible: true},
+  {year:2025,rank:2,title:"アルプス席の母",author:"早見和真",genre:"ヒューマン",media:"",synopsis:"野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く。スポーツと家族の絆が交差する感動作。"},
+  {year:2025,rank:3,title:"小説",author:"野崎まど",genre:"SF",media:"",synopsis:"「小説」という奇妙なタイトルが示す通り、物語の構造そのものを問い直す実験的かつ読みやすいエンタメ。"},
+  {year:2025,rank:4,title:"禁忌の子",author:"山口未桜",genre:"ミステリ",media:"",synopsis:"触れてはいけない真実を抱えた子どもたちの物語。新鋭・山口未桜が放つ衝撃のデビュー作。"},
+  {year:2025,rank:5,title:"人魚が逃げた",author:"青山美智子",genre:"青春",media:"",synopsis:"「人魚が逃げた」という謎の書き置きから始まる連作短編。青山美智子の温かく不思議な世界観が光る。"},
+  {year:2025,rank:6,title:"spring",author:"恩田陸",genre:"青春",media:"",synopsis:"バレエを通じて描かれる才能と情熱、嫉妬と愛。恩田陸が「蜜蜂と遠雷」に続いてアートの世界に挑んだ大作。"},
+  {year:2025,rank:7,title:"恋とか愛とかやさしさなら",author:"一穂ミチ",genre:"ヒューマン",media:"",synopsis:"さまざまな形の愛の物語を集めた連作短編集。一穂ミチが紡ぐ多様な関係性と感情の機微。"},
+  {year:2025,rank:8,title:"生殖記",author:"朝井リョウ",genre:"SF",media:"",synopsis:"AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウの挑戦作。"},
+  {year:2025,rank:9,title:"死んだ山田と教室",author:"金子玲介",genre:"青春",media:"映画化",synopsis:"突然死した同級生・山田が教室のスピーカーに宿り、クラスメートと会話するという奇想天外な青春小説。"},
+  {year:2025,rank:10,title:"成瀬は信じた道をいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"前作「成瀬は天下を取りにいく」の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む痛快青春小説。"},
+  // 2024 第21回
+  {year:2024,rank:1,title:"成瀬は天下を取りにいく",author:"宮島未奈",genre:"青春",media:"",synopsis:"滋賀県大津市を舞台に、西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。周囲を巻き込みながら突き進む姿が痛快な青春小説。", audible: true},
+  {year:2024,rank:2,title:"水車小屋のネネ",author:"津村記久子",genre:"ヒューマン",media:"",synopsis:"水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。津村記久子の新境地、温かな大河小説。"},
+  {year:2024,rank:3,title:"存在のすべてを",author:"塩田武士",genre:"ミステリ",media:"",synopsis:"誘拐事件と芸術の謎が絡み合うサスペンス。塩田武士が挑んだスケールの大きな人間ドラマ。"},
+  {year:2024,rank:4,title:"スピノザの診察室",author:"夏川草介",genre:"お仕事",media:"",synopsis:"大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作として話題を呼んだ作品。"},
+  {year:2024,rank:5,title:"レーエンデ国物語",author:"多崎礼",genre:"SF",media:"",synopsis:"異世界の小国を舞台にした壮大なファンタジー。講談社タイガーから登場した話題作で、続篇も好評。"},
+  {year:2024,rank:6,title:"黄色い家",author:"川上未映子",genre:"ヒューマン",media:"",synopsis:"貧困と孤独の中で生きる女たちの物語。川上未映子が社会の底辺に生きる人々を圧倒的な筆力で描く。"},
+  {year:2024,rank:7,title:"リカバリー・カバヒコ",author:"青山美智子",genre:"ヒューマン",media:"",synopsis:"公園の古びた動物遊具「カバヒコ」に触れると回復するという噂をめぐる連作短編。癒しと再生の物語。"},
+  {year:2024,rank:8,title:"星を編む",author:"凪良ゆう",genre:"ヒューマン",media:"",synopsis:"「汝、星のごとく」の続編にあたる短編集。前作のキャラクターたちのその後と、新たな出会いを描く。"},
+  {year:2024,rank:9,title:"放課後ミステリクラブ 1金魚の泳ぐプール事件",author:"知念実希人",genre:"ミステリ",media:"",synopsis:"小学生探偵たちが活躍する児童向けミステリ.本屋大賞初の児童書ノミネートとして話題に。"},
+  {year:2024,rank:10,title:"君が手にするはずだった黄金について",author:"小川哲",genre:"ヒューマン",media:"",synopsis:"芥川賞作家・小川哲の初短編集。才能と承認欲求、嘘と虚栄心をめぐる鋭い文学的考察。"},
+  // 2023 第20回
+  {year:2023,rank:1,title:"汝、星のごとく",author:"凪良ゆう",genre:"ヒューマン",media:"ドラマ化",synopsis:"瀬戸内の島で出会った二人の男女が、それぞれの夢と愛に苦しみながら生きていく物語。凪良ゆうの最高傑作との声も多い傑作。", audible: true}
+];
 
-## 本屋大賞 2024年（第21回）
+// ─── 各アフィリエイトURL生成ロジック ───
+function getAmazonKindleLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author);
+  return `https://www.amazon.co.jp/s?k=${q}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
+}
+function getAmazonPaperLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author);
+  return `https://www.amazon.co.jp/s?k=${q}&tag=${AMAZON_TAG}`;
+}
+function getRakutenLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author);
+  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${q}%2F-%2F%3Fsid%3D213310`;
+}
+function getAmazonAudibleLink(title, author) {
+  const q = encodeURIComponent(title + ' ' + author + ' Audible');
+  return `https://www.amazon.co.jp/s?k=${q}&i=audible&tag=${AMAZON_TAG}`;
+}
 
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 成瀬は天下を取りにいく | 宮島未奈 | [商品詳細](https://www.amazon.co.jp/dp/4103549513/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E6%88%90%E7%80%AC%E3%81%AF%E5%A4%A9%E4%B8%8B%E3%82%92%E5%8F%96%E3%82%8A%E3%81%AB%E3%81%84%E3%81%8F%20%E5%AE%AE%E5%B3%B6%E6%9C%AA%E5%A5%88&tag=wespressoblog-22) |
-| 2 | 水車小屋のネネ | 津村記久子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%B0%B4%E8%BB%8A%E5%B0%8F%E5%B1%8B%E3%81%AE%E3%83%8D%E3%83%8D%20%E6%B4%A5%E6%9D%91%E8%A8%98%E4%B9%85%E5%AD%90&tag=wespressoblog-22) |
-| 3 | 存在のすべてを | 塩田武士 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%AD%98%E5%9C%A8%E3%81%AE%E3%81%99%E3%81%B9%E3%81%A6%E3%82%92%20%E5%A1%A9%E7%94%B0%E6%AD%A6%E5%A3%AB&tag=wespressoblog-22) |
-| 4 | スピノザの診察室 | 夏川草介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%94%E3%83%8E%E3%82%B6%E3%81%AE%E8%A8%BA%E5%AF%9F%E5%AE%A4%20%E5%A4%8F%E5%B7%9D%E8%8D%89%E4%BB%8B&tag=wespressoblog-22) |
-| 5 | レーエンデ国物語 | 多崎礼 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%AC%E3%83%BC%E3%82%A8%E3%83%B3%E3%83%87%E5%9B%BD%E7%89%A9%E8%AA%9E%20%E5%A4%9A%E5%B4%8E%E7%A4%BC&tag=wespressoblog-22) |
-| 6 | 黄色い家 | 川上未映子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%BB%84%E8%89%B2%E3%81%84%E5%AE%B6%20%E5%B7%9D%E4%B8%8A%E6%9C%AA%E6%98%A0%E5%AD%90&tag=wespressoblog-22) |
-| 7 | リカバリー・カバヒコ | 青山美智子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%AA%E3%82%AB%E3%83%90%E3%83%AA%E3%83%BC%E3%83%BB%E3%82%AB%E3%83%90%E3%83%92%E3%82%B3%20%E9%9D%92%E5%B1%B1%E7%BE%8E%E6%99%BA%E5%AD%90&tag=wespressoblog-22) |
-| 8 | 星を編む | 凪良ゆう | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%98%9F%E3%82%92%E7%B7%A8%E3%82%80%20%E5%87%AA%E8%89%AF%E3%82%86%E3%81%86&tag=wespressoblog-22) |
-| 9 | 放課後ミステリクラブ | 知念実希人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%94%BE%E8%AA%B2%E5%BE%8C%E3%83%9F%E3%82%B9%E3%83%86%E3%83%AA%E3%82%AF%E3%83%A9%E3%83%96%20%E7%9F%A5%E5%BF%B5%E5%AE%9F%E5%B8%8C%E4%BA%BA&tag=wespressoblog-22) |
-| 10 | 君が手にするはずだった黄金について | 小川哲 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%90%9B%E3%81%8C%E6%89%8B%E3%81%AB%E3%81%99%E3%82%8B%E3%81%AF%E3%81%9A%E3%81%A0%E3%81%A3%E3%81%9F%E9%BB%84%E9%87%91%E3%81%AB%E3%81%A4%E3%81%84%E3%81%A6%20%E5%B0%8F%E5%B7%9D%E5%93%B2&tag=wespressoblog-22) |
+// ─── 💡【新設】Google Books APIから書影URLを安全・爆速で取得するコアシステム ───
+function fetchGoogleBookCover(title, author) {
+  // ① 記号や括弧などを排除し、純粋なスペース区切りの検索文字を作る（ヒット率向上）
+  const cleanTitle = title.replace(/[〜～─━：:・\s\-\[（()）\]]/g, ' ').replace(/[―—■●★▲◆▶✔•…]/g, '').trim();
+  const cacheKey = `gbook_${cleanTitle}_${author}`;
 
-## 本屋大賞 2023年（第20回）
+  // ② 【超重要】すでに取得したことがある本なら、APIを叩かずにブラウザの記憶（キャッシュ）から即座に返す
+  const cachedUrl = localStorage.getItem(cacheKey);
+  if (cachedUrl) return Promise.resolve(cachedUrl);
 
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 汝、星のごとく | 凪良ゆう | [商品詳細](https://www.amazon.co.jp/dp/4065286549/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E6%B1%9D%E3%80%81%E6%98%9F%E3%81%AE%E3%81%94%E3%81%A8%E3%81%8F%20%E5%87%AA%E8%89%AF%E3%82%86%E3%81%86&tag=wespressoblog-22) |
-| 2 | ラブカは静かに弓を持つ | 安壇美緒 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%A9%E3%83%96%E3%82%AB%E3%81%AF%E9%9D%99%E3%81%8B%E3%81%AB%E5%BC%93%E3%82%92%E6%8C%81%E3%81%A4%20%E5%AE%89%E5%A3%87%E7%BE%8E%E7%B7%92&tag=wespressoblog-22) |
-| 3 | 光のとこにいてね | 一穂ミチ | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%85%89%E3%81%AE%E3%81%A8%E3%81%93%E3%81%AB%E3%81%84%E3%81%A6%E3%81%AD%20%E4%B8%80%E7%A9%82%E3%83%9F%E3%83%81&tag=wespressoblog-22) |
-| 4 | 爆弾 | 呉勝浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%88%86%E5%BC%BE%20%E5%91%89%E5%8B%9D%E6%B5%A9&tag=wespressoblog-22) |
-| 5 | 月の立つ林で | 青山美智子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9C%88%E3%81%AE%E7%AB%8B%E3%81%A4%E6%9E%97%E3%81%A7%20%E9%9D%92%E5%B1%B1%E7%BE%8E%E6%99%BA%E5%AD%90&tag=wespressoblog-22) |
-| 6 | 君のクイズ | 小川哲 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%90%9B%E3%81%AE%E3%82%AF%E3%82%A4%E3%82%BA%20%E5%B0%8F%E5%B7%9D%E5%93%B2&tag=wespressoblog-22) |
-| 7 | 方舟 | 夕木春央 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%96%B9%E8%88%9F%20%E5%A4%95%E6%9C%A8%E6%98%A5%E5%A4%AE&tag=wespressoblog-22) |
-| 8 | 2020年の前奏曲 | 鴻上尚史 | [Amazon検索](https://www.amazon.co.jp/s?k=2020%E5%B9%B4%E3%81%AE%E5%89%8D%E5%A5%8F%E6%9B%B2%20%E9%B4%BB%E4%B8%8A%E5%B0%9A%E5%8F%B2&tag=wespressoblog-22) |
-| 9 | 掬えば手には | 瀬尾まいこ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%8E%AC%E3%81%88%E3%81%B0%E6%89%8B%E3%81%AB%E3%81%AF%20%E7%80%AC%E5%B0%BE%E3%81%BE%E3%81%84%E3%81%93&tag=wespressoblog-22) |
-| 10 | クロス | 小金丸大和 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%AF%E3%83%AD%E3%82%B9%20%E5%B0%8F%E9%87%91%E4%B8%B8%E5%A4%A7%E5%92%8C&tag=wespressoblog-22) |
-
-## 本屋大賞 2022年（第19回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 同志少女よ、敵を撃て | 逢坂冬馬 | [商品詳細](https://www.amazon.co.jp/dp/4152100648/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E5%90%8C%E5%BF%97%E5%B0%91%E5%A5%B3%E3%82%88%E3%80%81%E6%95%B5%E3%82%92%E6%92%83%E3%81%A6%20%E9%80%A2%E5%9D%82%E5%86%AC%E9%A6%AC&tag=wespressoblog-22) |
-| 2 | 赤と青とエスキース | 青山美智子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%B5%A4%E3%81%A8%E9%9D%92%E3%81%A8%E3%82%A8%E3%82%B9%E3%82%AD%E3%83%BC%E3%82%B9%20%E9%9D%92%E5%B1%B1%E7%BE%8E%E6%99%BA%E5%AD%90&tag=wespressoblog-22) |
-| 3 | スモールワールズ | 一穂ミチ | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%A2%E3%83%BC%E3%83%AB%E3%83%AF%E3%83%BC%E3%83%AB%E3%82%BA%20%E4%B8%80%E7%A9%82%E3%83%9F%E3%83%81&tag=wespressoblog-22) |
-| 4 | 正欲 | 朝井リョウ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%AD%A3%E6%AC%B2%20%E6%9C%9D%E4%BA%95%E3%83%AA%E3%83%A7%E3%82%A6&tag=wespressoblog-22) |
-| 5 | 六人の嘘つきな大学生 | 浅倉秋成 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%85%AD%E4%BA%BA%E3%81%AE%E5%98%98%E3%81%A4%E3%81%8D%E3%81%AA%E5%A4%A7%E5%AD%A6%E7%94%9F%20%E6%B5%85%E5%80%89%E7%A7%8B%E6%88%90&tag=wespressoblog-22) |
-| 6 | 夜が明ける | 西加奈子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%9C%E3%81%8C%E6%98%8E%E3%81%91%E3%82%8B%20%E8%A5%BF%E5%8A%A0%E5%A5%88%E5%AD%90&tag=wespressoblog-22) |
-| 7 | 残月記 | 小田雅久仁 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%AE%8B%E6%9C%88%E8%A8%98%20%E5%B0%8F%E7%94%B0%E9%9B%85%E4%B9%85%E4%BB%81&tag=wespressoblog-22) |
-| 8 | 硝子の塔の殺人 | 知念実希人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A1%9D%E5%AD%90%E3%81%AE%E5%A1%94%E3%81%AE%E6%AE%BA%E4%BA%BA%20%E7%9F%A5%E5%BF%B5%E5%AE%9F%E5%B8%8C%E4%BA%BA&tag=wespressoblog-22) |
-| 9 | 黒牢城 | 米澤穂信 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%BB%92%E7%89%A2%E5%9F%8E%20%E7%B1%B3%E6%BE%A4%E7%A9%82%E4%BF%A1&tag=wespressoblog-22) |
-| 10 | 星を掬う | 町田そのこ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%98%9F%E3%82%92%E6%8E%AC%E3%81%86%20%E7%94%BA%E7%94%B0%E3%81%9D%E3%81%AE%E3%81%93&tag=wespressoblog-22) |
-
-## 本屋大賞 2021年（第18回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 52ヘルツのクジラたち | 町田そのこ | [商品詳細](https://www.amazon.co.jp/dp/412005313X/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=52%E3%83%98%E3%83%AB%E3%83%84%E3%81%AE%E3%82%AF%E3%82%B8%E3%83%A9%E3%81%9F%E3%81%A1%20%E7%94%BA%E7%94%B0%E3%81%9D%E3%81%AE%E3%81%93&tag=wespressoblog-22) |
-| 2 | お探し物は図書室まで | 青山美智子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%8A%E6%8E%A2%E3%81%97%E7%89%A9%E3%81%AF%E5%9B%B3%E6%9B%B8%E5%AE%A4%E3%81%BE%E3%81%A7%20%E9%9D%92%E5%B1%B1%E7%BE%8E%E6%99%BA%E5%AD%90&tag=wespressoblog-22) |
-| 3 | 犬がいた季節 | 伊吹有喜 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%8A%AC%E3%81%8C%E3%81%84%E3%81%9F%E5%AD%A3%E7%AF%80%20%E4%BC%8A%E5%90%B9%E6%9C%89%E5%96%9C&tag=wespressoblog-22) |
-| 4 | 逆ソクラテス | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%80%86%E3%82%BD%E3%82%AF%E3%83%A9%E3%83%86%E3%82%B9%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 5 | 自転しながら公転する | 山本文緒 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%87%AA%E8%BB%A2%E3%81%97%E3%81%AA%E3%81%8C%E3%82%89%E5%85%AC%E8%BB%A2%E3%81%99%E3%82%8B%20%E5%B1%B1%E6%9C%AC%E6%96%87%E7%B7%92&tag=wespressoblog-22) |
-| 6 | 八月の銀の雪 | 伊与原新 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%85%AB%E6%9C%88%E3%81%AE%E9%8A%80%E3%81%AE%E9%9B%AA%20%E4%BC%8A%E4%B8%8E%E5%8E%9F%E6%96%B0&tag=wespressoblog-22) |
-| 7 | 滅びの前のシャングリラ | 凪良ゆう | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%BB%85%E3%81%B3%E3%81%AE%E5%89%8D%E3%81%AE%E3%82%B7%E3%83%A3%E3%83%B3%E3%82%B0%E3%83%AA%E3%83%A9%20%E5%87%AA%E8%89%AF%E3%82%86%E3%81%86&tag=wespressoblog-22) |
-| 8 | オルタネート | 加藤シゲアキ | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%AA%E3%83%AB%E3%82%BF%E3%83%8D%E3%83%BC%E3%83%88%20%E5%8A%A0%E8%97%A4%E3%82%B7%E3%82%B2%E3%82%A2%E3%82%AD&tag=wespressoblog-22) |
-| 9 | 推し、燃ゆ | 宇佐見りん | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%8E%A8%E3%81%97%E3%80%81%E7%87%83%E3%82%86%20%E5%AE%87%E4%BD%90%E8%A6%8B%E3%82%8A%E3%82%93&tag=wespressoblog-22) |
-| 10 | この本を盗む者は | 深緑野分 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%93%E3%81%AE%E6%9C%AC%E3%82%92%E7%9B%97%E3%82%80%E8%80%85%E3%81%AF%20%E6%B7%B1%E7%B7%91%E9%87%8E%E5%88%86&tag=wespressoblog-22) |
-
-## 本屋大賞 2020年（第17回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 流浪の月 | 凪良ゆう | [商品詳細](https://www.amazon.co.jp/dp/4488028020/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E6%B5%81%E6%B5%AA%E3%81%AE%E6%9C%88%20%E5%87%AA%E8%89%AF%E3%82%86%E3%81%86&tag=wespressoblog-22) |
-| 2 | ライオンのおやつ | 小川糸 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%A9%E3%82%A4%E3%82%AA%E3%83%B3%E3%81%AE%E3%81%8A%E3%82%84%E3%81%A4%20%E5%B0%8F%E5%B7%9D%E7%B3%B8&tag=wespressoblog-22) |
-| 3 | 線は、僕を描く | 砥上裕將 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%B7%9A%E3%81%AF%E3%80%81%E5%83%95%E3%82%92%E6%8F%8F%E3%81%8F%20%E7%A0%A5%E4%B8%8A%E8%A3%95%E5%B0%87&tag=wespressoblog-22) |
-| 4 | ノースライト | 横山秀夫 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%8E%E3%83%BC%E3%82%B9%E3%83%A9%E3%82%A4%E3%83%88%20%E6%A8%AA%E5%B1%B1%E7%A7%80%E5%A4%AB&tag=wespressoblog-22) |
-| 5 | 熱源 | 川越宗一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%86%B1%E6%BA%90%20%E5%B7%9D%E8%B6%8A%E5%AE%97%E4%B8%80&tag=wespressoblog-22) |
-| 6 | medium 霊媒探偵城塚翡翠 | 相沢沙呼 | [Amazon検索](https://www.amazon.co.jp/s?k=medium%20%E9%9C%8A%E5%AA%92%E6%8E%A2%E5%81%B5%E5%9F%8E%E5%A1%9A%E7%BF%A1%E7%BF%A0%20%E7%9B%B8%E6%B2%A2%E6%B2%99%E5%91%BC&tag=wespressoblog-22) |
-| 7 | 夏物語 | 川上未映子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%8F%E7%89%A9%E8%AA%9E%20%E5%B7%9D%E4%B8%8A%E6%9C%AA%E6%98%A0%E5%AD%90&tag=wespressoblog-22) |
-| 8 | ムゲンのi | 知念実希人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%A0%E3%82%B2%E3%83%B3%E3%81%AEi%20%E7%9F%A5%E5%BF%B5%E5%AE%9F%E5%B8%8C%E4%BA%BA&tag=wespressoblog-22) |
-| 9 | 店長がバカすぎて | 早見和真 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%BA%97%E9%95%B7%E3%81%8C%E3%83%90%E3%82%AB%E3%81%99%E3%81%8E%E3%81%A6%20%E6%97%A9%E8%A6%8B%E5%92%8C%E7%9C%9F&tag=wespressoblog-22) |
-| 10 | むかしむかしあるところに、死体がありました。 | 青柳碧人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%80%E3%81%8B%E3%81%97%E3%82%80%E3%81%8B%E3%81%97%E3%81%82%E3%82%8B%E3%81%A8%E3%81%93%E3%82%8D%E3%81%AB%E3%80%81%E6%AD%BB%E4%BD%93%E3%81%8C%E3%81%82%E3%82%8A%E3%81%BE%E3%81%97%E3%81%9F%E3%80%82%20%E9%9D%92%E6%9F%B3%E7%A2%A7%E4%BA%BA&tag=wespressoblog-22) |
-
-## 本屋大賞 2019年（第16回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | そして、バトンは渡された | 瀬尾まいこ | [商品詳細](https://www.amazon.co.jp/dp/4163907955/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E3%81%9D%E3%81%97%E3%81%A6%E3%80%81%E3%83%90%E3%83%88%E3%83%B3%E3%81%AF%E6%B8%A1%E3%81%95%E3%82%8C%E3%81%9F%20%E7%80%AC%E5%B0%BE%E3%81%BE%E3%81%84%E3%81%93&tag=wespressoblog-22) |
-| 2 | ひと | 小野寺史宜 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%B2%E3%81%A8%20%E5%B0%8F%E9%87%8E%E5%AF%BA%E5%8F%B2%E5%AE%9C&tag=wespressoblog-22) |
-| 3 | ベルリンは晴れているか | 深緑野分 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%99%E3%83%AB%E3%83%AA%E3%83%B3%E3%81%AF%E6%99%B4%E3%82%8C%E3%81%A6%E3%81%84%E3%82%8B%E3%81%8B%20%E6%B7%B1%E7%B7%91%E9%87%8E%E5%88%86&tag=wespressoblog-22) |
-| 4 | 熱帯 | 森見登美彦 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%86%B1%E5%B8%AF%20%E6%A3%AE%E8%A6%8B%E7%99%BB%E7%BE%8E%E5%BD%A6&tag=wespressoblog-22) |
-| 5 | ある男 | 平野啓一郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%82%E3%82%8B%E7%94%B7%20%E5%B9%B3%E9%87%8E%E5%95%93%E4%B8%80%E9%83%8E&tag=wespressoblog-22) |
-| 6 | さざなみの夜 | 木皿泉 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%95%E3%81%96%E3%81%AA%E3%81%BF%E3%81%AE%E5%A4%9C%20%E6%9C%A8%E7%9A%BF%E6%B3%89&tag=wespressoblog-22) |
-| 7 | 愛なき世界 | 三浦しをん | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%84%9B%E3%81%AA%E3%81%8D%E4%B8%96%E7%95%8C%20%E4%B8%89%E6%B5%A6%E3%81%97%E3%82%92%E3%82%93&tag=wespressoblog-22) |
-| 8 | ひとつむぎの手 | 知念実希人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%B2%E3%81%A8%E3%81%A4%E3%82%80%E3%81%8E%E3%81%AE%E6%89%8B%20%E7%9F%A5%E5%BF%B5%E5%AE%9F%E5%B8%8C%E4%BA%BA&tag=wespressoblog-22) |
-| 9 | 火のないところに俺はいる | 芦沢央 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%81%AB%E3%81%AE%E3%81%AA%E3%81%84%E3%81%A8%E3%81%93%E3%82%8D%E3%81%AB%E4%BF%BA%E3%81%AF%E3%81%84%E3%82%8B%20%E8%8A%A6%E6%B2%A2%E5%A4%AE&tag=wespressoblog-22) |
-| 10 | フーガはユーガ | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%95%E3%83%BC%E3%82%AC%E3%81%AF%E3%83%A6%E3%83%BC%E3%82%AC%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-
-## 本屋大賞 2018年（第15回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | かがみの孤城 | 辻村深月 | [商品詳細](https://www.amazon.co.jp/dp/4591153320/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E3%81%8B%E3%81%8C%E3%81%BF%E3%81%AE%E5%AD%A4%E5%9F%8E%20%E8%BE%BB%E6%9D%91%E6%B7%B1%E6%9C%88&tag=wespressoblog-22) |
-| 2 | 盤上の向日葵 | 柚月裕子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%9B%A4%E4%B8%8A%E3%81%AE%E5%90%91%E6%97%A5%E8%91%B5%20%E6%9F%9A%E6%9C%88%E8%A3%95%E5%AD%90&tag=wespressoblog-22) |
-| 3 | 屍人荘の殺人 | 今村昌弘 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%B1%8D%E4%BA%BA%E8%8D%98%E3%81%AE%E6%AE%BA%E4%BA%BA%20%E4%BB%8A%E6%9D%91%E6%98%8C%E5%BC%98&tag=wespressoblog-22) |
-| 4 | たゆたえども沈まず | 原田マハ | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%9F%E3%82%86%E3%81%9F%E3%81%88%E3%81%A9%E3%82%82%E6%B2%88%E3%81%BE%E3%81%9A%20%E5%8E%9F%E7%94%B0%E3%83%9E%E3%83%8F&tag=wespressoblog-22) |
-| 5 | AX アックス | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=AX%20%E3%82%A2%E3%83%83%E3%82%AF%E3%82%B9%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 6 | 騙し絵の牙 | 塩田武士 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%A8%99%E3%81%97%E7%B5%B5%E3%81%AE%E7%89%99%20%E5%A1%A9%E7%94%B0%E6%AD%A6%E5%A3%AB&tag=wespressoblog-22) |
-| 7 | 星の子 | 今村夏子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%98%9F%E3%81%AE%E5%AD%90%20%E4%BB%8A%E6%9D%91%E5%A4%8F%E5%AD%90&tag=wespressoblog-22) |
-| 8 | キラキラ共和国 | 小川糸 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%AD%E3%83%A9%E3%82%AD%E3%83%A9%E5%85%B1%E5%92%8C%E5%9B%BD%20%E5%B0%8F%E5%B7%9D%E7%B3%B8&tag=wespressoblog-22) |
-| 9 | コーヒーが冷めないうちに | 川口俊和 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%81%8C%E5%86%B7%E3%82%81%E3%81%AA%E3%81%84%E3%81%86%E3%81%A1%E3%81%AB%20%E5%B7%9D%E5%8F%A3%E4%BF%8A%E5%92%8C&tag=wespressoblog-22) |
-| 10 | 百貨の魔法 | 村山早紀 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%99%BE%E8%B2%A8%E3%81%AE%E9%AD%94%E6%B3%95%20%E6%9D%91%E5%B1%B1%E6%97%A9%E7%B4%80&tag=wespressoblog-22) |
-
-## 本屋大賞 2017年（第14回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 蜜蜂と遠雷 | 恩田陸 | [商品詳細](https://www.amazon.co.jp/dp/4344030036/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E8%9C%9C%E8%9C%82%E3%81%A8%E9%81%A0%E9%9B%B7%20%E6%81%A9%E7%94%B0%E9%99%B8&tag=wespressoblog-22) |
-| 2 | みかづき | 森絵都 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%BF%E3%81%8B%E3%81%A5%E3%81%8D%20%E6%A3%AE%E7%B5%B5%E9%83%BD&tag=wespressoblog-22) |
-| 3 | 罪の声 | 塩田武士 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%BD%AA%E3%81%AE%E5%A3%B0%20%E5%A1%A9%E7%94%B0%E6%AD%A6%E5%A3%AB&tag=wespressoblog-22) |
-| 4 | ツバキ文具店 | 小川糸 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%84%E3%83%90%E3%82%AD%E6%96%87%E5%85%B7%E5%BA%97%20%E5%B0%8F%E5%B7%9D%E7%B3%B8&tag=wespressoblog-22) |
-| 5 | 桜風堂ものがたり | 村山早紀 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%A1%9C%E9%A2%A8%E5%A0%82%E3%82%82%E3%81%AE%E3%81%8C%E3%81%9F%E3%82%8A%20%E6%9D%91%E5%B1%B1%E6%97%A9%E7%B4%80&tag=wespressoblog-22) |
-| 6 | 暗幕のゲルニカ | 原田マハ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9A%97%E5%B9%95%E3%81%AE%E3%82%B2%E3%83%AB%E3%83%8B%E3%82%AB%20%E5%8E%9F%E7%94%B0%E3%83%9E%E3%83%8F&tag=wespressoblog-22) |
-| 7 | i | 西加奈子 | [Amazon検索](https://www.amazon.co.jp/s?k=i%20%E8%A5%BF%E5%8A%A0%E5%A5%88%E5%AD%90&tag=wespressoblog-22) |
-| 8 | 夜行 | 森見登美彦 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%9C%E8%A1%8C%20%E6%A3%AE%E8%A6%8B%E7%99%BB%E7%BE%8E%E5%BD%A6&tag=wespressoblog-22) |
-| 9 | コンビニ人間 | 村田沙耶香 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B3%E3%83%B3%E3%83%93%E3%83%8B%E4%BA%BA%E9%96%93%20%E6%9D%91%E7%94%B0%E6%B2%99%E8%80%B6%E9%A6%99&tag=wespressoblog-22) |
-| 10 | コーヒーが冷めないうちに | 川口俊和 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B3%E3%83%BC%E3%83%92%E3%83%BC%E3%81%8C%E5%86%B7%E3%82%81%E3%81%AA%E3%81%84%E3%81%86%E3%81%A1%E3%81%AB%20%E5%B7%9D%E5%8F%A3%E4%BF%8A%E5%92%8C&tag=wespressoblog-22) |
-
-## 本屋大賞 2016年（第13回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 羊と鋼の森 | 宮下奈都 | [商品詳細](https://www.amazon.co.jp/dp/4163903232/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E7%BE%8A%E3%81%A8%E9%8B%BC%E3%81%AE%E6%A3%AE%20%E5%AE%AE%E4%B8%8B%E5%A5%88%E9%83%BD&tag=wespressoblog-22) |
-| 2 | 君の膵臓をたべたい | 住野よる | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%90%9B%E3%81%AE%E8%86%B5%E8%87%93%E3%82%92%E3%81%9F%E3%81%B9%E3%81%9F%E3%81%84%20%E4%BD%8F%E9%87%8E%E3%82%88%E3%82%8B&tag=wespressoblog-22) |
-| 3 | 世界から猫が消えたなら | 川村元気 | [Amazon検索](https://www.amazon.co.jp/s?k=%E4%B8%96%E7%95%8C%E3%81%8B%E3%82%89%E7%8C%AB%E3%81%8C%E6%B6%88%E3%81%88%E3%81%9F%E3%81%AA%E3%82%89%20%E5%B7%9D%E6%9D%91%E5%85%83%E6%B0%97&tag=wespressoblog-22) |
-| 4 | 永い言い訳 | 西川美和 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%B0%B8%E3%81%84%E8%A8%80%E3%81%84%E8%A8%B3%20%E8%A5%BF%E5%B7%9D%E7%BE%8E%E5%92%8C&tag=wespressoblog-22) |
-| 5 | 朝が来る | 辻村深月 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9C%9D%E3%81%8C%E6%9D%A5%E3%82%8B%20%E8%BE%BB%E6%9D%91%E6%B7%B1%E6%9C%88&tag=wespressoblog-22) |
-| 6 | 王とサーカス | 米澤穂信 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%8E%8B%E3%81%A8%E3%82%B5%E3%83%BC%E3%82%AB%E3%82%B9%20%E7%B1%B3%E6%BE%A4%E7%A9%82%E4%BF%A1&tag=wespressoblog-22) |
-| 7 | 戦場のコックたち | 深緑野分 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%88%A6%E5%A0%B4%E3%81%AE%E3%82%B3%E3%83%83%E3%82%AF%E3%81%9F%E3%81%A1%20%E6%B7%B1%E7%B7%91%E9%87%8E%E5%88%86&tag=wespressoblog-22) |
-| 8 | 流 | 東山彰良 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%B5%81%20%E6%9D%B1%E5%B1%B1%E5%BD%B0%E8%89%AF&tag=wespressoblog-22) |
-| 9 | 教団X | 中村文則 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%95%99%E5%9B%A3X%20%E4%B8%AD%E6%9D%91%E6%96%87%E5%89%87&tag=wespressoblog-22) |
-| 10 | 火花 | 又吉直樹 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%81%AB%E8%8A%B1%20%E5%8F%88%E5%90%89%E7%9B%B4%E6%A8%B9&tag=wespressoblog-22) |
-
-## 本屋大賞 2015年（第12回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 鹿の王 | 上橋菜穂子 | [商品詳細](https://www.amazon.co.jp/dp/4041018889/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E9%B9%BF%E3%81%AE%E7%8E%8B%20%E4%B8%8A%E6%A9%8B%E8%8F%9C%E7%A9%82%E5%AD%90&tag=wespressoblog-22) |
-| 2 | サラバ! | 西加奈子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B5%E3%83%A9%E3%83%90%21%20%E8%A5%BF%E5%8A%A0%E5%A5%88%E5%AD%90&tag=wespressoblog-22) |
-| 3 | ハケンアニメ! | 辻村深月 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%8F%E3%82%B1%E3%83%B3%E3%82%A2%E3%83%8B%E3%83%A1%21%20%E8%BE%BB%E6%9D%91%E6%B7%B1%E6%9C%88&tag=wespressoblog-22) |
-| 4 | 本日は、お日柄もよく | 原田マハ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9C%AC%E6%97%A5%E3%81%AF%E3%80%81%E3%81%8A%E6%97%A5%E6%9F%84%E3%82%82%E3%82%88%E3%81%8F%20%E5%8E%9F%E7%94%B0%E3%83%9E%E3%83%8F&tag=wespressoblog-22) |
-| 5 | アイネクライネナハトムジーク | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%A2%E3%82%A4%E3%83%8D%E3%82%AF%E3%83%A9%E3%82%A4%E3%83%8D%E3%83%8A%E3%83%8F%E3%83%88%E3%83%A0%E3%82%B8%E3%83%BC%E3%82%AF%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 6 | 億男 | 川村元気 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%84%84%E7%94%B7%20%E5%B7%9D%E6%9D%91%E5%85%83%E6%B0%97&tag=wespressoblog-22) |
-| 7 | キャプテンサンダーボルト | 阿部和重・伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%AD%E3%83%A3%E3%83%97%E3%83%86%E3%83%B3%E3%82%B5%E3%83%B3%E3%83%80%E3%83%BC%E3%83%9C%E3%83%AB%E3%83%88%20%E9%98%BF%E9%83%A8%E5%92%8C%E9%87%8D%E3%83%BB%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 8 | アイの物語 | 山本弘 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%A2%E3%82%A4%E3%81%AE%E7%89%A9%E8%AA%9E%20%E5%B1%B1%E6%9C%AC%E5%BC%98&tag=wespressoblog-22) |
-| 9 | 殺人犯はそこにいる | 清水潔 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%AE%BA%E4%BA%BA%E7%8A%AF%E3%81%AF%E3%81%9D%E3%81%93%E3%81%AB%E3%81%84%E3%82%8B%20%E6%B8%85%E6%B0%B4%E6%BD%94&tag=wespressoblog-22) |
-| 10 | 満願 | 米澤穂信 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%BA%80%E9%A1%98%20%E7%B1%B3%E6%BE%A4%E7%A9%82%E4%BF%A1&tag=wespressoblog-22) |
-
-## 本屋大賞 2014年（第11回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 村上海賊の娘 | 和田竜 | [商品詳細](https://www.amazon.co.jp/dp/4103068825/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E6%9D%91%E4%B8%8A%E6%B5%B7%E8%B3%8A%E3%81%AE%E5%A8%98%20%E5%92%8C%E7%94%B0%E7%AB%9C&tag=wespressoblog-22) |
-| 2 | 昨夜のカレー、明日のパン | 木皿泉 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%98%A8%E5%A4%9C%E3%81%AE%E3%82%AB%E3%83%AC%E3%83%BC%E3%80%81%E6%98%8E%E6%97%A5%E3%81%AE%E3%83%91%E3%83%B3%20%E6%9C%A8%E7%9A%BF%E6%B3%89&tag=wespressoblog-22) |
-| 3 | 島はぼくらと | 辻村深月 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%B3%B6%E3%81%AF%E3%81%BC%E3%81%8F%E3%82%89%E3%81%A8%20%E8%BE%BB%E6%9D%91%E6%B7%B1%E6%9C%88&tag=wespressoblog-22) |
-| 4 | さようなら、オレンジ | 岩城けい | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%95%E3%82%88%E3%81%86%E3%81%AA%E3%82%89%E3%80%81%E3%82%AA%E3%83%AC%E3%83%B3%E3%82%B8%20%E5%B2%A9%E5%9F%8E%E3%81%91%E3%81%84&tag=wespressoblog-22) |
-| 5 | とっぴんぱらりの風太郎 | 万城目学 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%A8%E3%81%A3%E3%81%B4%E3%82%93%E3%81%B1%E3%82%89%E3%82%8A%E3%81%AE%E9%A2%A8%E5%A4%AA%E9%83%8E%20%E4%B8%87%E5%9F%8E%E7%9B%AE%E5%AD%A6&tag=wespressoblog-22) |
-| 6 | 教団X | 中村文則 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%95%99%E5%9B%A3X%20%E4%B8%AD%E6%9D%91%E6%96%87%E5%89%87&tag=wespressoblog-22) |
-| 7 | 想像ラジオ | いとうせいこう | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%83%B3%E5%83%8F%E3%83%A9%E3%82%B8%E3%82%AA%20%E3%81%84%E3%81%A8%E3%81%86%E3%81%9B%E3%81%84%E3%81%93%E3%81%86&tag=wespressoblog-22) |
-| 8 | 聖なる怠け者の冒険 | 森見登美彦 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%81%96%E3%81%AA%E3%82%8B%E6%80%A0%E3%81%91%E8%80%85%E3%81%AE%E5%86%92%E9%99%BA%20%E6%A3%AE%E8%A6%8B%E7%99%BB%E7%BE%8E%E5%BD%A6&tag=wespressoblog-22) |
-| 9 | 去年の冬、きみと別れ | 中村文則 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%8E%BB%E5%B9%B4%E3%81%AE%E5%86%AC%E3%80%81%E3%81%8D%E3%81%BF%E3%81%A8%E5%88%A5%E3%82%8C%20%E4%B8%AD%E6%9D%91%E6%96%87%E5%89%87&tag=wespressoblog-22) |
-| 10 | 望郷 | 湊かなえ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9C%9B%E9%83%B7%20%E6%B9%8A%E3%81%8B%E3%81%AA%E3%81%88&tag=wespressoblog-22) |
-
-## 本屋大賞 2013年（第10回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 海賊とよばれた男 | 百田尚樹 | [商品詳細](https://www.amazon.co.jp/dp/4062177714/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E6%B5%B7%E8%B3%8A%E3%81%A8%E3%82%88%E3%81%B0%E3%82%8C%E3%81%9F%E7%94%B7%20%E7%99%BE%E7%94%B0%E5%B0%9A%E6%A8%B9&tag=wespressoblog-22) |
-| 2 | 64 | 横山秀夫 | [Amazon検索](https://www.amazon.co.jp/s?k=64%20%E6%A8%AA%E5%B1%B1%E7%A7%80%E5%A4%AB&tag=wespressoblog-22) |
-| 3 | 楽園のカンヴァス | 原田マハ | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%A5%BD%E5%9C%92%E3%81%AE%E3%82%AB%E3%83%B3%E3%83%B4%E3%82%A1%E3%82%B9%20%E5%8E%9F%E7%94%B0%E3%83%9E%E3%83%8F&tag=wespressoblog-22) |
-| 4 | きみはいい子 | 中脇初枝 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%8D%E3%81%BF%E3%81%AF%E3%81%84%E3%81%84%E5%AD%90%20%E4%B8%AD%E8%84%87%E5%88%9D%E6%9E%9D&tag=wespressoblog-22) |
-| 5 | ふくわらい | 西加奈子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%B5%E3%81%8F%E3%82%8F%E3%82%89%E3%81%84%20%E8%A5%BF%E5%8A%A0%E5%A5%88%E5%AD%90&tag=wespressoblog-22) |
-| 6 | 晴天の迷いクジラ | 窪美澄 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%99%B4%E5%A4%A9%E3%81%AE%E8%BF%B7%E3%81%84%E3%82%AF%E3%82%B8%E3%83%A9%20%E7%AA%AA%E7%BE%8E%E6%BE%84&tag=wespressoblog-22) |
-| 7 | 屍者の帝国 | 伊藤計劃・円城塔 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%B1%8D%E8%80%85%E3%81%AE%E5%B8%9D%E5%9B%BD%20%E4%BC%8A%E8%97%A4%E8%A8%88%E5%8A%83%E3%83%BB%E5%86%86%E5%9F%8E%E5%A1%94&tag=wespressoblog-22) |
-| 8 | 光待つ場所へ | 辻村深月 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%85%89%E5%BE%85%E3%81%A4%E5%A0%B4%E6%89%80%E3%81%B8%20%E8%BE%BB%E6%9D%91%E6%B7%B1%E6%9C%88&tag=wespressoblog-22) |
-| 9 | 獏の檻 | 道尾秀介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%8D%8F%E3%81%AE%E6%AA%BB%20%E9%81%93%E5%B0%BE%E7%A7%80%E4%BB%8B&tag=wespressoblog-22) |
-| 10 | 百瀬、こっちを向いて。 | 中田永一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%99%BE%E7%80%AC%E3%80%81%E3%81%93%E3%81%A3%E3%81%A1%E3%82%92%E5%90%91%E3%81%84%E3%81%A6%E3%80%82%20%E4%B8%AD%E7%94%B0%E6%B0%B8%E4%B8%80&tag=wespressoblog-22) |
-
-## 本屋大賞 2012年（第9回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 舟を編む | 三浦しをん | [商品詳細](https://www.amazon.co.jp/dp/4334927769/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E8%88%9F%E3%82%92%E7%B7%A8%E3%82%80%20%E4%B8%89%E6%B5%A6%E3%81%97%E3%82%92%E3%82%93&tag=wespressoblog-22) |
-| 2 | ジェノサイド | 高野和明 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B8%E3%82%A7%E3%83%8E%E3%82%B5%E3%82%A4%E3%83%89%20%E9%AB%98%E9%87%8E%E5%92%8C%E6%98%8E&tag=wespressoblog-22) |
-| 3 | ピエタ | 大島真寿美 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%94%E3%82%A8%E3%82%BF%20%E5%A4%A7%E5%B3%B6%E7%9C%9F%E5%AF%BF%E7%BE%8E&tag=wespressoblog-22) |
-| 4 | くちびるに歌を | 中田永一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%8F%E3%81%A1%E3%81%B3%E3%82%8B%E3%81%AB%E6%AD%8C%E3%82%92%20%E4%B8%AD%E7%94%B0%E6%B0%B8%E4%B8%80&tag=wespressoblog-22) |
-| 5 | 人質の朗読会 | 小川洋子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E4%BA%BA%E8%B3%AA%E3%81%AE%E6%9C%97%E8%AA%AD%E4%BC%9A%20%E5%B0%8F%E5%B7%9D%E6%B4%8B%E5%AD%90&tag=wespressoblog-22) |
-| 6 | ユリゴコロ | 沼田まほかる | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%A6%E3%83%AA%E3%82%B4%E3%82%B3%E3%83%AD%20%E6%B2%BC%E7%94%B0%E3%81%BE%E3%81%BB%E3%81%8B%E3%82%8B&tag=wespressoblog-22) |
-| 7 | 誰かが足りない | 宮下奈都 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%AA%B0%E3%81%8B%E3%81%8C%E8%B6%B3%E3%82%8A%E3%81%AA%E3%81%84%20%E5%AE%AE%E4%B8%8B%E5%A5%88%E9%83%BD&tag=wespressoblog-22) |
-| 8 | ビブリア古書堂の事件手帖 | 三上延 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%93%E3%83%96%E3%83%AA%E3%82%A2%E5%8F%A4%E6%9B%B8%E5%A0%82%E3%81%AE%E4%BA%8B%E4%BB%B6%E6%89%8B%E5%B8%96%20%E4%B8%89%E4%B8%8A%E5%BB%B6&tag=wespressoblog-22) |
-| 9 | 偉大なる、しゅららぼん | 万城目学 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%81%89%E5%A4%A7%E3%81%AA%E3%82%8B%E3%80%81%E3%81%97%E3%82%85%E3%82%89%E3%82%89%E3%81%BC%E3%82%93%20%E4%B8%87%E5%9F%8E%E7%9B%AE%E5%AD%A6&tag=wespressoblog-22) |
-| 10 | プリズム | 百田尚樹 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%97%E3%83%AA%E3%82%BA%E3%83%A0%20%E7%99%BE%E7%94%B0%E5%B0%9A%E6%A8%B9&tag=wespressoblog-22) |
-
-## 本屋大賞 2011年（第8回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 謎解きはディナーのあとで | 東川篤哉 | [商品詳細](https://www.amazon.co.jp/dp/409386280X/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E8%AC%8E%E8%A7%A3%E3%81%8D%E3%81%AF%E3%83%87%E3%82%A3%E3%83%8A%E3%83%BC%E3%81%AE%E3%81%82%E3%81%A8%E3%81%A7%20%E6%9D%B1%E5%B7%9D%E7%AF%A4%E5%93%89&tag=wespressoblog-22) |
-| 2 | ふがいない僕は空を見た | 窪美澄 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%B5%E3%81%8C%E3%81%84%E3%81%AA%E3%81%84%E5%83%95%E3%81%AF%E7%A9%BA%E3%82%92%E8%A6%8B%E3%81%9F%20%E7%AA%AA%E7%BE%8E%E6%BE%84&tag=wespressoblog-22) |
-| 3 | ペンギン・ハイウェイ | 森見登美彦 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%9A%E3%83%B3%E3%82%AE%E3%83%B3%E3%83%BB%E3%83%8F%E3%82%A4%E3%82%A6%E3%82%A7%E3%82%A4%20%E6%A3%AE%E8%A6%8B%E7%99%BB%E7%BE%8E%E5%BD%A6&tag=wespressoblog-22) |
-| 4 | 錨を上げよ | 百田尚樹 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%8C%A8%E3%82%92%E4%B8%8A%E3%81%92%E3%82%88%20%E7%99%BE%E7%94%B0%E5%B0%9A%E6%A8%B9&tag=wespressoblog-22) |
-| 5 | シューマンの指 | 奥泉光 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B7%E3%83%A5%E3%83%BC%E3%83%9E%E3%83%B3%E3%81%AE%E6%8C%87%20%E5%A5%A5%E6%B3%89%E5%85%89&tag=wespressoblog-22) |
-| 6 | 叫びと祈り | 梓河人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%8F%AB%E3%81%B3%E3%81%A8%E7%A5%88%E3%82%8A%20%E6%A2%93%E6%B2%B3%E4%BA%BA&tag=wespressoblog-22) |
-| 7 | 悪の教典 | 貴志祐介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%82%AA%E3%81%AE%E6%95%99%E5%85%B8%20%E8%B2%B4%E5%BF%97%E7%A5%90%E4%BB%8B&tag=wespressoblog-22) |
-| 8 | 神様のカルテ2 | 夏川草介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A5%9E%E6%A7%98%E3%81%AE%E3%82%AB%E3%83%AB%E3%83%862%20%E5%A4%8F%E5%B7%9D%E8%8D%89%E4%BB%8B&tag=wespressoblog-22) |
-| 9 | キケン | 有川浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%AD%E3%82%B1%E3%83%B3%20%E6%9C%89%E5%B7%9D%E6%B5%A9&tag=wespressoblog-22) |
-| 10 | ストーリー・セラー | 有川浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B9%E3%83%88%E3%83%BC%E3%83%AA%E3%83%BC%E3%83%BB%E3%82%BB%E3%83%A9%E3%83%BC%20%E6%9C%89%E5%B7%9D%E6%B5%A9&tag=wespressoblog-22) |
-
-## 本屋大賞 2010年（第7回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 天地明察 | 冲方丁 | [商品詳細](https://www.amazon.co.jp/dp/404874013X/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E5%A4%A9%E5%9C%B0%E6%98%8E%E5%AF%9F%20%E5%86%B2%E6%96%B9%E4%B8%81&tag=wespressoblog-22) |
-| 2 | 神様のカルテ | 夏川草介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A5%9E%E6%A7%98%E3%81%AE%E3%82%AB%E3%83%AB%E3%83%86%20%E5%A4%8F%E5%B7%9D%E8%8D%89%E4%BB%8B&tag=wespressoblog-22) |
-| 3 | 横道世之介 | 吉田修一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%A8%AA%E9%81%93%E4%B8%96%E4%B9%8B%E4%BB%8B%20%E5%90%89%E7%94%B0%E4%BF%AE%E4%B8%80&tag=wespressoblog-22) |
-| 4 | 神去なあなあ日常 | 三浦しをん | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A5%9E%E5%8E%BB%E3%81%AA%E3%81%82%E3%81%AA%E3%81%82%E6%97%A5%E5%B8%B8%20%E4%B8%89%E6%B5%A6%E3%81%97%E3%82%92%E3%82%93&tag=wespressoblog-22) |
-| 5 | 猫を抱いて象と泳ぐ | 小川洋子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%8C%AB%E3%82%92%E6%8A%B1%E3%81%84%E3%81%A6%E8%B1%A1%E3%81%A8%E6%B3%B3%E3%81%90%20%E5%B0%8F%E5%B7%9D%E6%B4%8B%E5%AD%90&tag=wespressoblog-22) |
-| 6 | ヘヴン | 川上未映子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%98%E3%83%B4%E3%83%B3%20%E5%B7%9D%E4%B8%8A%E6%9C%AA%E6%98%A0%E5%AD%90&tag=wespressoblog-22) |
-| 7 | 植物図鑑 | 有川浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%A4%8D%E7%89%A9%E5%9B%B3%E9%91%91%20%E6%9C%89%E5%B7%9D%E6%B5%A9&tag=wespressoblog-22) |
-| 8 | 新参者 | 東野圭吾 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%96%B0%E5%8F%82%E8%80%85%20%E6%9D%B1%E9%87%8E%E5%9C%AD%E5%90%BE&tag=wespressoblog-22) |
-| 9 | 1Q84 | 村上春樹 | [Amazon検索](https://www.amazon.co.jp/s?k=1Q84%20%E6%9D%91%E4%B8%8A%E6%98%A5%E6%A8%B9&tag=wespressoblog-22) |
-| 10 | 船に乗れ! | 藤谷治 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%88%B9%E3%81%AB%E4%B9%97%E3%82%8C%21%20%E8%97%A4%E8%B0%B7%E6%B2%BB&tag=wespressoblog-22) |
-
-## 本屋大賞 2009年（第6回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 告白 | 湊かなえ | [商品詳細](https://www.amazon.co.jp/dp/4575236195/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E5%91%8A%E7%99%BD%20%E6%B9%8A%E3%81%8B%E3%81%AA%E3%81%88&tag=wespressoblog-22) |
-| 2 | 忍びの国 | 和田竜 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%BF%8D%E3%81%B3%E3%81%AE%E5%9B%BD%20%E5%92%8C%E7%94%B0%E7%AB%9C&tag=wespressoblog-22) |
-| 3 | ジョーカー・ゲーム | 柳広司 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B8%E3%83%A7%E3%83%BC%E3%82%AB%E3%83%BC%E3%83%BB%E3%82%B2%E3%83%BC%E3%83%A0%20%E6%9F%B3%E5%BA%83%E5%8F%B8&tag=wespressoblog-22) |
-| 4 | テンペスト | 池上永一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%86%E3%83%B3%E3%83%9A%E3%82%B9%E3%83%88%20%E6%B1%A0%E4%B8%8A%E6%B0%B8%E4%B8%80&tag=wespressoblog-22) |
-| 5 | ボックス! | 百田尚樹 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%9C%E3%83%83%E3%82%AF%E3%82%B9%21%20%E7%99%BE%E7%94%B0%E5%B0%9A%E6%A8%B9&tag=wespressoblog-22) |
-| 6 | 新世界より | 貴志祐介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%96%B0%E4%B8%96%E7%95%8C%E3%82%88%E3%82%8A%20%E8%B2%B4%E5%BF%97%E7%A5%90%E4%BB%8B&tag=wespressoblog-22) |
-| 7 | 出星前夜 | 飯嶋和一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%87%BA%E6%98%9F%E5%89%8D%E5%A4%9C%20%E9%A3%AF%E5%B6%8B%E5%92%8C%E4%B8%80&tag=wespressoblog-22) |
-| 8 | 悼む人 | 天童荒太 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%82%BC%E3%82%80%E4%BA%BA%20%E5%A4%A9%E7%AB%A5%E8%8D%92%E5%A4%AA&tag=wespressoblog-22) |
-| 9 | 流星の絆 | 東野圭吾 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%B5%81%E6%98%9F%E3%81%AE%E7%B5%86%20%E6%9D%B1%E9%87%8E%E5%9C%AD%E5%90%BE&tag=wespressoblog-22) |
-| 10 | モダンタイムス | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%A2%E3%83%80%E3%83%B3%E3%82%BF%E3%82%A4%E3%83%A0%E3%82%B9%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-
-## 本屋大賞 2008年（第5回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | ゴールデンスランバー | 伊坂幸太郎 | [商品詳細](https://www.amazon.co.jp/dp/4104617032/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E3%82%B4%E3%83%BC%E3%83%AB%E3%83%87%E3%83%B3%E3%82%B9%E3%83%A9%E3%83%B3%E3%83%90%E3%83%BC%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 2 | パレードの凱歌 | 吉田修一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%91%E3%83%AC%E3%83%BC%E3%83%89%E3%81%AE%E5%87%B1%E6%AD%8C%20%E5%90%89%E7%94%B0%E4%BF%AE%E4%B8%80&tag=wespressoblog-22) |
-| 3 | 悪人 | 吉田修一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%82%AA%E4%BA%BA%20%E5%90%89%E7%94%B0%E4%BF%AE%E4%B8%80&tag=wespressoblog-22) |
-| 4 | 昨日の海は | 近藤史恵 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%98%A8%E6%97%A5%E3%81%AE%E6%B5%B7%E3%81%AF%20%E8%BF%91%E8%97%A4%E5%8F%B2%E6%81%B5&tag=wespressoblog-22) |
-| 5 | サウスバウンド | 奥田英朗 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B5%E3%82%A6%E3%82%B9%E3%83%90%E3%82%A6%E3%83%B3%E3%83%89%20%E5%A5%A5%E7%94%B0%E8%8B%B1%E6%9C%97&tag=wespressoblog-22) |
-| 6 | 楽園 | 宮部みゆき | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%A5%BD%E5%9C%92%20%E5%AE%AE%E9%83%A8%E3%81%BF%E3%82%86%E3%81%8D&tag=wespressoblog-22) |
-| 7 | 喋れどもしゃべれども | 佐藤多佳子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%96%8B%E3%82%8C%E3%81%A9%E3%82%82%E3%81%97%E3%82%83%E3%81%B9%E3%82%8C%E3%81%A9%E3%82%82%20%E4%BD%90%E8%97%A4%E5%A4%9A%E4%BD%B3%E5%AD%90&tag=wespressoblog-22) |
-| 8 | 赤い指 | 東野圭吾 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%B5%A4%E3%81%84%E6%8C%87%20%E6%9D%B1%E9%87%8E%E5%9C%AD%E5%90%BE&tag=wespressoblog-22) |
-| 9 | 鹿男あをによし | 万城目学 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%B9%BF%E7%94%B7%E3%81%82%E3%82%92%E3%81%AB%E3%82%88%E3%81%97%20%E4%B8%87%E5%9F%8E%E7%9B%AE%E5%AD%A6&tag=wespressoblog-22) |
-| 10 | 11 | 津村記久子 | [Amazon検索](https://www.amazon.co.jp/s?k=11%20%E6%B4%A5%E6%9D%91%E8%A8%98%E4%B9%85%E5%AD%90&tag=wespressoblog-22) |
-
-## 本屋大賞 2007年（第4回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 一瞬の風になれ | 佐藤多佳子 | [商品詳細](https://www.amazon.co.jp/dp/4062137356/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E4%B8%80%E7%9E%AC%E3%81%AE%E9%A2%A8%E3%81%AB%E3%81%AA%E3%82%8C%20%E4%BD%90%E8%97%A4%E5%A4%9A%E4%BD%B3%E5%AD%90&tag=wespressoblog-22) |
-| 2 | 夜は短し歩けよ乙女 | 森見登美彦 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%9C%E3%81%AF%E7%9F%AD%E3%81%97%E6%AD%A9%E3%81%91%E3%82%88%E4%B9%99%E5%A5%B3%20%E6%A3%AE%E8%A6%8B%E7%99%BB%E7%BE%8E%E5%BD%A6&tag=wespressoblog-22) |
-| 3 | 風が強く吹いている | 三浦しをん | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%A2%A8%E3%81%8C%E5%BC%B7%E3%81%8F%E5%90%B9%E3%81%84%E3%81%A6%E3%81%84%E3%82%8B%20%E4%B8%89%E6%B5%A6%E3%81%97%E3%82%92%E3%82%93&tag=wespressoblog-22) |
-| 4 | 終末のフール | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%B5%82%E6%9C%AB%E3%81%AE%E3%83%95%E3%83%BC%E3%83%AB%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 5 | 図書館戦争 | 有川浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%9B%B3%E6%9B%B8%E9%A4%A8%E6%88%A6%E4%BA%89%20%E6%9C%89%E5%B7%9D%E6%B5%A9&tag=wespressoblog-22) |
-| 6 | 鴨川ホルモー | 万城目学 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%B4%A8%E5%B7%9D%E3%83%9B%E3%83%AB%E3%83%A2%E3%83%BC%20%E4%B8%87%E5%9F%8E%E7%9B%AE%E5%AD%A6&tag=wespressoblog-22) |
-| 7 | ミーナの行進 | 小川洋子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%9F%E3%83%BC%E3%83%8A%E3%81%AE%E8%A1%8C%E9%80%B2%20%E5%B0%8F%E5%B7%9D%E6%B4%8B%E5%AD%90&tag=wespressoblog-22) |
-| 8 | 陰日向に咲く | 劇団ひとり | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%99%B0%E6%97%A5%E5%90%91%E3%81%AB%E5%92%B2%E3%81%8F%20%E5%8A%87%E5%9B%A3%E3%81%B2%E3%81%A8%E3%82%8A&tag=wespressoblog-22) |
-| 9 | 失はれる物語 | 乙一 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%B1%E3%81%AF%E3%82%8C%E3%82%8B%E7%89%A9%E8%AA%9E%20%E4%B9%99%E4%B8%80&tag=wespressoblog-22) |
-| 10 | アイの物語 | 山本弘 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%A2%E3%82%A4%E3%81%AE%E7%89%A9%E8%AA%9E%20%E5%B1%B1%E6%9C%AC%E5%BC%98&tag=wespressoblog-22) |
-
-## 本屋大賞 2006年（第3回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 東京タワー 〜オカンとボクと、時々、オトン〜 | リリー・フランキー | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%9D%B1%E4%BA%AC%E3%82%BF%E3%83%AF%E3%83%BC%20%E3%80%9C%E3%82%AA%E3%82%AB%E3%83%B3%E3%81%A8%E3%83%9C%E3%82%AF%E3%81%A8%E3%80%81%E6%99%82%E3%80%85%E3%80%81%E3%82%AA%E3%83%88%E3%83%B3%E3%80%9C%20%E3%83%AA%E3%83%AA%E3%83%BC%E3%83%BB%E3%83%95%E3%83%A9%E3%83%B3%E3%82%AD%E3%83%BC&tag=wespressoblog-22) |
-| 2 | サウスバウンド | 奥田英朗 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%B5%E3%82%A6%E3%82%B9%E3%83%90%E3%82%A6%E3%83%B3%E3%83%89%20%E5%A5%A5%E7%94%B0%E8%8B%B1%E6%9C%97&tag=wespressoblog-22) |
-| 3 | 死神の精度 | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%AD%BB%E7%A5%9E%E3%81%AE%E7%B2%BE%E5%BA%A6%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 4 | 容疑者Xの献身 | 東野圭吾 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%AE%B9%E7%96%91%E8%80%85X%E3%81%AE%E7%8C%AE%E8%BA%AB%20%E6%9D%B1%E9%87%8E%E5%9C%AD%E5%90%BE&tag=wespressoblog-22) |
-| 5 | その日のまえに | 重松清 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%9D%E3%81%AE%E6%97%A5%E3%81%AE%E3%81%BE%E3%81%88%E3%81%AB%20%E9%87%8D%E6%9D%BE%E6%B8%85&tag=wespressoblog-22) |
-| 6 | ナラタージュ | 島本理生 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%8A%E3%83%A9%E3%82%BF%E3%83%BC%E3%82%B8%E3%83%A5%20%E5%B3%B6%E6%9C%AC%E7%90%86%E7%94%9F&tag=wespressoblog-22) |
-| 7 | 告白 | 町田康 | [商品詳細](https://www.amazon.co.jp/dp/4575236195/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E5%91%8A%E7%99%BD%20%E7%94%BA%E7%94%B0%E5%BA%B7&tag=wespressoblog-22) |
-| 8 | ベルカ、吠えないのか? | 古川日出男 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%99%E3%83%AB%E3%82%AB%E3%80%81%E5%90%A0%E3%81%88%E3%81%AA%E3%81%84%E3%81%AE%E3%81%8B%3F%20%E5%8F%A4%E5%B7%9D%E6%97%A5%E5%87%BA%E7%94%B7&tag=wespressoblog-22) |
-| 9 | 嫌われ松子の一生 | 山田宗樹 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%AB%8C%E3%82%8F%E3%82%8C%E6%9D%BE%E5%AD%90%E3%81%AE%E4%B8%80%E7%94%9F%20%E5%B1%B1%E7%94%B0%E5%AE%97%E6%A8%B9&tag=wespressoblog-22) |
-| 10 | ワークス・フェイバリット | 有川浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%AF%E3%83%BC%E3%82%AF%E3%82%B9%E3%83%BB%E3%83%95%E3%82%A7%E3%82%A4%E3%83%90%E3%83%AA%E3%83%83%E3%83%88%20%E6%9C%89%E5%B7%9D%E6%B5%A9&tag=wespressoblog-22) |
-
-## 本屋大賞 2005年（第2回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 夜のピクニック | 恩田陸 | [商品詳細](https://www.amazon.co.jp/dp/4103971053/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E5%A4%9C%E3%81%AE%E3%83%94%E3%82%AF%E3%83%8B%E3%83%83%E3%82%AF%20%E6%81%A9%E7%94%B0%E9%99%B8&tag=wespressoblog-22) |
-| 2 | 明日の記憶 | 荻原浩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%98%8E%E6%97%A5%E3%81%AE%E8%A8%98%E6%86%B6%20%E8%8D%BB%E5%8E%9F%E6%B5%A9&tag=wespressoblog-22) |
-| 3 | 家守綺譚 | 梨木香歩 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%AE%B6%E5%AE%88%E7%B6%BA%E8%AD%9A%20%E6%A2%A8%E6%9C%A8%E9%A6%99%E6%AD%A9&tag=wespressoblog-22) |
-| 4 | 袋小路の男 | 糸山秋子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%A2%8B%E5%B0%8F%E8%B7%AF%E3%81%AE%E7%94%B7%20%E7%B3%B8%E5%B1%B1%E7%A7%8B%E5%AD%90&tag=wespressoblog-22) |
-| 5 | チルドレン | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%81%E3%83%AB%E3%83%89%E3%83%AC%E3%83%B3%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 6 | 対岸の彼女 | 角田光代 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%AF%BE%E5%B2%B8%E3%81%AE%E5%BD%BC%E5%A5%B3%20%E8%A7%92%E7%94%B0%E5%85%89%E4%BB%A3&tag=wespressoblog-22) |
-| 7 | 犯人に告ぐ | 雫井脩介 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%8A%AF%E4%BA%BA%E3%81%AB%E5%91%8A%E3%81%90%20%E9%9B%AB%E4%BA%95%E8%84%A9%E4%BB%8B&tag=wespressoblog-22) |
-| 8 | 黄金の羅針盤 | フィリップ・プルマン | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%BB%84%E9%87%91%E3%81%AE%E7%BE%85%E9%87%9D%E7%9B%A4%20%E3%83%95%E3%82%A3%E3%83%AA%E3%83%83%E3%83%97%E3%83%BB%E3%83%97%E3%83%AB%E3%83%9E%E3%83%B3&tag=wespressoblog-22) |
-| 9 | 私たちが好きだったこと | 宮本輝 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A7%81%E3%81%9F%E3%81%A1%E3%81%8C%E5%A5%BD%E3%81%8D%E3%81%A0%E3%81%A3%E3%81%9F%E3%81%93%E3%81%A8%20%E5%AE%AE%E6%9C%AC%E8%BC%9D&tag=wespressoblog-22) |
-| 10 | 逃亡作法 | 東山彰良 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%80%83%E4%BA%A1%E4%BD%9C%E6%B3%95%20%E6%9D%B1%E5%B1%B1%E5%BD%B0%E8%89%AF&tag=wespressoblog-22) |
-
-## 本屋大賞 2004年（第1回）
-
-| 順位 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 1 | 博士の愛した数式 | 小川洋子 | [商品詳細](https://www.amazon.co.jp/dp/4104636010/?tag=wespressoblog-22) / [検索結果](https://www.amazon.co.jp/s?k=%E5%8D%9A%E5%A3%AB%E3%81%AE%E6%84%9B%E3%81%97%E3%81%9F%E6%95%B0%E5%BC%8F%20%E5%B0%8F%E5%B7%9D%E6%B4%8B%E5%AD%90&tag=wespressoblog-22) |
-| 2 | クライマーズ・ハイ | 横山秀夫 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%AF%E3%83%A9%E3%82%A4%E3%83%9E%E3%83%BC%E3%82%BA%E3%83%BB%E3%83%8F%E3%82%A4%20%E6%A8%AA%E5%B1%B1%E7%A7%80%E5%A4%AB&tag=wespressoblog-22) |
-| 3 | アヒルと鴨のコインロッカー | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%A2%E3%83%92%E3%83%AB%E3%81%A8%E9%B4%A8%E3%81%AE%E3%82%B3%E3%82%A4%E3%83%B3%E3%83%AD%E3%83%83%E3%82%AB%E3%83%BC%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 4 | 永遠の出口 | 森絵都 | [Amazon検索](https://www.amazon.co.jp/s?k=%E6%B0%B8%E9%81%A0%E3%81%AE%E5%87%BA%E5%8F%A3%20%E6%A3%AE%E7%B5%B5%E9%83%BD&tag=wespressoblog-22) |
-| 5 | 重力ピエロ | 伊坂幸太郎 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%87%8D%E5%8A%9B%E3%83%94%E3%82%A8%E3%83%AD%20%E4%BC%8A%E5%9D%82%E5%B9%B8%E5%A4%AA%E9%83%8E&tag=wespressoblog-22) |
-| 6 | 4TEEN | 石田衣良 | [Amazon検索](https://www.amazon.co.jp/s?k=4TEEN%20%E7%9F%B3%E7%94%B0%E8%A1%A3%E8%89%AF&tag=wespressoblog-22) |
-| 7 | デッドエンドの思い出 | 吉本ばなな | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%87%E3%83%83%E3%83%89%E3%82%A8%E3%83%B3%E3%83%89%E3%81%AE%E6%80%9D%E3%81%84%E5%87%BA%20%E5%90%89%E6%9C%AC%E3%81%B0%E3%81%AA%E3%81%AA&tag=wespressoblog-22) |
-| 8 | 終戦のローレライ | 福井晴敏 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%B5%82%E6%88%A6%E3%81%AE%E3%83%AD%E3%83%BC%E3%83%AC%E3%83%A9%E3%82%A4%20%E7%A6%8F%E4%BA%95%E6%99%B4%E6%95%8F&tag=wespressoblog-22) |
-| 9 | 陰陽師 | 夢枕獏 | [Amazon検索](https://www.amazon.co.jp/s?k=%E9%99%B0%E9%99%BD%E5%B8%AB%20%E5%A4%A2%E6%9E%95%E7%8D%8F&tag=wespressoblog-22) |
-| 10 | 蛇にピアス | 金原ひとみ | [Amazon検索](https://www.amazon.co.jp/s?k=%E8%9B%87%E3%81%AB%E3%83%94%E3%82%A2%E3%82%B9%20%E9%87%91%E5%8E%9F%E3%81%B2%E3%81%A8%E3%81%BF&tag=wespressoblog-22) |
-
-## 翻訳小説部門・発掘部門（歴代1位）
-
-※翻訳小説部門と発掘部門の歴代1位リストです。
-
-### 翻訳小説部門
-
-| 年 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 2026 | 空、はてしない青 | メリッサ・ダ・コスタ | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A9%BA%E3%80%81%E3%81%AF%E3%81%A6%E3%81%97%E3%81%AA%E3%81%84%E9%9D%92%20%E3%83%A1%E3%83%AA%E3%83%83%E3%82%B5%E3%83%BB%E3%83%80%E3%83%BB%E3%82%B3%E3%82%B9%E3%82%BF&tag=wespressoblog-22) |
-| 2025 | フォース・ウィング 第四騎竜団の戦姫 | レベッカ・ヤロス | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%95%E3%82%A9%E3%83%BC%E3%82%B9%E3%83%BB%E3%82%A6%E3%82%A3%E3%83%B3%E3%82%B0%20%E7%AC%AC%E5%9B%9B%E9%A8%8E%E7%AB%9C%E5%9B%A3%E3%81%AE%E6%88%A6%E5%A7%AB%20%E3%83%AC%E3%83%99%E3%83%83%E3%82%AB%E3%83%BB%E3%83%A4%E3%83%AD%E3%82%B9&tag=wespressoblog-22) |
-| 2024 | ようこそ、ヒュナム洞書店へ | ファン・ボルム | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%88%E3%81%86%E3%81%93%E3%81%9D%E3%80%81%E3%83%92%E3%83%A5%E3%83%8A%E3%83%A0%E6%B4%9E%E6%9B%B8%E5%BA%97%E3%81%B8%20%E3%83%95%E3%82%A1%E3%83%B3%E3%83%BB%E3%83%9C%E3%83%AB%E3%83%A0&tag=wespressoblog-22) |
-| 2023 | われら闇より天を見る | クリス・ウィタカー | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%82%8F%E3%82%8C%E3%82%89%E9%97%87%E3%82%88%E3%82%8A%E5%A4%A9%E3%82%92%E8%A6%8B%E3%82%8B%20%E3%82%AF%E3%83%AA%E3%82%B9%E3%83%BB%E3%82%A6%E3%82%A3%E3%82%BF%E3%82%AB%E3%83%BC&tag=wespressoblog-22) |
-| 2022 | 三十の反撃 | ソン・ウォンピョン | [Amazon検索](https://www.amazon.co.jp/s?k=%E4%B8%89%E5%8D%81%E3%81%AE%E5%8F%8D%E6%92%83%20%E3%82%BD%E3%83%B3%E3%83%BB%E3%82%A6%E3%82%A9%E3%83%B3%E3%83%94%E3%83%A7%E3%83%B3&tag=wespressoblog-22) |
-
-### 発掘部門
-
-| 年 | タイトル | 著者 | Amazonリンク |
-|---|---|---|---|
-| 2026 | 夏時記 | 星野立子 | [Amazon検索](https://www.amazon.co.jp/s?k=%E5%A4%8F%E6%99%82%E8%A8%98%20%E6%98%9F%E9%87%8E%E7%AB%8B%E5%AD%90&tag=wespressoblog-22) |
-| 2025 | ありますもの | 中野翠 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%82%E3%82%8A%E3%81%BE%E3%81%99%E3%82%82%E3%81%AE%20%E4%B8%AD%E9%87%8E%E7%BF%A0&tag=wespressoblog-22) |
-| 2024 | プラスティック | 井上夢人 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%83%97%E3%83%A9%E3%82%B9%E3%83%86%E3%82%A3%E3%83%83%E3%82%AF%20%E4%BA%95%E4%B8%8A%E5%A4%A2%E4%BA%BA&tag=wespressoblog-22) |
-| 2023 | おもろい本 | 木下半太 | [Amazon検索](https://www.amazon.co.jp/s?k=%E3%81%8A%E3%82%82%E3%82%8D%E3%81%84%E6%9C%AC%20%E6%9C%A8%E4%B8%8B%E5%8D%8A%E5%A4%AA&tag=wespressoblog-22) |
-| 2022 | 破船 | 吉村昭 | [Amazon検索](https://www.amazon.co.jp/s?k=%E7%A0%B4%E8%88%B9%20%E5%90%89%E6%9D%91%E6%98%AD&tag=wespressoblog-22) |
-
-    </script>
-
-    <script>
-        const RAKUTEN_ID = "1baffa53.9767f76d.1baffa54.f4870c64";
-        const bookData = [];
-
-        // Markdownを解析してデータ化するシステム
-        function parseMarkdown() {
-            const rawText = document.getElementById('markdown-raw').textContent;
-            const lines = rawText.split('\n');
-            let currentYear = '';
-            let currentSection = 'main';
-
-            lines.forEach(line => {
-                const trimmed = line.trim();
-                if (!trimmed) return;
-
-                if (trimmed.startsWith('## 本屋大賞')) {
-                    const match = trimmed.match(/## 本屋大賞\s*(\d+)年/);
-                    if (match) { currentYear = match[1]; currentSection = 'main'; }
-                } else if (trimmed.startsWith('### 翻訳小説部門')) {
-                    currentSection = 'translation';
-                } else if (trimmed.startsWith('### 発掘部門')) {
-                    currentSection = 'discovery';
-                }
-
-                if (trimmed.startsWith('|') && !trimmed.includes('---|') && !trimmed.includes('順位') && !trimmed.includes('年 | タイトル')) {
-                    const parts = trimmed.split('|').map(p => p.trim());
-                    if (parts.length >= 5) {
-                        const col1 = parts[1];
-                        const title = parts[2];
-                        const author = parts[3];
-                        const linkPart = parts[4];
-
-                        // Amazonリンク抽出
-                        let kindleUrl = '';
-                        const urlMatch = linkPart.match(/\((https:\/\/[^)]+)\)/);
-                        if (urlMatch) kindleUrl = urlMatch[1];
-
-                        // 楽天Kobo自動リンク生成
-                        const searchQuery = encodeURIComponent(`${title} ${author} 電子書籍`);
-                        const koboUrl = `https://hb.afl.rakuten.co.jp/ichiba/${RAKUTEN_ID}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${searchQuery}%2F`;
-
-                        if (currentSection === 'main') {
-                            const rank = parseInt(col1);
-                            const category = rank === 1 ? 'grand' : 'nominate';
-                            const badge = rank === 1 ? `${currentYear}年 本屋大賞` : `${currentYear}年 第${rank}位`;
-                            bookData.push({
-                                year: currentYear, title, author, badge, category, kindleUrl, koboUrl,
-                                catch: "全国の書店員が選んだ、絶対に失敗しない名作。",
-                                story: ["本屋大賞に選ばれた傑作小説。ストーリーに一気に引き込まれ、普段あまり読書をしない方にもおすすめです。"],
-                                meta: [`🏆第${rank}位`, "⏱目安：約4時間"],
-                                coverImg: `https://placehold.co/140x200?text=${currentYear}_${rank}`
-                            });
-                        } else {
-                            const badgeName = currentSection === 'translation' ? '翻訳小説部門 1位' : '発掘部門 1位';
-                            const metaTag = currentSection === 'translation' ? '🌍海外文学' : '💎隠れた名作';
-                            bookData.push({
-                                year: col1, title, author, badge: `${col1}年 ${badgeName}`, category: 'department', kindleUrl, koboUrl,
-                                catch: "今こそ読みたい、読書好き絶賛の傑作。",
-                                story: ["本屋大賞の部門賞を受賞した、間違いのない名著。新しい読書体験を今すぐスマホで。"],
-                                meta: [metaTag],
-                                coverImg: `https://placehold.co/140x200?text=${col1}_DEPT`
-                            });
-                        }
-                    }
-                }
-            });
+  // ③ 記憶にない場合のみ、GoogleのAPIを叩く
+  const url = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(cleanTitle)}+inauthor:${encodeURIComponent(author)}&maxResults=1`;
+  
+  return fetch(url)
+    .then(res => res.json())
+    .then(data => {
+      let imgUrl = "";
+      if (data.items && data.items.length > 0) {
+        const volumeInfo = data.items[0].volumeInfo;
+        if (volumeInfo.imageLinks) {
+          // サムネイル画像（HTTPを安全なHTTPSに自動書き換え）
+          const rawUrl = volumeInfo.imageLinks.thumbnail || volumeInfo.imageLinks.smallThumbnail;
+          if (rawUrl) imgUrl = rawUrl.replace("http:", "https:");
         }
+      }
+      // 結果を次回のためにブラウザに記憶させる（空だった場合も無駄叩き防止のため記録）
+      localStorage.setItem(cacheKey, imgUrl);
+      return imgUrl;
+    })
+    .catch(err => {
+      console.error("Google Books API Error:", err);
+      return "";
+    });
+}
 
-        // 画面描画の処理
-        let currentCategory = 'all';
-        let currentYear = 'all';
+function getMoodsForBook(b) {
+  const moods = [];
+  if (b.genre === "ミステリ") moods.push("どんでん返し");
+  if (b.genre === "青春" || b.genre === "青春・日常") moods.push("サクサク読める");
+  if (b.genre === "ヒューマン" || b.genre === "ドラマ・家族") moods.push("泣ける");
+  if (b.rank === 1 || b.genre === "SF" || b.genre === "ミステリ") moods.push("一気読み");
+  if (moods.length === 0) moods.push("サクサク読める");
+  return moods;
+}
 
-        function initYearSelect() {
-            const yearSelect = document.getElementById('year-select');
-            const years = [...new Set(bookData.map(b => b.year))].sort((a, b) => b - a);
-            years.forEach(year => {
-                const opt = document.createElement('option');
-                opt.value = year; opt.textContent = `${year}年`;
-                yearSelect.appendChild(opt);
-            });
-        }
+function rankBadgeHTML(r) {
+  return `<div class="rank-badge ${r === 1 ? 'r1' : 'rn'}">${r === 1 ? '大賞' : `${r}位`}</div>`;
+}
 
-        function renderBooks() {
-            const container = document.getElementById('book-list');
-            container.innerHTML = '';
+function cardHTML(b) {
+  const isTop = b.rank === 1;
+  const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
+  const moods = getMoodsForBook(b);
+  const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
+  const imgId = `img-${b.year}-${b.rank}`;
 
-            const filteredBooks = bookData.filter(book => {
-                const matchCategory = (currentCategory === 'all' || book.category === currentCategory);
-                const matchYear = (currentYear === 'all' || book.year === currentYear);
-                return matchCategory && matchYear;
-            });
+  const audibleButtonHTML = b.audible 
+    ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版を聴く</a>`
+    : '';
 
-            if (filteredBooks.length === 0) {
-                container.innerHTML = '<div class="no-results">作品が見つかりませんでした。</div>';
-                return;
+  return `
+<article class="card${isTop?' rank-1':''}" data-year="${b.year}" data-rank="${b.rank}">
+  <div class="cover-wrap lazy-cover" data-title="${b.title}" data-author="${b.author}" data-target-id="${imgId}">
+    ${rankBadgeHTML(b.rank)}
+    <div class="year-badge">${b.year}年</div>
+    <div class="placeholder">
+      <span class="placeholder-title">${b.title}</span>
+      <span class="placeholder-author">${b.author}</span>
+    </div>
+    <img id="${imgId}" src="" alt="${b.title}">
+  </div>
+  <div class="card-body">
+    <div class="tag-container">
+      <span class="genre-badge">${b.genre}</span>
+      ${moodBadgeHTML}
+      ${mediaBadgeHTML}
+    </div>
+    <div class="book-title">${b.title}</div>
+    <div class="book-author">${b.author} 著</div>
+    ${b.synopsis ? `<p class="synopsis">${b.synopsis}</p>` : ''}
+  </div>
+  <div class="card-foot">
+    <div class="btn-group-main">
+      <a class="btn-link btn-kindle" href="${getAmazonKindleLink(b.title, b.author)}" target="_blank" rel="noopener">📱 Kindle電子書籍</a>
+      <a class="btn-link btn-rakuten" href="${getRakutenLink(b.title, b.author)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>
+    </div>
+    <div class="btn-group-sub">
+      ${audibleButtonHTML}
+      <a class="btn-link btn-paper" href="${getAmazonPaperLink(b.title, b.author)}" target="_blank" rel="noopener">📖 紙の本（Amazon）</a>
+    </div>
+  </div>
+</article>`;
+}
+
+function getDecade(y) {
+  if (y >= 2020) return '2020s';
+  if (y >= 2010) return '2010s';
+  return '2000s';
+}
+
+function updateFilteredList() {
+  const q = document.getElementById('search').value.toLowerCase().trim();
+  filteredBooks = BOOKS.filter(b => {
+    const rankOk = filterRank === 'all' || (filterRank === '1' && b.rank === 1);
+    const decadeOk = filterDecade === 'all' || filterDecade === getDecade(b.year);
+    const mediaOk = filterMedia === 'all' || (filterMedia === 'yes' && b.media !== "");
+    const moods = getMoodsForBook(b);
+    const moodOk = filterMood === 'all' || moods.includes(filterMood);
+    const qOk = !q || b.title.toLowerCase().includes(q) || b.author.toLowerCase().includes(q) || (b.synopsis && b.synopsis.toLowerCase().includes(q));
+    return rankOk && decadeOk && moodOk && mediaOk && qOk;
+  });
+}
+
+function resetAndRender() {
+  visibleCount = PAGE_SIZE;
+  updateFilteredList();
+  document.getElementById('result-info').textContent = `${filteredBooks.length}件を表示中`;
+  renderChunk();
+  initInfiniteScroll();
+}
+
+function renderChunk() {
+  const content = document.getElementById('content');
+  const chunk = filteredBooks.slice(0, visibleCount);
+  content.innerHTML = chunk.map(b => cardHTML(b)).join('');
+  
+  // 💡【重要】カードが新しく描画されるたびに、画像読み込みの個別監視センサー（Observer）を起動
+  activateCardImageObserver();
+}
+
+// ─── 💡【新設】画面に映った本の画像だけをピンポイントで呼び出すセンサー ───
+function activateCardImageObserver() {
+  if (cardObserver) cardObserver.disconnect();
+
+  cardObserver = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      // 画面にその本が近づいてきたら
+      if (entry.isIntersecting) {
+        const coverWrap = entry.target;
+        const title = coverWrap.dataset.title;
+        const author = coverWrap.dataset.author;
+        const targetImgId = coverWrap.dataset.targetId;
+
+        // この本は検知したのでセンサーの追跡リストから解除（無駄な重複処理の防止）
+        observer.unobserve(coverWrap);
+
+        // キャッシュチェック＆Google API通信を呼び出す
+        fetchGoogleBookCover(title, author).then(imgUrl => {
+          if (imgUrl) {
+            const img = document.getElementById(targetImgId);
+            if (img) {
+              img.src = imgUrl;
+              img.onload = () => { img.style.opacity = '1'; }; // 読み込みが完了したら綺麗にフワッと表示
             }
-
-            filteredBooks.forEach(book => {
-                const storyList = book.story.map(item => `<li>${item}</li>`).join('');
-                const metaSpan = book.meta.map(item => `<span>${item}</span>`).join('');
-
-                container.innerHTML += `
-                    <article class="book-card">
-                        <span class="badge">${book.badge}</span>
-                        <div class="book-cover">
-                            <img src="${book.coverImg}" alt="${book.title}">
-                        </div>
-                        <div class="book-info">
-                            <h2>${book.title}</h2>
-                            <p class="author">${book.author}</p>
-                            <p class="catch">${book.catch}</p>
-                            <ul class="story-summary">${storyList}</ul>
-                            <div class="book-meta">${metaSpan}</div>
-                            <div class="link-buttons">
-                                <a href="${book.kindleUrl}" class="btn-link kindle" target="_blank" rel="noopener">Kindle版</a>
-                                <a href="${book.koboUrl}" class="btn-link kobo" target="_blank" rel="noopener">楽天Kobo</a>
-                            </div>
-                        </div>
-                    </article>
-                `;
-            });
-        }
-
-        // 起動処理
-        parseMarkdown();
-        initYearSelect();
-        renderBooks();
-
-        // イベント設定
-        document.getElementById('category-filters').addEventListener('click', (e) => {
-            if (!e.target.classList.contains('btn-filter')) return;
-            document.querySelectorAll('#category-filters .btn-filter').forEach(btn => btn.classList.remove('active'));
-            e.target.classList.add('active');
-            currentCategory = e.target.dataset.category;
-            renderBooks();
+          }
         });
+      }
+    });
+  }, {
+    rootMargin: '300px 0px', // スマホ画面の上下300px手前に来たら読み込みを開始する（読者には読み込み遅延を感じさせない絶妙な余白）
+    threshold: 0.01
+  });
 
-        document.getElementById('year-select').addEventListener('change', (e) => {
-            currentYear = e.target.value;
-            renderBooks();
-        });
-    </script>
+  // 現在表示されているすべての本のカバーにセンサーを取り付ける
+  document.querySelectorAll('.lazy-cover').forEach(el => cardObserver.observe(el));
+}
+
+function initInfiniteScroll() {
+  if (scrollObserver) scrollObserver.disconnect();
+  scrollObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && visibleCount < filteredBooks.length) {
+        visibleCount += PAGE_SIZE;
+        renderChunk();
+      }
+    });
+  }, { rootMargin: '400px 0px', threshold: 0.1 });
+
+  const trigger = document.getElementById('load-more');
+  if (trigger) scrollObserver.observe(trigger);
+}
+
+function setRankFilter(el) {
+  filterRank = el.dataset.r;
+  document.querySelectorAll('#chips-rank .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  resetAndRender();
+}
+function setDecadeFilter(el) {
+  filterDecade = el.dataset.d;
+  document.querySelectorAll('#chips-decade .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  resetAndRender();
+}
+function setMoodFilter(el) {
+  filterMood = el.dataset.m;
+  document.querySelectorAll('#chips-mood .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  resetAndRender();
+}
+function setMediaFilter(el) {
+  filterMedia = el.dataset.v;
+  document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on'));
+  el.classList.add('on');
+  resetAndRender();
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  resetAndRender();
+  const loader = document.getElementById('loader');
+  if (loader) loader.classList.add('done');
+});
+</script>
 </body>
 </html>
