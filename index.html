@@ -5,6 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>本屋大賞ガイド｜2004〜2026年 全受賞・ノミネート作品一覧</title>
 <meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで,Amazon・Kindle・楽天ブックスからすぐ購入できます。">
+
+<meta property="og:title" content="本屋大賞ガイド｜全受賞・ノミネート作品一覧">
+<meta property="og:image" content="https://books.soranoshita.com/ogp.png">
+<meta name="twitter:card" content="summary_large_image">
+
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
@@ -32,7 +37,6 @@ h1 span{color:var(--gold)}
 .hdr-lead{font-size:13.5px;color:var(--ink-2);font-weight:400;max-width:760px;margin-bottom:1rem;line-height:1.8}
 .hdr-sub{font-size:11px;color:var(--ink-3);font-weight:400;}
 
-/* ─── STICKY NAV（PCレイアウト） ─── */
 .nav-wrap{background:var(--paper-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.03)}
 .nav-inner{max-width:1140px;margin:0 auto;padding:.75rem 1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
 .search-row { display: flex; gap: 0.5rem; flex: 1; min-width: 280px; align-items: center; }
@@ -41,7 +45,6 @@ h1 span{color:var(--gold)}
 .search-box input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(0,0,0,.05)}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--ink-3);pointer-events:none}
 
-/* スマホ用アコーディオンボタン（PCでは隠す） */
 .btn-filter-toggle {
   display: none; background: white; border: 1px solid var(--border-2);
   padding: 8px 12px; font-size: 12px; font-weight: 700; border-radius: 4px;
@@ -57,7 +60,6 @@ h1 span{color:var(--gold)}
 .chip:hover{background:var(--paper-3);color:var(--ink)}
 .chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700;}
 
-/* ─── MAIN CONTENT ─── */
 .main{max-width:1140px;margin:0 auto;padding:2rem 1.5rem}
 .book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px 20px}
 
@@ -77,7 +79,6 @@ h1 span{color:var(--gold)}
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
 
-/* 大賞サークルバッジ */
 .rank-badge.r1 {
   top: -8px; left: -8px; border-radius: 50%; width: 54px; height: 54px;
   display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
@@ -128,30 +129,17 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 .spinner{width:32px;height:32px;border:2px solid var(--paper-3);border-top-color:var(--gold);border-radius:50%;animation:spin .6s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
 
-/* ─── 📱 モバイルビュー専用の最強レイアウト調整 ─── */
 @media(max-width:980px) {
   .nav-inner { flex-direction: column; align-items: stretch; gap: 0.5rem; }
-  .btn-filter-toggle { display: flex; } /* アコーディオン用ボタンを出現させる */
-  
-  /* スマホの時はデフォルトでフィルターを格納（非表示） */
+  .btn-filter-toggle { display: flex; }
   .filter-groups {
     display: none; width: 100%; flex-direction: column; align-items: flex-start;
     gap: 0.75rem; background: rgba(0,0,0,0.02); padding: 12px; border-radius: 4px; margin-top: 4px;
   }
-  /* ボタンタップで .open クラスがついたら展開 */
   .filter-groups.open { display: flex; }
-  
-  .filter-group {
-    display: grid; grid-template-columns: 42px 1fr; /* 横一列に整列させて高さを節約 */
-    align-items: center; width: 100%; gap: 4px;
-  }
-  
-  /* 💡 チップ群を「折り返さず、指先でスルスル横スクロール」する設定 */
-  .chips {
-    flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch;
-    padding-bottom: 4px; width: 100%;
-  }
-  .chips::-webkit-scrollbar { display: none; } /* スクロールバーを隠してアプリっぽく */
+  .filter-group { display: grid; grid-template-columns: 42px 1fr; align-items: center; width: 100%; gap: 4px; }
+  .chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; width: 100%; }
+  .chips::-webkit-scrollbar { display: none; }
   .chip { padding: 4px 14px; font-size: 11px; }
 }
 
@@ -194,8 +182,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
     <div class="filter-groups" id="filter-panel">
       <div class="filter-group">
         <span class="filter-label">順位:</span>
-        <div class="chips" id="chips-rank">
-          </div>
+        <div class="chips" id="chips-rank"></div>
       </div>
       <div class="filter-group">
         <span class="filter-label">年代:</span>
@@ -239,30 +226,27 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
 
 <script>
-// ─── 🛡️ システム関数・制御コア ───
-function getAmazonKindleLink(title, author) {
-  return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
-}
-function getAmazonPaperLink(title, author) {
-  return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&tag=${AMAZON_TAG}`;
-}
-function getRakutenLink(title, author) {
-  return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(title + ' ' + author)}%2F-%2F%3Fsid%3D213310`;
-}
-function getAmazonAudibleLink(title, author) {
-  return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`;
-}
+// ─── 🛡️ 💡【追加】システムに大前提となる変数を完全復元 ───
+const AMAZON_TAG = 'wespressoblog-22'; 
+const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
 
-// 💡 スマホ用：アコーディオン開閉をトグルする関数
+const PAGE_SIZE = 24; 
+let visibleCount = PAGE_SIZE;
+let filteredBooks = [];
+let scrollObserver = null;
+
+let filterRank = 'all';
+let filterDecade = 'all';
+let filterMood = 'all';
+let filterMedia = 'all';
+
 function toggleFilterPanel() {
   const panel = document.getElementById('filter-panel');
   const arrow = document.getElementById('toggle-arrow');
   if (panel.classList.contains('open')) {
-    panel.classList.remove('open');
-    arrow.innerText = '▼';
+    panel.classList.remove('open'); arrow.innerText = '▼';
   } else {
-    panel.classList.add('open');
-    arrow.innerText = '▲';
+    panel.classList.add('open'); arrow.innerText = '▲';
   }
 }
 
@@ -291,7 +275,6 @@ function cardHTML(b) {
   const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
   const moods = getMoodsForBook(b);
   const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
-  const imgId = `img-${b.year}-${b.rank}`;
   const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
 
   const coverHTML = b.coverImg 
