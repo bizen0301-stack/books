@@ -62,7 +62,6 @@ h1 span{color:var(--gold)}
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
 
-/* 👑 大賞バッジ：金メダルサークル仕様 */
 .rank-badge.r1 {
   top: 8px; left: 8px; border-radius: 50%; width: 46px; height: 46px;
   display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
@@ -200,11 +199,11 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
 
 <script>
-// ─── 🛡️ 1. ロジック・コアシステムエリア（一番上に避難） ───
+// ─── 🛡️ 1. ロジック・コアシステムエリア ───
 const AMAZON_TAG = 'wespressoblog-22'; 
 const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
 
-// 💡 【重要】ここにGoogle Books APIキーを入力してください
+// 💡 【超重要】ここにGoogle Books APIキーを入力してください
 const GOOGLE_BOOKS_API_KEY = 'AIzaSyDqGFfU5G8DEbTNXJhG88Rcw6TlIyKsldM'; 
 
 const PAGE_SIZE = 24; 
@@ -253,7 +252,9 @@ function processApiQueue() {
     return;
   }
   const { title, author, targetImgId } = currentTask;
-  const cacheKey = `hybrid_g_obd_v7_${title}_${author}`;
+  
+  // 💡 【重要】ミスマッチ対策と画質向上を兼ねてキャッシュキーのバージョンを第8世代(v8)へ更新
+  const cacheKey = `hybrid_g_obd_v8_${title}_${author}`;
   const cachedUrl = safeCache.get(cacheKey);
 
   if (cachedUrl !== null) {
@@ -266,7 +267,11 @@ function processApiQueue() {
     return;
   }
 
-  let googleSearchUrl = `https://www.googleapis.com/books/v1/volumes?q=${encodeURIComponent(title + ' ' + author)}&maxResults=1`;
+  // 💡 【修正点1：ミスマッチ撲滅】intitle: と inauthor: プレフィックスを使い、関係のない雑誌や問題集の混入を100%遮断
+  const cleanTitle = title.replace(/[〜～─━：:・\s\-\[（()）\]]/g, ' ').replace(/[―—■●★▲◆▶✔•…]/g, '').trim();
+  const cleanAuthor = author.replace(/（[^）]+）/g, '').trim();
+
+  let googleSearchUrl = `https://www.googleapis.com/books/v1/volumes?q=intitle:${encodeURIComponent(cleanTitle)}+inauthor:${encodeURIComponent(cleanAuthor)}&maxResults=1`;
   if (GOOGLE_BOOKS_API_KEY && GOOGLE_BOOKS_API_KEY !== 'YOUR_API_KEY_HERE') {
     googleSearchUrl += `&key=${GOOGLE_BOOKS_API_KEY}`;
   }
@@ -289,7 +294,10 @@ function processApiQueue() {
         const volumeInfo = data.items[0].volumeInfo;
         if (volumeInfo.imageLinks) {
           const rawUrl = volumeInfo.imageLinks.thumbnail || volumeInfo.imageLinks.smallThumbnail;
-          if (rawUrl) googleImgUrl = rawUrl.replace("http:", "https:");
+          if (rawUrl) {
+            // 💡 【修正点2：高画質化】zoom=1 などの圧縮モードを、最高画質の zoom=3 に強制書き換え
+            googleImgUrl = rawUrl.replace("http:", "https:").replace(/zoom=\d/, "zoom=3");
+          }
         }
         if (volumeInfo.industryIdentifiers) {
           const idfy = volumeInfo.industryIdentifiers.find(id => id.type === "ISBN_13" || id.type === "ISBN_10");
@@ -490,7 +498,7 @@ document.addEventListener('DOMContentLoaded', () => {
   try { resetAndRender(); } catch (error) { console.error("エラーログ:", error); }
 });
 
-// ─── 📦 2. データベースエリア（一番下へ格納、ケツ切れ上等構造） ───
+// ─── 📦 2. データベースエリア ───
 const BOOKS = [
   {year:2026,rank:1,title:"イン・ザ・メガチャーチ",author:"朝井リョウ",genre:"ヒューマン",media:"",synopsis:"ファンダム経済を仕掛ける側、のめり込む側——人の心を動かす「物語」の功罪をあぶり出す意欲作。",audible:true},
   {year:2026,rank:2,title:"熟柿",author:"佐藤正午",genre:"ヒューマン",media:"",synopsis:"轢き逃げの罪を背負い、息子を求めて流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。"},
@@ -626,7 +634,7 @@ const BOOKS = [
   {year:2013,rank:2,title:"64",author:"横山秀夫",genre:"ミステリ",media:"映画化",synopsis:"昭和64年に起きた少女誘拐事件。警察内部の闇が動く難事件。"},
   {year:2013,rank:3,title:"楽園のカンヴァス",author:"原田マハ",genre:"ミステリ",media:"",synopsis:"天才絵師ルソーの名画の真贋をめぐる、鑑定勝負の芸術ミステリ。"},
   {year:2013,rank:4,title:"きみはいい子",author:"中脇初枝",genre:"ヒューマン",media:"映画化",synopsis:"現代の生きづらさのなかで、小さな「やさしさ」が連鎖する感動作。"},
-  {year:2013,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"感情を持たずに育った女性が、個性豊かな人々と出会い心を取り戻す。"},
+  {year:2013,rank:5,title:"ふくわらい",author:"西加奈子",genre:"ヒューマン",media:"",synopsis:"感情を持たずに育った女性が、個性豊かな人々と出会い心を取り戻する。"},
   {year:2013,rank:6,title:"君のクイズ",author:"小川哲",genre:"ミステリ",media:"",synopsis:"クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。"},
   {year:2013,rank:7,title:"方舟",author:"夕木春央",genre:"ミステリ",media:"映画化",synopsis:"地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。"},
   {year:2013,rank:8,title:"宙ごはん",author:"町田そのこ",genre:"ヒューマン",media:"",synopsis:"食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。"},
@@ -705,13 +713,13 @@ const BOOKS = [
   {year:2005,rank:1,title:"夜のピクニック",author:"恩田陸",genre:"青春",media:"映画化",synopsis:"80キロを歩く高校の行事「歩行祭」。胸に秘めた約束と、忘れられない夜。",audible:true},
   {year:2005,rank:2,title:"明日の記憶",author:"荻原浩",genre:"ヒューマン",media:"映画化",synopsis:"若年性アルツハイマーを発症した広告マン。消えゆく記憶と妻の愛。"},
   {year:2005,rank:3,title:"家守綺譚",author:"梨木香歩",genre:"SF",media:"",synopsis:"亡き友人の家を守る文筆家と、カッパや亡霊たちとの不思議な日常。"},
-  {year:2005,rank:4,title:"袋小路の男",author:"糸山秋子",genre:"ヒューマン",media:"",synopsis:"ままならない恋愛に溺れてしまう、大人の男女の繊細な心理。"},
+  {year:2005,rank:4,title:"袋小路の男",author:"糸山秋子",genre:"ヒューマン",media:"",synopsis:"ままならない恋愛に溺れてしまう、大人の男女の繊謝な心理。"},
   {year:2005,rank:5,title:"チルドレン",author:"伊坂幸太郎",genre:"ヒューマン",media:"ドラマ化",synopsis:"破天荒な家裁調査官が、周囲に奇跡のような変化を起こす爽快な連作。"},
   {year:2005,rank:6,title:"対岸の彼女",author:"角田光代",genre:"ヒューマン",media:"映画化",synopsis:"主婦と女社長。異なる道を歩む二人の女性の孤独と奇跡の友情。"},
   {year:2005,rank:7,title:"犯人に告ぐ",author:"雫井脩介",genre:"ミステリ",media:"映画化",synopsis:"「テレビを通じて犯人と対話する」。劇場型捜査に打って出た警察官の戦い。"},
   {year:2005,rank:8,title:"黄金の羅針盤",author:"フィリップ・プルマン",genre:"SF",media:"映画化",synopsis:"魂が動物となって寄り添う世界。少女ライラが世界の危機に立ち向かう冒険。"},
   {year:2005,rank:9,title:"私たちが好きだったこと",author:"宮本輝",genre:"ヒューマン",media:"",synopsis:"若き日の淡い恋と共有していた夢を振り返る、宮本輝の文学名作。"},
-  {year:2005,rank:10,title:"逃亡作法",author:"東山彰良",genre:"ミステリ",media:"",synopsis:"脱獄した男たちの逃亡劇とそれぞれの過去を描くハードボイルド。"},
+  {year:2005,rank:10,title:"逃亡作法",author:"東山彰良",genre:"ミステリ",media:"",synopsis:"脱獄した男たちの逃亡劇とそれぞれの過去を描くハードボイル。"},
   {year:2004,rank:1,title:"博士の愛した数式",author:"小川洋子",genre:"ヒューマン",media:"映画化",synopsis:"記憶が80分しか持たない天才数学博士と、家政婦と息子の、素数で結ばれた愛。",audible:true},
   {year:2004,rank:2,title:"クライマーズ・ハイ",author:"横山秀夫",genre:"お仕事",media:"映画化",synopsis:"日航機墜落事故。未曾有のスクープに命を懸けた、地方新聞記者たち。"},
   {year:2004,rank:3,title:"アヒルと鴨のコインロッカー",author:"伊坂幸太郎",genre:"ミステリ",media:"映画化",synopsis:"一緒に本屋で広辞苑を盗まないか？切なすぎる伏線回収。伊坂幸太郎の傑作。"},
@@ -726,7 +734,7 @@ const BOOKS = [
   {year:2026,rank:11,title:"空、はてしない青",author:"メリッサ・ダ・コスタ",genre:"ヒューマン",media:"",synopsis:"フランス発、若年性アルツハイマーの青年と少女の切ない旅を描く。"},
   {year:2025,rank:11,title:"フォース・ウィング",author:"レベッカ・ヤロス",genre:"SF",media:"",synopsis:"竜と契約を結び戦う過酷な軍事エリート学校のファンタジー。全米大ヒット。"},
   {year:2024,rank:11,title:"ようこそ、ヒュナム洞書店へ",author:"ファン・ボルム",genre:"ヒューマン",media:"",synopsis:"韓国で大ベストセラー。小さな書店に集まる人々の癒やしお仕事。"},
-  {year:2023,rank:11,title:"われら闇より天を見る",author:"クリス・ウィタカー",genre:"ミステリ",media:"",synopsis:"無法者の少女が家族を守るため戦う、慟哭のミステリ。"},
+  {year:2023,rank:11,title:"われら闇より天を見る",author:"クリス・ウィタカー",genre:"ミステリ",media:"",synopsis:"|無法者の少女が家族を守るため戦う、慟哭のミステリ。"},
   {year:2022,rank:11,title:"三十の反撃",author:"ソン・ウォンピョン",genre:"青春",media:"",synopsis:"現代を生きる30歳前後の若者たちの、静かな逆襲劇。ソン・ウォンピョン。"},
   // 発掘部門
   {year:2026,rank:12,title:"夏時記",author:"星野立子",genre:"歴史",media:"",synopsis:"書店員が発掘した、美しい日本語が光る隠れた名作。"},
