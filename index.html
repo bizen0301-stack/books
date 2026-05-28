@@ -69,16 +69,32 @@ h1 span{color:var(--gold)}
 
 .cover-wrap{position:relative;width:100%;padding-top:140%;background:var(--paper-2);overflow:hidden;border-bottom:1px solid var(--border)}
 .cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;z-index:2;opacity:1;}
+
+/* ─── ✨【新設】画像がない際の上品なブックカバー風プレースホルダー ─── */
 .cover-wrap .placeholder {
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;font-family:'Noto Serif JP',serif;padding:1.5rem;text-align:center;
-  background:linear-gradient(135deg, #ffffff, var(--paper-2));z-index:1;
+  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:1.6rem 1.2rem;text-align:center;z-index:1;box-sizing:border-box;
+  background: linear-gradient(135deg, #fdfcf9 0%, #f4f1e9 100%); /* 高級文庫本のような淡いキナリ色 */
 }
-.placeholder-title{font-size:14px;font-weight:700;color:var(--ink);line-height:1.5;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;border-bottom:1px solid var(--border);padding-bottom:6px;width:100%;}
-.placeholder-author{font-size:11px;color:var(--ink-3);margin-top:2px;}
+/* 本の装丁をイメージしたゴールドのインナー飾り枠 */
+.cover-wrap .placeholder::before {
+  content:'';position:absolute;inset:10px;border:1px solid rgba(154, 122, 26, 0.18);pointer-events:none;
+}
+.placeholder-title{
+  font-family:'Noto Serif JP',serif;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.6;
+  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
+  padding-bottom:12px;margin-bottom:10px;position:relative;width:82%;
+}
+/* タイトルと著者を分けるノスタルジックな金線 */
+.placeholder-title::after {
+  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:20px;height:1px;background:var(--gold);
+}
+.placeholder-author{font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--ink-3);font-weight:500;letter-spacing:0.01em;}
 
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
 
+/* 大賞バッジ：金メダルサークル仕様 */
 .rank-badge.r1 {
   top: -8px; left: -8px; border-radius: 50%; width: 54px; height: 54px;
   display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
@@ -234,6 +250,16 @@ let filterDecade = 'all';
 let filterMood = 'all';
 let filterMedia = 'all';
 
+function toggleFilterPanel() {
+  const panel = document.getElementById('filter-panel');
+  const arrow = document.getElementById('toggle-arrow');
+  if (panel && panel.classList.contains('open')) {
+    panel.classList.remove('open'); if(arrow) arrow.innerText = '▼';
+  } else if(panel) {
+    panel.classList.add('open'); if(arrow) arrow.innerText = '▲';
+  }
+}
+
 function getAmazonKindleLink(title, author) { return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`; }
 function getAmazonPaperLink(title, author) { return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&tag=${AMAZON_TAG}`; }
 function getRakutenLink(title, author) { return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(title + ' ' + author)}%2F-%2F%3Fsid%3D213310`; }
@@ -265,7 +291,9 @@ function cardHTML(b) {
   const moods = getMoodsForBook(b);
   const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
   const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
-  const coverHTML = b.coverImg ? `<img src="${b.coverImg}" alt="${b.title}" loading="lazy">` : '';
+
+  // 💡【核心の修正】画像エラー時(onerror)だけでなく、Googleの正方形ダミー(1:1)を検知したら強制爆破(none)するJSを直書き
+  const coverHTML = b.coverImg ? `<img src="${b.coverImg}" alt="${b.title}" onerror="this.style.display='none'" onload="if(this.naturalWidth===this.naturalHeight||this.naturalWidth<=40){this.style.display='none';}">` : '';
 
   return `
 <article class="card${isTop?' rank-1':''}" data-year="${b.year}" data-rank="${b.rank}">
@@ -331,51 +359,14 @@ function updateFilteredList() {
   });
 }
 
-function resetAndRender() {
-  visibleCount = PAGE_SIZE; updateFilteredList();
-  const resInfo = document.getElementById('result-info');
-  if (resInfo) resInfo.textContent = `${filteredBooks.length}件を表示中`;
-  renderChunk(); initInfiniteScroll();
-}
+function resetAndRender() { visibleCount = PAGE_SIZE; updateFilteredList(); const resInfo = document.getElementById('result-info'); if (resInfo) resInfo.textContent = `${filteredBooks.length}件を表示中`; renderChunk(); initInfiniteScroll(); }
+function renderChunk() { const content = document.getElementById('content'); if (!content) return; if (typeof BOOKS === 'undefined') { content.innerHTML = '<p class="no-res">データファイル(data.js)を読み込み中です。</p>'; return; } const chunk = filteredBooks.slice(0, visibleCount); content.innerHTML = chunk.map(b => cardHTML(b)).join(''); }
+function initInfiniteScroll() { if (scrollObserver) scrollObserver.disconnect(); scrollObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting && visibleCount < filteredBooks.length) { visibleCount += PAGE_SIZE; renderChunk(); } }); }, { rootMargin: '400px 0px', threshold: 0.1 }); const trigger = document.getElementById('load-more'); if (trigger) scrollObserver.observe(trigger); }
 
-function renderChunk() {
-  const content = document.getElementById('content'); if (!content) return;
-  if (typeof BOOKS === 'undefined') {
-    content.innerHTML = '<p class="no-res">データファイル(data.js)を読み込み中です。配置をご確認ください。</p>';
-    return;
-  }
-  const chunk = filteredBooks.slice(0, visibleCount);
-  content.innerHTML = chunk.map(b => cardHTML(b)).join('');
-}
-
-function initInfiniteScroll() {
-  if (scrollObserver) scrollObserver.disconnect();
-  scrollObserver = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && visibleCount < filteredBooks.length) {
-        visibleCount += PAGE_SIZE; renderChunk();
-      }
-    });
-  }, { rootMargin: '400px 0px', threshold: 0.1 });
-  const trigger = document.getElementById('load-more'); if (trigger) scrollObserver.observe(trigger);
-}
-
-function setRankFilter(el) {
-  filterRank = el.dataset.r; document.querySelectorAll('#chips-rank .chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on'); resetAndRender();
-}
-function setDecadeFilter(el) {
-  filterDecade = el.dataset.d; document.querySelectorAll('#chips-decade .chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on'); resetAndRender();
-}
-function setMoodFilter(el) {
-  filterMood = el.dataset.m; document.querySelectorAll('#chips-mood .chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on'); resetAndRender();
-}
-function setMediaFilter(el) {
-  filterMedia = el.dataset.v; document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on'));
-  el.classList.add('on'); resetAndRender();
-}
+function setRankFilter(el) { filterRank = el.dataset.r; document.querySelectorAll('#chips-rank .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
+function setDecadeFilter(el) { filterDecade = el.dataset.d; document.querySelectorAll('#chips-decade .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
+function setMoodFilter(el) { filterMood = el.dataset.m; document.querySelectorAll('#chips-mood .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
+function setMediaFilter(el) { filterMedia = el.dataset.v; document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
 
 document.addEventListener('DOMContentLoaded', () => {
   const loader = document.getElementById('loader'); if (loader) loader.classList.add('done');
