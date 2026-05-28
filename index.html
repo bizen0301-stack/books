@@ -79,6 +79,7 @@ h1 span{color:var(--gold)}
 .rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
 .rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
 
+/* 👑 大賞バッジ：金メダルサークル仕様 */
 .rank-badge.r1 {
   top: -8px; left: -8px; border-radius: 50%; width: 54px; height: 54px;
   display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
@@ -152,6 +153,19 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 <div class="loading-overlay" id="loader"><div class="spinner"></div></div>
 
 <script>
+const AMAZON_TAG = 'wespressoblog-22'; 
+const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
+
+const PAGE_SIZE = 24; 
+let visibleCount = PAGE_SIZE;
+let filteredBooks = [];
+let scrollObserver = null;
+
+let filterRank = 'all';
+let filterDecade = 'all';
+let filterMood = 'all';
+let filterMedia = 'all';
+
 function toggleFilterPanel() {
   const panel = document.getElementById('filter-panel');
   const arrow = document.getElementById('toggle-arrow');
@@ -297,7 +311,7 @@ function setMediaFilter(el) {
 
 
 <script id="database-area">
-// 👇 【ジェネレーターの完了画面にでてきた「const BOOKS = [...]」を、この下にそのままペーストして上書きしてください】
+// 👇 【ジェネレーターで抽出完了した「const BOOKS = [...]」の全データをここにそのまま貼り付けてください】
 const BOOKS = [
   {
     "year": 2026,
