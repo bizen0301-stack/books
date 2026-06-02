@@ -7,6 +7,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "ファンダム経済を仕掛ける側、のめり込む側——人の心を動かす「物語」の功罪をあぶり出す意欲作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=c7WBEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -18,6 +19,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "轢き逃げの罪を背負い、息子を求めて流れていく女の孤独な逃避行。佐藤正午が紡ぐ罪と愛の物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=fwxOEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -28,6 +30,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "何度も本屋大賞を受賞しながら直木賞が取れない作家の執念と苦悩を描く、文壇の光と影。",
+    "isbn": "4163919309",
     "coverImg": "https://books.google.com/books/content?id=VDTx0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -38,6 +41,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "『スピノザの診察室』続編。大学病院の絶対権力者の父親を診ることになった医師の葛藤。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=Fdh3EQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -48,6 +52,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "文部科学大臣刺殺事件の犯人が語る手記と、事件を小説にする作家。フィクションが交錯するミステリ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=7KeXEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -58,6 +63,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "凄腕営業マンが殺し屋の現場を目撃し、口封じされかける。絶体絶命の状況で営業トークを駆使するサスペンス。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=j1l5EQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -68,6 +74,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "シングルマザーと同性愛者の義弟。複雑な関係の中で育まれる確かな絆を描く温かな物語。",
+    "isbn": "4910576037",
     "coverImg": "https://books.google.com/books/content?id=dukd0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -78,6 +85,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "色恋調査が病的に得意な探偵・小石が挑む連作ミステリ。軽妙な会話と意外な真相。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=txGGEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -88,6 +96,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "顔を潰された身元不明の死体と「父かもしれない」と訪れた小学生。十年前の失踪が交錯する本格推理。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=E053EQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -97,8 +106,9 @@ const BOOKS = [
     "author": "伊坂幸太郎",
     "genre": "ミステリ",
     "media": "",
-    "synopsis": "咄嗟に夫を殺してしまった女性のもとに現れる謎 of 男。伊坂流のユーモアと緊張感。",
-    "coverImg": "https://books.google.com/books/content?id=ZCyL0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "synopsis": "咄嗟に夫を殺してしまった女性のもとに現れる謎の男。伊坂流のユーモアと緊張感。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=dMSPEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2025,
@@ -108,6 +118,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "「カフネ」とはポルトガル語で、愛する人の髪を優しくすく仕草を意味する言葉「カフネ」。言葉の温もりをテーマにした愛の物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=xnoHEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -119,6 +130,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "野球観戦のアルプス席から息子を見守り続ける母の愛と葛藤を描く、家族の感動作。",
+    "isbn": "4093867135",
     "coverImg": "https://books.google.com/books/content?id=TDCQ0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -129,6 +141,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "物語の構造そのものを問い直す実験的かつ読みやすい、野崎まどならではのエンタメ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=XjMwEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -139,6 +152,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "触れてはいけない真実を抱えた子どもたちの物語。新鋭・山口未桜が放つ衝撃のデビュー作。",
+    "isbn": "9784488025694",
     "coverImg": "https://books.google.com/books/content?id=ETMmEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -149,6 +163,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "謎の書き置きから始まる連作短編。青山美智子の温かく不思議な世界観が光る一編。",
+    "isbn": "4569857949",
     "coverImg": "https://books.google.com/books/content?id=eTzh0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -159,6 +174,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "バレエを通じて描かれる才能と情熱、嫉妬と愛。『蜜蜂と遠雷』に続くアート小説大作。",
+    "isbn": "9789861339689",
     "coverImg": "https://books.google.com/books/content?id=5eNaEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -169,6 +185,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "さまざまな形の愛の物語を集めた連作短編集。多様な関係性と感情の機微を美しく描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=y0MsEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -178,7 +195,8 @@ const BOOKS = [
     "author": "朝井リョウ",
     "genre": "SF",
     "media": "",
-    "synopsis": "AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウの挑戦作。",
+    "synopsis": "AIと人間の生殖をめぐる近未来SF。現代社会への鋭い問いを孕んだ朝井リョウ of 挑戦作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=c5kREQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -189,6 +207,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "突然死した同級生が教室のスピーカーに宿り、クラスメートと会話する奇想天外な青春劇。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=wVgFEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -199,6 +218,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "前作『成瀬は天下を取りにいく』の続編。相変わらず破天荒な成瀬あかりが新たな挑戦に臨む。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=p48zEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -209,7 +229,8 @@ const BOOKS = [
     "genre": "青春",
     "media": "漫画化",
     "synopsis": "西武大津店の閉店を見届けると決めた成瀬あかりの破天荒な高校生活。痛快無比な青春小説。",
-    "coverImg": "https://books.google.com/books/content?id=W-dA0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=DTi0EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
   {
@@ -220,6 +241,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "水車小屋に棲む謎の鳥・ネネと二人の姉妹の40年にわたる交流を描く。温かな大河小説。",
+    "isbn": "462021101X",
     "coverImg": "https://books.google.com/books/content?id=itbd0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -230,6 +252,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "二つの誘拐事件と芸術の謎が絡み合うサスペンス。スケールの大きな人間ドラマ。",
+    "isbn": "4022519320",
     "coverImg": "https://books.google.com/books/content?id=_twW0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -240,6 +263,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "大学病院を離れ地域病院で働く内科医・雄町の日常と哲学。医療小説の新たな傑作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=KmrfEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -250,6 +274,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "異世界の小国を舞台にした壮大なファンタジー。圧倒的な世界観で多くの読者を魅了。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=u5hNEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -259,7 +284,8 @@ const BOOKS = [
     "author": "川上未映子",
     "genre": "ヒューマン",
     "media": "",
-    "synopsis": "貧コンと孤独の中で生きる女たちの集まり。社会の底辺に生きる人々を圧倒的な筆力で描く。",
+    "synopsis": "貧困と孤独の中で生きる女たちの集まり。社会の底辺に生きる人々を圧倒的な筆力で描く。",
+    "isbn": "4120056287",
     "coverImg": "https://books.google.com/books/content?id=C9eazwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -270,6 +296,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "公園の古びた動物遊具「カバヒコ」に触れると回復するという噂をめぐる連作短編。",
+    "isbn": "433410990X",
     "coverImg": "https://books.google.com/books/content?id=yUzl0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -280,6 +307,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "『汝、星のごとく』の続編にあたる短編集。前作のキャラクターたちのその後を描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-PLfEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -290,6 +318,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "小学生探偵たちが学校の謎に挑む。本屋大賞初の児童書ノミネートとして話題に。",
+    "isbn": "4909044612",
     "coverImg": "https://books.google.com/books/content?id=J5VB0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -300,6 +329,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "才能と承認欲求、嘘と虚栄心をめぐる、直木賞作家が放つ鋭い文学的考察短編集。",
+    "isbn": "4103553111",
     "coverImg": "https://books.google.com/books/content?id=ff0Y0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -310,7 +340,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "瀬戸内の島で出会った二人が、それぞれの夢と愛に苦しみながら生きていく。魂を揺さぶる傑作。",
-    "coverImg": "https://books.google.com/books/content?id=RUt9EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=jZVrEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
   {
@@ -321,6 +352,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "著作権調査のため音楽教室に潜入したスパイが、チェロとの出会いで心を取り戻していく。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=63O4EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -331,6 +363,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "運命的に出会った二人の少女の、長年にわたる不思議な絆と魂の交錯を描く。",
+    "isbn": "4163916180",
     "coverImg": "https://books.google.com/books/content?id=aFBozwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -341,6 +374,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "取調室でのスリリングな心理戦。爆弾を予告する男と刑事の頭脳戦を描く極上サスペンス。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=FrdpEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -351,27 +385,30 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "ポッドキャストの声を通じて見えない糸でつながっていく5人の温かな日常を描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=UVGZEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2023,
     "rank": 6,
-    "title": "向日葵の咲かない夏",
-    "author": "道尾秀介",
+    "title": "君のクイズ",
+    "author": "小川哲",
     "genre": "ミステリ",
     "media": "",
-    "synopsis": "夏休みのある日、失踪した同級生の死体を発見した少年の恐怖体験。道尾秀介流の衝撃ミステリ。",
-    "coverImg": "https://books.google.com/books/content?id=s89RPwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "synopsis": "クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=LEtYEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2023,
     "rank": 7,
-    "title": "栞と嘘の季節",
-    "author": "米澤穂信",
+    "title": "方舟",
+    "author": "夕木春央",
     "genre": "ミステリ",
-    "media": "",
-    "synopsis": "「氷菓」シリーズの古典部が帰ってくる。押し花の栞に込められた毒草の謎を解くライトミステリ。",
-    "coverImg": "https://books.google.com/books/content?id=N1CZEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "media": "映画化",
+    "synopsis": "地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=-JaFEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2023,
@@ -381,6 +418,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=4whxEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -391,6 +429,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-mB3EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -401,6 +440,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=oXAQEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -411,6 +451,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "独ソ戦を舞台に、女性狙撃手となった少女の戦いを描く。アガサ賞W受賞の衝撃作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=7voyEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -422,7 +463,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "一枚の絵が時代や国を超えて人をつなぐ。青山美智子が描く「縁」の感動作。",
-    "coverImg": "https://books.google.com/books/content?id=amEeEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=-n1OEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2022,
@@ -432,6 +474,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "日常に潜む小さな歪みと嘘を鮮烈に切り取った、完成度の高い6つの傑作短編集。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=4ywiEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -442,7 +485,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "マイノリティの性を抱えた人々の生。「多様性」という言葉の欺瞞を突く問題作。",
-    "coverImg": "https://books.google.com/books/content?id=kspbzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "4101269335",
+    "coverImg": "https://books.google.com/books/content?id=jLrWzwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2022,
@@ -452,7 +496,8 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "最終選考に残った6人が、互いの嘘を暴き合う。驚異の二転三転就活サスペンス。",
-    "coverImg": "https://books.google.com/books/content?id=Tn7BEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2022,
@@ -462,6 +507,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "現代の若者が直面する貧困や労働の苦しさと、その先にある微かな光を紡ぐ渾身作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=oXAQEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -472,6 +518,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "月をテーマにした、圧倒的な筆力と狂気に満ちた世界観で話題をさらったダークファンタジー。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=TyVOEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -482,6 +529,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "ミステリを愛するすべての人へ贈る、硝子の館で起きる本格クローズドサークル。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=yqY5EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -492,6 +540,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "有岡城に幽閉された黒田官兵衛が、城内で起きる奇妙な難事件を解く歴史ミステリ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=gv0KEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -502,6 +551,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "DVから逃げ出した女性たちが身を寄せる家での、傷つきながらも寄り添う再生の物語。",
+    "isbn": "4122075637",
     "coverImg": "https://books.google.com/books/content?id=bZvT0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -512,6 +562,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "誰にも届かない声で鳴くクジラに自らを重ねた、孤独な魂たちの出会いと救済の物語。",
+    "isbn": "4122073707",
     "coverImg": "https://books.google.com/books/content?id=V5nVzwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
     "audible": true
   },
@@ -523,6 +574,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "悩める人々が図書室の司書から勧められた一冊の本をきっかけに人生を変えてしていく。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-PwGEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -533,6 +585,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "ある高校に住み着いた白い犬と、バブル末期から平成を駆け抜けた生徒たちの青春。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-v8BEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -543,6 +596,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "子供たちの視点から「大人の先入観」を軽快にひっくり返す、伊坂流の爽快な短編集。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=GK3FEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -553,6 +607,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "30代女性の結婚、仕事、家族へのリアルな悩み。ぐるぐる回る日常を優しく包む。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=iDeYEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -563,6 +618,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "不器用な理系学生や外国人労働者が、科学の美しさを通じて心を通わせる感動短編。",
+    "isbn": "4103362138",
     "coverImg": "https://books.google.com/books/content?id=IojxzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -573,6 +629,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "小惑星が衝突し世界が終わる。その時、名もなき人々はどう生き、誰を愛するのか。",
+    "isbn": "4122074711",
     "coverImg": "https://books.google.com/books/content?id=ya1e0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -583,6 +640,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "高校生限定のマッチングアプリがもたらす、3人の若者の瑞々しい恋と挫折の物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=u2krEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -593,6 +651,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "推しのアイドルがファンを殴って炎上した。背骨を失った少女の狂おしい純粋さ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=jyH7DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -603,6 +662,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "本に呪われた街。盗まれた本を取り戻すため、少女が物語の世界を旅するファンタジー。",
+    "isbn": "4041092698",
     "coverImg": "https://books.google.com/books/content?id=oWTlzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -613,6 +673,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "世間の「善悪」と当事者の真実の乖離を鋭く描く問題作。十数年後に再会した二人の関係性が世間からどう見られるか——映画化。",
+    "isbn": "9784488028022",
     "coverImg": "https://books.google.com/books/content?id=znWqDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -624,6 +685,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "余命わずかな女性が過ごすホスピス。毎週日曜に出される思い出のおやつの温かさ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=mo26DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -634,6 +696,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "深い喪失感を抱えた大学生が水墨画と出会い、その白黒の世界に魅了され再生していく。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=OJ6dDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -644,6 +707,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "ドラマ化",
     "synopsis": "自分が建てた美しい家。なぜ依頼人は家族を置いて失踪したのか？建築士が追う謎。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=vcmlDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -654,6 +718,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "極寒の樺太を舞台に、故郷を奪われたアイヌの男とポーランド人の生き様を描く歴史大作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=VHl5EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -664,57 +729,63 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "日本の有名な昔話を本格ミステリで読み解く。一風変わった、だが緻密なパズル。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=VkZIEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2020,
     "rank": 7,
-    "title": "AX アックス",
-    "author": "伊坂幸太郎",
+    "title": "私は嘘をつきません",
+    "author": "織守きょうや",
     "genre": "ミステリ",
     "media": "",
-    "synopsis": "恐妻家の殺し屋「兜」の日常を描くユーモラスなサスペンス。「グラスホッパー」「マリアビートル」と並ぶ三部作完結編。",
-    "coverImg": "https://books.google.com/books/content?id=9APQDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "synopsis": "ある日突然、嘘を見抜く能力を手に入れた少年の葛藤と、彼を取り巻く人々の物語。",
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2020,
     "rank": 8,
-    "title": "線は、僕を描く",
-    "author": "砥上裕將",
-    "genre": "青春",
-    "media": "映画化",
-    "synopsis": "両親を事故で亡くした大学生が水墨画の世界へ。喪失と再生を描く美しい青春小説。",
-    "coverImg": "https://books.google.com/books/content?id=OJ6dDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "title": "ムゲンのi",
+    "author": "知念実希人",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "眠り病から患者を救うため、若き女医が患者の夢の世界へダイブするファンタジー医療サスペンス。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=7QSwDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2020,
     "rank": 9,
-    "title": "在庫あり",
-    "author": "河崎秋子",
+    "title": "店長がバカすぎて",
+    "author": "早見和真",
     "genre": "お仕事",
     "media": "",
-    "synopsis": "北海道を舞台に書店員の仕事と日常を描いた作品。",
-    "coverImg": ""
+    "synopsis": "ブラックな書店を舞台に、ズボラで的外れな店長に振り回される契約社員の奮闘コミック。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=slE8EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2020,
     "rank": 10,
-    "title": "夏物語",
-    "author": "川上未映子",
+    "title": "終りなき夜の旅",
+    "author": "飛鳥井千砂",
     "genre": "ヒューマン",
     "media": "",
-    "synopsis": "生殖と女の体、命をめぐる問いを正面から描く川上未映子の大作。芥川賞「乳と卵」の世界が広がる長篇。",
-    "coverImg": "https://books.google.com/books/content?id=35OKzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "synopsis": "それぞれに孤独を抱えた人々が、夜の街を舞台に交錯し、静かに寄り添い合う感動群像劇。",
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2019,
     "rank": 1,
-    "title": "그리고 미란다を죽이다",
-    "author": "ピーター・スワンソン",
-    "genre": "ミステリ",
-    "media": "",
-    "synopsis": "飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。",
-    "coverImg": ""
+    "title": "そして、バトンは渡された",
+    "author": "瀬尾まいこ",
+    "genre": "ヒューマン",
+    "media": "映画化",
+    "synopsis": "複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=RxL6DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2019,
@@ -724,17 +795,19 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "突然ひとりぼっちになった大学生・聡が、人との出会いを通じて少しずつ成長していく物語。",
+    "isbn": "4396635427",
     "coverImg": "https://books.google.com/books/content?id=3YqVtgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2019,
     "rank": 3,
-    "title": "그리고、바톤은 넘겨졌다",
-    "author": "瀬尾まいこ",
-    "genre": "ヒューマン",
-    "media": "映画化",
-    "synopsis": "複雑な家庭環境で育ちながら愛情に包まれた少女・優子。3人の父と2人の母に育てられた幸せな物語が感動を呼ぶ。映画化。",
-    "coverImg": ""
+    "title": "そしてミランダを殺す",
+    "author": "ピーター・スワンソン",
+    "genre": "ミステリ",
+    "media": "",
+    "synopsis": "飛行機で出会った見知らぬ男女が妻を殺す計画を立てる。二転三転するどんでん返しが見事な海外ミステリ。",
+    "isbn": "9784488173050",
+    "coverImg": "https://books.google.com/books/content?id=AgdLDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2019,
@@ -744,6 +817,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "ある謎の本をめぐって語り手が入れ子状に入れ替わっていく幻想的な冒険小説。森見ワールド全開。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=Yi9AEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -753,7 +827,8 @@ const BOOKS = [
     "author": "平野啓一郎",
     "genre": "ヒューマン",
     "media": "映画化",
-    "synopsis": "死後「別人」と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。",
+    "synopsis": "死後『別人』と判明した男の正体を探る弁護士。アイデンティティと愛を問う深い文学作品。映画化。",
+    "isbn": "4163909028",
     "coverImg": "https://books.google.com/books/content?id=NAFvvQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -764,6 +839,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "ある女性の死後、彼女を知る多くの人を通して描かれる、命の意味と温かな繋がり。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=v4ZVDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -774,6 +850,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "ドラマ化",
     "synopsis": "植物学者の研究と、食堂で働く青年の初恋を描く。研究の純粋さと愛の煌めき。",
+    "isbn": "4122071445",
     "coverImg": "https://books.google.com/books/content?id=BzSzzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -784,6 +861,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "",
     "synopsis": "医療系サスペンス。外科医を目指す研修医が巻き込まれる事件と命の現場を描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=tbSHDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -794,6 +872,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "怪談話を集めるフリーライターが遭遇する、現実と非現実の境界が揺れる傑作ホラー。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=BdMzEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -804,6 +883,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "双子の兄弟が、特別な時間だけ入れ替われる超能力を使いながら生き抜く物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=9rZ9DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -813,7 +893,8 @@ const BOOKS = [
     "author": "辻村深月",
     "genre": "SF",
     "media": "アニメ化",
-    "synopsis": "学校に居場所を失った7人の中学生が、謎の城に招かれ「願いの部屋」の鍵を探す。",
+    "synopsis": "学校に居場所を失った7人の中学生が、謎の城に招かれ『願いの部屋』の鍵を探す。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=p6QgEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -825,6 +906,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "脳腫瘍を宣告された青年が故郷の島で出会った女性との純愛と、そこに隠された謎。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-Or_DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -835,6 +917,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "ドラマ化",
     "synopsis": "将棋の駒に秘められた殺人事件の真実を追う。将棋ミステリの傑作。",
+    "isbn": "4122069408",
     "coverImg": "https://books.google.com/books/content?id=MKLbzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -845,6 +928,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "恐妻家の殺し屋「兜」の日常を描く、ユーモラスで切ないサスペンス。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=9APQDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -855,6 +939,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "ゾンビが閉じ込める密室館で連続殺人が起きる。本格ミステリ+ゾンビの型破り作。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -865,6 +950,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "返刊寸前の雑誌を守るため、騙し騙されながら奮闘する編集長の物語。",
+    "isbn": "4041026423",
     "coverImg": "https://books.google.com/books/content?id=1AYozAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -875,6 +961,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "鎌倉の文具店を舞台に、代書屋として人々の様々な「手紙」を書くヒロインを描く。",
+    "isbn": "4344029275",
     "coverImg": "https://books.google.com/books/content?id=yEvvjwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -885,6 +972,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "少年時代の記憶と、あの夏に置き忘れてきた感情を瑞々しく描く青春小説。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -895,6 +983,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "時代の波に押される老舗百貨店を舞台に描かれる、温かく切ないファンタジー。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=3W84DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -905,6 +994,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "大学生が始めた秘密結社が、次第に肥大化し歪んでいく。歪んだ正義と挫折。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=yuznDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -915,6 +1005,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "国際ピアノコンクールを舞台に、4人のピアニストの葛藤と情熱を描く。W受賞作。",
+    "isbn": "4344845188",
     "coverImg": "https://books.google.com/books/content?id=eGNVygEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
     "audible": true
   },
@@ -926,6 +1017,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "学習塾を舞台に、昭和から平成まで3世代にわたる家族と教育の物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=Uc81EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -936,7 +1028,8 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "グリコ・森永事件をモデルに、未解決事件に翻弄された人々の人生を描く。",
-    "coverImg": "https://books.google.com/books/content?id=v2GUDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "isbn": "4065148251",
+    "coverImg": "https://books.google.com/books/content?id=bI3mxQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2017,
@@ -946,6 +1039,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "古い一軒家に暮らす女4人の、おかしくも温かな共同生活を描くコメディ。",
+    "isbn": "4865966722",
     "coverImg": ""
   },
   {
@@ -956,6 +1050,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "「普通」の人間社会に馴染めない女性が、コンビニという居場所で見つけた生き方。",
+    "isbn": "4163906185",
     "coverImg": "https://books.google.com/books/content?id=ZgUFvgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -966,6 +1061,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "日々のちょっとした可笑しみや、大人の女性の日常を軽妙に描くエッセイ。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -976,6 +1072,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "少年犯罪の加害者として生きる男と、その友人の葛藤を描く社会派サスペンス。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=I3g1EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -986,6 +1083,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "シリア人の父を持つ女性が、自らのアイデンティティと向き合い続ける姿を描く。",
+    "isbn": "4591164454",
     "coverImg": "https://books.google.com/books/content?id=uBIZzAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -996,6 +1094,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "謎多き事件の裏側にある、人と人との心理的な繋がりを辻村深月が描く。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1006,6 +1105,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "岩手県を舞台に、男二人の友情と、その裏にある喪失と再生を描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=PRfNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1016,6 +1116,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "ピアノの調律師を目指す青年の成長を、美しい森の描写とともに描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=vw_NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1027,7 +1128,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "海辺の理髪店を舞台にした6つの短編集。切なさと温かさが同居する。",
-    "coverImg": ""
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=_Pw1EAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2016,
@@ -1037,6 +1139,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "ドラマ化",
     "synopsis": "提供者として生まれた子供たちの運命と愛を描いた、世界的傑作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=u2vaTWhcEBsC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1047,6 +1150,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "特別養子縁組で子供を授かった夫婦と、子供を手放した母の物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=NxLNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1057,6 +1161,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "父の死後、孤独に生きる女性編集者が、社会との接点を取り戻していく。",
+    "isbn": "4022647906",
     "coverImg": "https://books.google.com/books/content?id=FggcjgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1067,6 +1172,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "病を抱えた少女と、彼女の秘密を知った少年の、切なくも美しい青春。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=s3C7DgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1077,7 +1183,8 @@ const BOOKS = [
     "author": "西川美和",
     "genre": "ヒューマン",
     "media": "映画化",
-    "synopsis": "妻を突然失った作家が、遺族と向き合う中で自らを見つめ長す。",
+    "synopsis": "妻を突然失った作家が、遺族と向き合う中で自らを見つめ直す。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=wQ3NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1088,6 +1195,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "ブラック企業で働く青年を救ったのは、実は死んでいた同級生？癒しの物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=b5h8DwAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1098,6 +1206,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "ミスマッチな名前を持つ2人の少女の、友情と決別を描く青春小説。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=UlYZCgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1108,6 +1217,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "満洲からの引き揚げを通じて結ばれた女の子たちの、数奇な人生を描く大作。",
+    "isbn": "4062939029",
     "coverImg": "https://books.google.com/books/content?id=siNauAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1118,6 +1228,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "アニメ化",
     "synopsis": "謎の疫病と戦士の逃亡を軸に、壮大なファンタジー世界を描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=ouvnDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1129,6 +1240,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "エジプト生まれの男性の数奇な半生を、圧倒的な筆力で描く直木賞作。",
+    "isbn": "4093863938",
     "coverImg": "https://books.google.com/books/content?id=yPALogEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1139,6 +1251,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "ありえない事故を連続させる謎の少女をめぐる、SFミステリ。",
+    "isbn": "4041029899",
     "coverImg": "https://books.google.com/books/content?id=mGOCrgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1149,6 +1262,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "芸人の生き様と師弟関係を描き、社会現象となった芥川賞受賞作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=ew7NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1159,6 +1273,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "ネパールで起きた王族殺害事件を追う、記者のジャーナリズムミステリ。",
+    "isbn": "9784488451103",
     "coverImg": "https://books.google.com/books/content?id=mX5oDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1169,7 +1284,8 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "第二次大戦下、米軍のコックとして戦地を転戦する男の日常と謎。",
-    "coverImg": "https://books.google.com/books/content?id=a_37xwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "9784488453121",
+    "coverImg": "https://books.google.com/books/content?id=xVCnDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2015,
@@ -1179,6 +1295,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "5人の高校生が、それぞれ少しだけ不思議な「能力」を持って生活する青春。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=9JUyDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1189,6 +1306,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "アルツハイマー病の父と家族の10年を、温かく笑いと涙で描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=3w_NDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1199,6 +1317,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "映画化",
     "synopsis": "過去に戻れる喫茶店で、後悔を持つ人々が大切な人に会いに行く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=Lb9WDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1209,6 +1328,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "横道世之介の大学生活を描いた、心温まる青春小説。",
+    "isbn": "4620108642",
     "coverImg": "https://books.google.com/books/content?id=3tK_zwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1219,6 +1339,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "戦国時代、海賊の娘・景が大坂本願寺への兵糧支援に挑む歴史エンタメ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=UE_XCwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1230,6 +1351,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "猫の「ナナ」と飼い主が、旅をしながら昔の友人を訪ねる感動作。",
+    "isbn": "4062854805",
     "coverImg": "https://books.google.com/books/content?id=KFxArgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1240,6 +1362,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "親友の母親殺しという衝撃的な出来事をめぐり、2人の女性を描く問題作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=RNurBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1250,7 +1373,8 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "二大作家がコラボした、ロードノベル×サスペンスの痛快作。",
-    "coverImg": "https://books.google.com/books/content?id=C1wAEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=bBnNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2014,
@@ -1260,6 +1384,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "多重人格の女性と精神科医の、百田尚樹流メインミステリ。",
+    "isbn": "4344020642",
     "coverImg": "https://books.google.com/books/content?id=ucjSygAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1270,7 +1395,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "母の四十九日に集まった家族が、レシピを通じて絆を取り戻す物語。",
-    "coverImg": "https://books.google.com/books/content?id=70IqywAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "4591136647",
+    "coverImg": "https://books.google.com/books/content?id=uYggnwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2014,
@@ -1280,6 +1406,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "夫を亡くした嫁と義父の共同生活を描く、食と私と再生の物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=MTe7DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1290,6 +1417,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "主婦が横領に手を染めていく経緯を描く、欲望と社会の歪み。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=21r0DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1300,6 +1428,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "離島に育った4人の高校生の、地方と都会の狭間で揺れる青春。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=kvKqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1310,6 +1439,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "アニメ業界を舞台に、覇権を争うプロフェッショナルたちの熱い物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=Mna5DAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1320,7 +1450,8 @@ const BOOKS = [
     "genre": "歴史",
     "media": "映画化",
     "synopsis": "戦後、日本の復興に石油事業で挑んだ男の、熱き戦いの記録。",
-    "coverImg": "https://books.google.com/books/content?id=CtBvBgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
+    "isbn": "4062175649",
+    "coverImg": "https://books.google.com/books/content?id=fF6CMAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
     "audible": true
   },
   {
@@ -1331,6 +1462,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "昭和64年に起きた少女誘拐事件。警察内部の闇が動く難事件。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=BwzNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1341,6 +1473,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "天才絵師ルソーの名画の真贋をめぐる、鑑定勝負の芸術ミステリ。",
+    "isbn": "4101259615",
     "coverImg": "https://books.google.com/books/content?id=-fD8oAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1351,6 +1484,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "現代の生きづらさのなかで、小さな「やさしさ」が連鎖する感動作。",
+    "isbn": "4591139751",
     "coverImg": "https://books.google.com/books/content?id=35hyoAEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1361,57 +1495,63 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "感情を持たずに育った女性が、個性豊かな人々と出会い心を取り戻す。",
+    "isbn": "4022647906",
     "coverImg": "https://books.google.com/books/content?id=FggcjgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2013,
     "rank": 6,
-    "title": "君のクイズ",
-    "author": "小川哲",
+    "title": "ソロモンの偽証",
+    "author": "宮部みゆき",
     "genre": "ミステリ",
-    "media": "",
-    "synopsis": "クイズ番組の決勝、なぜ彼は問題が読まれる前に正解できたのか？思考ミステリ。",
-    "coverImg": "https://books.google.com/books/content?id=LEtYEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "media": "映画化",
+    "synopsis": "クリスマスの朝に起きた男子中学生の転落死。学校内に張り巡らされた嘘に立ち向かうため、生徒たちが独自に学校裁判を開廷する。",
+    "isbn": "4101369372",
+    "coverImg": "https://books.google.com/books/content?id=89UZogEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2013,
     "rank": 7,
-    "title": "方舟",
-    "author": "夕木春央",
-    "genre": "ミステリ",
+    "title": "世界から猫が消えたなら",
+    "author": "川村元気",
+    "genre": "ヒューマン",
     "media": "映画化",
-    "synopsis": "地下建築に閉じ込められた9人。脱出するには1人の生贄が必要。サバイバル。",
-    "coverImg": "https://books.google.com/books/content?id=-JaFEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "synopsis": "脳腫瘍で余命わずかの郵便配達員の前に現れた悪魔。この世界から何かを1つ消すごとに、1日の命が延びるという奇妙な契約を交わす。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=WlK5DAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2013,
     "rank": 8,
-    "title": "宙ごはん",
-    "author": "町田そのこ",
-    "genre": "ヒューマン",
+    "title": "百年法",
+    "author": "山田宗樹",
+    "genre": "SF",
     "media": "",
-    "synopsis": "食を通じて描く、家族の再生と新しい繋がりの物語。町田そのこの感動作。",
-    "coverImg": "https://books.google.com/books/content?id=4whxEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "synopsis": "不老不死の技術が実用化された近未来の日本。だが、世代交代を強制するため「不老処理後100年で死ななければならない」法律が迫る。",
+    "isbn": "4041101913",
+    "coverImg": "https://books.google.com/books/content?id=TJJqvgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2013,
     "rank": 9,
-    "title": "掬えば手には",
-    "author": "瀬尾まいこ",
-    "genre": "ヒューマン",
-    "media": "",
-    "synopsis": "人の心が読めてしまう青年が、ある不器用な少女と出会うことで動き出す優しい物語。",
-    "coverImg": "https://books.google.com/books/content?id=-mB3EAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "title": "屍者の帝国",
+    "author": "伊藤計劃・円城塔",
+    "genre": "SF",
+    "media": "アニメ化",
+    "synopsis": "死者を労働力として蘇生させ、社会の基盤とする19世紀末のロンドン。医学生ワトソンはフランケンシュタインが遺した魂の書を追う。",
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=vrs_DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2013,
     "rank": 10,
-    "title": "夜が明ける",
+    "title": "舞台",
     "author": "西加奈子",
     "genre": "ヒューマン",
     "media": "",
-    "synopsis": "生きることの苦しさと希望を、二人の友情を通して描く、西加奈子の代表作。",
-    "coverImg": "https://books.google.com/books/content?id=oXAQEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "synopsis": "東京を舞台に、自意識過剰な青年が体験する様々な人間模様。都会の孤独と再生を描き出す。",
+    "isbn": "4062935821",
+    "coverImg": "https://books.google.com/books/content?id=SVk1MQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2012,
@@ -1421,6 +1561,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "辞書「大渡海」の編纂に情熱を傾ける人々の15年を描く。言葉への愛が詰まった。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1431,6 +1572,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "人類を滅ぼす新人類の誕生。アフリカの傭兵と日本の院生が破滅を止める。",
+    "isbn": "4048741837",
     "coverImg": "https://books.google.com/books/content?id=Mui7uAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1441,6 +1583,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "18世紀ヴェネツィア。孤児院の女性たちが音楽の巨匠の死を機に結ばれる。",
+    "isbn": "4591122670",
     "coverImg": "https://books.google.com/books/content?id=nkdKYgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1451,7 +1594,8 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "元天才ピアニストと、離島の中学校合唱部員たちのひと夏の青春。",
-    "coverImg": "https://books.google.com/books/content?id=sUIHnwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=JvKBDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2012,
@@ -1461,6 +1605,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "人質となった人々が遺した、ささやかで愛おしい人生の朗読記録。",
+    "isbn": "4120041956",
     "coverImg": "https://books.google.com/books/content?id=mMKkuAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1471,6 +1616,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "押し入れで見つけた殺人者の日記。それは自分の家族の血塗られた過去。",
+    "isbn": "4575237191",
     "coverImg": "https://books.google.com/books/content?id=9fWnuAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1481,6 +1627,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "一つの団地、一つのレストラン。すれ違う住民たちの小さな幸福と繋がりの短編。",
+    "isbn": "4575517178",
     "coverImg": "https://books.google.com/books/content?id=0d7VoQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1491,7 +1638,8 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "古書店の美しい店主が古書に秘められた謎を解き明かすライトミステリ。",
-    "coverImg": "https://books.google.com/books/content?id=3Xne0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "4049152983",
+    "coverImg": "https://books.google.com/books/content?id=vQuN0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2012,
@@ -1501,6 +1649,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "映画化",
     "synopsis": "琵琶湖の畔、不思議な力を受け継ぐ一族。宿敵との戦いが街を巻き込む。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-ETNCwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1511,6 +1660,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "多重人格の女性。彼女のなかの別の格に、青年は恋をしてしまう。",
+    "isbn": "4344020642",
     "coverImg": "https://books.google.com/books/content?id=ucjSygAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1521,6 +1671,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "お嬢様刑事の推理はいつも的外れ。毒舌執事がディナーのあとに謎を解く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=BUKUDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1532,6 +1683,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "主婦と男子高校生の許されざる関係。生きることの泥臭さと救いを描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=q4WEDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1542,6 +1694,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "アニメ化",
     "synopsis": "街に突然現れたペンギン。小学4年生の男の子が、お姉さんの謎を追う。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=xNVfDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1552,6 +1705,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "戦後の激動期、自らの力だけでのし上がろうとした男の破天荒な自伝。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=5EAgEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1562,6 +1716,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "天才ピアニストの失踪と、音楽に魅了された男たちの狂気を描く芸術ミステリ。",
+    "isbn": "4062163446",
     "coverImg": "https://books.google.com/books/content?id=GMnibwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1572,6 +1727,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "世界の辺境で起きる事件を解く、ミステリ界の新鋭が放つ名作短編集。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1582,6 +1738,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "生徒に慕われる完璧な教師。だが彼は、他人の命を何とも思わないサイコパス。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=uQrNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1592,6 +1749,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "信州の病院に同期の親友が赴任。だが彼は定時で帰る冷徹な医師に。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=DIE9DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1602,6 +1760,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "理系大学の「機械制御研究部」。破天荒な部長が仕掛ける、爆発だらけの青春。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=u59dDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1612,6 +1771,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "命を削って物語を書く妻と、彼女を支え続けた夫の愛。有川浩の傑作。",
+    "isbn": "4103018739",
     "coverImg": "https://books.google.com/books/content?id=XTzXcQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1622,6 +1782,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "映画化",
     "synopsis": "江戸時代、日本独自の正確な暦作りに生涯を捧げた渋川春海の、挫折と情熱。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=5ZzGBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1633,6 +1794,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "24時間病院で働く栗原一止。患者との触れ合いを通じて医師の宿命を見つめる。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=sFP8CgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1643,6 +1805,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "長崎から上京した横道世之介。彼の周りには、いつも温かな笑いがあった。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=-QXNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1653,6 +1816,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "都会育ちの少年が山奥の林業の村へ。厳しい自然と、職人たちとの爆笑お仕事。",
+    "isbn": "4198936048",
     "coverImg": ""
   },
   {
@@ -1663,6 +1827,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "からくり人形のなかに隠れてチェスを指し続ける少年の、哀しく美しい物語。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=9wPNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1673,6 +1838,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "理不尽なイジメに遭う二人が共有した、傷だらけの秘密の世界。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=CRqvBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1683,6 +1849,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "行き倒れていたイケメンは、野草に詳しい料理上手な王子様だった。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=U5pTHSxxf40C&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1693,6 +1860,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "ドラマ化",
     "synopsis": "日本橋で起きた殺人事件。赴任したばかりの加賀恭一郎が、人の心を解く。",
+    "isbn": "4062157713",
     "coverImg": "https://books.google.com/books/content?id=NdiUQgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1703,7 +1871,8 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "二つの月が浮かぶ奇妙な世界で、二人が再び巡り会うまでの壮大な物語。",
-    "coverImg": "https://books.google.com/books/content?id=KYxNAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2010,
@@ -1712,7 +1881,8 @@ const BOOKS = [
     "author": "藤谷治",
     "genre": "青春",
     "media": "",
-    "synopsis": "音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、そしてほろ苦い初恋。",
+    "synopsis": "音大付属高校のチェロ専攻の少年。音楽への情熱と挫折、精度初恋。",
+    "isbn": "486176579X",
     "coverImg": "https://books.google.com/books/content?id=IpFuPgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1723,6 +1893,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "我が娘を殺した生徒への、女教師の衝撃の復讐から始まるイヤミスの金字塔。",
+    "isbn": "4575245925",
     "coverImg": "https://books.google.com/books/content?id=-V6YzwEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
     "audible": true
   },
@@ -1734,6 +1905,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "映画化",
     "synopsis": "織田軍VS伊賀忍者。最強だが冷酷な忍者・無門が、天下の軍勢を迎え撃つ。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=juu_DgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1744,6 +1916,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "秘密スパイ養成機関「D機関」。世界を騙すスパイたちの知略とアクション。",
+    "isbn": "4800007518",
     "coverImg": ""
   },
   {
@@ -1754,6 +1927,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "ドラマ化",
     "synopsis": "幕末の琉球王国。男と偽り王宮の難局に立ち向かった才女の激動の生涯。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=GA9tBAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1764,6 +1938,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "天才肌と努力型。高校ボクシング部で競い合う、少年の友情と熱き戦い。",
+    "isbn": "4062775360",
     "coverImg": "https://books.google.com/books/content?id=6amqAQAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1774,6 +1949,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "アニメ化",
     "synopsis": "呪力を得た人類の理想郷の裏に隠された、おぞましき真実。日本SF大賞。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=LGqtBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1784,6 +1960,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "島原の乱前夜の、民衆の怒りと立ち上がった天草四郎の歴史大作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=7d6BDAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1794,6 +1971,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "非業の死を遂げた人々を「悼む」ため、全国を旅する青年の、生と死を見つめ直す。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=CQrNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1804,6 +1982,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "ドラマ化",
     "synopsis": "幼い頃に両親を殺された3兄妹。詐欺を働きながら犯人を探す彼らの哀しい宿命。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=SSbdDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1814,6 +1993,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "検索すると人が死ぬ？国家の巨大な監視網に立ち向かうプログラマー。",
+    "isbn": "4062150735",
     "coverImg": "https://books.google.com/books/content?id=O8JTzQEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1824,6 +2004,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "首相暗殺の濡れ衣を着せられた青年。仙台の街を舞台にした決死の逃亡。",
+    "isbn": "410125026X",
     "coverImg": "https://books.google.com/books/content?id=XdNYewAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
     "audible": true
   },
@@ -1835,6 +2016,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "若者たちの共同生活。平穏のなかに潜む、冷たい狂気を描く。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1845,7 +2027,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "殺人事件を起こした青年と逃避行を共にした女性。本当の悪人は誰か。",
-    "coverImg": "https://books.google.com/books/content?id=WtYrAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2008,
@@ -1855,6 +2038,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "少年時代のほろ苦い記憶と、小さな事件を瑞々しく描く青春ミステリ。",
+    "isbn": "4569825907",
     "coverImg": "https://books.google.com/books/content?id=PlDQmkWL24sC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1865,6 +2049,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "元過激派の父親が国家相手に大暴れ。破天荒な家族の沖縄移住計画。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1875,6 +2060,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "ドラマ化",
     "synopsis": "『模倣犯』から9年。ライターが再び挑む、少年の死をめぐる難事件。",
+    "isbn": "4163262407",
     "coverImg": "https://books.google.com/books/content?id=mSrRswEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1885,6 +2071,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "話すのが不器用な人々が、落語を通じて心を通わせる、癒やしの青春。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1895,6 +2082,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "ドラマ化",
     "synopsis": "平凡な家庭で起きた殺人。保身のため我が子を庇う親と、それを追う加賀恭一郎。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=ArUrAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1905,7 +2093,8 @@ const BOOKS = [
     "genre": "SF",
     "media": "ドラマ化",
     "synopsis": "奈良に赴任した教師が喋る鹿から命令される、奇想天外ファンタジー。",
-    "coverImg": "https://books.google.com/books/content?id=ie8rAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=2-W4DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2008,
@@ -1915,6 +2104,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "生きづらさを抱えながら、日々の小さな仕事と折り合いをつけていく女性たち。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -1925,6 +2115,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "ドラマ化",
     "synopsis": "陸上短距離走にすべてを懸ける高校生たちの、圧倒的疾走感。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=9k6qBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -1936,6 +2127,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "アニメ化",
     "synopsis": "京都の夜を突き進む乙女と、空回りする先輩の恋。森見ワールド。",
+    "isbn": "4041169879",
     "coverImg": "https://books.google.com/books/content?id=Ok-u0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1946,6 +2138,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "アニメ化",
     "synopsis": "素人ばかりのボロアパート住人が箱根駅伝を目指す、熱すぎる青春。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=y7xaEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1956,6 +2149,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "ドラマ化",
     "synopsis": "「あと3年で世界が終わる」。その時、人々は残された日々をどう生きるか。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=ONomEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -1966,6 +2160,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "本を読む自由を守るため、検閲に武力で抗う図書隊員たちの熱血お仕事恋。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=q1imYpx_hbUC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -1976,7 +2171,8 @@ const BOOKS = [
     "genre": "SF",
     "media": "映画化",
     "synopsis": "京都の大学生が謎のサークルでオニを操って戦う、前代未聞の競技。",
-    "coverImg": "https://books.google.com/books/content?id=9YvYARzxbhgC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
+    "isbn": "",
+    "coverImg": "https://books.google.com/books/content?id=a6ETCMQffIUC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
     "year": 2007,
@@ -1986,7 +2182,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "コビトカバに乗って学校へ通う美少女。昭和の大邸宅で過ごした、切なく美しい日々。",
-    "coverImg": "https://books.google.com/books/content?id=_QQsAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2007,
@@ -1996,6 +2193,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "日陰で生きる人々を優しく照らす、連作短編集。劇団ひとりのベストセラー。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=3eW4DwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2006,6 +2204,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "事故で感覚を失い右手の触覚だけが残った男。妻が紡ぐ切なすぎる愛。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=QU-qtUZ8bRUC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2016,7 +2215,8 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "人類滅亡へ向かう未来。アンドロイドが語る、ロマン溢れるSF。",
-    "coverImg": "https://books.google.com/books/content?id=oueaPwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "4048736213",
+    "coverImg": "https://books.google.com/books/content?id=IXUgNwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2006,
@@ -2026,7 +2226,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "オカン、これまで育ててくれてありがとう。日本中を濡らした自伝的小説。",
-    "coverImg": "https://books.google.com/books/content?id=T_crAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api",
+    "isbn": "",
+    "coverImg": "",
     "audible": true
   },
   {
@@ -2037,6 +2238,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "元過激派の父親に振り回される家族。東京を飛び出し、沖縄の島へ！",
+    "isbn": "4043860021",
     "coverImg": ""
   },
   {
@@ -2047,6 +2249,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "音楽を愛する死神が、7日間の観察を経て対象者の「死」を判定する、小粋な連作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=pZ9DEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2057,6 +2260,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "天才数学者が仕掛けた完璧な殺人アリバイ。物理学者・湯川学が挑む。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=hQDeDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2067,6 +2271,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "余命宣告された妻と家族が過ごした、最後の短い時間。重松清の感動作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=JQbNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2077,6 +2282,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "高校の教師に狂おしいほどの恋をした少女の、一生消えない痛みの。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=xaWsDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2087,7 +2293,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "実在した大量殺人事件を、町田康の独特な言語センスで描く圧倒的大作。",
-    "coverImg": "https://books.google.com/books/content?id=PO0rAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2006,
@@ -2097,7 +2304,8 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "犬たちの目線から、世界大戦と冷戦の歴史を駆け抜ける奇作。",
-    "coverImg": "https://books.google.com/books/content?id=KDYsAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2006,
@@ -2107,6 +2315,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "なぜ彼女の人生はこれほど転落したのか？悲惨なのに愛おしい一人の生涯。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -2117,6 +2326,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "本を愛する人々の日々と不器用な恋模様。有川浩の原点。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -2127,6 +2337,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "80キロを歩く高校の行事「歩行祭」。胸に秘めた約束と、忘れられない夜。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=E1SeBwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -2138,6 +2349,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "若年性アルツハイマーを発症した広告マン。消えゆく記憶と妻の愛。",
+    "isbn": "4334924468",
     "coverImg": "https://cover.openbd.jp/9784334924461.jpg"
   },
   {
@@ -2148,6 +2360,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "亡き友人の家を守る文筆家と、カッパや亡霊たちとの不思議な日常。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=eKBxEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2158,6 +2371,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "ままならない恋愛に溺れてしまう、大人の男女の繊細な心理。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -2168,6 +2382,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "ドラマ化",
     "synopsis": "破天荒な家裁調査官が、周囲に奇跡のような変化を起こす爽快な連作。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=PkutBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2178,6 +2393,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "主婦と女社長。異なる道を歩む二人の女性の孤独と奇跡の友情。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=YQbNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2188,6 +2404,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "「テレビを通じて犯人と対話する」。劇場型捜査に打って出た警察官の戦い。",
+    "isbn": "4575511552",
     "coverImg": "https://books.google.com/books/content?id=DSkhNwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2198,6 +2415,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "映画化",
     "synopsis": "魂が動物となって寄り添う世界。少女ライラが世界の危機に立ち向かう冒険。",
+    "isbn": "410538905X",
     "coverImg": "https://books.google.com/books/content?id=SMshNwAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2208,6 +2426,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "若き日の淡い恋と共有していた夢を振り返る、宮本輝の文学名作。",
+    "isbn": "4103325100",
     "coverImg": ""
   },
   {
@@ -2218,6 +2437,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "脱獄した男たちの逃亡劇とそれぞれの過去を描くハードボイルド。",
+    "isbn": "4796673784",
     "coverImg": "https://books.google.com/books/content?id=HhPGQgAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2228,6 +2448,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "記憶が80分しか持たない天才数学博士と、家政婦と息子の、素数で結ばれた愛。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=k71aEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api",
     "audible": true
   },
@@ -2239,6 +2460,7 @@ const BOOKS = [
     "genre": "お仕事",
     "media": "映画化",
     "synopsis": "日航機墜落事故。未曾有のスクープに命を懸けた、地方新聞記者たち。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=cwXNDwAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2249,6 +2471,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "映画化",
     "synopsis": "一緒に本屋で広辞苑を盗まないか？切なすぎる伏線回収。伊坂幸太郎の傑作。",
+    "isbn": "9784488464011",
     "coverImg": "https://books.google.com/books/content?id=qvkQCN5x2UkC&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2259,6 +2482,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "少女から大人へ変わる日々の、輝きとほろ苦さを描く青春小説。森絵都。",
+    "isbn": "4087460118",
     "coverImg": "https://books.google.com/books/content?id=Icm2PAAACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2268,7 +2492,8 @@ const BOOKS = [
     "author": "伊坂幸太郎",
     "genre": "ミステリ",
     "media": "映画化",
-    "synopsis": "謎のグラフィティアートと連続放火。家族の過去に隠された哀しい真真。",
+    "synopsis": "謎のグラフィティアートと連続放火。家族の過去に隠された哀しい真実。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=YbxaEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2279,6 +2504,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "映画化",
     "synopsis": "東京の下町・月島。14歳の少年4人組が過ごした、一生モノの特別な夏休み。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=r0SpCgAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2289,7 +2515,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "傷ついた心が、静かにほぐされていく。吉本ばななが描く再生の短編集。",
-    "coverImg": "https://books.google.com/books/content?id=_9orAQAAIAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2004,
@@ -2299,6 +2526,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "映画化",
     "synopsis": "終戦直前の日本。歴史を書き換える決死の作戦に挑む特殊潜水艦。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=m_WqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2309,6 +2537,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "映画化",
     "synopsis": "平安の闇を払う安倍晴明と源博雅。凸凹コンビの伝奇ファンタジー。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=HGqlEAAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2319,7 +2548,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "映画化",
     "synopsis": "痛みのなかにしか存在を感じられない若者たちの、鮮烈なデビュー作。",
-    "coverImg": "https://books.google.com/books/content?id=gwrsAAAAMAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "",
+    "coverImg": ""
   },
   {
     "year": 2026,
@@ -2329,6 +2559,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "フランス発、若年性アルツハイマーの青年と少女の切ない旅を描く。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=AwmFEQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2339,6 +2570,7 @@ const BOOKS = [
     "genre": "SF",
     "media": "",
     "synopsis": "竜と契約を結び戦う過酷な軍事エリート学校のファンタジー。全米大ヒット。",
+    "isbn": "4152104937",
     "coverImg": "https://books.google.com/books/content?id=hKKp0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2349,7 +2581,8 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "韓国で大ベストセラー。小さな書店に集まる人々の癒やしお仕事。",
-    "coverImg": "https://books.google.com/books/content?id=IuvWEAAAQBAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
+    "isbn": "4087735249",
+    "coverImg": "https://books.google.com/books/content?id=zN8X0AEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
     "year": 2023,
@@ -2359,6 +2592,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "無法者の少女が家族を守るため戦う、慟哭のミステリ。",
+    "isbn": "4151869018",
     "coverImg": "https://books.google.com/books/content?id=7ta10QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2369,6 +2603,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "現代を生きる30歳前後の若者たちの、静かな逆襲劇。ソン・ウォンピョン。",
+    "isbn": "4396636121",
     "coverImg": "https://books.google.com/books/content?id=9qyLzgEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"
   },
   {
@@ -2379,6 +2614,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "書店員が発掘した、美しい日本語が光る隠れた名作。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -2389,6 +2625,7 @@ const BOOKS = [
     "genre": "ヒューマン",
     "media": "",
     "synopsis": "日常のささやかな楽しさを見つける、大人のためのセレクト名著。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -2399,6 +2636,7 @@ const BOOKS = [
     "genre": "ミステリ",
     "media": "",
     "synopsis": "読む者を恐怖の迷宮へ誘う、伝説のサスペンス。井上夢人。",
+    "isbn": "",
     "coverImg": "https://books.google.com/books/content?id=kOWqBQAAQBAJ&printsec=frontcover&img=1&zoom=3&edge=curl&source=gbs_api"
   },
   {
@@ -2409,6 +2647,7 @@ const BOOKS = [
     "genre": "青春",
     "media": "",
     "synopsis": "一気読み必至のノンストップおもしろ劇。木下半太の隠れた傑作。",
+    "isbn": "",
     "coverImg": ""
   },
   {
@@ -2419,6 +2658,7 @@ const BOOKS = [
     "genre": "歴史",
     "media": "",
     "synopsis": "荒ぶる海辺の村。生き延びるために彼らが犯したおぞましき因習。",
+    "isbn": "4101117187",
     "coverImg": ""
   }
 ];
