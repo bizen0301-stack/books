@@ -6,6 +6,9 @@
 <title>本屋大賞ガイド｜2004〜2026年 全受賞・ノミネート作品一覧</title>
 <meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで,Amazon・Kindle・楽天ブックスからすぐ購入できます。">
 
+<link rel="icon" href="favicon.ico" type="image/x-icon">
+<link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
 <meta property="og:title" content="本屋大賞ガイド｜全受賞・ノミネート作品一覧">
 <meta property="og:image" content="https://books.soranoshita.com/ogp.png">
 <meta name="twitter:card" content="summary_large_image">
@@ -245,7 +248,7 @@ let visibleCount = PAGE_SIZE;
 let filteredBooks = [];
 let scrollObserver = null;
 let filterRank = 'all';
-let filterGenre = 'all'; // 💡年代の代わりにカテゴリ状態を管理
+let filterGenre = 'all'; 
 let filterMood = 'all';
 let filterMedia = 'all';
 
@@ -344,7 +347,6 @@ function updateFilteredList() {
     else if (filterRank === 'department') rankOk = isDept;
     else if (filterRank === 'nominate') rankOk = (b.rank >= 2 && b.rank <= 10);
     
-    // 💡【ロジック変更】年代判定をパージし、厳密なカテゴリ部分一致判定に変更
     const genreOk = filterGenre === 'all' || (b.genre && b.genre.includes(filterGenre));
     
     const mediaOk = filterMedia === 'all' || (filterMedia === 'yes' && b.media !== "");
@@ -388,7 +390,6 @@ function renderChunk() {
 function initInfiniteScroll() { if (scrollObserver) scrollObserver.disconnect(); scrollObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting && visibleCount < filteredBooks.length) { visibleCount += PAGE_SIZE; renderChunk(); } }); }, { rootMargin: '400px 0px', threshold: 0.1 }); const trigger = document.getElementById('load-more'); if (trigger) scrollObserver.observe(trigger); }
 
 function setRankFilter(el) { filterRank = el.dataset.r; document.querySelectorAll('#chips-rank .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
-// 💡【新設】ジャンルチップクリック時のイベント処理
 function setGenreFilter(el) { filterGenre = el.dataset.g; document.querySelectorAll('#chips-genre .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
 function setMoodFilter(el) { filterMood = el.dataset.m; document.querySelectorAll('#chips-mood .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
 function setMediaFilter(el) { filterMedia = el.dataset.v; document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
