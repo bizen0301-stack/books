@@ -144,7 +144,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
     gap: 0.75rem; background: rgba(0,0,0,0.02); padding: 12px; border-radius: 4px; margin-top: 4px;
   }
   .filter-groups.open { display: flex; }
-  .filter-group { display: grid; grid-template-columns: 42px 1fr; align-items: center; width: 100%; gap: 4px; }
+  .filter-group { display: grid; grid-template-columns: 50px 1fr; align-items: center; width: 100%; gap: 4px; }
   .chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; width: 100%; }
   .chips::-webkit-scrollbar { display: none; }
   .chip { padding: 4px 14px; font-size: 11px; }
@@ -168,7 +168,7 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
     <div class="hdr-kana">全国書店員が選んだ、いちばん売りたい本</div>
     <h1>本屋大賞 <span>歴代全作品ガイド</span></h1>
     <p class="hdr-lead">
-      2004年の第1回開催から現在に至るまで、全国の書店員が「本当に売りたい、面白い」と情熱を注いだ名作たち。本ギャラリーでは、歴代の大賞受賞作から隠れた傑作ノミネート作までを美しく網羅しました。あらすじや初心者に優しい「気分タグ」から、あなたの読書人生を満たす至高の一冊がすぐに見つかります。
+      2004年の第1回開催から現在に至るまで、全国の書店員が「本当に売りたい、面白い」と情熱を注いだ名作たち。本ギャラリーでは、歴代の大賞受賞作から隠れた傑作ノミネート作までを美しく網羅しました。あらすじや初心者に優しい「カテゴリ」や「気分タグ」から、あなたの読書人生を満たす至高の一冊がすぐに見つかります。
     </p>
     <p class="hdr-sub">※各作品カードから、お使いの端末（Kindle電子書籍）や楽天ブックス、話題のAudibleオーディオブックへ直接アクセスして、今すぐスマホで読書を始められます。</p>
   </div>
@@ -192,12 +192,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
         <div class="chips" id="chips-rank"></div>
       </div>
       <div class="filter-group">
-        <span class="filter-label">年代:</span>
-        <div class="chips" id="chips-decade">
-          <button class="chip on" data-d="all" onclick="setDecadeFilter(this)">すべて</button>
-          <button class="chip" data-d="2020s" onclick="setDecadeFilter(this)">2020年代</button>
-          <button class="chip" data-d="2010s" onclick="setDecadeFilter(this)">2010年代</button>
-          <button class="chip" data-d="2000s" onclick="setDecadeFilter(this)">2000年代</button>
+        <span class="filter-label">ジャンル:</span>
+        <div class="chips" id="chips-genre">
+          <button class="chip on" data-g="all" onclick="setGenreFilter(this)">すべて</button>
+          <button class="chip" data-g="ヒューマン" onclick="setGenreFilter(this)">ヒューマン</button>
+          <button class="chip" data-g="ミステリ" onclick="setGenreFilter(this)">ミステリ</button>
+          <button class="chip" data-g="青春" onclick="setGenreFilter(this)">青春</button>
+          <button class="chip" data-g="お仕事" onclick="setGenreFilter(this)">お仕事</button>
+          <button class="chip" data-g="SF" onclick="setGenreFilter(this)">SF</button>
+          <button class="chip" data-g="歴史" onclick="setGenreFilter(this)">歴史</button>
         </div>
       </div>
       <div class="filter-group">
@@ -242,7 +245,7 @@ let visibleCount = PAGE_SIZE;
 let filteredBooks = [];
 let scrollObserver = null;
 let filterRank = 'all';
-let filterDecade = 'all';
+let filterGenre = 'all'; // 💡年代の代わりにカテゴリ状態を管理
 let filterMood = 'all';
 let filterMedia = 'all';
 
@@ -288,13 +291,10 @@ function cardHTML(b) {
   const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
   const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
 
-  // 💡【新開発：openBDハイブリッド・レスキューエンジン】
-  // Googleの画像URLが空っぽ("")で、かつ有効なISBN(978始まりなど)がある場合、自動的にopenBDの直リンク書影を自動生成して差し込む
   let finalCoverUrl = b.coverImg || "";
   if (!finalCoverUrl && b.isbn && b.isbn.startsWith("978") && b.isbn.length >= 10) {
     finalCoverUrl = `https://cover.openbd.jp/${b.isbn}.jpg`;
   }
-
   const coverHTML = finalCoverUrl ? `<img src="${finalCoverUrl}" alt="${b.title}">` : '';
 
   return `
@@ -331,12 +331,6 @@ function cardHTML(b) {
 </article>`;
 }
 
-function getDecade(y) {
-  if (y >= 2020) return '2020s';
-  if (y >= 2010) return '2010s';
-  return '2000s';
-}
-
 function updateFilteredList() {
   const searchInput = document.getElementById('search');
   const q = searchInput ? searchInput.value.toLowerCase().trim() : '';
@@ -349,7 +343,10 @@ function updateFilteredList() {
     if (filterRank === '1') rankOk = b.rank === 1;
     else if (filterRank === 'department') rankOk = isDept;
     else if (filterRank === 'nominate') rankOk = (b.rank >= 2 && b.rank <= 10);
-    const decadeOk = filterDecade === 'all' || filterDecade === getDecade(b.year);
+    
+    // 💡【ロジック変更】年代判定をパージし、厳密なカテゴリ部分一致判定に変更
+    const genreOk = filterGenre === 'all' || (b.genre && b.genre.includes(filterGenre));
+    
     const mediaOk = filterMedia === 'all' || (filterMedia === 'yes' && b.media !== "");
     const moods = getMoodsForBook(b);
     const moodOk = filterMood === 'all' || moods.includes(filterMood);
@@ -357,22 +354,19 @@ function updateFilteredList() {
     const authorStr = (b.author || "").toLowerCase();
     const synopsisStr = (b.synopsis || "").toLowerCase();
     const qOk = !q || titleStr.includes(q) || authorStr.includes(q) || synopsisStr.includes(q);
-    return rankOk && decadeOk && moodOk && mediaOk && qOk;
+    return rankOk && genreOk && moodOk && mediaOk && qOk;
   });
 }
 
 function resetAndRender() { visibleCount = PAGE_SIZE; updateFilteredList(); const resInfo = document.getElementById('result-info'); if (resInfo) resInfo.textContent = `${filteredBooks.length}件を表示中`; renderChunk(); initInfiniteScroll(); }
 
-// 🛡️ キャッシュすり抜け・ロゴ・openBD側で画像が存在しなかった場合の「割れ画像」をまとめて強制消去する統合クレンジング
 function scanAndPurgeSpamImages() {
   const content = document.getElementById('content');
   if (!content) return;
-  
   content.querySelectorAll('img').forEach(img => {
     const checkRatio = () => {
       if (img.naturalWidth > 0) {
         const ratio = img.naturalWidth / img.naturalHeight;
-        // 1:1（ロゴ・Googleダミー）を検知した場合、またはopenBD側に画像がなく極小画像(1x1ピクセル)が返ってきた場合に非表示化
         if (ratio >= 0.82 || (img.naturalWidth === img.naturalHeight && img.naturalWidth < 180) || img.naturalWidth <= 5) {
           img.style.display = 'none';
         }
@@ -394,7 +388,8 @@ function renderChunk() {
 function initInfiniteScroll() { if (scrollObserver) scrollObserver.disconnect(); scrollObserver = new IntersectionObserver((entries) => { entries.forEach(entry => { if (entry.isIntersecting && visibleCount < filteredBooks.length) { visibleCount += PAGE_SIZE; renderChunk(); } }); }, { rootMargin: '400px 0px', threshold: 0.1 }); const trigger = document.getElementById('load-more'); if (trigger) scrollObserver.observe(trigger); }
 
 function setRankFilter(el) { filterRank = el.dataset.r; document.querySelectorAll('#chips-rank .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
-function setDecadeFilter(el) { filterDecade = el.dataset.d; document.querySelectorAll('#chips-decade .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
+// 💡【新設】ジャンルチップクリック時のイベント処理
+function setGenreFilter(el) { filterGenre = el.dataset.g; document.querySelectorAll('#chips-genre .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
 function setMoodFilter(el) { filterMood = el.dataset.m; document.querySelectorAll('#chips-mood .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
 function setMediaFilter(el) { filterMedia = el.dataset.v; document.querySelectorAll('#chips-media .chip').forEach(c => c.classList.remove('on')); el.classList.add('on'); resetAndRender(); }
 
