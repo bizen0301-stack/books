@@ -139,18 +139,23 @@ h1 span{color:var(--gold)}
 .affiliate{max-width:1140px;margin:0 auto;padding:2rem 1.5rem 1rem;font-size:11px;color:var(--ink-3);border-top:1px solid var(--border);text-align:center;line-height:1.6;}
 footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:center;font-size:11px;letter-spacing:.05em;margin-top:4rem}
 
+/* ✨ スマートフォン・タブレット表示用（完全レスポンシブ：画面内折り返し最適化版） */
 @media(max-width:980px) {
   .nav-inner { flex-direction: column; align-items: stretch; gap: 0.5rem; }
   .btn-filter-toggle { display: flex; }
   .filter-groups {
     display: none; width: 100%; flex-direction: column; align-items: flex-start;
-    gap: 0.75rem; background: rgba(0,0,0,0.02); padding: 12px; border-radius: 4px; margin-top: 4px;
+    gap: 1rem; background: rgba(0,0,0,0.02); padding: 14px 12px; border-radius: 4px; margin-top: 4px;
   }
   .filter-groups.open { display: flex; }
-  .filter-group { display: grid; grid-template-columns: 50px 1fr; align-items: center; width: 100%; gap: 4px; }
-  .chips { flex-wrap: nowrap; overflow-x: auto; -webkit-overflow-scrolling: touch; padding-bottom: 4px; width: 100%; }
-  .chips::-webkit-scrollbar { display: none; }
-  .chip { padding: 4px 14px; font-size: 11px; }
+  
+  /* 💡 横並びグリッドを廃止し、縦並びに変更して横幅の圧迫を解消 */
+  .filter-group { display: flex; flex-direction: column; align-items: flex-start; width: 100%; gap: 6px; }
+  .filter-label { font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 2px; }
+  
+  /* 💡 横スクロール(nowrap)を完全廃止し、wrap(画面内自動折り返し)にアップグレード */
+  .chips { flex-wrap: wrap; gap: 6px; width: 100%; overflow-x: visible; padding-bottom: 0; }
+  .chip { padding: 5px 12px; font-size: 11px; border-radius: 4px; }
 }
 
 @media(max-width:640px){
