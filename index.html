@@ -5,6 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>本屋大賞ガイド｜2004〜2026年 全受賞・ノミネート作品一覧</title>
 <meta name="description" content="2004年から2026年までの本屋大賞作品を網羅。あらすじ、系統ジャンル、映像化情報（映画・ドラマ・アニメ）付きで,Amazon・Kindle・楽天ブックスからすぐ購入できます。">
+<link rel="canonical" href="https://books.soranoshita.com/">
 
 <link rel="icon" href="favicon.ico" type="image/x-icon">
 <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
@@ -16,156 +17,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-<style>
-:root{
-  --ink:#111111;--ink-2:#333333;--ink-3:#666666;--ink-4:#999999;
-  --paper:#ffffff;--paper-2:#f8f9fa;--paper-3:#eeeeee;--paper-card:#ffffff;
-  --red:#b5301f;--red-light:#f5e6e4;--gold:#9a7a1a;--gold-light:#faf6e8;
-  --amazon:#ff9900;--amazon-dk:#e68000;
-  --rakuten:#bf0000;--rakuten-dk:#990000;
-  --audible:#252f3d;--audible-dk:#19222d;
-  --border:rgba(0,0,0,.08);--border-2:rgba(0,0,0,.15);
-  --r:6px;
-}
-*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
-html{scroll-behavior:smooth}
-body{font-family:'Noto Sans JP',sans-serif;background:var(--paper);color:var(--ink);line-height:1.7;letter-spacing:0.03em;}
-
-header{background:var(--paper);color:var(--ink);border-bottom:1px solid var(--border);padding:4rem 0 3rem 0;}
-.hdr-inner{max-width:1140px;margin:0 auto;padding:0 1.5rem;position:relative}
-.hdr-kana{font-family:'Noto Sans JP',sans-serif;font-size:11px;font-weight:700;letter-spacing:.2em;color:var(--gold);margin-bottom:.75rem;display:flex;align-items:center;gap:10px}
-.hdr-kana::before{content:'';width:15px;height:2px;background:var(--gold)}
-h1{font-family:'Noto Serif JP',serif;font-size:clamp(1.8rem,4.5vw,2.8rem);font-weight:700;line-height:1.3;margin-bottom:1.5rem;color:#000;}
-h1 span{color:var(--gold)}
-.hdr-lead{font-size:13.5px;color:var(--ink-2);font-weight:400;max-width:760px;margin-bottom:1rem;line-height:1.8}
-.hdr-sub{font-size:11px;color:var(--ink-3);font-weight:400;}
-
-.nav-wrap{background:var(--paper-2);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:100;box-shadow:0 4px 20px rgba(0,0,0,.03)}
-.nav-inner{max-width:1140px;margin:0 auto;padding:.75rem 1.5rem;display:flex;gap:1rem;align-items:center;flex-wrap:wrap}
-.search-row { display: flex; gap: 0.5rem; flex: 1; min-width: 280px; align-items: center; }
-.search-box{position:relative;flex:1;}
-.search-box input{width:100%;padding:9px 12px 9px 36px;border:1px solid var(--border-2);border-radius:4px;background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:13px;color:var(--ink);outline:none;transition:all .15s;}
-.search-box input:focus{border-color:var(--ink);box-shadow:0 0 0 3px rgba(0,0,0,.05)}
-.search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--ink-3);pointer-events:none}
-
-.btn-filter-toggle {
-  display: none; background: white; border: 1px solid var(--border-2);
-  padding: 8px 12px; font-size: 12px; font-weight: 700; border-radius: 4px;
-  cursor: pointer; align-items: center; gap: 4px; white-space: nowrap; transition: background 0.2s;
-}
-.btn-filter-toggle:hover { background: var(--paper-2); }
-
-.filter-groups{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;flex:3;min-width:280px}
-.filter-group{display:flex;align-items:center;gap:8px}
-.filter-label{font-size:11px;color:var(--ink-3);font-weight:700;white-space:nowrap}
-.chips{display:flex;gap:4px;flex-wrap:wrap}
-.chip{padding:4px 12px;border-radius:20px;border:1px solid var(--border-2);background:var(--paper-card);font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--ink-2);cursor:pointer;transition:all .15s;white-space:nowrap;font-weight:400;}
-.chip:hover{background:var(--paper-3);color:var(--ink)}
-.chip.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700;}
-
-.main{max-width:1140px;margin:0 auto;padding:2rem 1.5rem}
-.book-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:24px 20px}
-
-.card{background:var(--paper-card);border:1px solid var(--border);border-radius:var(--r);overflow:hidden;display:flex;flex-direction:column;transition:all .2s ease}
-.card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:var(--border-2)}
-.card.rank-1{border-top:3px solid var(--gold);background:linear-gradient(to bottom, var(--gold-light) 0%, var(--paper-card) 120px)}
-
-.cover-wrap{position:relative;width:100%;padding-top:140%;background:var(--paper-2);overflow:hidden;border-bottom:1px solid var(--border)}
-.cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;z-index:2;opacity:1;}
-
-.cover-wrap .placeholder {
-  position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;
-  padding:1.6rem 1.2rem;text-align:center;z-index:1;box-sizing:border-box;
-  background: linear-gradient(135deg, #fdfcf9 0%, #f4f1e9 100%);
-}
-.cover-wrap .placeholder::before {
-  content:'';position:absolute;inset:10px;border:1px solid rgba(154, 122, 26, 0.18);pointer-events:none;
-}
-.placeholder-title{
-  font-family:'Noto Serif JP',serif;font-size:13.5px;font-weight:700;color:var(--ink);line-height:1.6;
-  display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;
-  padding-bottom:12px;margin-bottom:10px;position:relative;width:82%;
-}
-.placeholder-title::after {
-  content:'';position:absolute;bottom:0;left:50%;transform:translateX(-50%);width:20px;height:1px;background:var(--gold);
-}
-.placeholder-author{font-family:'Noto Sans JP',sans-serif;font-size:11px;color:var(--ink-3);font-weight:500;letter-spacing:0.01em;}
-
-.rank-badge{position:absolute;z-index:3;font-family:'Noto Sans JP',sans-serif;}
-.rank-badge.rn{top:10px;left:10px;padding:3px 10px;border-radius:3px;background:var(--ink-2);color:#fff;font-size:10px;font-weight:700;box-shadow:0 2px 6px rgba(0,0,0,0.06);}
-
-.rank-badge.r1 {
-  top: -8px; left: -8px; border-radius: 50%; width: 54px; height: 54px;
-  display: flex; align-items: center; justify-content: center; flex-direction: column; line-height: 1.1; padding: 0;
-  background: linear-gradient(135deg, #fff3a1 0%, #f1c40f 50%, #b8860b 100%); color: #ffffff;
-  box-shadow: 0 4px 10px rgba(184, 134, 11, 0.4), inset 0 1px 0 rgba(255, 255, 255, 0.6);
-  border: 2px solid #ffffff; transform: rotate(-5deg); z-index: 10;
-}
-.rank-badge.r1 .crown { font-size: 14px; line-height: 1; }
-.rank-badge.r1 .txt { font-size: 11px; font-weight: 800; letter-spacing: 0.02em; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-
-.year-badge{position:absolute;top:10px;right:10px;padding:3px 8px;border-radius:3px;font-family:'Noto Sans JP',sans-serif;font-size:10px;font-weight:700;z-index:3;background:rgba(255,255,255,0.9);color:var(--ink);border:1px solid var(--border);box-shadow:0 1px 3px rgba(0,0,0,0.02)}
-
-.card-body{padding:1rem 1rem .6rem;flex:1;display:flex;flex-direction:column}
-.tag-container{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:8px}
-.genre-badge{font-size:10px;background:var(--paper-2);color:var(--ink-2);padding:2px 8px;border-radius:3px;font-weight:500;border:1px solid var(--border);}
-.mood-badge{font-size:10px;background:#f0f7ff;color:#0055b3;padding:2px 8px;border-radius:3px;font-weight:700;}
-.media-badge{font-size:10px;background:var(--red-light);color:var(--red);padding:2px 8px;border-radius:3px;font-weight:700}
-
-.book-title{font-family:'Noto Serif JP',serif;font-size:15px;font-weight:700;line-height:1.4;color:var(--ink);margin-bottom:4px}
-.book-author{font-size:11px;color:var(--ink-3);margin-bottom:.75rem}
-.synopsis{font-size:11.5px;color:var(--ink-2);line-height:1.8;flex:1;display:-webkit-box;-webkit-line-clamp:4;-webkit-box-orient:vertical;overflow:hidden;text-align:justify;}
-
-.card-foot{padding:.4rem 1rem 1rem;display:flex;flex-direction:column;gap:6px;margin-top:auto}
-.btn-group-main, .btn-group-sub { display: flex; gap: 6px; width: 100%; }
-
-.btn-link {
-    display: flex; align-items: center; justify-content: center; gap: 4px;
-    text-decoration: none; font-size: 11.5px; font-weight: 700;
-    font-family:'Noto Sans JP',sans-serif; padding: 8px 4px; border-radius: 4px; transition: background .15s; flex: 1;
-}
-.btn-kindle{ background:var(--amazon); color:#111; }
-.btn-kindle:hover{ background:var(--amazon-dk); }
-.btn-rakuten{ background:var(--rakuten); color:#fff; }
-.btn-rakuten:hover{ background:var(--rakuten-dk); }
-.btn-audible{ background:var(--audible); color:#fff; }
-.btn-audible:hover{ background:var(--audible-dk); }
-.btn-paper{ border:1px solid var(--border-2); color:var(--ink-3); font-weight: 500; background:#fff; }
-.btn-paper:hover{ background:var(--paper-2); color:var(--ink); }
-
-.result-info{font-size:12px;color:var(--ink-3);margin-bottom:1.5rem;text-align:right;font-weight:500;}
-.load-trigger{width:100%;height:40px;margin-top:2rem;display:flex;align-items:center;justify-content:center;}
-.no-res{text-align:center;padding:5rem 1rem;color:var(--ink-3);font-size:14px;grid-column:1/-1;}
-.affiliate{max-width:1140px;margin:0 auto;padding:2rem 1.5rem 1rem;font-size:13px;color:var(--ink-2);border-top:1px solid var(--border);text-align:center;line-height:1.7;}
-footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:center;font-size:11px;letter-spacing:.05em;margin-top:4rem}
-
-/* ✨ スマートフォン・タブレット表示用（完全レスポンシブ：画面内折り返し最適化版） */
-@media(max-width:980px) {
-  .nav-inner { flex-direction: column; align-items: stretch; gap: 0.5rem; }
-  .btn-filter-toggle { display: flex; }
-  .filter-groups {
-    display: none; width: 100%; flex-direction: column; align-items: flex-start;
-    gap: 1rem; background: rgba(0,0,0,0.02); padding: 14px 12px; border-radius: 4px; margin-top: 4px;
-  }
-  .filter-groups.open { display: flex; }
-  
-  /* 💡 横並びグリッドを廃止し、縦並びに変更して横幅の圧迫を解消 */
-  .filter-group { display: flex; flex-direction: column; align-items: flex-start; width: 100%; gap: 6px; }
-  .filter-label { font-size: 11px; color: var(--gold); font-weight: 700; margin-bottom: 2px; }
-  
-  /* 💡 横スクロール(nowrap)を完全廃止し、wrap(画面内自動折り返し)にアップグレード */
-  .chips { flex-wrap: wrap; gap: 6px; width: 100%; overflow-x: visible; padding-bottom: 0; }
-  .chip { padding: 5px 12px; font-size: 11px; border-radius: 4px; }
-}
-
-@media(max-width:640px){
-  header{padding:2.5rem 0 2rem 0;}
-  .hdr-inner,.nav-inner,.main{padding-left:1rem;padding-right:1rem}
-  .book-grid{grid-template-columns:repeat(2,1fr);gap:12px}
-  h1{font-size:1.5rem}
-  .card-body,.card-foot{padding:0.75rem;}
-}
-</style>
+<link rel="stylesheet" href="assets/style.css">
 </head>
 <body>
 
@@ -244,17 +96,331 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 </div>
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
 
+<!-- ALL_INDEX_START -->
+<nav class="all-index" aria-label="全240作品インデックス">
+    <h2>全240作品インデックス</h2>
+    <h3>2026年</h3>
+    <ul>
+      <li><a href="/year/2026/#r1">イン・ザ・メガチャーチ — 朝井リョウ（1位）</a></li>
+      <li><a href="/year/2026/#r2">熟柿 — 佐藤正午（2位）</a></li>
+      <li><a href="/year/2026/#r3">PRIZE―プライズ― — 村山由佳（3位）</a></li>
+      <li><a href="/year/2026/#r4">エピクロスの処方箋 — 夏川草介（4位）</a></li>
+      <li><a href="/year/2026/#r5">暁星 — 湊かなえ（5位）</a></li>
+      <li><a href="/year/2026/#r6">殺し屋の営業術 — 野宮有（6位）</a></li>
+      <li><a href="/year/2026/#r7">ありか — 瀬尾まいこ（7位）</a></li>
+      <li><a href="/year/2026/#r8">探偵小石は恋しない — 森バジル（8位）</a></li>
+      <li><a href="/year/2026/#r9">失われた貌 — 櫻田智也（9位）</a></li>
+      <li><a href="/year/2026/#r10">さよならジャバウォック — 伊坂幸太郎（10位）</a></li>
+      <li><a href="/year/2026/#r11">空、はてしない青 — メリッサ・ダ・コスタ（翻訳賞）</a></li>
+      <li><a href="/year/2026/#r12">夏時記 — 星野立子（発掘賞）</a></li>
+    </ul>
+    <h3>2025年</h3>
+    <ul>
+      <li><a href="/year/2025/#r1">カフネ — 阿部暁子（1位）</a></li>
+      <li><a href="/year/2025/#r2">アルプス席の母 — 早見和真（2位）</a></li>
+      <li><a href="/year/2025/#r3">小説 — 野崎まど（3位）</a></li>
+      <li><a href="/year/2025/#r4">禁忌の子 — 山口未桜（4位）</a></li>
+      <li><a href="/year/2025/#r5">人魚が逃げた — 青山美智子（5位）</a></li>
+      <li><a href="/year/2025/#r6">spring — 恩田陸（6位）</a></li>
+      <li><a href="/year/2025/#r7">恋とか愛とかやさしさなら — 一穂ミチ（7位）</a></li>
+      <li><a href="/year/2025/#r8">生殖記 — 朝井リョウ（8位）</a></li>
+      <li><a href="/year/2025/#r9">死んだ山田と教室 — 金子玲介（9位）</a></li>
+      <li><a href="/year/2025/#r10">成瀬は信じた道をいく — 宮島未奈（10位）</a></li>
+      <li><a href="/year/2025/#r11">フォース・ウィング — レベッカ・ヤロス（翻訳賞）</a></li>
+      <li><a href="/year/2025/#r12">ありますもの — 中野翠（発掘賞）</a></li>
+    </ul>
+    <h3>2024年</h3>
+    <ul>
+      <li><a href="/year/2024/#r1">成瀬は天下を取りにいく — 宮島未奈（1位）</a></li>
+      <li><a href="/year/2024/#r2">水車小屋のネネ — 津村記久子（2位）</a></li>
+      <li><a href="/year/2024/#r3">存在のすべてを — 塩田武士（3位）</a></li>
+      <li><a href="/year/2024/#r4">スピノザの診察室 — 夏川草介（4位）</a></li>
+      <li><a href="/year/2024/#r5">レーエンデ国物語 — 多崎礼（5位）</a></li>
+      <li><a href="/year/2024/#r6">黄色い家 — 川上未映子（6位）</a></li>
+      <li><a href="/year/2024/#r7">リカバリー・カバヒコ — 青山美智子（7位）</a></li>
+      <li><a href="/year/2024/#r8">星を編む — 凪良ゆう（8位）</a></li>
+      <li><a href="/year/2024/#r9">放課後ミステリクラブ — 知念実希人（9位）</a></li>
+      <li><a href="/year/2024/#r10">君が手にするはずだった黄金について — 小川哲（10位）</a></li>
+      <li><a href="/year/2024/#r11">ようこそ、ヒュナム洞書店へ — ファン・ボルム（翻訳賞）</a></li>
+      <li><a href="/year/2024/#r12">プラスティック — 井上夢人（発掘賞）</a></li>
+    </ul>
+    <h3>2023年</h3>
+    <ul>
+      <li><a href="/year/2023/#r1">汝、星のごとく — 凪良ゆう（1位）</a></li>
+      <li><a href="/year/2023/#r2">ラブカは静かに弓を持つ — 安壇美緒（2位）</a></li>
+      <li><a href="/year/2023/#r3">光のとこにいてね — 一穂ミチ（3位）</a></li>
+      <li><a href="/year/2023/#r4">爆弾 — 呉勝浩（4位）</a></li>
+      <li><a href="/year/2023/#r5">月の立つ林で — 青山美智子（5位）</a></li>
+      <li><a href="/year/2023/#r6">君のクイズ — 小川哲（6位）</a></li>
+      <li><a href="/year/2023/#r7">方舟 — 夕木春央（7位）</a></li>
+      <li><a href="/year/2023/#r8">宙ごはん — 町田そのこ（8位）</a></li>
+      <li><a href="/year/2023/#r9">川のほとりに立つ者は — 寺地はるな（9位）</a></li>
+      <li><a href="/year/2023/#r10">#真相をお話しします — 結城真一郎（10位）</a></li>
+      <li><a href="/year/2023/#r11">われら闇より天を見る — クリス・ウィタカー（翻訳賞）</a></li>
+      <li><a href="/year/2023/#r12">おもろい本 — 木下半太（発掘賞）</a></li>
+    </ul>
+    <h3>2022年</h3>
+    <ul>
+      <li><a href="/year/2022/#r1">同志少女よ、敵を撃て — 逢坂冬馬（1位）</a></li>
+      <li><a href="/year/2022/#r2">赤と青とエスキース — 青山美智子（2位）</a></li>
+      <li><a href="/year/2022/#r3">スモールワールズ — 一穂ミチ（3位）</a></li>
+      <li><a href="/year/2022/#r4">正欲 — 朝井リョウ（4位）</a></li>
+      <li><a href="/year/2022/#r5">六人の嘘つきな大学生 — 浅倉秋成（5位）</a></li>
+      <li><a href="/year/2022/#r6">夜が明ける — 西加奈子（6位）</a></li>
+      <li><a href="/year/2022/#r7">残月記 — 小田雅久仁（7位）</a></li>
+      <li><a href="/year/2022/#r8">硝子の塔の殺人 — 知念実希人（8位）</a></li>
+      <li><a href="/year/2022/#r9">黒牢城 — 米澤穂信（9位）</a></li>
+      <li><a href="/year/2022/#r10">星を掬う — 町田そのこ（10位）</a></li>
+      <li><a href="/year/2022/#r11">三十の反撃 — ソン・ウォンピョン（翻訳賞）</a></li>
+      <li><a href="/year/2022/#r12">破船 — 吉村昭（発掘賞）</a></li>
+    </ul>
+    <h3>2021年</h3>
+    <ul>
+      <li><a href="/year/2021/#r1">52ヘルツのクジラたち — 町田そのこ（1位）</a></li>
+      <li><a href="/year/2021/#r2">お探し物は図書室まで — 青山美智子（2位）</a></li>
+      <li><a href="/year/2021/#r3">犬がいた季節 — 伊吹有喜（3位）</a></li>
+      <li><a href="/year/2021/#r4">逆ソクラテス — 伊坂幸太郎（4位）</a></li>
+      <li><a href="/year/2021/#r5">自転しながら公転する — 山本文緒（5位）</a></li>
+      <li><a href="/year/2021/#r6">八月の銀の雪 — 伊与原新（6位）</a></li>
+      <li><a href="/year/2021/#r7">滅びの前のシャングリラ — 凪良ゆう（7位）</a></li>
+      <li><a href="/year/2021/#r8">オルタネート — 加藤シゲアキ（8位）</a></li>
+      <li><a href="/year/2021/#r9">推し、燃ゆ — 宇佐見りん（9位）</a></li>
+      <li><a href="/year/2021/#r10">この本を盗む者は — 深緑野分（10位）</a></li>
+    </ul>
+    <h3>2020年</h3>
+    <ul>
+      <li><a href="/year/2020/#r1">流浪の月 — 凪良ゆう（1位）</a></li>
+      <li><a href="/year/2020/#r2">ライオンのおやつ — 小川糸（2位）</a></li>
+      <li><a href="/year/2020/#r3">線は、僕を描く — 砥上裕將（3位）</a></li>
+      <li><a href="/year/2020/#r4">ノースライト — 横山秀夫（4位）</a></li>
+      <li><a href="/year/2020/#r5">熱源 — 川越宗一（5位）</a></li>
+      <li><a href="/year/2020/#r6">medium霊媒探偵城塚翡翠 — 相沢沙呼（6位）</a></li>
+      <li><a href="/year/2020/#r7">夏物語 — 川上未映子（7位）</a></li>
+      <li><a href="/year/2020/#r8">ムゲンのi — 知念実希人（8位）</a></li>
+      <li><a href="/year/2020/#r9">店長がバカすぎて — 早見和真（9位）</a></li>
+      <li><a href="/year/2020/#r10">むかしむかしあるところに、死体がありました。 — 青柳碧人（10位）</a></li>
+    </ul>
+    <h3>2019年</h3>
+    <ul>
+      <li><a href="/year/2019/#r1">そして、バトンは渡された — 瀬尾まいこ（1位）</a></li>
+      <li><a href="/year/2019/#r2">ひと — 小野寺史宜（2位）</a></li>
+      <li><a href="/year/2019/#r3">ベルリンは晴れているか — 深緑野分（3位）</a></li>
+      <li><a href="/year/2019/#r4">熱帯 — 森見登美彦（4位）</a></li>
+      <li><a href="/year/2019/#r5">ある男 — 平野啓一郎（5位）</a></li>
+      <li><a href="/year/2019/#r6">さざなみのよる — 木皿泉（6位）</a></li>
+      <li><a href="/year/2019/#r7">愛なき世界 — 三浦しをん（7位）</a></li>
+      <li><a href="/year/2019/#r8">ひとつむぎの手 — 知念実希人（8位）</a></li>
+      <li><a href="/year/2019/#r9">火のないところに煙は — 芦沢央（9位）</a></li>
+      <li><a href="/year/2019/#r10">フーガはユーガ — 伊坂幸太郎（10位）</a></li>
+    </ul>
+    <h3>2018年</h3>
+    <ul>
+      <li><a href="/year/2018/#r1">かがみの孤城 — 辻村深月（1位）</a></li>
+      <li><a href="/year/2018/#r2">盤上の向日葵 — 柚月裕子（2位）</a></li>
+      <li><a href="/year/2018/#r3">屍人荘の殺人 — 今村昌弘（3位）</a></li>
+      <li><a href="/year/2018/#r4">たゆたえども沈まず — 原田マハ（4位）</a></li>
+      <li><a href="/year/2018/#r5">AX アックス — 伊坂幸太郎（5位）</a></li>
+      <li><a href="/year/2018/#r6">騙し絵の牙 — 塩田武士（6位）</a></li>
+      <li><a href="/year/2018/#r7">星の子 — 今村夏子（7位）</a></li>
+      <li><a href="/year/2018/#r8">崩れる脳を抱きしめて — 知念実希人（8位）</a></li>
+      <li><a href="/year/2018/#r9">百貨の魔法 — 村山早紀（9位）</a></li>
+      <li><a href="/year/2018/#r10">キラキラ共和国 — 小川糸（10位）</a></li>
+    </ul>
+    <h3>2017年</h3>
+    <ul>
+      <li><a href="/year/2017/#r1">蜜蜂と遠雷 — 恩田陸（1位）</a></li>
+      <li><a href="/year/2017/#r2">みかづき — 森絵都（2位）</a></li>
+      <li><a href="/year/2017/#r3">罪の声 — 塩田武士（3位）</a></li>
+      <li><a href="/year/2017/#r4">ツバキ文具店 — 小川糸（4位）</a></li>
+      <li><a href="/year/2017/#r5">桜風堂ものがたり — 村山早紀（5位）</a></li>
+      <li><a href="/year/2017/#r6">暗幕のゲルニカ — 原田マハ（6位）</a></li>
+      <li><a href="/year/2017/#r7">i — 西加奈子（7位）</a></li>
+      <li><a href="/year/2017/#r8">夜行 — 森見登美彦（8位）</a></li>
+      <li><a href="/year/2017/#r9">コンビニ人間 — 村田沙耶香（9位）</a></li>
+      <li><a href="/year/2017/#r10">コーヒーが冷めないうちに — 川口俊和（10位）</a></li>
+    </ul>
+    <h3>2016年</h3>
+    <ul>
+      <li><a href="/year/2016/#r1">羊と鋼の森 — 宮下奈都（1位）</a></li>
+      <li><a href="/year/2016/#r2">君の膵臓をたべたい — 住野よる（2位）</a></li>
+      <li><a href="/year/2016/#r3">世界の果てのこどもたち — 中脇初枝（3位）</a></li>
+      <li><a href="/year/2016/#r4">永い言い訳 — 西川美和（4位）</a></li>
+      <li><a href="/year/2016/#r5">朝が来る — 辻村深月（5位）</a></li>
+      <li><a href="/year/2016/#r6">王とサーカス — 米澤穂信（6位）</a></li>
+      <li><a href="/year/2016/#r7">戦場のコックたち — 深緑野分（7位）</a></li>
+      <li><a href="/year/2016/#r8">流 — 東山彰良（8位）</a></li>
+      <li><a href="/year/2016/#r9">教団X — 中村文則（9位）</a></li>
+      <li><a href="/year/2016/#r10">火花 — 又吉直樹（10位）</a></li>
+    </ul>
+    <h3>2015年</h3>
+    <ul>
+      <li><a href="/year/2015/#r1">鹿の王 — 上橋菜穂子（1位）</a></li>
+      <li><a href="/year/2015/#r2">サラバ! — 西加奈子（2位）</a></li>
+      <li><a href="/year/2015/#r3">ハケンアニメ！ — 辻村深月（3位）</a></li>
+      <li><a href="/year/2015/#r4">本屋さんのダイアナ — 柚木麻子（4位）</a></li>
+      <li><a href="/year/2015/#r5">土漠の花 — 月村了衛（5位）</a></li>
+      <li><a href="/year/2015/#r6">怒り — 吉田修一（6位）</a></li>
+      <li><a href="/year/2015/#r7">満願 — 米澤穂信（7位）</a></li>
+      <li><a href="/year/2015/#r8">キャプテンサンダーボルト — 阿部和重・伊坂幸太郎（8位）</a></li>
+      <li><a href="/year/2015/#r9">アイネクライネナハトムジーク — 伊坂幸太郎（9位）</a></li>
+      <li><a href="/year/2015/#r10">億男 — 川村元気（10位）</a></li>
+    </ul>
+    <h3>2014年</h3>
+    <ul>
+      <li><a href="/year/2014/#r1">村上海賊の娘 — 和田竜（1位）</a></li>
+      <li><a href="/year/2014/#r2">昨夜のカレー、明日のパン — 木皿泉（2位）</a></li>
+      <li><a href="/year/2014/#r3">島はぼくらと — 辻村深月（3位）</a></li>
+      <li><a href="/year/2014/#r4">さようなら、オレンジ — 岩城けい（4位）</a></li>
+      <li><a href="/year/2014/#r5">とっぴんぱらりの風太郎 — 万城目学（5位）</a></li>
+      <li><a href="/year/2014/#r6">教場 — 長岡弘樹（6位）</a></li>
+      <li><a href="/year/2014/#r7">ランチのアッコちゃん — 柚木麻子（7位）</a></li>
+      <li><a href="/year/2014/#r8">想像ラジオ — いとうせいこう（8位）</a></li>
+      <li><a href="/year/2014/#r9">聖なる怠け者の冒険 — 森見登美彦（9位）</a></li>
+      <li><a href="/year/2014/#r10">去年の冬、きみと別れ — 中村文則（10位）</a></li>
+    </ul>
+    <h3>2013年</h3>
+    <ul>
+      <li><a href="/year/2013/#r1">海賊とよばれた男 — 百田尚樹（1位）</a></li>
+      <li><a href="/year/2013/#r2">64 — 横山秀夫（2位）</a></li>
+      <li><a href="/year/2013/#r3">楽園のカンヴァス — 原田マハ（3位）</a></li>
+      <li><a href="/year/2013/#r4">きみはいい子 — 中脇初枝（4位）</a></li>
+      <li><a href="/year/2013/#r5">ふくわらい — 西加奈子（5位）</a></li>
+      <li><a href="/year/2013/#r6">晴天の迷いクジラ — 窪美澄（6位）</a></li>
+      <li><a href="/year/2013/#r7">ソロモンの偽証 — 宮部みゆき（7位）</a></li>
+      <li><a href="/year/2013/#r8">世界から猫が消えたなら — 川村元気（8位）</a></li>
+      <li><a href="/year/2013/#r9">百年法 — 山田宗樹（9位）</a></li>
+      <li><a href="/year/2013/#r10">屍者の帝国 — 伊藤計劃、円城塔（10位）</a></li>
+    </ul>
+    <h3>2012年</h3>
+    <ul>
+      <li><a href="/year/2012/#r1">舟を編む — 三浦しをん（1位）</a></li>
+      <li><a href="/year/2012/#r2">ジェノサイド — 高野和明（2位）</a></li>
+      <li><a href="/year/2012/#r3">ピエタ — 大島真寿美（3位）</a></li>
+      <li><a href="/year/2012/#r4">くちびるに歌を — 中田永一（4位）</a></li>
+      <li><a href="/year/2012/#r5">人質の朗読会 — 小川洋子（5位）</a></li>
+      <li><a href="/year/2012/#r6">ユリゴコロ — 沼田まほかる（6位）</a></li>
+      <li><a href="/year/2012/#r7">誰かが足りない — 宮下奈都（7位）</a></li>
+      <li><a href="/year/2012/#r8">ビブリア古書堂の事件手帖 — 三上延（8位）</a></li>
+      <li><a href="/year/2012/#r9">偉大なる、しゅららぼん — 万城目学（9位）</a></li>
+      <li><a href="/year/2012/#r10">プリズム — 百田尚樹（10位）</a></li>
+    </ul>
+    <h3>2011年</h3>
+    <ul>
+      <li><a href="/year/2011/#r1">謎解きはディナーのあとで — 東川篤哉（1位）</a></li>
+      <li><a href="/year/2011/#r2">ふがいない僕は空を見た — 窪美澄（2位）</a></li>
+      <li><a href="/year/2011/#r3">ペンギン・ハイウェイ — 森見登美彦（3位）</a></li>
+      <li><a href="/year/2011/#r4">錨を上げよ — 百田尚樹（4位）</a></li>
+      <li><a href="/year/2011/#r5">シューマンの指 — 奥泉光（5位）</a></li>
+      <li><a href="/year/2011/#r6">叫びと祈り — 梓崎優（6位）</a></li>
+      <li><a href="/year/2011/#r7">悪の教典 — 貴志祐介（7位）</a></li>
+      <li><a href="/year/2011/#r8">神様のカルテ2 — 夏川草介（8位）</a></li>
+      <li><a href="/year/2011/#r9">キケン — 有川浩（9位）</a></li>
+      <li><a href="/year/2011/#r10">ストーリー・セラー — 有川浩（10位）</a></li>
+    </ul>
+    <h3>2010年</h3>
+    <ul>
+      <li><a href="/year/2010/#r1">天地明察 — 冲方丁（1位）</a></li>
+      <li><a href="/year/2010/#r2">神様のカルテ — 夏川草介（2位）</a></li>
+      <li><a href="/year/2010/#r3">横道世之介 — 吉田修一（3位）</a></li>
+      <li><a href="/year/2010/#r4">神去なあなあ日常 — 三浦しをん（4位）</a></li>
+      <li><a href="/year/2010/#r5">猫を抱いて象と泳ぐ — 小川洋子（5位）</a></li>
+      <li><a href="/year/2010/#r6">ヘヴン — 川上未映子（6位）</a></li>
+      <li><a href="/year/2010/#r7">船に乗れ！ — 藤谷治（7位）</a></li>
+      <li><a href="/year/2010/#r8">植物図鑑 — 有川浩（8位）</a></li>
+      <li><a href="/year/2010/#r9">新参者 — 東野圭吾（9位）</a></li>
+      <li><a href="/year/2010/#r10">1Q84 — 村上春樹（10位）</a></li>
+    </ul>
+    <h3>2009年</h3>
+    <ul>
+      <li><a href="/year/2009/#r1">告白 — 湊かなえ（1位）</a></li>
+      <li><a href="/year/2009/#r2">のぼうの城 — 和田竜（2位）</a></li>
+      <li><a href="/year/2009/#r3">ジョーカー・ゲーム — 柳広司（3位）</a></li>
+      <li><a href="/year/2009/#r4">テンペスト — 池上永一（4位）</a></li>
+      <li><a href="/year/2009/#r5">ボックス! — 百田尚樹（5位）</a></li>
+      <li><a href="/year/2009/#r6">新世界より — 貴志祐介（6位）</a></li>
+      <li><a href="/year/2009/#r7">出星前夜 — 飯嶋和一（7位）</a></li>
+      <li><a href="/year/2009/#r8">悼む人 — 天童荒太（8位）</a></li>
+      <li><a href="/year/2009/#r9">流星の絆 — 東野圭吾（9位）</a></li>
+      <li><a href="/year/2009/#r10">モダンタイムス — 伊坂幸太郎（10位）</a></li>
+    </ul>
+    <h3>2008年</h3>
+    <ul>
+      <li><a href="/year/2008/#r1">ゴールデンスランバー — 伊坂幸太郎（1位）</a></li>
+      <li><a href="/year/2008/#r2">サクリファイス — 近藤史恵（2位）</a></li>
+      <li><a href="/year/2008/#r3">有頂天家族 — 森見登美彦（3位）</a></li>
+      <li><a href="/year/2008/#r4">悪人 — 吉田修一（4位）</a></li>
+      <li><a href="/year/2008/#r5">映画篇 — 金城一紀（5位）</a></li>
+      <li><a href="/year/2008/#r6">八日目の蝉 — 角田光代（6位）</a></li>
+      <li><a href="/year/2008/#r7">赤朽葉家の伝説 — 桜庭一樹（7位）</a></li>
+      <li><a href="/year/2008/#r8">鹿男あをによし — 万城目学（8位）</a></li>
+      <li><a href="/year/2008/#r9">私の男 — 桜庭一樹（9位）</a></li>
+      <li><a href="/year/2008/#r10">カシオペアの丘で — 重松清（10位）</a></li>
+    </ul>
+    <h3>2007年</h3>
+    <ul>
+      <li><a href="/year/2007/#r1">一瞬の風になれ — 佐藤多佳子（1位）</a></li>
+      <li><a href="/year/2007/#r2">夜は短し歩けよ乙女 — 森見登美彦（2位）</a></li>
+      <li><a href="/year/2007/#r3">風が強く吹いている — 三浦しをん（3位）</a></li>
+      <li><a href="/year/2007/#r4">終末のフール — 伊坂幸太郎（4位）</a></li>
+      <li><a href="/year/2007/#r5">図書館戦争 — 有川浩（5位）</a></li>
+      <li><a href="/year/2007/#r6">鴨川ホルモー — 万城目学（6位）</a></li>
+      <li><a href="/year/2007/#r7">ミーナの行進 — 小川洋子（7位）</a></li>
+      <li><a href="/year/2007/#r8">陰日向に咲く — 劇団ひとり（8位）</a></li>
+      <li><a href="/year/2007/#r9">失われた町 — 三崎亜記（9位）</a></li>
+      <li><a href="/year/2007/#r10">名もなき毒 — 宮部みゆき（10位）</a></li>
+    </ul>
+    <h3>2006年</h3>
+    <ul>
+      <li><a href="/year/2006/#r1">東京タワー — リリー・フランキー（1位）</a></li>
+      <li><a href="/year/2006/#r2">サウスバウンド — 奥田英朗（2位）</a></li>
+      <li><a href="/year/2006/#r3">死神の精度 — 伊坂幸太郎（3位）</a></li>
+      <li><a href="/year/2006/#r4">容疑者Xの献身 — 東野圭吾（4位）</a></li>
+      <li><a href="/year/2006/#r5">その日のまえに — 重松清（5位）</a></li>
+      <li><a href="/year/2006/#r6">ナラタージュ — 島本理生（6位）</a></li>
+      <li><a href="/year/2006/#r7">告白 — 町田康（7位）</a></li>
+      <li><a href="/year/2006/#r8">ベルカ、吠えないのか? — 古川日出男（8位）</a></li>
+      <li><a href="/year/2006/#r9">県庁の星 — 桂望実（9位）</a></li>
+      <li><a href="/year/2006/#r10">さくら — 西加奈子（10位）</a></li>
+    </ul>
+    <h3>2005年</h3>
+    <ul>
+      <li><a href="/year/2005/#r1">夜のピクニック — 恩田陸（1位）</a></li>
+      <li><a href="/year/2005/#r2">明日の記憶 — 荻原浩（2位）</a></li>
+      <li><a href="/year/2005/#r3">家守綺譚 — 梨木香歩（3位）</a></li>
+      <li><a href="/year/2005/#r4">袋小路の男 — 絲山秋子（4位）</a></li>
+      <li><a href="/year/2005/#r5">チルドレン — 伊坂幸太郎（5位）</a></li>
+      <li><a href="/year/2005/#r6">対岸の彼女 — 角田光代（6位）</a></li>
+      <li><a href="/year/2005/#r7">犯人に告ぐ — 雫井脩介（7位）</a></li>
+      <li><a href="/year/2005/#r8">黄金旅風 — 飯嶋和一（8位）</a></li>
+      <li><a href="/year/2005/#r9">私が語りはじめた彼は — 三浦しをん（9位）</a></li>
+      <li><a href="/year/2005/#r10">そのときは彼によろしく — 市川拓司（10位）</a></li>
+    </ul>
+    <h3>2004年</h3>
+    <ul>
+      <li><a href="/year/2004/#r1">博士の愛した数式 — 小川洋子（1位）</a></li>
+      <li><a href="/year/2004/#r2">クライマーズ・ハイ — 横山秀夫（2位）</a></li>
+      <li><a href="/year/2004/#r3">アヒルと鴨のコインロッカー — 伊坂幸太郎（3位）</a></li>
+      <li><a href="/year/2004/#r4">永遠の出口 — 森絵都（4位）</a></li>
+      <li><a href="/year/2004/#r5">重力ピエロ — 伊坂幸太郎（5位）</a></li>
+      <li><a href="/year/2004/#r6">4TEEN — 石田衣良（6位）</a></li>
+      <li><a href="/year/2004/#r7">デッドエンドの思い出 — よしもとばなな（7位）</a></li>
+      <li><a href="/year/2004/#r8">終戦のローレライ — 福井晴敏（8位）</a></li>
+      <li><a href="/year/2004/#r9">陰摩羅鬼の瑕 — 京極夏彦（9位）</a></li>
+      <li><a href="/year/2004/#r10">lalala科學の子 — 矢作俊彦（10位）</a></li>
+    </ul>
+  </nav>
+<!-- ALL_INDEX_END -->
+
 <script src="data.js"></script>
+<script src="render.js"></script>
 
 <script>
-const AMAZON_TAG = 'soranoshita-books-22'; 
-const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64'; 
-const PAGE_SIZE = 24; 
+const PAGE_SIZE = 24;
 let visibleCount = PAGE_SIZE;
 let filteredBooks = [];
 let scrollObserver = null;
 let filterRank = 'all';
-let filterGenre = 'all'; 
+let filterGenre = 'all';
 let filterMood = 'all';
 let filterMedia = 'all';
 
@@ -268,77 +434,9 @@ function toggleFilterPanel() {
   }
 }
 
-function getAmazonKindleLink(title, author) { return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`; }
-function getAmazonPaperLink(title, author) { return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&tag=${AMAZON_TAG}`; }
-function getRakutenLink(title, author) { return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(title + ' ' + author)}%2F-%2F%3Fsid%3D213310`; }
-function getAmazonAudibleLink(title, author) { return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`; }
-
-function getMoodsForBook(b) {
-  const moods = [];
-  const genre = b ? (b.genre || "") : "";
-  if (genre === "ミステリ") moods.push("どんでん返し");
-  if (genre === "青春" || genre === "青春・日常") moods.push("サクサク読める");
-  if (genre === "ヒューマン" || genre === "ドラマ・家族") moods.push("泣ける");
-  if (b && (b.rank === 1 || genre === "SF" || genre === "ミステリ")) moods.push("一気読み");
-  if (moods.length === 0) moods.push("サクサク読める");
-  return moods;
-}
-
-function rankBadgeHTML(r) {
-  if (r === 11) return `<div class="rank-badge rn">翻訳賞</div>`;
-  if (r === 12) return `<div class="rank-badge rn">発掘賞</div>`;
-  if (r === 1) return `<div class="rank-badge r1"><span class="crown">👑</span><span class="txt">大賞</span></div>`;
-  return `<div class="rank-badge rn">${r}位</div>`;
-}
-
-function cardHTML(b) {
-  if (!b) return "";
-  const isTop = b.rank === 1;
-  const isDept = b.rank >= 11;
-  const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
-  const moods = getMoodsForBook(b);
-  const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
-  const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
-
-  let finalCoverUrl = b.coverImg || "";
-  if (!finalCoverUrl && b.isbn && b.isbn.startsWith("978") && b.isbn.length >= 10) {
-    finalCoverUrl = `https://cover.openbd.jp/${b.isbn}.jpg`;
-  }
-  const coverHTML = finalCoverUrl ? `<img src="${finalCoverUrl}" alt="${b.title}">` : '';
-
-  return `
-<article class="card${isTop?' rank-1':''}" data-year="${b.year}" data-rank="${b.rank}">
-  <div class="cover-wrap">
-    ${rankBadgeHTML(b.rank)}
-    <div class="year-badge">${b.year}年</div>
-    <div class="placeholder">
-      <span class="placeholder-title">${b.title}</span>
-      <span class="placeholder-author">${b.author}</span>
-    </div>
-    ${coverHTML}
-  </div>
-  <div class="card-body">
-    <div class="tag-container">
-      <span class="genre-badge">${isDept ? '部門賞' : b.genre}</span>
-      ${moodBadgeHTML}
-      ${mediaBadgeHTML}
-    </div>
-    <div class="book-title">${b.title}</div>
-    <div class="book-author">${b.author} 著</div>
-    ${b.synopsis ? `<p class="synopsis">${b.synopsis}</p>` : ''}
-  </div>
-  <div class="card-foot">
-    <div class="btn-group-main">
-      <a class="btn-link btn-kindle" href="${getAmazonKindleLink(b.title, b.author)}" target="_blank" rel="noopener">📱 Kindle版</a>
-      <a class="btn-link btn-rakuten" href="${getRakutenLink(b.title, b.author)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>
-    </div>
-    <div class="btn-group-sub">
-      ${audibleButtonHTML}
-      <a class="btn-link btn-paper" href="${getAmazonPaperLink(b.title, b.author)}" target="_blank" rel="noopener">📖 紙の本</a>
-    </div>
-  </div>
-</article>`;
-}
+// getAmazonKindleLink / getAmazonPaperLink / getRakutenLink / getAmazonAudibleLink /
+// getMoodsForBook / rankBadgeHTML / cardHTML は render.js から読み込む
+// (year/*・genre/* の生成ページと同じ実装を共有するため、ここでは定義しない)
 
 function updateFilteredList() {
   const searchInput = document.getElementById('search');
