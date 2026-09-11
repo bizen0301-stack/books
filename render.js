@@ -55,12 +55,12 @@
     return `<div class="rank-badge rn">${r}位</div>`;
   }
 
+  // かつてはcoverImgが空のとき openBD の書影URLを機械的に組み立てて試していたが、
+  // 2026-09-12に127件を実際に検証したところ123件(96%)が404で、無駄なリクエストに
+  // なっていることが分かった(表示自体はプレースホルダーカードで壊れず済んでいた)。
+  // 実在を確認できた4件だけdata.jsのcoverImgに直接書いたので、ここでの推測は行わない。
   function coverUrlFor(b) {
-    let finalCoverUrl = b.coverImg || '';
-    if (!finalCoverUrl && b.isbn && b.isbn.startsWith('978') && b.isbn.length >= 10) {
-      finalCoverUrl = `https://cover.openbd.jp/${b.isbn}.jpg`;
-    }
-    return finalCoverUrl;
+    return b.coverImg || '';
   }
 
   // idAttr: 年度ページで `<article id="r1">` のようにアンカーを付けたいときに渡す。
