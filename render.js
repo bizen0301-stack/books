@@ -21,8 +21,14 @@
   function getAmazonKindleLink(title, author) {
     return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
   }
-  function getAmazonPaperLink(title, author) {
-    return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&tag=${AMAZON_TAG}`;
+  // amazonAsinはISBN10をAmazon.co.jpの実商品ページで一件ずつ照合し、
+  // 一致が確認できたものだけをdata.jsに書き込んでいる(2026-09-12)。
+  // 無い場合は検索結果へフォールバックし、リンク切れを起こさない。
+  function getAmazonPaperLink(b) {
+    if (b && b.amazonAsin) {
+      return `https://www.amazon.co.jp/dp/${b.amazonAsin}/?tag=${AMAZON_TAG}`;
+    }
+    return `https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title + ' ' + b.author)}&tag=${AMAZON_TAG}`;
   }
   function getRakutenLink(title, author) {
     return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(title + ' ' + author)}%2F-%2F%3Fsid%3D213310`;
@@ -101,7 +107,7 @@
     </div>
     <div class="btn-group-sub">
       ${audibleButtonHTML}
-      <a class="btn-link btn-paper" href="${getAmazonPaperLink(b.title, b.author)}" target="_blank" rel="noopener">📖 紙の本</a>
+      <a class="btn-link btn-paper" href="${getAmazonPaperLink(b)}" target="_blank" rel="noopener">📖 紙の本</a>
     </div>
   </div>
 </article>`;
