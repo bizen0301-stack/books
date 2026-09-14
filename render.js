@@ -39,8 +39,16 @@
   function getRakutenLink(title, author) {
     return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(title + ' ' + author)}%2F-%2F%3Fsid%3D213310`;
   }
-  function getAmazonAudibleLink(title, author) {
-    return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`;
+  // audibleAsinは「Amazon.co.jp側のAudible版ASIN」であることに注意(2026-09-14)。
+  // audible.co.jpの商品ASINとは別物で、そちらをここに書くとamazon.co.jp/dp/では404になる。
+  // 取得は紙の商品ページの形式スイッチ(ref=tmm_aud_swatch)から。出てこない場合は
+  // amazon.co.jp/s?k=書名&i=audible で拾う。全件で着地を確認済み。
+  // 複数巻ものは1巻(または上巻)を指す。無い場合は検索結果へフォールバックする。
+  function getAmazonAudibleLink(b) {
+    if (b && b.audibleAsin) {
+      return `https://www.amazon.co.jp/dp/${b.audibleAsin}/?tag=${AMAZON_TAG}`;
+    }
+    return `https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title + ' ' + b.author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`;
   }
 
   function getMoodsForBook(b) {
@@ -79,7 +87,7 @@
     const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
     const moods = getMoodsForBook(b);
     const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
-    const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b.title, b.author)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
+    const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
 
     const finalCoverUrl = coverUrlFor(b);
     const coverHTML = finalCoverUrl ? `<img src="${finalCoverUrl}" alt="${b.title}" loading="lazy">` : '';
