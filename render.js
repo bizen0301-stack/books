@@ -18,8 +18,14 @@
   };
   const GENRE_LABELS = Object.fromEntries(Object.entries(GENRE_SLUGS).map(([k, v]) => [v, k]));
 
-  function getAmazonKindleLink(title, author) {
-    return `https://www.amazon.co.jp/s?k=${encodeURIComponent(title + ' ' + author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
+  // kindleAsinは、確認済みamazonAsin(紙の本)の商品ページ上に表示される
+  // フォーマット切り替え(Kindle版スワッチ)からASINを取得している(2026-09-14)。
+  // 無い場合は検索結果へフォールバックし、リンク切れを起こさない。
+  function getAmazonKindleLink(b) {
+    if (b && b.kindleAsin) {
+      return `https://www.amazon.co.jp/dp/${b.kindleAsin}/?tag=${AMAZON_TAG}`;
+    }
+    return `https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title + ' ' + b.author)}&i=digital-text&tag=${AMAZON_TAG}&linkCode=as2`;
   }
   // amazonAsinはISBN10をAmazon.co.jpの実商品ページで一件ずつ照合し、
   // 一致が確認できたものだけをdata.jsに書き込んでいる(2026-09-12)。
@@ -102,7 +108,7 @@
   </div>
   <div class="card-foot">
     <div class="btn-group-main">
-      <a class="btn-link btn-kindle" href="${getAmazonKindleLink(b.title, b.author)}" target="_blank" rel="noopener">📱 Kindle版</a>
+      <a class="btn-link btn-kindle" href="${getAmazonKindleLink(b)}" target="_blank" rel="noopener">📱 Kindle版</a>
       <a class="btn-link btn-rakuten" href="${getRakutenLink(b.title, b.author)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>
     </div>
     <div class="btn-group-sub">
