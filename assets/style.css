@@ -282,3 +282,9 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
   .nav-wrap .nav-inner{padding-top:.5rem;padding-bottom:.5rem;}
 }
 @media(max-width:640px){ .topbar-inner{padding:.5rem 1rem;} .to-top-btn{right:12px;bottom:12px;} }
+
+/* 絞り込みパネルは追従バーの高さを変えないよう、バーの下に重ねて出す(2026-09-16 シゲ指摘: 開閉でページが跳ねていた) */
+.nav-inner{position:relative;}
+.filter-groups.open{position:absolute;left:0;right:0;top:100%;margin:0 1.5rem;background:var(--paper-2);border:1px solid var(--border);border-top:none;border-radius:0 0 6px 6px;box-shadow:0 12px 30px rgba(0,0,0,.08);z-index:101;padding:12px 14px;}
+@media(max-width:640px){ .filter-groups.open{margin:0 1rem;max-height:70vh;overflow-y:auto;} }
+body{overflow-anchor:none;}
