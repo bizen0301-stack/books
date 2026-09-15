@@ -46,15 +46,18 @@
 
 <div class="nav-wrap">
   <div class="nav-inner">
-    <a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a>
+    <div class="nav-top-row">
+      <a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a>
+      <a class="topbar-index nav-index-link" href="#all-index">全作品インデックス</a>
+      <button class="btn-filter-toggle" onclick="toggleFilterPanel()">
+        <span>⚙️</span> 絞り込み <span id="toggle-arrow">▼</span>
+      </button>
+    </div>
     <div class="search-row">
       <div class="search-box">
         <span class="search-icon">🔍</span>
         <input type="text" id="search" placeholder="タイトル・著者・あらすじから探す…" autocomplete="off" oninput="resetAndRender()">
       </div>
-      <button class="btn-filter-toggle" onclick="toggleFilterPanel()">
-        <span>⚙️</span> 絞り込み条件 <span id="toggle-arrow">▼</span>
-      </button>
     </div>
     
     <div class="filter-groups" id="filter-panel">
