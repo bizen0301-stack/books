@@ -330,16 +330,17 @@ function buildBookPage(b) {
   const { meta, sections } = parseContent(md);
   const sec = name => sections.find(s => s.title === name);
   const label = rankLabel(b.rank);
+  const awardLabel = b.rank === 1 ? '大賞受賞作' : label;
   const url = bookPageUrl(b);
   const sameYear = BOOKS.filter(x => x.year === b.year && x !== b).sort((x, y) => x.rank - y.rank);
   const sameGenre = BOOKS.filter(x => x.genre === b.genre && x !== b && x.rank === 1).sort((x, y) => y.year - x.year).slice(0, 6);
   const genreSlug = R.GENRE_SLUGS[b.genre];
 
   const head = headHTML({
-    title: b.title + '（' + b.author + '）あらすじと読者の受け止め方｜' + b.year + '年本屋大賞' + label + '｜本屋大賞ガイド',
-    description: b.year + '年本屋大賞' + label + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeの感想・インタビュー' + (meta.sources || '') + '本から見た読者の受け止め方、分かれる点、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
+    title: b.title + '（' + b.author + '）あらすじと読者の受け止め方｜' + b.year + '年本屋大賞 ' + awardLabel + '｜本屋大賞ガイド',
+    description: b.year + '年本屋大賞 ' + awardLabel + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeの感想・インタビュー' + (meta.sources || '') + '本から見た読者の受け止め方、分かれる点、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
     canonical: SITE + url,
-    ogTitle: b.title + '｜' + b.year + '年本屋大賞' + label,
+    ogTitle: b.title + '｜' + b.year + '年本屋大賞 ' + awardLabel,
   });
 
   const breadcrumbItems = [
