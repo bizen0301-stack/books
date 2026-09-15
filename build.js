@@ -343,7 +343,7 @@ function buildBookPage(b) {
 
   const head = headHTML({
     title: b.title + '（' + b.author + '）あらすじと読者の受け止め方｜' + b.year + '年本屋大賞 ' + awardLabel + '｜本屋大賞ガイド',
-    description: b.year + '年本屋大賞 ' + awardLabel + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeの感想・インタビュー' + (meta.sources || '') + '本から見た読者の受け止め方、分かれる点、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
+    description: b.year + '年本屋大賞 ' + awardLabel + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeや読書サイトの感想から見た読者の受け止め方、分かれる点、Audible版のナレーター、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
     canonical: SITE + url,
     ogTitle: b.title + '｜' + b.year + '年本屋大賞 ' + awardLabel,
   });
