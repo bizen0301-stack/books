@@ -30,13 +30,14 @@ h1 span{color:var(--gold)}
 .search-icon{position:absolute;left:11px;top:50%;transform:translateY(-50%);font-size:13px;color:var(--ink-3);pointer-events:none}
 
 .btn-filter-toggle {
-  display: none; background: white; border: 1px solid var(--border-2);
+  display: flex; background: white; border: 1px solid var(--border-2);
   padding: 8px 12px; font-size: 12px; font-weight: 700; border-radius: 4px;
   cursor: pointer; align-items: center; gap: 4px; white-space: nowrap; transition: background 0.2s;
 }
 .btn-filter-toggle:hover { background: var(--paper-2); }
 
-.filter-groups{display:flex;gap:1rem;align-items:center;flex-wrap:wrap;flex:3;min-width:280px}
+.filter-groups{display:none;width:100%;gap:1rem;align-items:center;flex-wrap:wrap;background:rgba(0,0,0,0.02);padding:12px 14px;border-radius:4px}
+.filter-groups.open{display:flex}
 .filter-group{display:flex;align-items:center;gap:8px}
 .filter-label{font-size:11px;color:var(--ink-3);font-weight:700;white-space:nowrap}
 .chips{display:flex;gap:4px;flex-wrap:wrap}
@@ -268,13 +269,15 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 .to-top-btn{position:fixed;right:18px;bottom:18px;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;display:flex;align-items:center;justify-content:center;font-size:18px;text-decoration:none;box-shadow:0 6px 18px rgba(0,0,0,.2);opacity:0;pointer-events:none;transform:translateY(8px);transition:opacity .2s,transform .2s;z-index:200;}
 .to-top-btn.show{opacity:.9;pointer-events:auto;transform:none;}
 .to-top-btn:hover{opacity:1;}
+/* PCでも絞り込みはボタンで開閉し、追従バーを1〜2行の薄い帯に揃える(2026-09-16 シゲ指示) */
+.nav-top-row .btn-filter-toggle{margin-left:auto;}
+@media(min-width:981px){ .nav-top-row .btn-filter-toggle{margin-left:0;} .search-row{flex:1;} }
 /* 追従バーをPC・スマホで揃える: 1行目=ロゴ＋インデックス(＋スマホは絞り込みボタン)、検索はその横(PC)か下(スマホ) */
 .nav-top-row{display:flex;align-items:center;gap:14px;}
-.nav-index-link{display:none;}
+.nav-index-link{display:inline;}
 @media(max-width:980px){
   .nav-top-row{width:100%;}
   .nav-top-row .btn-filter-toggle{margin-left:auto;}
-  .nav-index-link{display:inline;}
   .search-row{width:100%;min-width:0;}
   .nav-wrap .nav-inner{padding-top:.5rem;padding-bottom:.5rem;}
 }
