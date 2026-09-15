@@ -36,7 +36,12 @@
     }
     return `https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title + ' ' + b.author)}&tag=${AMAZON_TAG}`;
   }
-  function getRakutenLink(title, author) {
+  // rakutenUrl は、ブログ「あの空の下」のRinkerに登録済みの楽天商品ページを流用したもの(2026-09-16 シゲ指示)。
+  // トラッキングIDはbooks側(RAKUTEN_TAG)を使う。無い作品は従来どおり検索結果へ。
+  function getRakutenLink(title, author, b) {
+    if (b && b.rakutenUrl) {
+      return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=${encodeURIComponent(b.rakutenUrl)}`;
+    }
     return `https://hb.afl.rakuten.co.jp/hgc/${RAKUTEN_TAG}/?pc=https%3A%2F%2Fsearch.rakuten.co.jp%2Fsearch%2Fmall%2F${encodeURIComponent(title + ' ' + author)}%2F-%2F%3Fsid%3D213310`;
   }
   // audibleAsinは「Amazon.co.jp側のAudible版ASIN」であることに注意(2026-09-14)。
@@ -122,7 +127,7 @@
   <div class="card-foot">
     <div class="btn-group-main">
       <a class="btn-link btn-kindle" href="${getAmazonKindleLink(b)}" target="_blank" rel="noopener">📱 Kindle版</a>
-      <a class="btn-link btn-rakuten" href="${getRakutenLink(b.title, b.author)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>
+      <a class="btn-link btn-rakuten" href="${getRakutenLink(b.title, b.author, b)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>
     </div>
     <div class="btn-group-sub">
       ${audibleButtonHTML}

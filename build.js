@@ -324,7 +324,7 @@ function buyButtonsHTML(b) {
   const audible = b.audible ? '<a class="btn-link btn-audible" href="' + R.getAmazonAudibleLink(b) + '" target="_blank" rel="noopener">🎧 Audible版</a>' : '';
   return '<div class="buy-buttons">'
     + '<a class="btn-link btn-kindle" href="' + R.getAmazonKindleLink(b) + '" target="_blank" rel="noopener">📱 Kindle版</a>'
-    + '<a class="btn-link btn-rakuten" href="' + R.getRakutenLink(b.title, b.author) + '" target="_blank" rel="noopener">🔴 楽天ブックス</a>'
+    + '<a class="btn-link btn-rakuten" href="' + R.getRakutenLink(b.title, b.author, b) + '" target="_blank" rel="noopener">🔴 楽天ブックス</a>'
     + audible
     + '<a class="btn-link btn-paper" href="' + R.getAmazonPaperLink(b) + '" target="_blank" rel="noopener">📖 紙の本</a>'
     + '</div>';
@@ -365,6 +365,7 @@ function buildBookPage(b) {
   const owner = sec('運営者の視点');
   const audible = sec('Audibleで聴く');
   const sources = sec('出典');
+  const mentioned = sec('こんなところでも紹介されています');
 
   const parts = [];
   parts.push('<div class="book-hero">'
@@ -412,6 +413,10 @@ function buildBookPage(b) {
     parts.push('<section class="book-section book-audible" id="audible"><h2>『' + esc(b.title) + '』をAudibleで聴く</h2>' + blockMd(audible.text)
       + (b.audible ? '<p class="book-more"><a href="' + R.getAmazonAudibleLink(b) + '" target="_blank" rel="noopener">Audible版『' + esc(b.title) + '』をAmazonで見る →</a></p>' : '')
       + '</section>');
+  }
+
+  if (mentioned && mentioned.text) {
+    parts.push('<section class="book-section book-mentioned"><h2>こんなところでも紹介されています</h2>' + blockMd(mentioned.text) + '</section>');
   }
 
   if (sources) {
