@@ -357,6 +357,7 @@ function buildBookPage(b) {
   const split = sec('分かれる点');
   const author = sec('著者が語っていること');
   const owner = sec('運営者の視点');
+  const audible = sec('Audibleで聴く');
   const sources = sec('出典');
 
   const parts = [];
@@ -398,6 +399,13 @@ function buildBookPage(b) {
     parts.push('<section class="book-section"><h2>同じジャンル「' + esc(b.genre) + '」の大賞受賞作</h2>'
       + '<ul class="book-list">' + sameGenre.map(x => '<li><a href="' + (hasBookPage(x) ? bookPageUrl(x) : '/year/' + x.year + '/#r' + x.rank) + '">' + esc(x.title) + '</a> — ' + esc(x.author) + '（' + x.year + '年）</li>').join('') + '</ul>'
       + '<p class="book-more"><a href="/genre/' + genreSlug + '/">ジャンル「' + esc(b.genre) + '」の全作品を見る →</a></p></section>');
+  }
+
+  // Audible版とナレーター(末尾近くに独立した節。SEOと「あの声の人」の引っかかり用。2026-09-16 シゲ指示)
+  if (audible && audible.text) {
+    parts.push('<section class="book-section book-audible" id="audible"><h2>『' + esc(b.title) + '』をAudibleで聴く</h2>' + blockMd(audible.text)
+      + (b.audible ? '<p class="book-more"><a href="' + R.getAmazonAudibleLink(b) + '" target="_blank" rel="noopener">Audible版『' + esc(b.title) + '』をAmazonで見る →</a></p>' : '')
+      + '</section>');
   }
 
   if (sources) {
