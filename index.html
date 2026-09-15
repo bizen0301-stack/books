@@ -46,6 +46,7 @@
 
 <div class="nav-wrap">
   <div class="nav-inner">
+    <a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a>
     <div class="search-row">
       <div class="search-box">
         <span class="search-icon">🔍</span>
@@ -99,6 +100,8 @@
   <div class="book-grid" id="content"></div>
   <div id="load-more" class="load-trigger"></div>
 </main>
+
+<a href="#top" class="to-top-btn" id="to-top-btn" aria-label="ページの先頭へ戻る">↑</a>
 
 <!-- ALL_INDEX_START -->
 <nav class="all-index" id="all-index" aria-label="全240作品インデックス">
@@ -558,6 +561,9 @@ document.addEventListener("click", (e) => {
   if (hash === "#" || hash === "#top") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); history.replaceState(null, "", location.pathname + location.search); return; }
   if (jumpToHash(hash)) { e.preventDefault(); history.replaceState(null, "", hash); }
 });
+
+// 右下の「先頭へ戻る」ボタン。少しスクロールしたら出す
+(function(){const btn=document.getElementById("to-top-btn");if(!btn)return;const upd=()=>{btn.classList.toggle("show",window.scrollY>600)};window.addEventListener("scroll",upd,{passive:true});upd();})();
 
 window.addEventListener("load", () => {
   // 初回描画(50ms後)が終わってから位置を決める

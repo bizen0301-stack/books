@@ -21,7 +21,8 @@
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"name":"ホーム","item":"https://books.soranoshita.com/"},{"@type":"ListItem","position":2,"name":"2024年","item":"https://books.soranoshita.com/year/2024/"},{"@type":"ListItem","position":3,"name":"成瀬は天下を取りにいく","item":"https://books.soranoshita.com/books/2024-01/"}]}</script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Book","name":"成瀬は天下を取りにいく","author":{"@type":"Person","name":"宮島未奈"},"url":"https://books.soranoshita.com/books/2024-01/","isbn":"9784103549512","image":"https://books.google.com/books/content?id=W-dA0QEACAAJ&printsec=frontcover&img=1&zoom=3&source=gbs_api"}</script>
 </head>
-<body>
+<body id="top">
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 <header>
   <div class="hdr-inner">
     <div class="hdr-kana">全国書店員が選んだ、いちばん売りたい本</div>
@@ -63,6 +64,8 @@
   Amazonのアソシエイトとして、本屋大賞ガイドは適格販売により収入を得ています。
 </div>
 <footer>© 2026 本屋大賞受賞作ガイド</footer>
+<a href="#top" class="to-top-btn" id="to-top-btn" aria-label="ページの先頭へ戻る">↑</a>
+<script>(function(){var b=document.getElementById("to-top-btn");if(!b)return;var u=function(){b.classList.toggle("show",window.scrollY>600)};window.addEventListener("scroll",u,{passive:true});u();b.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"})});})();</script>
 <script src="/data.js"></script>
 <script src="/pages.js"></script>
 <script src="/render.js"></script>

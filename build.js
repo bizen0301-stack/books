@@ -125,12 +125,15 @@ function pageShell({ head, breadcrumb, jsonLd, body, extraJsonLd }) {
 ${head}
 ${jsonLdBlocks}
 </head>
-<body>
+<body id="top">
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 ${miniHeaderHTML()}
 ${breadcrumb}
 ${body}
 ${AFFILIATE_DISCLOSURE}
 ${FOOTER}
+<a href="#top" class="to-top-btn" id="to-top-btn" aria-label="ページの先頭へ戻る">↑</a>
+<script>(function(){var b=document.getElementById("to-top-btn");if(!b)return;var u=function(){b.classList.toggle("show",window.scrollY>600)};window.addEventListener("scroll",u,{passive:true});u();b.addEventListener("click",function(e){e.preventDefault();window.scrollTo({top:0,behavior:"smooth"})});})();</script>
 <script src="/data.js"></script>
 <script src="/pages.js"></script>
 <script src="/render.js"></script>
