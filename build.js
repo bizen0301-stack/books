@@ -132,6 +132,7 @@ ${body}
 ${AFFILIATE_DISCLOSURE}
 ${FOOTER}
 <script src="/data.js"></script>
+<script src="/pages.js"></script>
 <script src="/render.js"></script>
 </body>
 </html>
@@ -190,7 +191,7 @@ function buildYearPage(year) {
     { label: `${year}年`, url: `/year/${year}/` },
   ];
 
-  const cardsHTML = books.map(b => R.cardHTML(b, { id: `r${b.rank}` })).join('');
+  const cardsHTML = books.map(b => R.cardHTML(b, { id: `r${b.rank}`, detailUrl: hasBookPage(b) ? bookPageUrl(b) : '' })).join('');
 
   const body = `<div class="page-h1">
   <h1>${year}年本屋大賞 全${count}作品</h1>
@@ -225,6 +226,222 @@ ${yearNavHTML(year)}`;
   });
 }
 
+// --- 作品ページ（段階2） ---
+// content/{年}-{順位2桁}.md がある作品だけページを作る。無い作品は年度ページのアンカーのまま。
+// 本文は「世の中の受け止め方(出典つき)」＋「運営者の視点(空なら欄ごと出さない)」(2026-09-16 シゲ指示)。
+
+const CONTENT_DIR = path.join(ROOT, 'content');
+
+function bookSlug(b) {
+  return String(b.year) + '-' + String(b.rank).padStart(2, '0');
+}
+function bookPageUrl(b) {
+  return '/books/' + bookSlug(b) + '/';
+}
+function bookContentPath(b) {
+  return path.join(CONTENT_DIR, bookSlug(b) + '.md');
+}
+function hasBookPage(b) {
+  return fs.existsSync(bookContentPath(b));
+}
+
+function rankLabel(r) {
+  if (r === 1) return '大賞';
+  if (r === 11) return '翻訳賞';
+  if (r === 12) return '発掘賞';
+  return r + '位';
+}
+
+// content/*.md の最小限のパーサ。フロントマター(key: value)＋ "## " 見出しで節を分ける。
+function parseContent(md) {
+  const meta = {};
+  let body = md;
+  const fm = md.match(/^---\n([\s\S]*?)\n---\n?/);
+  if (fm) {
+    fm[1].split('\n').forEach(l => {
+      const m = l.match(/^([\w-]+):\s*(.*)$/);
+      if (m) meta[m[1]] = m[2].trim();
+    });
+    body = md.slice(fm[0].length);
+  }
+  const sections = [];
+  let cur = null;
+  body.split('\n').forEach(line => {
+    const h = line.match(/^## (.+)$/);
+    if (h) { cur = { title: h[1].trim(), lines: [] }; sections.push(cur); return; }
+    if (cur) cur.lines.push(line);
+  });
+  sections.forEach(s => { s.text = s.lines.join('\n').trim(); });
+  return { meta, sections };
+}
+
+function inlineMd(s) {
+  s = esc(s);
+  s = s.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  s = s.replace(/\[([^\]]+)\]\((https?:\/\/[^\s)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
+  s = s.replace(/(^|[^"'>])(https?:\/\/[^\s<]+)/g, (m, pre, url) => pre + '<a href="' + url + '" target="_blank" rel="noopener">' + url + '</a>');
+  return s;
+}
+
+// 段落・箇条書き・表だけを扱う。それ以外の記法は使わない前提。
+function blockMd(text) {
+  const out = [];
+  const lines = text.split('\n');
+  let i = 0;
+  while (i < lines.length) {
+    const line = lines[i];
+    if (!line.trim()) { i++; continue; }
+    if (line.startsWith('|')) {
+      const rows = [];
+      while (i < lines.length && lines[i].startsWith('|')) { rows.push(lines[i]); i++; }
+      const cells = r => r.replace(/^\||\|$/g, '').split('|').map(c => c.trim());
+      const head = cells(rows[0]);
+      const bodyRows = rows.slice(1).filter(r => !/^\|[\s:|-]+\|$/.test(r));
+      out.push('<div class="table-wrap"><table><thead><tr>' + head.map(c => '<th>' + inlineMd(c) + '</th>').join('') + '</tr></thead><tbody>'
+        + bodyRows.map(r => '<tr>' + cells(r).map(c => '<td>' + inlineMd(c) + '</td>').join('') + '</tr>').join('')
+        + '</tbody></table></div>');
+      continue;
+    }
+    if (/^- /.test(line)) {
+      const items = [];
+      while (i < lines.length && /^- /.test(lines[i])) { items.push(lines[i].slice(2)); i++; }
+      out.push('<ul>' + items.map(t => '<li>' + inlineMd(t) + '</li>').join('') + '</ul>');
+      continue;
+    }
+    const para = [];
+    while (i < lines.length && lines[i].trim() && !lines[i].startsWith('|') && !/^- /.test(lines[i])) { para.push(lines[i]); i++; }
+    out.push('<p>' + inlineMd(para.join(' ')) + '</p>');
+  }
+  return out.join('\n');
+}
+
+function buyButtonsHTML(b) {
+  const audible = b.audible ? '<a class="btn-link btn-audible" href="' + R.getAmazonAudibleLink(b) + '" target="_blank" rel="noopener">🎧 Audible版</a>' : '';
+  return '<div class="buy-buttons">'
+    + '<a class="btn-link btn-kindle" href="' + R.getAmazonKindleLink(b) + '" target="_blank" rel="noopener">📱 Kindle版</a>'
+    + '<a class="btn-link btn-rakuten" href="' + R.getRakutenLink(b.title, b.author) + '" target="_blank" rel="noopener">🔴 楽天ブックス</a>'
+    + audible
+    + '<a class="btn-link btn-paper" href="' + R.getAmazonPaperLink(b) + '" target="_blank" rel="noopener">📖 紙の本</a>'
+    + '</div>';
+}
+
+function buildBookPage(b) {
+  const md = fs.readFileSync(bookContentPath(b), 'utf8').replace(/\r\n/g, '\n');
+  const { meta, sections } = parseContent(md);
+  const sec = name => sections.find(s => s.title === name);
+  const label = rankLabel(b.rank);
+  const url = bookPageUrl(b);
+  const sameYear = BOOKS.filter(x => x.year === b.year && x !== b).sort((x, y) => x.rank - y.rank);
+  const sameGenre = BOOKS.filter(x => x.genre === b.genre && x !== b && x.rank === 1).sort((x, y) => y.year - x.year).slice(0, 6);
+  const genreSlug = R.GENRE_SLUGS[b.genre];
+
+  const head = headHTML({
+    title: b.title + '（' + b.author + '）あらすじと読者の受け止め方｜' + b.year + '年本屋大賞' + label + '｜本屋大賞ガイド',
+    description: b.year + '年本屋大賞' + label + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeの感想・インタビュー' + (meta.sources || '') + '本から見た読者の受け止め方、分かれる点、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
+    canonical: SITE + url,
+    ogTitle: b.title + '｜' + b.year + '年本屋大賞' + label,
+  });
+
+  const breadcrumbItems = [
+    { label: 'ホーム', url: '/' },
+    { label: b.year + '年', url: '/year/' + b.year + '/' },
+    { label: b.title, url: url },
+  ];
+
+  const cover = R.coverUrlFor(b);
+  const coverHTML = cover
+    ? '<img src="' + cover + '" alt="' + esc(b.title) + '">'
+    : '<div class="book-cover-ph"><span>' + esc(b.title) + '</span></div>';
+
+  const reception = sec('読者の受け止め方');
+  const split = sec('分かれる点');
+  const author = sec('著者が語っていること');
+  const owner = sec('運営者の視点');
+  const sources = sec('出典');
+
+  const parts = [];
+  parts.push('<div class="book-hero">'
+    + '<div class="book-cover">' + coverHTML + '</div>'
+    + '<div class="book-info">'
+    + '<div class="book-award"><a href="/year/' + b.year + '/">' + b.year + '年本屋大賞</a> ' + esc(label) + '</div>'
+    + '<h1>' + esc(b.title) + '</h1>'
+    + '<div class="book-meta">' + esc(b.author) + ' 著' + (b.genre ? '　／　<a href="/genre/' + genreSlug + '/">' + esc(b.genre) + '</a>' : '') + (b.media ? '　／　🎬 ' + esc(b.media) : '') + '</div>'
+    + (b.synopsis ? '<p class="book-synopsis">' + esc(b.synopsis) + '</p>' : '')
+    + buyButtonsHTML(b)
+    + '</div></div>');
+
+  if (reception) {
+    parts.push('<section class="book-section"><h2>読者の受け止め方</h2>' + blockMd(reception.text) + '</section>');
+  }
+  if (split) {
+    parts.push('<section class="book-section"><h2>分かれる点</h2>' + blockMd(split.text) + '</section>');
+  }
+  if (author) {
+    parts.push('<section class="book-section"><h2>著者が語っていること</h2>' + blockMd(author.text) + '</section>');
+  }
+  if (owner && owner.text) {
+    parts.push('<section class="book-section book-owner"><h2>運営者の視点</h2>' + blockMd(owner.text) + '</section>');
+  }
+
+  // 聴く・読む導線
+  const listen = [];
+  if (b.audible) listen.push('この作品はAudibleで聴けます（' + (meta.researched ? meta.researched.replace(/-/g, '/') : '') + '時点）。本屋大賞の受賞作でAudibleにあるものの一覧は、ブログ<a href="https://soranoshita.com/2026/09/16/honya-taisho-audible/">本屋大賞の受賞作、Audibleで聴けるのは14作品</a>にまとめています。');
+  if (BLOG_LINKS[b.year]) listen.push('ブログ「あの空の下」に<a href="' + BLOG_LINKS[b.year] + '">' + b.year + '年本屋大賞の紹介記事</a>があります。');
+  if (listen.length) parts.push('<div class="blog-crosslink">📖 ' + listen.join('<br>') + '</div>');
+
+  // 同じ年
+  parts.push('<section class="book-section"><h2>' + b.year + '年の他のノミネート作</h2>'
+    + '<ul class="book-list">' + sameYear.map(x => '<li><a href="' + (hasBookPage(x) ? bookPageUrl(x) : '/year/' + b.year + '/#r' + x.rank) + '">' + esc(x.title) + '</a> — ' + esc(x.author) + '（' + esc(rankLabel(x.rank)) + '）</li>').join('') + '</ul>'
+    + '<p class="book-more"><a href="/year/' + b.year + '/">' + b.year + '年の全' + (sameYear.length + 1) + '作品を見る →</a></p></section>');
+
+  if (sameGenre.length) {
+    parts.push('<section class="book-section"><h2>同じジャンル「' + esc(b.genre) + '」の大賞受賞作</h2>'
+      + '<ul class="book-list">' + sameGenre.map(x => '<li><a href="' + (hasBookPage(x) ? bookPageUrl(x) : '/year/' + x.year + '/#r' + x.rank) + '">' + esc(x.title) + '</a> — ' + esc(x.author) + '（' + x.year + '年）</li>').join('') + '</ul>'
+      + '<p class="book-more"><a href="/genre/' + genreSlug + '/">ジャンル「' + esc(b.genre) + '」の全作品を見る →</a></p></section>');
+  }
+
+  if (sources) {
+    parts.push('<section class="book-section book-sources"><h2>出典</h2><p class="book-note">受け止め方のまとめは、次の動画を' + (meta.researched || '') + 'に視聴・確認したものです。引用ではなく要約であり、「多い」「少ない」はこの' + (meta.sources || '') + '本の中での数です。</p>' + blockMd(sources.text) + '</section>');
+  }
+
+  const body = '<div class="book-page">\n' + yearNavHTML(b.year) + '\n' + parts.join('\n') + '\n</div>\n' + yearPagerHTML(b.year);
+
+  const bookJsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Book',
+    name: b.title,
+    author: { '@type': 'Person', name: b.author },
+    url: SITE + url,
+  };
+  if (b.isbn) bookJsonLd.isbn = b.isbn;
+  if (cover) bookJsonLd.image = cover;
+
+  return pageShell({
+    head,
+    breadcrumb: breadcrumbHTML(breadcrumbItems),
+    jsonLd: breadcrumbJsonLd(breadcrumbItems),
+    extraJsonLd: bookJsonLd,
+    body,
+  });
+}
+
+function buildBookPages() {
+  const made = [];
+  BOOKS.forEach(b => {
+    if (!hasBookPage(b)) return;
+    const dir = path.join(ROOT, 'books', bookSlug(b));
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), buildBookPage(b));
+    made.push(b);
+  });
+  // ブラウザ側(トップのJS描画)がカードに「詳しく見る」を出せるよう、ページのある作品を書き出す
+  const map = {};
+  made.forEach(b => { map[b.year + '-' + b.rank] = bookPageUrl(b); });
+  fs.writeFileSync(path.join(ROOT, 'pages.js'), 'const BOOK_PAGES = ' + JSON.stringify(map) + ';\n');
+  console.log('books/: ' + made.length + 'ページ生成');
+  return made;
+}
+
 // --- ジャンルページ ---
 
 function genreIndexNavHTML(currentSlug) {
@@ -253,7 +470,7 @@ function buildGenrePage(genreLabel, slug) {
     { label: genreLabel, url: `/genre/${slug}/` },
   ];
 
-  const cardsHTML = books.map(b => R.cardHTML(b)).join('');
+  const cardsHTML = books.map(b => R.cardHTML(b, { detailUrl: hasBookPage(b) ? bookPageUrl(b) : '' })).join('');
 
   const body = `<div class="page-h1">
   <h1>${esc(genreLabel)}の本屋大賞作品 全${count}冊</h1>
@@ -296,7 +513,8 @@ function buildAllIndexBlock() {
   const sections = years.map(y => {
     const items = byYear[y].sort((a, b) => a.rank - b.rank).map(b => {
       const label = b.rank <= 10 ? `${b.rank}位` : (b.rank === 11 ? '翻訳賞' : '発掘賞');
-      return `<li><a href="/year/${y}/#r${b.rank}">${esc(b.title)} — ${esc(b.author)}（${label}）</a></li>`;
+      const href = hasBookPage(b) ? bookPageUrl(b) : `/year/${y}/#r${b.rank}`;
+      return `<li><a href="${href}">${esc(b.title)} — ${esc(b.author)}（${label}）</a></li>`;
     }).join('\n      ');
     return `    <h3 id="idx-${y}"><a href="/year/${y}/">${y}年</a><a class="idx-goto" href="/year/${y}/">年度ページを見る →</a></h3>
     <ul>
@@ -351,6 +569,7 @@ function buildSitemap() {
   const urls = [`${SITE}/`];
   YEARS.forEach(y => urls.push(`${SITE}/year/${y}/`));
   Object.keys(R.GENRE_SLUGS).forEach(label => urls.push(`${SITE}/genre/${R.GENRE_SLUGS[label]}/`));
+  BOOKS.filter(hasBookPage).forEach(b => urls.push(SITE + bookPageUrl(b)));
 
   const body = urls.map(u => `  <url>
     <loc>${u}</loc>
@@ -387,6 +606,7 @@ function main() {
   });
   console.log('genre/: ' + Object.keys(R.GENRE_SLUGS).length + 'ページ生成');
 
+  buildBookPages();
   injectAllIndex();
   buildSitemap();
 

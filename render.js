@@ -92,6 +92,10 @@
     const finalCoverUrl = coverUrlFor(b);
     const coverHTML = finalCoverUrl ? `<img src="${finalCoverUrl}" alt="${b.title}" loading="lazy">` : '';
     const idAttr = opts.id ? ` id="${opts.id}"` : '';
+    // 作品ページがある本には「詳しく見る」を出す。build.js からは opts.detailUrl、ブラウザでは pages.js の BOOK_PAGES を見る
+    let detailUrl = opts.detailUrl || '';
+    if (!detailUrl && typeof BOOK_PAGES !== 'undefined' && BOOK_PAGES) detailUrl = BOOK_PAGES[b.year + '-' + b.rank] || '';
+    const detailHTML = detailUrl ? `<a class="card-detail" href="${detailUrl}">詳しく見る →</a>` : '';
 
     return `
 <article class="card${isTop ? ' rank-1' : ''}" data-year="${b.year}" data-rank="${b.rank}"${idAttr}>
@@ -113,6 +117,7 @@
     <div class="book-title">${b.title}</div>
     <div class="book-author">${b.author} 著</div>
     ${b.synopsis ? `<p class="synopsis">${b.synopsis}</p>` : ''}
+    ${detailHTML}
   </div>
   <div class="card-foot">
     <div class="btn-group-main">
