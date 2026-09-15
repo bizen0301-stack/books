@@ -525,6 +525,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   setTimeout(() => { try { resetAndRender(); } catch (e) { console.error(e); } }, 50);
 });
+
+// --- 末尾の全作品インデックスへのジャンプと、開いたときのスクロール位置 (2026-09-16 シゲ指摘) ---
+// 一覧は無限スクロールで少しずつ描画するため、#all-index へ飛ぶ途中で load-more が画面に入り、
+// カードが追加されてページが伸び、アンカーに届かなかった。飛ぶ前に全件を描画してから移動する。
+// また、ブラウザの「前回のスクロール位置の復元」がJS描画前の高さで行われると途中で開いてしまうので、
+// 復元を手動にして、ハッシュが無ければ先頭から開く。
+if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+function renderAllBooks() {
+  if (scrollObserver) scrollObserver.disconnect();
+  updateFilteredList();
+  visibleCount = filteredBooks.length;
+  renderChunk();
+}
+
+function jumpToHash(hash) {
+  const id = (hash || "").replace(/^#/, "");
+  if (!id) return false;
+  const target = document.getElementById(id);
+  if (!target) return false;
+  // インデックス内のアンカーは、一覧を全件出してから飛ぶ(高さが変わらないようにする)
+  if (id === "all-index" || id.indexOf("idx-") === 0) renderAllBooks();
+  target.scrollIntoView({ behavior: "instant", block: "start" });
+  return true;
+}
+
+document.addEventListener("click", (e) => {
+  const a = e.target.closest("a[href^=\"#\"]");
+  if (!a) return;
+  const hash = a.getAttribute("href");
+  if (hash === "#" || hash === "#top") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); history.replaceState(null, "", location.pathname + location.search); return; }
+  if (jumpToHash(hash)) { e.preventDefault(); history.replaceState(null, "", hash); }
+});
+
+window.addEventListener("load", () => {
+  // 初回描画(50ms後)が終わってから位置を決める
+  setTimeout(() => {
+    if (location.hash) { jumpToHash(location.hash); }
+    else { window.scrollTo(0, 0); }
+  }, 150);
+});
 </script>
 </body>
 </html>
