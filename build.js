@@ -156,6 +156,21 @@ function blogCrosslinkHTML(year) {
   return `<div class="blog-crosslink">📖 ブログ「あの空の下」に、${year}年本屋大賞の紹介記事があります → <a href="${url}">読む</a></div>`;
 }
 
+// 年別ナビ。全ページ共通で、各年度ページとトップ末尾の全作品インデックスへ一段で飛べるようにする(2026-09-16 シゲ指示)。
+// onIndex=true のときはトップページ内のアンカー(#all-index)へ、それ以外は /#all-index へ。
+function yearNavHTML(currentYear, { onIndex = false } = {}) {
+  const chips = YEARS.map(y => {
+    const cls = y === currentYear ? 'chip on' : 'chip';
+    return `<a class="${cls}" href="/year/${y}/">${y}</a>`;
+  }).join('');
+  const indexHref = onIndex ? '#all-index' : '/#all-index';
+  return `<nav class="year-nav" aria-label="年別ページ">
+  <span class="year-nav-label">年別</span>
+  <div class="year-nav-scroll">${chips}</div>
+  <a class="year-nav-index" href="${indexHref}">全${BOOKS.length}作品インデックス ↓</a>
+</nav>`;
+}
+
 // --- 年度ページ ---
 
 function buildYearPage(year) {
@@ -181,11 +196,13 @@ function buildYearPage(year) {
   <h1>${year}年本屋大賞 全${count}作品</h1>
   <p class="page-lead">${winner ? `大賞は「${esc(winner.title)}」（${esc(winner.author)}）。` : ''}ノミネート・部門賞を含む${count}作品を掲載しています。</p>
 </div>
+${yearNavHTML(year)}
 ${blogCrosslinkHTML(year)}
 <main class="main">
   <div class="book-grid">${cardsHTML}</div>
 </main>
-${yearPagerHTML(year)}`;
+${yearPagerHTML(year)}
+${yearNavHTML(year)}`;
 
   const itemListJsonLd = {
     '@context': 'https://schema.org',
@@ -243,6 +260,7 @@ function buildGenrePage(genreLabel, slug) {
   <p class="page-lead">本屋大賞の歴代受賞・ノミネート作品から、ジャンル「${esc(genreLabel)}」に当てはまる作品を集めました。</p>
 </div>
 ${genreIndexNavHTML(slug)}
+${yearNavHTML(null)}
 <main class="main">
   <div class="book-grid">${cardsHTML}</div>
 </main>`;
@@ -280,21 +298,37 @@ function buildAllIndexBlock() {
       const label = b.rank <= 10 ? `${b.rank}位` : (b.rank === 11 ? '翻訳賞' : '発掘賞');
       return `<li><a href="/year/${y}/#r${b.rank}">${esc(b.title)} — ${esc(b.author)}（${label}）</a></li>`;
     }).join('\n      ');
-    return `    <h3>${y}年</h3>
+    return `    <h3 id="idx-${y}"><a href="/year/${y}/">${y}年</a><a class="idx-goto" href="/year/${y}/">年度ページを見る →</a></h3>
     <ul>
       ${items}
     </ul>`;
   }).join('\n');
 
-  return `<nav class="all-index" aria-label="全${BOOKS.length}作品インデックス">
+  // 年ごとの見出しへ飛ぶ帯。長い一覧の中で目的の年へ一段で移動できるようにする
+  const jump = years.map(y => `<a href="#idx-${y}">${y}</a>`).join('');
+
+  return `<nav class="all-index" id="all-index" aria-label="全${BOOKS.length}作品インデックス">
     <h2>全${BOOKS.length}作品インデックス</h2>
+    <p class="all-index-note">年をクリックすると、その年の一覧へ移動します。見出しの年からは年度ページへ飛べます。</p>
+    <div class="all-index-jump">${jump}</div>
 ${sections}
+    <p class="all-index-top"><a href="#top">↑ ページの先頭へ</a></p>
   </nav>`;
+}
+
+function injectYearNav(html) {
+  const startMarker = '<!-- YEAR_NAV_START -->';
+  const endMarker = '<!-- YEAR_NAV_END -->';
+  const s = html.indexOf(startMarker);
+  const e = html.indexOf(endMarker);
+  if (s < 0 || e < 0) throw new Error('index.html に YEAR_NAV_START/END マーカーが無い');
+  return html.slice(0, s + startMarker.length) + '\n' + yearNavHTML(null, { onIndex: true }) + '\n' + html.slice(e);
 }
 
 function injectAllIndex() {
   const p = path.join(ROOT, 'index.html');
   let html = fs.readFileSync(p, 'utf8');
+  html = injectYearNav(html);
   const startMarker = '<!-- ALL_INDEX_START -->';
   const endMarker = '<!-- ALL_INDEX_END -->';
   const startIdx = html.indexOf(startMarker);

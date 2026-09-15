@@ -152,11 +152,34 @@ footer{background:var(--ink);color:rgba(255,255,255,.4);padding:2rem;text-align:
 .genre-index-list a:hover{background:var(--paper-3);color:var(--ink);}
 .genre-index-list a.on{background:var(--ink);border-color:var(--ink);color:#fff;font-weight:700;}
 
+/* 年別ナビ(全ページ共通)。各年度ページと全作品インデックスへ一段で飛ぶ */
+.year-nav{max-width:1140px;margin:1.25rem auto 0;padding:0 1.5rem;display:flex;align-items:center;gap:10px;}
+.year-nav-label{font-size:11px;font-weight:700;color:var(--gold);letter-spacing:.1em;white-space:nowrap;}
+.year-nav-scroll{display:flex;gap:6px;overflow-x:auto;flex:1;min-width:0;padding-bottom:4px;scrollbar-width:thin;}
+.year-nav-scroll .chip{text-decoration:none;flex:0 0 auto;}
+.year-nav-index{font-size:12px;font-weight:700;color:var(--red);text-decoration:none;white-space:nowrap;}
+.year-nav-index:hover{text-decoration:underline;}
+@media(max-width:640px){
+  .year-nav{flex-wrap:wrap;padding:0 1rem;}
+  .year-nav-index{width:100%;text-align:right;}
+}
+
 /* 全240作品の静的インデックス(トップページ末尾)。クローラー向けに常に可視で置く */
 .all-index{max-width:1140px;margin:2rem auto 0;padding:2rem 1.5rem;border-top:1px solid var(--border);}
 .all-index h2{font-family:'Noto Serif JP',serif;font-size:1.1rem;margin-bottom:1rem;color:var(--ink-2);}
 .all-index h3{font-size:12.5px;font-weight:700;color:var(--gold);margin:1.25rem 0 .5rem;}
 .all-index h3:first-of-type{margin-top:0;}
+.all-index h3{display:flex;align-items:baseline;gap:12px;scroll-margin-top:90px;}
+.all-index h3 a{color:var(--gold);}
+.all-index h3 .idx-goto{font-weight:400;font-size:11px;color:var(--ink-3);}
+.all-index h3 .idx-goto:hover{color:var(--red);}
+.all-index{scroll-margin-top:90px;}
+.all-index-note{font-size:11.5px;color:var(--ink-3);margin-bottom:.75rem;}
+.all-index-jump{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:1.25rem;}
+.all-index-jump a{padding:3px 10px;border-radius:20px;border:1px solid var(--border-2);background:var(--paper-card);font-size:11px;color:var(--ink-2);text-decoration:none;}
+.all-index-jump a:hover{background:var(--paper-3);color:var(--ink);text-decoration:none;}
+.all-index-top{margin-top:1.5rem;font-size:12px;text-align:right;}
+.all-index-top a{color:var(--ink-3);}
 .all-index ul{list-style:none;columns:2;column-gap:1.5rem;}
 .all-index li{font-size:12px;line-height:1.9;break-inside:avoid;}
 .all-index a{color:var(--ink-2);text-decoration:none;}
