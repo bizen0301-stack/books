@@ -11,6 +11,8 @@ const R = require('./render.js');
 
 const ROOT = __dirname;
 const SITE = 'https://books.soranoshita.com';
+// CSSのキャッシュ対策。ビルドごとに変わるクエリを付ける(GitHub PagesのCDNが10分ほど古いCSSを返すため)
+const CSS_VER = Date.now().toString(36);
 
 // --- data.js の読み込み ---
 const dataSrc = fs.readFileSync(path.join(ROOT, 'data.js'), 'utf8');
@@ -75,7 +77,7 @@ function headHTML({ title, description, canonical, ogTitle }) {
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+JP:wght@400;600;700&family=Noto+Sans+JP:wght@300;400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/style.css">`;
+<link rel="stylesheet" href="/assets/style.css?v=${CSS_VER}">`;
 }
 
 function breadcrumbHTML(items) {
@@ -559,6 +561,7 @@ function injectAllIndex() {
   const p = path.join(ROOT, 'index.html');
   let html = fs.readFileSync(p, 'utf8');
   html = injectYearNav(html);
+  html = html.replace(/href="assets\/style\.css(\?v=[^"]*)?"/, 'href="assets/style.css?v=' + CSS_VER + '"');
   const startMarker = '<!-- ALL_INDEX_START -->';
   const endMarker = '<!-- ALL_INDEX_END -->';
   const startIdx = html.indexOf(startMarker);
