@@ -52,7 +52,8 @@ h1 span{color:var(--gold)}
 .card:hover{transform:translateY(-4px);box-shadow:0 12px 30px rgba(0,0,0,.08);border-color:var(--border-2)}
 .card.rank-1{border-top:3px solid var(--gold);background:linear-gradient(to bottom, var(--gold-light) 0%, var(--paper-card) 120px)}
 
-.cover-wrap{position:relative;width:100%;padding-top:140%;background:var(--paper-2);overflow:hidden;border-bottom:1px solid var(--border)}
+.cover-wrap{position:relative;display:block;width:100%;padding-top:140%;background:var(--paper-2);overflow:hidden;border-bottom:1px solid var(--border);color:inherit;text-decoration:none}
+a.cover-wrap{cursor:pointer}
 .cover-wrap img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:opacity .4s ease;z-index:2;opacity:1;}
 
 .cover-wrap .placeholder {

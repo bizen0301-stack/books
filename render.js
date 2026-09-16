@@ -102,9 +102,12 @@
     if (!detailUrl && typeof BOOK_PAGES !== 'undefined' && BOOK_PAGES) detailUrl = BOOK_PAGES[b.year + '-' + b.rank] || '';
     const detailHTML = detailUrl ? `<a class="card-detail" href="${detailUrl}">詳しく見る →</a>` : '';
 
+    const coverTag = detailUrl ? 'a' : 'div';
+    const coverTagAttrs = detailUrl ? ` href="${detailUrl}" aria-label="${b.title}の作品ページを見る"` : '';
+
     return `
 <article class="card${isTop ? ' rank-1' : ''}" data-year="${b.year}" data-rank="${b.rank}"${idAttr}>
-  <div class="cover-wrap">
+  <${coverTag} class="cover-wrap"${coverTagAttrs}>
     ${rankBadgeHTML(b.rank)}
     <div class="year-badge">${b.year}年</div>
     <div class="placeholder">
@@ -112,7 +115,7 @@
       <span class="placeholder-author">${b.author}</span>
     </div>
     ${coverHTML}
-  </div>
+  </${coverTag}>
   <div class="card-body">
     <div class="tag-container">
       <span class="genre-badge">${isDept ? '部門賞' : b.genre}</span>
