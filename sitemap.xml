@@ -607,6 +607,18 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://books.soranoshita.com/books/2020-02/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://books.soranoshita.com/books/2020-03/</loc>
+    <lastmod>2026-09-16</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://books.soranoshita.com/books/2019-01/</loc>
     <lastmod>2026-09-16</lastmod>
     <changefreq>weekly</changefreq>
