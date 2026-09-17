@@ -4,6 +4,19 @@
 // (index.html・year/*・genre/* が別々に持つと、後から仕様がずれる)。
 
 (function (root) {
+  // Google Analytics (GA4) 計測タグ。全ページがrender.jsを読み込むため、ここに1回だけ追加する。
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){ window.dataLayer.push(arguments); }
+          window.gtag = gtag;
+          gtag('js', new Date());
+          gtag('config', 'G-TFW2GX35G');
+          const gaScript = document.createElement('script');
+          gaScript.async = true;
+          gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-TFW2GX35G';
+          document.head.appendChild(gaScript);
+    }
+  
   const AMAZON_TAG = 'soranoshita-books-22';
   const RAKUTEN_TAG = '1baffa53.9767f76d.1baffa54.f4870c64';
 
