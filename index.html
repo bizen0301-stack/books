@@ -529,7 +529,11 @@ document.addEventListener('DOMContentLoaded', () => {
         <button class="chip" data-r="department" onclick="setRankFilter(this)">部門賞</button>
      `;
   }
-  setTimeout(() => { try { resetAndRender(); } catch (e) { console.error(e); } }, 50);
+  setTimeout(() => {
+    try { resetAndRender(); } catch (e) { console.error(e); }
+    // 描画が終わった時点で初期スクロール位置を決める（loadまで待つと実測で約4.5秒かかる）
+    try { settleInitialScroll(); } catch (e) { console.error(e); }
+  }, 50);
 });
 
 // --- 末尾の全作品インデックスへのジャンプと、開いたときのスクロール位置 (2026-09-16 シゲ指摘) ---
@@ -537,7 +541,33 @@ document.addEventListener('DOMContentLoaded', () => {
 // カードが追加されてページが伸び、アンカーに届かなかった。飛ぶ前に全件を描画してから移動する。
 // また、ブラウザの「前回のスクロール位置の復元」がJS描画前の高さで行われると途中で開いてしまうので、
 // 復元を手動にして、ハッシュが無ければ先頭から開く。
+//
+// --- 「たまに途中までスクロールして開く」の修正 (2026-09-22 シゲ指摘) ---
+// 上の対策後も症状が残っていた。調べたら原因は3つあった。
+//  1. インデックスの年リンクを押すと replaceState で URL に #idx-2020 が残り、
+//     その後に再読み込みすると毎回そこへ飛んでいた（＝アンカーのような動き）。
+//     → ページ内ジャンプでURLを書き換えるのをやめた。
+//  2. 位置を決めるのが load の150ms後で、実測で約4.7秒かかっていた。
+//     その間に読み始めた人が、あとから勝手に先頭へ戻されていた。
+//     → 初回描画の直後に決めるようにした。
+//  3. CSSの html{scroll-behavior:smooth} により window.scrollTo(0,0) がアニメーションになり、
+//     途中で別のスクロールが入ると中断されて中途半端な位置で止まっていた。
+//     → 下のとおり scrollTo(0,0) 自体をやめたので、この問題も無くなった。
 if ("scrollRestoration" in history) history.scrollRestoration = "manual";
+
+// 初期スクロール位置の確定。描画直後と load の両方から呼ばれるが、実行は1回だけ。
+//
+// ここでは「先頭へ戻す」処理をあえて持たない。
+// ブラウザによる位置の復元は上の scrollRestoration = "manual" で止めてあるので、
+// この時点でページが先頭以外にあるなら、それは読み始めたユーザー自身が動かしたということ。
+// そこで scrollTo(0,0) をすると、読んでいる人を勝手に引き戻すことになる（実測で発生していた）。
+// やることは、ハッシュ付きURLで開かれたときの移動だけでよい。
+let initialScrollSettled = false;
+function settleInitialScroll() {
+  if (initialScrollSettled) return;
+  initialScrollSettled = true;
+  if (location.hash) jumpToHash(location.hash);
+}
 
 function renderAllBooks() {
   if (scrollObserver) scrollObserver.disconnect();
@@ -562,7 +592,9 @@ document.addEventListener("click", (e) => {
   if (!a) return;
   const hash = a.getAttribute("href");
   if (hash === "#" || hash === "#top") { e.preventDefault(); window.scrollTo({ top: 0, behavior: "instant" }); history.replaceState(null, "", location.pathname + location.search); return; }
-  if (jumpToHash(hash)) { e.preventDefault(); history.replaceState(null, "", hash); }
+  // ページ内ジャンプでURLにハッシュを残さない。残すと、次に再読み込みしたときに
+  // 毎回その位置から開いてしまう（2026-09-22 修正）
+  if (jumpToHash(hash)) { e.preventDefault(); }
 });
 
 // 絞り込みパネルの外を押したら閉じる
@@ -571,13 +603,8 @@ document.addEventListener("click",(e)=>{const p=document.getElementById("filter-
 // 右下の「先頭へ戻る」ボタン。少しスクロールしたら出す
 (function(){const btn=document.getElementById("to-top-btn");if(!btn)return;const upd=()=>{btn.classList.toggle("show",window.scrollY>600)};window.addEventListener("scroll",upd,{passive:true});upd();})();
 
-window.addEventListener("load", () => {
-  // 初回描画(50ms後)が終わってから位置を決める
-  setTimeout(() => {
-    if (location.hash) { jumpToHash(location.hash); }
-    else { window.scrollTo(0, 0); }
-  }, 150);
-});
+// 位置の確定は初回描画の直後に済ませている。これは取りこぼしたときの保険。
+window.addEventListener("load", () => { setTimeout(settleInitialScroll, 150); });
 </script>
 </body>
 </html>
