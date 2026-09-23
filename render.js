@@ -10,10 +10,10 @@
           function gtag(){ window.dataLayer.push(arguments); }
           window.gtag = gtag;
           gtag('js', new Date());
-          gtag('config', 'G-TFW2GX35G');
+          gtag('config', 'G-TFW2XGX35G');
           const gaScript = document.createElement('script');
           gaScript.async = true;
-          gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-TFW2GX35G';
+          gaScript.src = 'https://www.googletagmanager.com/gtag/js?id=G-TFW2XGX35G';
           document.head.appendChild(gaScript);
     }
   
