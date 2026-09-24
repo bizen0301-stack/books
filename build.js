@@ -342,7 +342,7 @@ function buildBookPage(b) {
   const genreSlug = R.GENRE_SLUGS[b.genre];
 
   const head = headHTML({
-    title: b.title + '（' + b.author + '）あらすじと読者の受け止め方｜' + b.year + '年本屋大賞 ' + awardLabel + '｜本屋大賞ガイド',
+    title: b.title + '（' + b.author + '）あらすじ・感想｜' + b.year + '年本屋大賞 ' + awardLabel + '｜本屋大賞ガイド',
     description: b.year + '年本屋大賞 ' + awardLabel + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeや読書サイトの感想から見た読者の受け止め方、分かれる点、Audible版のナレーター、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
     canonical: SITE + url,
     ogTitle: b.title + '｜' + b.year + '年本屋大賞 ' + awardLabel,
