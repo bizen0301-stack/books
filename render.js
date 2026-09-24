@@ -29,6 +29,8 @@
     'SF': 'sf',
     '歴史': 'history',
   };
+  // 表示名（2026-09-25 ジャンルを3つの賞共通の8分類にした。data.js の値とURLのスラッグは変えない）
+  const GENRE_DISPLAY = { 'ヒューマン': '家族・人間ドラマ', 'ミステリ': 'ミステリー', 'SF': 'SF・ファンタジー', '歴史': '時代・歴史' };
   const GENRE_LABELS = Object.fromEntries(Object.entries(GENRE_SLUGS).map(([k, v]) => [v, k]));
 
   // kindleAsinは、確認済みamazonAsin(紙の本)の商品ページ上に表示される
@@ -131,7 +133,7 @@
   </${coverTag}>
   <div class="card-body">
     <div class="tag-container">
-      <span class="genre-badge">${isDept ? '部門賞' : b.genre}</span>
+      <span class="genre-badge">${isDept ? '部門賞' : (GENRE_DISPLAY[b.genre] || b.genre)}</span>
       ${moodBadgeHTML}
       ${mediaBadgeHTML}
     </div>

@@ -1,4 +1,4 @@
-// books.soranoshita.com 段階1ビルドスクリプト。
+// books.soranoshita.com（文学賞ガイド）のビルドスクリプト。2026-09-25 から本屋大賞・直木賞・芥川賞の3つの賞とジャンルページを作る。
 // data.js を唯一の入力として、年度ページ23枚・ジャンルページ6枚・sitemap.xml・
 // index.html末尾の全作品静的インデックスを作り直す。依存ライブラリ無し、node build.js で実行する。
 //
@@ -9,6 +9,8 @@ const fs = require('fs');
 const path = require('path');
 const R = require('./render.js');
 const AW = require('./awards.js');
+const GN = require('./genres.js');
+let GENRE_INFO = { urls: [], counts: {} };
 
 const ROOT = __dirname;
 const SITE = 'https://books.soranoshita.com';
@@ -48,10 +50,10 @@ const BLOG_LINKS = {
 
 const AFFILIATE_DISCLOSURE = `<div class="affiliate">
   ※ 当サイトはAmazonアソシエイト・プログラム、および楽天アフィリエイトの参加者です。リンクを経由してご購入いただくと、サイト運営者に紹介料が支払われます。<br>
-  Amazonのアソシエイトとして、本屋大賞ガイドは適格販売により収入を得ています。
+  Amazonのアソシエイトとして、文学賞ガイドは適格販売により収入を得ています。
 </div>`;
 
-const FOOTER = `<footer>© 2026 本屋大賞受賞作ガイド</footer>`;
+const FOOTER = `<footer>© 2026 文学賞ガイド（本屋大賞・直木賞・芥川賞）</footer>`;
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -129,7 +131,7 @@ ${head}
 ${jsonLdBlocks}
 </head>
 <body id="top">
-<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 ${header || miniHeaderHTML()}
 ${breadcrumb}
 ${body}
@@ -186,10 +188,10 @@ function buildYearPage(year) {
   const count = books.length;
 
   const head = headHTML({
-    title: `${year}年本屋大賞 全${count}作品 受賞・ノミネート一覧｜本屋大賞ガイド`,
+    title: `${year}年本屋大賞 全${count}作品 受賞・ノミネート一覧｜文学賞ガイド`,
     description: `${year}年本屋大賞の受賞作${winner ? '「' + winner.title + '」' : ''}を含む、全${count}作品のあらすじ・ジャンル・映像化情報をまとめました。Amazon・Kindle・楽天ブックスからすぐ購入できます。`,
     canonical: `${SITE}/year/${year}/`,
-    ogTitle: `${year}年本屋大賞 全${count}作品｜本屋大賞ガイド`,
+    ogTitle: `${year}年本屋大賞 全${count}作品｜文学賞ガイド`,
   });
 
   const breadcrumbItems = [
@@ -343,7 +345,7 @@ function buildBookPage(b) {
   const genreSlug = R.GENRE_SLUGS[b.genre];
 
   const head = headHTML({
-    title: b.title + '（' + b.author + '）あらすじ・感想｜' + b.year + '年本屋大賞 ' + awardLabel + '｜本屋大賞ガイド',
+    title: b.title + '（' + b.author + '）あらすじ・感想｜' + b.year + '年本屋大賞 ' + awardLabel + '｜文学賞ガイド',
     description: b.year + '年本屋大賞 ' + awardLabel + '『' + b.title + '』（' + b.author + '）。あらすじ、YouTubeや読書サイトの感想から見た読者の受け止め方、分かれる点、Audible版のナレーター、同じ年のノミネート作。Kindle・楽天ブックス・Audibleへのリンク付き。',
     canonical: SITE + url,
     ogTitle: b.title + '｜' + b.year + '年本屋大賞 ' + awardLabel,
@@ -479,10 +481,10 @@ function buildGenrePage(genreLabel, slug) {
   const count = books.length;
 
   const head = headHTML({
-    title: `${genreLabel}のおすすめ本屋大賞作品 全${count}冊｜本屋大賞ガイド`,
+    title: `${genreLabel}のおすすめ本屋大賞作品 全${count}冊｜文学賞ガイド`,
     description: `本屋大賞の受賞・ノミネート作品から「${genreLabel}」に分類される全${count}冊。あらすじ・映像化情報付きで、Amazon・Kindle・楽天ブックスからすぐ購入できます。`,
     canonical: `${SITE}/genre/${slug}/`,
-    ogTitle: `${genreLabel}の本屋大賞作品 全${count}冊｜本屋大賞ガイド`,
+    ogTitle: `${genreLabel}の本屋大賞作品 全${count}冊｜文学賞ガイド`,
   });
 
   const breadcrumbItems = [
@@ -563,10 +565,41 @@ function injectYearNav(html) {
   return html.slice(0, s + startMarker.length) + '\n' + yearNavHTML(null, { onIndex: true }) + '\n' + html.slice(e);
 }
 
+// --- トップの入口（3つの賞・ジャンル・両方に選ばれた作品。2026-09-25） ---
+
+function hubHTML() {
+  const load = (f, n) => AW.loadArray(path.join(ROOT, f), n);
+  const N = load('naoki.js', 'NAOKI'), A = load('akutagawa.js', 'AKUTAGAWA');
+  const cv = u => (u || '').replace(/zoom=\d/, 'zoom=1').replace('&edge=curl', '');
+  const latestOf = list => { const k = Math.max(...list.map(w => w.kai)); return list.filter(w => w.kai === k && w.title); };
+  const h1 = BOOKS.find(b => b.year === MAX_YEAR && b.rank === 1);
+  const half = h => { const m = String(h).match(/^(\d{4})(上|下)$/); return m ? `${m[1]}年${m[2]}半期` : h; };
+  const latestHTML = (img, label, title, author, href) => `<a class="hub-latest" href="${href}">${img ? `<img src="${esc(img)}" alt="『${esc(title)}』の表紙">` : `<span class="hub-ph"><span>${esc(title)}</span></span>`}<span class="hub-latest-txt"><span class="hub-latest-label">${label}</span><span class="hub-latest-title">${esc(title)}</span><span class="hub-latest-author">${esc(author)}</span></span></a>`;
+  const panel = (name, who, latest, count, href, sub) => `<section class="hub-panel"><h2><a href="${href}">${name}</a></h2><p class="hub-who">${who}</p>${latest}<p class="hub-count">${count}</p><p class="hub-main"><a href="${href}">${name}の一覧を見る →</a></p><p class="hub-sub">${sub}</p></section>`;
+  const nl = latestOf(N)[0], al = latestOf(A)[0];
+  const decadeLinks = key => [2020, 2010, 2000].map(d => `<a href="/${key}/#d${d}">${d}年代</a>`).join('');
+  const panels = [
+    panel('本屋大賞', '書店員が選ぶ', latestHTML(cv(h1.coverImg), `${h1.year}年 大賞`, h1.title, h1.author, hasBookPage(h1) ? bookPageUrl(h1) : `/year/${h1.year}/`), `2004年〜${MAX_YEAR}年　全${BOOKS.length}作（ノミネートを含む）`, '#honya', '年別：' + YEARS.slice(0, 3).map(y => `<a href="/year/${y}/">${y}</a>`).join('') + '…'),
+    panel('直木賞', '作家が選ぶ・エンタメ小説', latestHTML(cv(nl.coverImg), `第${nl.kai}回（${half(nl.half)}）`, nl.title, nl.author, `/naoki/#k${nl.kai}`), `第1回〜第${nl.kai}回　受賞${N.filter(w => w.title).length}作`, '/naoki/', '年代別：' + decadeLinks('naoki') + '…'),
+    panel('芥川賞', '作家が選ぶ・純文学の新人', latestHTML(cv(al.coverImg), `第${al.kai}回（${half(al.half)}）`, al.title, al.author, `/akutagawa/#k${al.kai}`), `第1回〜第${al.kai}回　受賞${A.filter(w => w.title).length}作`, '/akutagawa/', '年代別：' + decadeLinks('akutagawa') + '…'),
+  ].join('');
+  const genres = GN.GENRES.map(g => `<a class="genre-tile" href="/genre/${g.slug}/"><span class="gt-name">${g.label}</span><span class="gt-desc">${g.desc}</span><span class="gt-count">${GENRE_INFO.counts[g.slug] || 0}冊</span></a>`).join('');
+  const both = BOOKS.filter(b => b.otherAwards).sort((a, b) => b.year - a.year);
+  const strip = both.map(b => `<a href="${hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.rank}`}"><span class="hs-img">${b.coverImg ? `<img src="${esc(cv(b.coverImg))}" alt="『${esc(b.title)}』の表紙" loading="lazy">` : ''}</span><span class="hs-t">${esc(b.title)}</span><span class="hs-a">${b.otherAwards.map(x => x.label.replace(/ 第\d+回/, '')).join('・')}</span></a>`).join('');
+  return `<div class="sec-h"><h2>賞で探す</h2></div>
+<div class="hub-grid">${panels}</div>
+<div class="sec-h" id="genres"><h2>ジャンルで探す</h2></div>
+<div class="genre-grid">${genres}</div>
+<div class="sec-h"><h2>本屋大賞と、直木賞・芥川賞の両方に選ばれた${both.length}作</h2></div>
+<div class="hub-strip">${strip}</div>
+<p class="hub-note"><a href="https://soranoshita.com/2026/09/25/honya-taisho-naoki-akutagawa/">この${both.length}作の読みどころをブログで紹介しています →</a></p>`;
+}
+
 function injectAllIndex() {
   const p = path.join(ROOT, 'index.html');
   let html = fs.readFileSync(p, 'utf8');
   html = injectYearNav(html);
+  html = html.replace(/<!-- HUB_START -->[\s\S]*?<!-- HUB_END -->/, () => '<!-- HUB_START -->\n' + hubHTML() + '\n<!-- HUB_END -->');
   html = html.replace(/href="assets\/style\.css(\?v=[^"]*)?"/, 'href="assets/style.css?v=' + CSS_VER + '"');
   const startMarker = '<!-- ALL_INDEX_START -->';
   const endMarker = '<!-- ALL_INDEX_END -->';
@@ -591,7 +624,7 @@ function buildSitemap() {
   const today = new Date().toISOString().slice(0, 10);
   const urls = [`${SITE}/`];
   YEARS.forEach(y => urls.push(`${SITE}/year/${y}/`));
-  Object.keys(R.GENRE_SLUGS).forEach(label => urls.push(`${SITE}/genre/${R.GENRE_SLUGS[label]}/`));
+  GENRE_INFO.urls.forEach(u => urls.push(u));
   BOOKS.filter(hasBookPage).forEach(b => urls.push(SITE + bookPageUrl(b)));
   AWARD_URLS.forEach(u => urls.push(u));
 
@@ -624,15 +657,10 @@ function main() {
   });
   console.log('year/: ' + YEARS.length + 'ページ生成');
 
-  fs.mkdirSync(path.join(ROOT, 'genre'), { recursive: true });
-  Object.entries(R.GENRE_SLUGS).forEach(([label, slug]) => {
-    const dir = path.join(ROOT, 'genre', slug);
-    fs.mkdirSync(dir, { recursive: true });
-    fs.writeFileSync(path.join(dir, 'index.html'), buildGenrePage(label, slug));
-  });
-  console.log('genre/: ' + Object.keys(R.GENRE_SLUGS).length + 'ページ生成');
 
   buildBookPages();
+  // ジャンルページは3つの賞をまたいで作る（genres.js、2026-09-25）。otherAwards を付けたあとに作る
+  GENRE_INFO = GN.buildGenrePages({ esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT });
   AWARD_URLS.push(...Object.keys(AW.AWARDS).map(k => AW.buildAwardPage(k, { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT, checkedOn: '2026年9月24日' })));
   injectAllIndex();
   buildSitemap();

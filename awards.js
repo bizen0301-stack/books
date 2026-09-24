@@ -86,7 +86,7 @@ function buildAwardPage(key, ctx) {
 </section>` : '';
 
   const kindleCount = winners.filter(w => w.kindleAsin).length;
-  const title = `${A.name} 歴代受賞作一覧（第1回〜第${latest.kai}回）｜Kindleで読める作品も｜本屋大賞ガイド`;
+  const title = `${A.name} 歴代受賞作一覧（第1回〜第${latest.kai}回）｜Kindleで読める作品も｜文学賞ガイド`;
   const head = headHTML({
     title,
     description: `${A.name}（${A.fullName}）の第1回（${first.half.slice(0, 4)}年）から第${latest.kai}回（${halfLabel(latest.half)}）までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品がひと目で分かります。`,
