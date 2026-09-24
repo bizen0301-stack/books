@@ -296,7 +296,6 @@ body{overflow-anchor:none;}
 .topbar-awards a:hover{color:var(--red);text-decoration:underline}
 .topbar-award-link{font-size:12px;font-weight:700;color:var(--ink-2);text-decoration:none;white-space:nowrap;margin-left:auto;margin-right:1rem}
 .topbar-award-link:hover{color:var(--red);text-decoration:underline}
-.aw-main>*{max-width:860px}
 .aw-both{border-top:2px solid var(--gold);border-bottom:1px solid var(--border);padding:1.2rem 0 1rem;margin-bottom:2rem}
 .aw-both h2{font-family:'Noto Serif JP',serif;font-size:1.15rem;margin-bottom:.5rem}
 .aw-both p{font-size:13px;color:var(--ink-2);margin-bottom:.6rem}
@@ -331,3 +330,18 @@ body{overflow-anchor:none;}
 @media(max-width:640px){.topbar-awards{margin-left:.6rem;gap:.7rem}.topbar-award-link{display:none}.aw-cover{flex-basis:60px;width:60px;height:88px}}
 .card-other-award{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;margin-top:2px}.card-other-award:hover{text-decoration:underline}
 .topbar-award-link+.topbar-award-link{margin-left:0}
+
+/* 文学賞一覧をカード表示に（2026-09-25 シゲ指示「本屋大賞と比べて寂しい、サムネイルが小さい、ファーストビューに文字が多い」） */
+.aw-main .book-grid{margin-bottom:.5rem}
+.aw-decade{margin-bottom:2.5rem}
+.aw-card .card-foot .aw-btns{display:flex;flex-wrap:wrap;gap:6px;margin-top:0}
+.aw-card .card-foot .aw-btns .btn-link{flex:1 1 auto;padding:7px 6px;font-size:11px;text-align:center}
+.aw-honya-badge{background:var(--gold-light);color:var(--gold);border-color:rgba(154,122,26,.3);font-weight:700;text-decoration:none}
+.aw-honya-badge:hover{text-decoration:underline}
+.aw-both-card{border-top:3px solid var(--gold)}
+.aw-card .synopsis{-webkit-line-clamp:3}
+.page-lead a{color:var(--red);font-weight:700;text-decoration:none}
+.aw-both,.aw-about,.aw-source{max-width:860px}
+.aw-about{margin-top:2rem;padding-top:1.2rem;border-top:1px solid var(--border)}
+.aw-about h2{font-family:'Noto Serif JP',serif;font-size:1.1rem;margin-bottom:.5rem}
+.aw-about p{font-size:13px;color:var(--ink-2);line-height:1.9}
