@@ -129,6 +129,7 @@ function buildAwardPage(key, ctx) {
 <main class="main aw-main">
 ${bothHTML}
 ${sections}
+<div class="blog-crosslink">📖 ブログ「あの空の下」に、本屋大賞と直木賞・芥川賞の両方に選ばれた12作を紹介した記事があります → <a href="https://soranoshita.com/2026/09/25/honya-taisho-naoki-akutagawa/">読む</a></div>
 <p class="aw-source">受賞作・回・出版社（掲載誌）は、主催する<a href="https://bungakushinko.or.jp/award/${key}/list.html" target="_blank" rel="noopener">日本文学振興会の受賞者一覧</a>で確かめました（${ctx.checkedOn}）。Kindle版の有無は同じ日にAmazonで確認したもので、変わることがあります。</p>
 </main>`;
 
