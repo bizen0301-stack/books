@@ -129,7 +129,7 @@ ${head}
 ${jsonLdBlocks}
 </head>
 <body id="top">
-<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/">本屋大賞</a><a href="/naoki/">直木賞</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 ${header || miniHeaderHTML()}
 ${breadcrumb}
 ${body}

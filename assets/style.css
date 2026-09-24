@@ -330,3 +330,4 @@ body{overflow-anchor:none;}
 .aw-source a{color:var(--ink-2)}
 @media(max-width:640px){.topbar-awards{margin-left:.6rem;gap:.7rem}.topbar-award-link{display:none}.aw-cover{flex-basis:60px;width:60px;height:88px}}
 .card-other-award{display:inline-block;font-size:11px;font-weight:700;color:var(--gold);text-decoration:none;margin-top:2px}.card-other-award:hover{text-decoration:underline}
+.topbar-award-link+.topbar-award-link{margin-left:0}
