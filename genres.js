@@ -19,11 +19,17 @@ const GENRES = [
   { slug: 'literary', label: '純文学', desc: '言葉と人の内側を読む', honya: null },
 ];
 
+// 本屋大賞の作品を、主ジャンルとは別のジャンルにも並べるための表（2026-09-25）。恋愛の要素が物語の中心にあるもの
+const HONYA_EXTRA = {
+  romance: ['2025-7', '2023-1', '2021-8', '2020-1', '2016-2', '2015-9', '2011-2', '2011-10', '2010-8', '2007-2', '2006-6', '2005-4', '2005-10'],
+};
+
 function items(g, ctx) {
   const { R, BOOKS, hasBookPage, bookPageUrl } = ctx;
   const out = [];
-  if (g.honya) {
-    BOOKS.filter(b => b.genre === g.honya).forEach(b => {
+  const extra = HONYA_EXTRA[g.slug] || [];
+  if (g.honya || extra.length) {
+    BOOKS.filter(b => (g.honya && b.genre === g.honya) || extra.includes(b.year + '-' + b.rank)).forEach(b => {
       const awards = ['honya'].concat((b.otherAwards || []).map(x => x.href.split('/')[1]));
       const html = R.cardHTML(b, { detailUrl: hasBookPage(b) ? bookPageUrl(b) : '' })
         .replace('<div class="year-badge">' + b.year + '年</div>', '<div class="year-badge">本屋大賞 ' + b.year + '</div>')
