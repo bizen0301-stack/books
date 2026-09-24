@@ -61,36 +61,7 @@ function buildAwardPage(key, ctx) {
   const honyaLabel = b => b.rank === 1 ? `${b.year}年本屋大賞 大賞` : `${b.year}年本屋大賞 ${b.rank}位`;
   const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.rank}`;
 
-  function rowHTML(w) {
-    const hb = honya(w);
-    const buy = {
-      title: w.title, author: w.author,
-      kindleAsin: w.kindleAsin, amazonAsin: w.amazonAsin,
-    };
-    const btns = [
-      w.kindleAsin ? `<a class="btn-link btn-kindle" href="${R.getAmazonKindleLink(buy)}" target="_blank" rel="noopener">📱 Kindle版</a>` : '',
-      `<a class="btn-link btn-paper" href="${R.getAmazonPaperLink(buy)}" target="_blank" rel="noopener">📖 ${w.amazonAsin ? '紙の本' : 'Amazonで探す'}</a>`,
-      `<a class="btn-link btn-rakuten" href="${R.getRakutenLink(w.title, w.author, null)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>`,
-    ].join('');
-    // 本屋大賞のカード（render.js の cardHTML）と同じ作り。書影が無いときは同じ書名・著者のプレースホルダーを出す
-    const img = w.coverImg ? `<img src="${esc(w.coverImg)}" alt="『${esc(w.title)}』の表紙" loading="lazy">` : '';
-    const h = w.half.match(/^(\d{4})(上|下)$/);
-    return `<article class="card aw-card${hb ? ' aw-both-card' : ''}" id="k${w.kai}${w.sub ? '-' + w.sub : ''}">
-  <div class="cover-wrap">
-    <div class="rank-badge rn">第${w.kai}回</div>
-    <div class="year-badge">${h ? h[1] + '年' + h[2] : esc(w.half)}</div>
-    <div class="placeholder"><span class="placeholder-title">${esc(w.title)}</span><span class="placeholder-author">${esc(w.author)}</span></div>
-    ${img}
-  </div>
-  <div class="card-body">
-    ${hb ? `<div class="tag-container"><a class="genre-badge aw-honya-badge" href="${honyaHref(hb)}">${honyaLabel(hb)}</a></div>` : ''}
-    <div class="book-title">${esc(w.title)}</div>
-    <div class="book-author">${esc(w.author)} 著${w.pub ? `（${esc(w.pub)}）` : ''}</div>
-    ${w.note ? `<p class="synopsis">${esc(w.note)}</p>` : ''}
-  </div>
-  <div class="card-foot"><div class="aw-btns">${btns}</div></div>
-</article>`;
-  }
+  const rowHTML = w => awardCardHTML(w, key, ctx);
 
   // 年代ごと（新しい順）。受賞作なしの回は、年代の末尾にまとめて書く
   const decades = [...new Set(list.map(w => decadeOf(w.half)))].sort((a, b) => b - a);
@@ -164,6 +135,44 @@ ${bothHTML}
   return `${SITE}/${key}/`;
 }
 
+// 賞の受賞作1件のカード。一覧ページとジャンルページで共用する
+function awardCardHTML(w, key, ctx) {
+const A = AWARDS[key];
+const { esc, R, BOOKS, hasBookPage, bookPageUrl } = ctx;
+const honya = x => x.honya ? BOOKS.find(b => b.year === x.honya.year && b.rank === x.honya.rank) : null;
+const honyaLabel = b => b.rank === 1 ? `${b.year}年本屋大賞 大賞` : `${b.year}年本屋大賞 ${b.rank}位`;
+const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.rank}`;
+  const hb = honya(w);
+  const buy = {
+    title: w.title, author: w.author,
+    kindleAsin: w.kindleAsin, amazonAsin: w.amazonAsin,
+  };
+  const btns = [
+    w.kindleAsin ? `<a class="btn-link btn-kindle" href="${R.getAmazonKindleLink(buy)}" target="_blank" rel="noopener">📱 Kindle版</a>` : '',
+    `<a class="btn-link btn-paper" href="${R.getAmazonPaperLink(buy)}" target="_blank" rel="noopener">📖 ${w.amazonAsin ? '紙の本' : 'Amazonで探す'}</a>`,
+    `<a class="btn-link btn-rakuten" href="${R.getRakutenLink(w.title, w.author, null)}" target="_blank" rel="noopener">🔴 楽天ブックス</a>`,
+  ].join('');
+  // 本屋大賞のカード（render.js の cardHTML）と同じ作り。書影が無いときは同じ書名・著者のプレースホルダーを出す
+  const img = w.coverImg ? `<img src="${esc(w.coverImg)}" alt="『${esc(w.title)}』の表紙" loading="lazy">` : '';
+  const h = w.half.match(/^(\d{4})(上|下)$/);
+  return `<article data-award="${key}" data-kindle="${w.kindleAsin ? 1 : 0}" data-sort="${parseInt(w.half, 10) + (/下/.test(w.half) ? 0.5 : 0)}" class="card aw-card${hb ? ' aw-both-card' : ''}" id="k${w.kai}${w.sub ? '-' + w.sub : ''}">
+<div class="cover-wrap">
+  <div class="rank-badge rn">${ctx.showAward ? A.name + " " : ""}第${w.kai}回</div>
+  <div class="year-badge">${h ? h[1] + '年' + h[2] : esc(w.half)}</div>
+  <div class="placeholder"><span class="placeholder-title">${esc(w.title)}</span><span class="placeholder-author">${esc(w.author)}</span></div>
+  ${img}
+</div>
+<div class="card-body">
+  ${hb ? `<div class="tag-container"><a class="genre-badge aw-honya-badge" href="${honyaHref(hb)}">${honyaLabel(hb)}</a></div>` : ''}
+  <div class="book-title">${esc(w.title)}</div>
+  <div class="book-author">${esc(w.author)} 著${w.pub ? `（${esc(w.pub)}）` : ''}</div>
+  ${w.note ? `<p class="synopsis">${esc(w.note)}</p>` : ''}
+</div>
+<div class="card-foot"><div class="aw-btns">${btns}</div></div>
+</article>`;
+}
+
+
 // 本屋大賞の作品に「ほかに取った賞」を付けるための対応表。キーは「年-順位」
 function crossRefs(ROOT) {
   const map = {};
@@ -176,4 +185,4 @@ function crossRefs(ROOT) {
   return map;
 }
 
-module.exports = { AWARDS, buildAwardPage, crossRefs };
+module.exports = { AWARDS, buildAwardPage, crossRefs, awardCardHTML, loadArray };
