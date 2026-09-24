@@ -137,6 +137,7 @@
     </div>
     <div class="book-title">${b.title}</div>
     <div class="book-author">${b.author} 著</div>
+    ${b.otherAwards ? b.otherAwards.map(x => `<a class="card-other-award" href="${x.href}">${x.label}も受賞</a>`).join('') : ''}
     ${b.synopsis ? `<p class="synopsis">${b.synopsis}</p>` : ''}
     ${detailHTML}
   </div>

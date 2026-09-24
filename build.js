@@ -8,6 +8,7 @@
 const fs = require('fs');
 const path = require('path');
 const R = require('./render.js');
+const AW = require('./awards.js');
 
 const ROOT = __dirname;
 const SITE = 'https://books.soranoshita.com';
@@ -117,7 +118,7 @@ function miniHeaderHTML() {
 </header>`;
 }
 
-function pageShell({ head, breadcrumb, jsonLd, body, extraJsonLd }) {
+function pageShell({ head, breadcrumb, jsonLd, body, extraJsonLd, header }) {
   const jsonLdBlocks = [jsonLd, extraJsonLd].filter(Boolean)
     .map(o => `<script type="application/ld+json">${JSON.stringify(o)}</script>`)
     .join('\n');
@@ -128,8 +129,8 @@ ${head}
 ${jsonLdBlocks}
 </head>
 <body id="top">
-<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
-${miniHeaderHTML()}
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">本屋大賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/">本屋大賞</a><a href="/naoki/">直木賞</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
+${header || miniHeaderHTML()}
 ${breadcrumb}
 ${body}
 ${AFFILIATE_DISCLOSURE}
@@ -371,7 +372,7 @@ function buildBookPage(b) {
   parts.push('<div class="book-hero">'
     + '<div class="book-cover">' + coverHTML + '</div>'
     + '<div class="book-info">'
-    + '<div class="book-award"><a href="/year/' + b.year + '/">' + b.year + '年本屋大賞</a> ' + esc(label) + '</div>'
+    + '<div class="book-award"><a href="/year/' + b.year + '/">' + b.year + '年本屋大賞</a> ' + esc(label) + (b.otherAwards ? b.otherAwards.map(x => '　／　<a href="' + x.href + '">' + esc(x.label) + '</a>受賞').join('') : '') + '</div>'
     + '<h1>' + esc(b.title) + '</h1>'
     + '<div class="book-meta">' + esc(b.author) + ' 著' + (b.genre ? '　／　<a href="/genre/' + genreSlug + '/">' + esc(b.genre) + '</a>' : '') + (b.media ? '　／　🎬 ' + esc(b.media) : '') + '</div>'
     + (b.synopsis ? '<p class="book-synopsis">' + esc(b.synopsis) + '</p>' : '')
@@ -582,6 +583,8 @@ function injectAllIndex() {
   console.log('index.html: 全作品インデックスを注入（' + BOOKS.length + '件）');
 }
 
+const AWARD_URLS = [];
+
 // --- sitemap.xml ---
 
 function buildSitemap() {
@@ -590,6 +593,7 @@ function buildSitemap() {
   YEARS.forEach(y => urls.push(`${SITE}/year/${y}/`));
   Object.keys(R.GENRE_SLUGS).forEach(label => urls.push(`${SITE}/genre/${R.GENRE_SLUGS[label]}/`));
   BOOKS.filter(hasBookPage).forEach(b => urls.push(SITE + bookPageUrl(b)));
+  AWARD_URLS.forEach(u => urls.push(u));
 
   const body = urls.map(u => `  <url>
     <loc>${u}</loc>
@@ -610,6 +614,8 @@ ${body}
 // --- 実行 ---
 
 function main() {
+  const XREF = AW.crossRefs(ROOT);
+  BOOKS.forEach(b => { const x = XREF[b.year + '-' + b.rank]; if (x) b.otherAwards = x; });
   fs.mkdirSync(path.join(ROOT, 'year'), { recursive: true });
   YEARS.forEach(y => {
     const dir = path.join(ROOT, 'year', String(y));
@@ -627,6 +633,7 @@ function main() {
   console.log('genre/: ' + Object.keys(R.GENRE_SLUGS).length + 'ページ生成');
 
   buildBookPages();
+  AWARD_URLS.push(...Object.keys(AW.AWARDS).map(k => AW.buildAwardPage(k, { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT, checkedOn: '2026年9月24日' })));
   injectAllIndex();
   buildSitemap();
 
