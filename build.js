@@ -661,7 +661,9 @@ function main() {
   buildBookPages();
   // ジャンルページは3つの賞をまたいで作る（genres.js、2026-09-25）。otherAwards を付けたあとに作る
   GENRE_INFO = GN.buildGenrePages({ esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT });
-  AWARD_URLS.push(...Object.keys(AW.AWARDS).map(k => AW.buildAwardPage(k, { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT, checkedOn: '2026年9月24日' })));
+  const AWCTX = { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT, parseContent, blockMd, checkedOn: '2026年9月24日' };
+  AWARD_URLS.push(...Object.keys(AW.AWARDS).map(k => AW.buildAwardPage(k, AWCTX)));
+  Object.keys(AW.AWARDS).forEach(k => AWARD_URLS.push(...AW.buildWorkPages(k, AWCTX)));
   injectAllIndex();
   buildSitemap();
 

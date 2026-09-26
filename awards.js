@@ -1,7 +1,8 @@
 // 本屋大賞以外の文学賞の一覧ページ（2026-09-24〜）。build.js から呼ぶ。
 // 1つの賞 = データファイル1つ（例: naoki.js の NAOKI）＋一覧ページ1枚（/naoki/）。
 // 受賞作の事実（回・年・作者・作品・出版社）は日本文学振興会の公式一覧から取った。
-// 作品ページは作らない。本屋大賞でも上位に入った作品だけ、本屋大賞側の作品ページ・年度ページへリンクする。
+// 作品ページは content/{賞}-{回}(-{sub}).md がある受賞作だけ作る（/naoki/175/ など、2026-09-27〜）。
+// 本屋大賞でも上位に入った作品は作らず、本屋大賞側の作品ページへリンクする。
 'use strict';
 
 const fs = require('fs');
@@ -164,12 +165,89 @@ const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.
 </div>
 <div class="card-body">
   ${hb ? `<div class="tag-container"><a class="genre-badge aw-honya-badge" href="${honyaHref(hb)}">${honyaLabel(hb)}</a></div>` : ''}
-  <div class="book-title">${esc(w.title)}</div>
+  <div class="book-title">${ctx.ROOT && hasWorkPage(key, w, ctx.ROOT) ? `<a href="${workPageUrl(key, w)}">${esc(w.title)}</a>` : esc(w.title)}</div>
   <div class="book-author">${esc(w.author)} 著${w.pub ? `（${esc(w.pub)}）` : ''}</div>
   ${w.note ? `<p class="synopsis">${esc(w.note)}</p>` : ''}
 </div>
-<div class="card-foot"><div class="aw-btns">${btns}</div></div>
+<div class="card-foot">${ctx.ROOT && hasWorkPage(key, w, ctx.ROOT) ? `<a class="aw-more" href="${workPageUrl(key, w)}">あらすじ・感想を見る →</a>` : ''}<div class="aw-btns">${btns}</div></div>
 </article>`;
+}
+
+// --- 受賞作の作品ページ（2026-09-27〜） ---
+function workSlug(w) { return String(w.kai) + (w.sub ? '-' + w.sub : ''); }
+function workContentPath(key, w, ROOT) { return path.join(ROOT, 'content', key + '-' + workSlug(w) + '.md'); }
+function workPageUrl(key, w) { return '/' + key + '/' + workSlug(w) + '/'; }
+function hasWorkPage(key, w, ROOT) { return !!w.title && !w.honya && fs.existsSync(workContentPath(key, w, ROOT)); }
+
+function buildWorkPage(key, w, list, ctx) {
+  const A = AWARDS[key];
+  const { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, parseContent, blockMd } = ctx;
+  const md = fs.readFileSync(workContentPath(key, w, ctx.ROOT), 'utf8').replace(/\r\n/g, '\n');
+  const { meta, sections } = parseContent(md);
+  const sec = name => sections.find(s => s.title === name);
+  const url = workPageUrl(key, w);
+  const round = '第' + w.kai + '回（' + halfLabel(w.half) + '）';
+  const head = headHTML({
+    title: w.title + '（' + w.author + '）あらすじ・感想｜' + A.name + ' ' + round + '｜文学賞ガイド',
+    description: A.name + round + '受賞作『' + w.title + '』（' + w.author + '）。あらすじ、読者の感想から見た受け止め方、分かれる点、著者の言葉。Kindle・楽天ブックスへのリンク付き。',
+    canonical: SITE + url,
+    ogTitle: w.title + '｜' + A.name + ' 第' + w.kai + '回',
+  });
+  const crumbs = [{ label: 'ホーム', url: '/' }, { label: A.name + ' 歴代受賞作', url: '/' + key + '/' }, { label: w.title, url }];
+  const buy = { title: w.title, author: w.author, kindleAsin: w.kindleAsin, amazonAsin: w.amazonAsin, audibleAsin: meta.audibleAsin, audible: !!meta.audibleAsin };
+  const btns = '<div class="buy-buttons">'
+    + (w.kindleAsin ? '<a class="btn-link btn-kindle" href="' + R.getAmazonKindleLink(buy) + '" target="_blank" rel="noopener">📱 Kindle版</a>' : '')
+    + '<a class="btn-link btn-rakuten" href="' + R.getRakutenLink(w.title, w.author, null) + '" target="_blank" rel="noopener">🔴 楽天ブックス</a>'
+    + (meta.audibleAsin ? '<a class="btn-link btn-audible" href="' + R.getAmazonAudibleLink(buy) + '" target="_blank" rel="noopener">🎧 Audible版</a>' : '')
+    + '<a class="btn-link btn-paper" href="' + R.getAmazonPaperLink(buy) + '" target="_blank" rel="noopener">📖 ' + (w.amazonAsin ? '紙の本' : 'Amazonで探す') + '</a>'
+    + '</div>';
+  const cover = w.coverImg
+    ? '<img src="' + esc(w.coverImg) + '" alt="' + esc(w.title) + '">'
+    : '<div class="book-cover-ph"><span>' + esc(w.title) + '</span></div>';
+  const parts = [];
+  parts.push('<div class="book-hero"><div class="book-cover">' + cover + '</div><div class="book-info">'
+    + '<div class="book-award"><a href="/' + key + '/#k' + workSlug(w) + '">' + A.name + ' ' + esc(round) + '</a></div>'
+    + '<h1>' + esc(w.title) + '</h1>'
+    + '<div class="book-meta">' + esc(w.author) + ' 著' + (w.pub ? '　／　' + esc(w.pub) : '') + '</div>'
+    + (w.note ? '<p class="book-synopsis">' + esc(w.note) + '</p>' : '')
+    + btns + '</div></div>');
+  [['読者の受け止め方'], ['分かれる点'], ['著者が語っていること'], ['運営者の視点', 'book-owner']].forEach(([name, cls]) => {
+    const x = sec(name);
+    if (x && x.text) parts.push('<section class="book-section' + (cls ? ' ' + cls : '') + '"><h2>' + name + '</h2>' + blockMd(x.text) + '</section>');
+  });
+  const same = list.filter(x => x.kai === w.kai && x.title && x !== w);
+  const near = list.filter(x => x.title && x.kai !== w.kai && Math.abs(x.kai - w.kai) <= 2).sort((a, b) => b.kai - a.kai);
+  const link = x => hasWorkPage(key, x, ctx.ROOT) ? workPageUrl(key, x) : '/' + key + '/#k' + workSlug(x);
+  const li = x => '<li><a href="' + link(x) + '">' + esc(x.title) + '</a> — ' + esc(x.author) + '（第' + x.kai + '回）</li>';
+  if (same.length) parts.push('<section class="book-section"><h2>同じ回の' + A.name + '受賞作</h2><ul class="book-list">' + same.map(li).join('') + '</ul></section>');
+  parts.push('<section class="book-section"><h2>前後の回の' + A.name + '受賞作</h2><ul class="book-list">' + near.map(li).join('') + '</ul>'
+    + '<p class="book-more"><a href="/' + key + '/">' + A.name + 'の歴代受賞作をすべて見る →</a></p></section>');
+  const audible = sec('Audibleで聴く');
+  if (audible && audible.text) parts.push('<section class="book-section book-audible" id="audible"><h2>『' + esc(w.title) + '』をAudibleで聴く</h2>' + blockMd(audible.text)
+    + (meta.audibleAsin ? '<p class="book-more"><a href="' + R.getAmazonAudibleLink(buy) + '" target="_blank" rel="noopener">Audible版『' + esc(w.title) + '』をAmazonで見る →</a></p>' : '') + '</section>');
+  const mentioned = sec('こんなところでも紹介されています');
+  if (mentioned && mentioned.text) parts.push('<section class="book-section book-mentioned"><h2>こんなところでも紹介されています</h2>' + blockMd(mentioned.text) + '</section>');
+  parts.push('<p class="aw-source">受賞の回・出版社（掲載誌）は<a href="https://bungakushinko.or.jp/award/' + key + '/list.html" target="_blank" rel="noopener">日本文学振興会の受賞者一覧</a>によります。感想のまとめは' + esc(meta.researched || '') + 'に確認したものです。</p>');
+  const body = '<div class="book-page">\n' + parts.join('\n') + '\n</div>';
+  const bookJsonLd = { '@context': 'https://schema.org', '@type': 'Book', name: w.title, author: { '@type': 'Person', name: w.author }, url: SITE + url };
+  if (w.isbn) bookJsonLd.isbn = w.isbn;
+  if (w.coverImg) bookJsonLd.image = w.coverImg;
+  const header = '<header>\n  <div class="hdr-inner">\n    <div class="hdr-kana">' + A.kana + '</div>\n    <div class="site-title"><a href="/' + key + '/">' + A.name + ' <span>歴代受賞作ガイド</span></a></div>\n  </div>\n</header>';
+  return pageShell({ header, head, breadcrumb: breadcrumbHTML(crumbs), jsonLd: breadcrumbJsonLd(crumbs), extraJsonLd: bookJsonLd, body });
+}
+
+function buildWorkPages(key, ctx) {
+  const A = AWARDS[key];
+  const list = loadArray(path.join(ctx.ROOT, A.file), A.varName);
+  const urls = [];
+  list.filter(w => hasWorkPage(key, w, ctx.ROOT)).forEach(w => {
+    const dir = path.join(ctx.ROOT, key, workSlug(w));
+    fs.mkdirSync(dir, { recursive: true });
+    fs.writeFileSync(path.join(dir, 'index.html'), buildWorkPage(key, w, list, ctx));
+    urls.push(ctx.SITE + workPageUrl(key, w));
+  });
+  console.log(key + '/: 作品ページ ' + urls.length + '件');
+  return urls;
 }
 
 
@@ -185,4 +263,4 @@ function crossRefs(ROOT) {
   return map;
 }
 
-module.exports = { AWARDS, buildAwardPage, crossRefs, awardCardHTML, loadArray };
+module.exports = { AWARDS, buildAwardPage, buildWorkPages, crossRefs, awardCardHTML, loadArray };

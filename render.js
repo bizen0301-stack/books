@@ -71,15 +71,10 @@
     return `https://www.amazon.co.jp/s?k=${encodeURIComponent(b.title + ' ' + b.author + ' Audible')}&i=audible&tag=${AMAZON_TAG}`;
   }
 
+  // 気分タグは、作品ページの「読者の受け止め方」に根拠があるものだけ data.js の moods に書いている（2026-09-25）。
+  // 以前はジャンルから機械的に付けていたが、根拠のない「#泣ける」が出るのでやめた。
   function getMoodsForBook(b) {
-    const moods = [];
-    const genre = b ? (b.genre || '') : '';
-    if (genre === 'ミステリ') moods.push('どんでん返し');
-    if (genre === '青春' || genre === '青春・日常') moods.push('サクサク読める');
-    if (genre === 'ヒューマン' || genre === 'ドラマ・家族') moods.push('泣ける');
-    if (b && (b.rank === 1 || genre === 'SF' || genre === 'ミステリ')) moods.push('一気読み');
-    if (moods.length === 0) moods.push('サクサク読める');
-    return moods;
+    return (b && b.moods) ? b.moods.slice() : [];
   }
 
   function rankBadgeHTML(r) {
@@ -106,7 +101,7 @@
     const isDept = b.rank >= 11;
     const mediaBadgeHTML = b.media ? `<span class="media-badge">🎬 ${b.media}</span>` : '';
     const moods = getMoodsForBook(b);
-    const moodBadgeHTML = `<span class="mood-badge">#${moods[0]}</span>`;
+    const moodBadgeHTML = moods.length ? `<span class="mood-badge">#${moods[0]}</span>` : '';
     const audibleButtonHTML = b.audible ? `<a class="btn-link btn-audible" href="${getAmazonAudibleLink(b)}" target="_blank" rel="noopener">🎧 Audible版</a>` : '';
 
     const finalCoverUrl = coverUrlFor(b);

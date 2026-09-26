@@ -402,3 +402,7 @@ body{overflow-anchor:none;}
   .sec-h,.hub-grid,.genre-grid,.hub-strip,.hub-note{padding-left:1rem;padding-right:1rem}
 }
 .topbar-static{position:static}
+.aw-card .book-title a{color:inherit;text-decoration:none;}
+.aw-card .book-title a:hover{text-decoration:underline;}
+.aw-more{display:block;margin:0 0 .5rem;font-size:13px;font-weight:700;color:var(--red);text-decoration:none;}
+.aw-more:hover{text-decoration:underline;}
