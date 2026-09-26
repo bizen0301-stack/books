@@ -5,6 +5,6 @@
 set -euo pipefail
 cd "$(dirname "$0")"
 TMP=$(mktemp -d)
-git archive HEAD | tar -x -C "$TMP"
+git -c core.autocrlf=false -c core.eol=lf archive HEAD | tar -x -C "$TMP"
 npx --yes wrangler@latest pages deploy "$TMP" --project-name soranoshita-books --branch main --commit-hash "$(git rev-parse HEAD)" --commit-message "$(git log -1 --pretty=%s | head -c 300)"
 rm -rf "$TMP"
