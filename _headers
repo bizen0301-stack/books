@@ -1,0 +1,3 @@
+# Cloudflare Pages 用。仮のアドレス（*.pages.dev）は検索に出さない（本来のアドレスは books.soranoshita.com）
+https://:project.pages.dev/*
+  X-Robots-Tag: noindex
