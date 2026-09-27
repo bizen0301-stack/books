@@ -131,7 +131,7 @@ ${head}
 ${jsonLdBlocks}
 </head>
 <body id="top">
-<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/yamamoto/">山本周五郎賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/yamamoto/">山本周五郎賞</a><a href="/mystery/">ミステリーの賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 ${header || miniHeaderHTML()}
 ${breadcrumb}
 ${body}
@@ -590,6 +590,7 @@ function hubHTML() {
   const strip = both.map(b => `<a href="${hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.rank}`}"><span class="hs-img">${b.coverImg ? `<img src="${esc(cv(b.coverImg))}" alt="『${esc(b.title)}』の表紙" loading="lazy">` : ''}</span><span class="hs-t">${esc(b.title)}</span><span class="hs-a">${na(b).map(x => x.label.replace(/ 第\d+回/, '')).join('・')}</span></a>`).join('');
   return `<div class="sec-h"><h2>賞で探す</h2></div>
 <div class="hub-grid">${panels}</div>
+<p class="hub-more">ミステリーの賞も：<a href="/honkaku/">本格ミステリ大賞</a>・<a href="/suikyo/">日本推理作家協会賞</a>・<a href="/ranpo/">江戸川乱歩賞</a>　<a href="/mystery/">3つの賞をまとめて見る →</a></p>
 <div class="sec-h" id="genres"><h2>ジャンルで探す</h2></div>
 <div class="genre-grid">${genres}</div>
 <div class="sec-h"><h2>本屋大賞と、直木賞・芥川賞の両方に選ばれた${both.length}作</h2></div>
@@ -666,6 +667,7 @@ function main() {
   const AWCTX = { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, BOOKS, hasBookPage, bookPageUrl, ROOT, parseContent, blockMd, checkedOn: '2026年9月24日' };
   AWARD_URLS.push(...Object.keys(AW.AWARDS).map(k => AW.buildAwardPage(k, AWCTX)));
   Object.keys(AW.AWARDS).forEach(k => AWARD_URLS.push(...AW.buildWorkPages(k, AWCTX)));
+  Object.keys(AW.GROUPS).forEach(g => AWARD_URLS.push(AW.buildGroupPage(g, AWCTX)));
   injectAllIndex();
   buildSitemap();
 

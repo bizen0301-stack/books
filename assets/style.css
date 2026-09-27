@@ -417,3 +417,11 @@ body{overflow-anchor:none;}
   .nav-top-row,.topbar-inner{flex-wrap:wrap}
   .nav-top-row .topbar-awards,.topbar-inner .topbar-awards{order:9;flex:1 0 100%;margin:.35rem 0 0}
 }
+
+/* ミステリーの賞のまとめ（2026-09-27） */
+.hub-more{max-width:1140px;margin:.4rem auto 0;padding:0 1.5rem;font-size:13px;color:var(--ink-2)}
+.hub-more a{color:var(--red)}
+.aw-main .hub-grid{padding:0;margin-bottom:2rem}
+.hub-grid-3{grid-template-columns:repeat(3,1fr)}
+@media(max-width:1000px){.hub-grid-3{grid-template-columns:1fr}}
+@media(max-width:640px){.hub-more{padding:0 1rem}}

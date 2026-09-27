@@ -18,6 +18,7 @@ function loadArray(file, name) {
 // 賞ごとの設定。あとから芥川賞などを足すときは、ここに1件足してデータファイルを置く。
 const AWARDS = {
   naoki: {
+    who: '作家が選考委員を務める',
     file: 'naoki.js',
     varName: 'NAOKI',
     name: '直木賞',
@@ -29,6 +30,7 @@ const AWARDS = {
     blog: true,
   },
   akutagawa: {
+    who: '作家が選考委員を務める',
     file: 'akutagawa.js',
     varName: 'AKUTAGAWA',
     name: '芥川賞',
@@ -41,6 +43,7 @@ const AWARDS = {
   },
   // 2026-09-27〜。年1回。回と年は新潮社の一覧のとおり（第14回は2002年の表記）
   yamamoto: {
+    who: '作家が選考委員を務める',
     file: 'yamamoto.js',
     varName: 'YAMAMOTO',
     name: '山本周五郎賞',
@@ -50,6 +53,58 @@ const AWARDS = {
     source: { url: 'https://www.shinchosha.co.jp/prizes/yamamotosho/archive.html', name: '新潮社の「山本周五郎賞 過去の受賞作」', what: '受賞作・回・年' },
     listNote: 'すべての作品に短い紹介を付けました。',
     blog: false,
+  },
+  // ミステリーの賞（2026-09-27〜）。/mystery/ にまとめの入口を置く。group: 'mystery'
+  honkaku: {
+    who: '本格ミステリ作家クラブの会員が投票で選ぶ',
+    file: 'honkaku.js',
+    varName: 'HONKAKU',
+    name: '本格ミステリ大賞',
+    fullName: '本格ミステリ大賞（小説部門）',
+    kana: '本格ミステリの書き手たちが、投票で選ぶ賞',
+    lead: '本格ミステリ大賞は、本格ミステリ作家クラブが2001年に始めた賞です。会員の投票で、その年のすぐれた本格ミステリを選びます。このページでは小説部門の受賞作を載せています。',
+    source: { url: 'http://honkaku.com/taishou.html', name: '本格ミステリ作家クラブの「本格ミステリ大賞」のページ', what: '受賞作・回・年' },
+    listNote: 'すべての作品に短い紹介を付けました。',
+    group: 'mystery',
+    checkedOn: '2026年9月27日',
+  },
+  suikyo: {
+    who: 'ミステリー作家が選ぶ',
+    file: 'suikyo.js',
+    varName: 'SUIKYO',
+    name: '日本推理作家協会賞',
+    fullName: '日本推理作家協会賞（長編部門）',
+    kana: 'ミステリー作家が選ぶ、その年のすぐれた作品',
+    lead: '日本推理作家協会賞は、1948年に「探偵作家クラブ賞」として始まった、ミステリーの賞のなかでも長い歴史をもつ賞です。前年に発表された作品から毎年選ばれます。このページでは、長編（いまの「長編および連作短編集部門」）の受賞作を載せています。',
+    source: { url: 'http://www.mystery.or.jp/search/prize?prize=1', name: '日本推理作家協会の「推理作家協会賞一覧」', what: '受賞作・回・年' },
+    listNote: '第5回から第28回までは部門を分けずに選ばれていたため、この一覧には入れていません。2000年以降の作品を中心に、短い紹介を付けました。',
+    group: 'mystery',
+    checkedOn: '2026年9月27日',
+  },
+  ranpo: {
+    who: 'まだ世に出ていない原稿から選ぶ',
+    file: 'ranpo.js',
+    varName: 'RANPO',
+    name: '江戸川乱歩賞',
+    fullName: '江戸川乱歩賞',
+    kana: 'ミステリー作家への登竜門',
+    lead: '江戸川乱歩賞は、江戸川乱歩の寄付をもとに1955年に始まり、日本推理作家協会が選んでいる賞です。第3回からは、まだ発表されていない長編ミステリーを募集する新人賞になり、多くの作家がこの賞からデビューしました。第1回は中島河太郎の『探偵小説辞典』、第2回は早川書房の「ハヤカワ・ポケット・ミステリ」の刊行に贈られたため、この一覧は第3回から載せています。',
+    source: { url: 'http://www.mystery.or.jp/search/prize?prize=2', name: '日本推理作家協会の「江戸川乱歩賞一覧」', what: '受賞作・回・年' },
+    listNote: '2000年以降の作品を中心に、短い紹介を付けました。',
+    group: 'mystery',
+    checkedOn: '2026年9月27日',
+  },
+};
+
+// 賞のまとめの入口（/mystery/）。group が同じ賞を並べる
+const GROUPS = {
+  mystery: {
+    slug: 'mystery',
+    name: 'ミステリーの賞',
+    h1: 'ミステリーの賞 歴代受賞作ガイド',
+    title: 'ミステリーの賞 歴代受賞作一覧｜本格ミステリ大賞・日本推理作家協会賞・江戸川乱歩賞｜文学賞ガイド',
+    description: '本格ミステリ大賞・日本推理作家協会賞（長編）・江戸川乱歩賞の歴代受賞作をまとめました。2つ以上の賞に選ばれたミステリー、Kindle版の有無、あらすじと読者の感想も。',
+    lead: 'ミステリーの賞は、選ぶ人と選び方がそれぞれ違います。本格ミステリ作家クラブの会員が投票で選ぶ本格ミステリ大賞、ミステリー作家がその年の作品から選ぶ日本推理作家協会賞、まだ世に出ていない原稿から新人を選ぶ江戸川乱歩賞。3つの賞の受賞作を、ここから探せます。',
   },
 };
 
@@ -101,7 +156,7 @@ function buildAwardPage(key, ctx) {
   const both = winners.filter(w => honya(w)).sort((a, b) => b.kai - a.kai);
   const bothHTML = both.length ? `<section class="aw-both" id="both">
   <h2>本屋大賞でも上位に入った${A.name}受賞作</h2>
-  <p>書店員が選ぶ本屋大賞と、作家が選考委員を務める${A.name}。選ぶ人も基準も違う2つの賞で、どちらにも名前が挙がった作品です。</p>
+  <p>書店員が選ぶ本屋大賞と、${A.who || ""}${A.name}。選ぶ人も基準も違う2つの賞で、どちらにも名前が挙がった作品です。</p>
   <ul>${both.map(w => { const b = honya(w); return `<li><a href="#k${w.kai}${w.sub ? '-' + w.sub : ''}">『${esc(w.title)}』${esc(w.author)}</a>：${A.name} 第${w.kai}回／<a href="${honyaHref(b)}">${honyaLabel(b)}</a></li>`; }).join('')}</ul>
 </section>` : '';
 
@@ -112,18 +167,18 @@ function buildAwardPage(key, ctx) {
 </section>` : '';
 
   const kindleCount = winners.filter(w => w.kindleAsin).length;
-  const title = `${A.name} 歴代受賞作一覧（第1回〜第${latest.kai}回）｜Kindleで読める作品も｜文学賞ガイド`;
+  const title = `${A.name} 歴代受賞作一覧（第${first.kai}回〜第${latest.kai}回）｜Kindleで読める作品も｜文学賞ガイド`;
   const head = headHTML({
     title,
-    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の第1回（${first.half.slice(0, 4)}年）から第${latest.kai}回（${halfLabel(latest.half)}）までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
+    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の第${first.kai}回（${first.half.slice(0, 4)}年）から第${latest.kai}回（${halfLabel(latest.half)}）までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
     canonical: `${SITE}/${key}/`,
     ogTitle: `${A.name} 歴代受賞作一覧（全${winners.length}作）`,
   });
-  const crumbs = [{ label: 'ホーム', url: '/' }, { label: `${A.name} 歴代受賞作`, url: `/${key}/` }];
+  const crumbs = [{ label: 'ホーム', url: '/' }].concat(A.group ? [{ label: GROUPS[A.group].name, url: '/' + A.group + '/' }] : [], [{ label: `${A.name} 歴代受賞作`, url: `/${key}/` }]);
 
   const body = `<div class="page-h1">
   <h1>${A.name} 歴代受賞作一覧</h1>
-  <p class="page-lead">第1回（${first.half.slice(0, 4)}年）〜第${latest.kai}回（${halfLabel(latest.half)}）の全${winners.length}作。Kindle版は${kindleCount}作${both.length ? `。<a href="#both">本屋大賞とも重なる${both.length}作 ↓</a>` : ''}</p>
+  <p class="page-lead">第${first.kai}回（${first.half.slice(0, 4)}年）〜第${latest.kai}回（${halfLabel(latest.half)}）の全${winners.length}作。Kindle版は${kindleCount}作${both.length ? `。<a href="#both">本屋大賞とも重なる${both.length}作 ↓</a>` : ''}</p>
 </div>
 <nav class="year-nav aw-jump" aria-label="年代別"><span class="year-nav-label">年代</span><div class="year-nav-scroll">${jump}</div></nav>
 <main class="main aw-main">
@@ -182,7 +237,7 @@ const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.
   // 本屋大賞のカード（render.js の cardHTML）と同じ作り。書影が無いときは同じ書名・著者のプレースホルダーを出す
   const img = w.coverImg ? `<img src="${esc(w.coverImg)}" alt="『${esc(w.title)}』の表紙" loading="lazy">` : '';
   const h = w.half.match(/^(\d{4})(上|下)$/);
-  return `<article data-award="${key}" data-kindle="${w.kindleAsin ? 1 : 0}" data-sort="${parseInt(w.half, 10) + (/下/.test(w.half) ? 0.5 : 0)}" class="card aw-card${hb ? ' aw-both-card' : ''}" id="k${w.kai}${w.sub ? '-' + w.sub : ''}">
+  return `<article data-award="${key}${A.group ? ' ' + A.group : ''}" data-kindle="${w.kindleAsin ? 1 : 0}" data-sort="${parseInt(w.half, 10) + (/下/.test(w.half) ? 0.5 : 0)}" class="card aw-card${hb ? ' aw-both-card' : ''}" id="k${w.kai}${w.sub ? '-' + w.sub : ''}">
 <div class="cover-wrap">
   <div class="rank-badge rn">${ctx.showAward ? A.name + " " : ""}第${w.kai}回</div>
   <div class="year-badge">${h ? h[1] + '年' + h[2] : esc(halfLabel(w.half))}</div>
@@ -235,7 +290,7 @@ function buildWorkPage(key, w, list, ctx) {
     canonical: SITE + url,
     ogTitle: w.title + '｜' + A.name + ' 第' + w.kai + '回',
   });
-  const crumbs = [{ label: 'ホーム', url: '/' }, { label: A.name + ' 歴代受賞作', url: '/' + key + '/' }, { label: w.title, url }];
+  const crumbs = [{ label: 'ホーム', url: '/' }].concat(A.group ? [{ label: GROUPS[A.group].name, url: '/' + A.group + '/' }] : [], [{ label: A.name + ' 歴代受賞作', url: '/' + key + '/' }, { label: w.title, url }]);
   const buy = { title: w.title, author: w.author, kindleAsin: w.kindleAsin, amazonAsin: w.amazonAsin, audibleAsin: meta.audibleAsin, audible: !!meta.audibleAsin };
   const btns = '<div class="buy-buttons">'
     + (w.kindleAsin ? '<a class="btn-link btn-kindle" href="' + R.getAmazonKindleLink(buy) + '" target="_blank" rel="noopener">📱 Kindle版</a>' : '')
@@ -305,4 +360,63 @@ function crossRefs(ROOT) {
   return map;
 }
 
-module.exports = { AWARDS, buildAwardPage, buildWorkPages, crossRefs, awardCardHTML, loadArray };
+function buildGroupPage(gkey, ctx) {
+  const G = GROUPS[gkey];
+  const { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, SITE, BOOKS, hasBookPage, bookPageUrl } = ctx;
+  const keys = Object.keys(AWARDS).filter(k => AWARDS[k].group === gkey);
+  const lists = Object.fromEntries(keys.map(k => [k, loadArray(path.join(ctx.ROOT, AWARDS[k].file), AWARDS[k].varName)]));
+  const cv = u => (u || '').replace(/zoom=\d/, 'zoom=1');
+  const href = (k, w) => hasWorkPage(k, w, ctx.ROOT) ? workPageUrl(k, w) : '/' + k + '/#k' + workSlug(w);
+  const panels = keys.map(k => {
+    const A = AWARDS[k], L = lists[k].filter(w => w.title);
+    const top = Math.max(...L.map(w => w.kai));
+    const lw = L.filter(w => w.kai === top)[0];
+    const first = L.reduce((a, b) => (b.kai < a.kai ? b : a));
+    return `<section class="hub-panel"><h2><a href="/${k}/">${A.name}</a></h2><p class="hub-who">${esc(A.kana)}</p><a class="hub-latest" href="${href(k, lw)}">${lw.coverImg ? `<img src="${esc(cv(lw.coverImg))}" alt="『${esc(lw.title)}』の表紙">` : `<span class="hub-ph"><span>${esc(lw.title)}</span></span>`}<span class="hub-latest-txt"><span class="hub-latest-label">第${lw.kai}回（${lw.half}年）</span><span class="hub-latest-title">${esc(lw.title)}</span><span class="hub-latest-author">${esc(lw.author)}</span></span></a><p class="hub-count">第${first.kai}回〜第${top}回　受賞${L.length}作</p><p class="hub-main"><a href="/${k}/">${A.name}の一覧を見る →</a></p></section>`;
+  }).join('');
+  // 2つ以上の賞に選ばれた作品：このグループの賞どうし、またはほかの賞（本屋大賞・直木賞など）と重なるもの
+  const multi = [];
+  keys.forEach(k => lists[k].filter(w => w.title && (w.also || w.honya)).forEach(w => {
+    const labels = [AWARDS[k].name + ' 第' + w.kai + '回'];
+    (w.also || []).forEach(x => labels.push(AWARDS[x.key].name + ' 第' + x.kai + '回'));
+    let link = href(k, w);
+    if (w.also) link = otherHref(w.also[0], ctx.ROOT);
+    if (w.honya) { const b = BOOKS.find(b => b.year === w.honya.year && b.rank === w.honya.rank); if (b) { labels.push(b.year + '年本屋大賞 ' + (b.rank === 1 ? '大賞' : b.rank + '位')); link = hasBookPage(b) ? bookPageUrl(b) : '/year/' + b.year + '/#r' + b.rank; } }
+    multi.push({ w, labels, link, y: parseInt(w.half, 10) });
+  }));
+  const seen = new Set();
+  const multiList = multi.sort((a, b) => b.y - a.y).filter(m => { const t = m.w.title.normalize('NFKC'); if (seen.has(t)) return false; seen.add(t); return true; });
+  const multiHTML = multiList.length ? `<section class="aw-both" id="multi">
+  <h2>2つ以上の賞に選ばれたミステリー</h2>
+  <p>選ぶ人も基準も違う賞で、どちらにも選ばれた作品です。迷ったときの一冊目に。</p>
+  <ul>${multiList.map(m => `<li><a href="${m.link}">『${esc(m.w.title)}』${esc(m.w.author)}</a>：${m.labels.map(esc).join('／')}</li>`).join('')}</ul>
+</section>` : '';
+  const head = headHTML({ title: G.title, description: G.description, canonical: SITE + '/' + G.slug + '/', ogTitle: G.h1 });
+  const crumbs = [{ label: 'ホーム', url: '/' }, { label: G.name, url: '/' + G.slug + '/' }];
+  const body = `<div class="page-h1">
+  <h1>${G.h1}</h1>
+  <p class="page-lead">${G.lead}</p>
+</div>
+<main class="main aw-main">
+<div class="hub-grid hub-grid-3">${panels}</div>
+${multiHTML}
+<section class="aw-about">
+  <h2>3つの賞の違い</h2>
+  ${keys.map(k => `<p><strong><a href="/${k}/">${AWARDS[k].name}</a></strong>　${AWARDS[k].lead}</p>`).join('\n  ')}
+</section>
+<p class="aw-source">受賞作は、${keys.map(k => `<a href="${AWARDS[k].source.url}" target="_blank" rel="noopener">${AWARDS[k].source.name}</a>`).join('、')}で確かめました（2026年9月27日）。</p>
+</main>`;
+  const header = `<header>
+  <div class="hdr-inner">
+    <div class="hdr-kana">本格ミステリ大賞・日本推理作家協会賞・江戸川乱歩賞</div>
+    <div class="site-title"><a href="/${G.slug}/">${G.name} <span>歴代受賞作ガイド</span></a></div>
+  </div>
+</header>`;
+  const html = pageShell({ header, head, breadcrumb: breadcrumbHTML(crumbs), jsonLd: breadcrumbJsonLd(crumbs), body });
+  fs.mkdirSync(path.join(ctx.ROOT, G.slug), { recursive: true });
+  fs.writeFileSync(path.join(ctx.ROOT, G.slug, 'index.html'), html);
+  console.log(G.slug + '/: ' + keys.length + '賞、2つ以上の賞 ' + multiList.length + '作');
+  return SITE + '/' + G.slug + '/';
+}
+
+module.exports = { GROUPS, buildGroupPage,  AWARDS, buildAwardPage, buildWorkPages, crossRefs, awardCardHTML, loadArray };
