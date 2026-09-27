@@ -53,7 +53,7 @@ const AFFILIATE_DISCLOSURE = `<div class="affiliate">
   Amazonのアソシエイトとして、文学賞ガイドは適格販売により収入を得ています。
 </div>`;
 
-const FOOTER = `<footer>© 2026 文学賞ガイド（本屋大賞・直木賞・芥川賞）</footer>`;
+const FOOTER = `<footer>© 2026 文学賞ガイド（本屋大賞・直木賞・芥川賞・山本周五郎賞・ミステリーの賞）</footer>`;
 
 function esc(s) {
   return String(s == null ? '' : s)
