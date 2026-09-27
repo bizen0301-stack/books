@@ -24,6 +24,9 @@ const AWARDS = {
     fullName: '直木三十五賞',
     kana: '作家が選ぶ、エンターテインメント小説の賞',
     lead: '直木賞（直木三十五賞）は、日本文学振興会が年に2回選ぶ文学賞です。新進・中堅の作家によるエンターテインメント作品の単行本が対象です。',
+    source: { url: 'https://bungakushinko.or.jp/award/naoki/list.html', name: '日本文学振興会の受賞者一覧', what: '受賞作・回・出版社（掲載誌）' },
+    listNote: '2000年以降の作品には短い紹介を付けました。',
+    blog: true,
   },
   akutagawa: {
     file: 'akutagawa.js',
@@ -32,12 +35,28 @@ const AWARDS = {
     fullName: '芥川龍之介賞',
     kana: '新人の純文学に贈られる賞',
     lead: '芥川賞（芥川龍之介賞）は、日本文学振興会が年に2回選ぶ文学賞です。雑誌に発表された、新進作家による純文学の中編・短編が対象です。',
+    source: { url: 'https://bungakushinko.or.jp/award/akutagawa/list.html', name: '日本文学振興会の受賞者一覧', what: '受賞作・回・出版社（掲載誌）' },
+    listNote: '2000年以降の作品には短い紹介を付けました。',
+    blog: true,
+  },
+  // 2026-09-27〜。年1回。回と年は新潮社の一覧のとおり（第14回は2002年の表記）
+  yamamoto: {
+    file: 'yamamoto.js',
+    varName: 'YAMAMOTO',
+    name: '山本周五郎賞',
+    fullName: '山本周五郎賞',
+    kana: '「物語」の面白さに贈られる賞',
+    lead: '山本周五郎賞は、新潮文芸振興会が主催し、1988年から年に1回選ばれている文学賞です。すぐれた物語性をもつ小説・文芸書が対象で、ミステリーや時代小説、恋愛小説まで幅広い作品が受賞しています。',
+    source: { url: 'https://www.shinchosha.co.jp/prizes/yamamotosho/archive.html', name: '新潮社の「山本周五郎賞 過去の受賞作」', what: '受賞作・回・年' },
+    listNote: 'すべての作品に短い紹介を付けました。',
+    blog: false,
   },
 };
 
 function halfLabel(h) {
   // 公式一覧の「2026上」→「2026年上半期」
   const m = String(h).match(/^(\d{4})(上|下)$/);
+  if (/^\d{4}$/.test(String(h))) return h + '年';
   return m ? `${m[1]}年${m[2]}半期` : h;
 }
 
@@ -86,11 +105,17 @@ function buildAwardPage(key, ctx) {
   <ul>${both.map(w => { const b = honya(w); return `<li><a href="#k${w.kai}${w.sub ? '-' + w.sub : ''}">『${esc(w.title)}』${esc(w.author)}</a>：${A.name} 第${w.kai}回／<a href="${honyaHref(b)}">${honyaLabel(b)}</a></li>`; }).join('')}</ul>
 </section>` : '';
 
+  const dbl = winners.filter(w => w.also).sort((a, b) => b.kai - a.kai);
+  const dblHTML = dbl.length ? `<section class="aw-both" id="double">
+  <h2>${dbl.map(w => AWARDS[w.also[0].key].name).filter((x, i, a) => a.indexOf(x) === i).join('・')}とダブル受賞した${A.name}受賞作</h2>
+  <ul>${dbl.map(w => w.also.map(x => `<li><a href="#k${workSlug(w)}">『${esc(w.title)}』${esc(w.author)}</a>：${A.name} 第${w.kai}回／<a href="${otherHref(x, ctx.ROOT)}">${AWARDS[x.key].name} 第${x.kai}回</a></li>`).join('')).join('')}</ul>
+</section>` : '';
+
   const kindleCount = winners.filter(w => w.kindleAsin).length;
   const title = `${A.name} 歴代受賞作一覧（第1回〜第${latest.kai}回）｜Kindleで読める作品も｜文学賞ガイド`;
   const head = headHTML({
     title,
-    description: `${A.name}（${A.fullName}）の第1回（${first.half.slice(0, 4)}年）から第${latest.kai}回（${halfLabel(latest.half)}）までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品がひと目で分かります。`,
+    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の第1回（${first.half.slice(0, 4)}年）から第${latest.kai}回（${halfLabel(latest.half)}）までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
     canonical: `${SITE}/${key}/`,
     ogTitle: `${A.name} 歴代受賞作一覧（全${winners.length}作）`,
   });
@@ -104,12 +129,13 @@ function buildAwardPage(key, ctx) {
 <main class="main aw-main">
 ${sections}
 ${bothHTML}
+${dblHTML}
 <section class="aw-about">
   <h2>${A.name}とは</h2>
-  <p>${A.lead}このページでは、受賞作を新しい順に年代ごとに並べています（受賞作なしの回が${none}回あります）。2000年以降の作品には短い紹介を付けました。</p>
+  <p>${A.lead}このページでは、受賞作を新しい順に年代ごとに並べています${none ? `（受賞作なしの回が${none}回あります）` : ''}。${A.listNote}</p>
 </section>
-<div class="blog-crosslink">📖 ブログ「あの空の下」に、本屋大賞と直木賞・芥川賞の両方に選ばれた12作を紹介した記事があります → <a href="https://soranoshita.com/2026/09/25/honya-taisho-naoki-akutagawa/">読む</a></div>
-<p class="aw-source">受賞作・回・出版社（掲載誌）は、主催する<a href="https://bungakushinko.or.jp/award/${key}/list.html" target="_blank" rel="noopener">日本文学振興会の受賞者一覧</a>で確かめました（${ctx.checkedOn}）。Kindle版の有無は同じ日にAmazonで確認したもので、変わることがあります。</p>
+${A.blog ? '<div class="blog-crosslink">📖 ブログ「あの空の下」に、本屋大賞と直木賞・芥川賞の両方に選ばれた12作を紹介した記事があります → <a href="https://soranoshita.com/2026/09/25/honya-taisho-naoki-akutagawa/">読む</a></div>' : ''}
+<p class="aw-source">${A.source.what}は、<a href="${A.source.url}" target="_blank" rel="noopener">${A.source.name}</a>で確かめました（${A.checkedOn || ctx.checkedOn}）。Kindle版の有無は同じ日にAmazonで確認したもので、変わることがあります。</p>
 </main>`;
 
   const itemList = {
@@ -159,12 +185,12 @@ const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.
   return `<article data-award="${key}" data-kindle="${w.kindleAsin ? 1 : 0}" data-sort="${parseInt(w.half, 10) + (/下/.test(w.half) ? 0.5 : 0)}" class="card aw-card${hb ? ' aw-both-card' : ''}" id="k${w.kai}${w.sub ? '-' + w.sub : ''}">
 <div class="cover-wrap">
   <div class="rank-badge rn">${ctx.showAward ? A.name + " " : ""}第${w.kai}回</div>
-  <div class="year-badge">${h ? h[1] + '年' + h[2] : esc(w.half)}</div>
+  <div class="year-badge">${h ? h[1] + '年' + h[2] : esc(halfLabel(w.half))}</div>
   <div class="placeholder"><span class="placeholder-title">${esc(w.title)}</span><span class="placeholder-author">${esc(w.author)}</span></div>
   ${img}
 </div>
 <div class="card-body">
-  ${hb ? `<div class="tag-container"><a class="genre-badge aw-honya-badge" href="${honyaHref(hb)}">${honyaLabel(hb)}</a></div>` : ''}
+  ${hb || w.also || alsoOf(key, w, ctx.ROOT).length ? `<div class="tag-container">${hb ? `<a class="genre-badge aw-honya-badge" href="${honyaHref(hb)}">${honyaLabel(hb)}</a>` : ''}${(w.also || []).map(x => `<a class="genre-badge aw-honya-badge" href="${otherHref(x, ctx.ROOT)}">${AWARDS[x.key].name} 第${x.kai}回</a>`).join('')}${alsoOf(key, w, ctx.ROOT).map(x => `<a class="genre-badge aw-honya-badge" href="${x.href}">${x.label}</a>`).join('')}</div>` : ''}
   <div class="book-title">${ctx.ROOT && hasWorkPage(key, w, ctx.ROOT) ? `<a href="${workPageUrl(key, w)}">${esc(w.title)}</a>` : esc(w.title)}</div>
   <div class="book-author">${esc(w.author)} 著${w.pub ? `（${esc(w.pub)}）` : ''}</div>
   ${w.note ? `<p class="synopsis">${esc(w.note)}</p>` : ''}
@@ -177,7 +203,23 @@ const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.
 function workSlug(w) { return String(w.kai) + (w.sub ? '-' + w.sub : ''); }
 function workContentPath(key, w, ROOT) { return path.join(ROOT, 'content', key + '-' + workSlug(w) + '.md'); }
 function workPageUrl(key, w) { return '/' + key + '/' + workSlug(w) + '/'; }
-function hasWorkPage(key, w, ROOT) { return !!w.title && !w.honya && fs.existsSync(workContentPath(key, w, ROOT)); }
+function hasWorkPage(key, w, ROOT) { return !!w.title && !w.honya && !w.also && fs.existsSync(workContentPath(key, w, ROOT)); }
+// also の相手（例: 直木賞 第169回）へのリンク。作品ページがあればそちら
+function otherHref(x, ROOT) {
+  const ow = loadArray(path.join(ROOT, AWARDS[x.key].file), AWARDS[x.key].varName).find(o => o.kai === x.kai && (o.sub || 0) === (x.sub || 0));
+  return ow && ROOT && hasWorkPage(x.key, ow, ROOT) ? workPageUrl(x.key, ow) : '/' + x.key + '/#k' + x.kai + (x.sub ? '-' + x.sub : '');
+}
+// 逆向き：ほかの賞の also がこの作品を指しているもの（直木賞のカードに「山本周五郎賞 第36回」を出す）
+function alsoOf(key, w, ROOT) {
+  if (!ROOT) return [];
+  const out = [];
+  Object.entries(AWARDS).forEach(([k, A]) => {
+    if (k === key) return;
+    loadArray(path.join(ROOT, A.file), A.varName).filter(o => (o.also || []).some(x => x.key === key && x.kai === w.kai && (x.sub || 0) === (w.sub || 0)))
+      .forEach(o => out.push({ label: A.name + ' 第' + o.kai + '回', href: '/' + k + '/#k' + workSlug(o) }));
+  });
+  return out;
+}
 
 function buildWorkPage(key, w, list, ctx) {
   const A = AWARDS[key];
@@ -206,7 +248,7 @@ function buildWorkPage(key, w, list, ctx) {
     : '<div class="book-cover-ph"><span>' + esc(w.title) + '</span></div>';
   const parts = [];
   parts.push('<div class="book-hero"><div class="book-cover">' + cover + '</div><div class="book-info">'
-    + '<div class="book-award"><a href="/' + key + '/#k' + workSlug(w) + '">' + A.name + ' ' + esc(round) + '</a></div>'
+    + '<div class="book-award"><a href="/' + key + '/#k' + workSlug(w) + '">' + A.name + ' ' + esc(round) + '</a>' + alsoOf(key, w, ctx.ROOT).map(x => '　／　<a href="' + x.href + '">' + esc(x.label) + '</a>受賞').join('') + '</div>'
     + '<h1>' + esc(w.title) + '</h1>'
     + '<div class="book-meta">' + esc(w.author) + ' 著' + (w.pub ? '　／　' + esc(w.pub) : '') + '</div>'
     + (w.note ? '<p class="book-synopsis">' + esc(w.note) + '</p>' : '')
@@ -227,7 +269,7 @@ function buildWorkPage(key, w, list, ctx) {
     + (meta.audibleAsin ? '<p class="book-more"><a href="' + R.getAmazonAudibleLink(buy) + '" target="_blank" rel="noopener">Audible版『' + esc(w.title) + '』をAmazonで見る →</a></p>' : '') + '</section>');
   const mentioned = sec('こんなところでも紹介されています');
   if (mentioned && mentioned.text) parts.push('<section class="book-section book-mentioned"><h2>こんなところでも紹介されています</h2>' + blockMd(mentioned.text) + '</section>');
-  parts.push('<p class="aw-source">受賞の回・出版社（掲載誌）は<a href="https://bungakushinko.or.jp/award/' + key + '/list.html" target="_blank" rel="noopener">日本文学振興会の受賞者一覧</a>によります。感想のまとめは' + esc(meta.researched || '') + 'に確認したものです。</p>');
+  parts.push('<p class="aw-source">' + A.source.what + 'は<a href="' + A.source.url + '" target="_blank" rel="noopener">' + A.source.name + '</a>によります。感想のまとめは' + esc(meta.researched || '') + 'に確認したものです。</p>');
   const body = '<div class="book-page">\n' + parts.join('\n') + '\n</div>';
   const bookJsonLd = { '@context': 'https://schema.org', '@type': 'Book', name: w.title, author: { '@type': 'Person', name: w.author }, url: SITE + url };
   if (w.isbn) bookJsonLd.isbn = w.isbn;

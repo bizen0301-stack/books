@@ -40,7 +40,7 @@ function items(g, ctx) {
   Object.keys(AW.AWARDS).forEach(key => {
     const A = AW.AWARDS[key];
     AW.loadArray(path.join(ctx.ROOT, A.file), A.varName)
-      .filter(w => w.title && w.genre === g.slug && !w.honya)
+      .filter(w => w.title && w.genre === g.slug && !w.honya && !w.also)
       .forEach(w => out.push({ sort: parseInt(w.half, 10) + (/下/.test(w.half) ? 0.5 : 0), html: AW.awardCardHTML(w, key, Object.assign({}, ctx, { showAward: true })) }));
   });
   return out.sort((a, b) => b.sort - a.sort);
@@ -60,19 +60,19 @@ function buildGenrePages(ctx) {
     const list = all[g.slug];
     const n = list.length;
     const head = headHTML({
-      title: `${g.label}のおすすめ小説 ${n}冊｜本屋大賞・直木賞・芥川賞から｜文学賞ガイド`,
-      description: `本屋大賞・直木賞・芥川賞の受賞作とノミネート作から、${g.label}（${g.desc}）の小説${n}冊を新しい順に。Kindle版の有無、あらすじつきで探せます。`,
+      title: `${g.label}のおすすめ小説 ${n}冊｜本屋大賞・直木賞・芥川賞・山本周五郎賞から｜文学賞ガイド`,
+      description: `本屋大賞・直木賞・芥川賞・山本周五郎賞の受賞作とノミネート作から、${g.label}（${g.desc}）の小説${n}冊を新しい順に。Kindle版の有無、あらすじつきで探せます。`,
       canonical: `${SITE}/genre/${g.slug}/`,
       ogTitle: `${g.label}のおすすめ小説 ${n}冊｜文学賞ガイド`,
     });
     const crumbs = [{ label: 'ホーム', url: '/' }, { label: g.label, url: `/genre/${g.slug}/` }];
     const body = `<div class="page-h1">
   <h1>${esc(g.label)}のおすすめ小説</h1>
-  <p class="page-lead">${esc(g.desc)}。本屋大賞・直木賞・芥川賞から${n}冊を新しい順に並べました。</p>
+  <p class="page-lead">${esc(g.desc)}。本屋大賞・直木賞・芥川賞・山本周五郎賞から${n}冊を新しい順に並べました。</p>
 </div>
 ${navHTML(g.slug, counts)}
 <div class="flt" id="flt">
-  <div class="flt-row"><span class="flt-l">賞</span><button class="chip on" data-f="all">すべて</button><button class="chip" data-f="honya">本屋大賞</button><button class="chip" data-f="naoki">直木賞</button><button class="chip" data-f="akutagawa">芥川賞</button></div>
+  <div class="flt-row"><span class="flt-l">賞</span><button class="chip on" data-f="all">すべて</button><button class="chip" data-f="honya">本屋大賞</button><button class="chip" data-f="naoki">直木賞</button><button class="chip" data-f="akutagawa">芥川賞</button><button class="chip" data-f="yamamoto">山本周五郎賞</button></div>
   <div class="flt-row"><span class="flt-l">条件</span><button class="chip" data-k="1">Kindle版あり</button><span class="flt-count" id="flt-count">${n}冊</span></div>
 </div>
 <main class="main">

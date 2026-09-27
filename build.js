@@ -131,7 +131,7 @@ ${head}
 ${jsonLdBlocks}
 </head>
 <body id="top">
-<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/yamamoto/">山本周五郎賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 ${header || miniHeaderHTML()}
 ${breadcrumb}
 ${body}
@@ -569,23 +569,25 @@ function injectYearNav(html) {
 
 function hubHTML() {
   const load = (f, n) => AW.loadArray(path.join(ROOT, f), n);
-  const N = load('naoki.js', 'NAOKI'), A = load('akutagawa.js', 'AKUTAGAWA');
+  const N = load('naoki.js', 'NAOKI'), A = load('akutagawa.js', 'AKUTAGAWA'), Y = load('yamamoto.js', 'YAMAMOTO');
   const cv = u => (u || '').replace(/zoom=\d/, 'zoom=1').replace('&edge=curl', '');
   const latestOf = list => { const k = Math.max(...list.map(w => w.kai)); return list.filter(w => w.kai === k && w.title); };
   const h1 = BOOKS.find(b => b.year === MAX_YEAR && b.rank === 1);
   const half = h => { const m = String(h).match(/^(\d{4})(上|下)$/); return m ? `${m[1]}年${m[2]}半期` : h; };
   const latestHTML = (img, label, title, author, href) => `<a class="hub-latest" href="${href}">${img ? `<img src="${esc(img)}" alt="『${esc(title)}』の表紙">` : `<span class="hub-ph"><span>${esc(title)}</span></span>`}<span class="hub-latest-txt"><span class="hub-latest-label">${label}</span><span class="hub-latest-title">${esc(title)}</span><span class="hub-latest-author">${esc(author)}</span></span></a>`;
   const panel = (name, who, latest, count, href, sub) => `<section class="hub-panel"><h2><a href="${href}">${name}</a></h2><p class="hub-who">${who}</p>${latest}<p class="hub-count">${count}</p><p class="hub-main"><a href="${href}">${name}の一覧を見る →</a></p><p class="hub-sub">${sub}</p></section>`;
-  const nl = latestOf(N)[0], al = latestOf(A)[0];
+  const nl = latestOf(N)[0], al = latestOf(A)[0], yl = latestOf(Y)[0];
   const decadeLinks = key => [2020, 2010, 2000].map(d => `<a href="/${key}/#d${d}">${d}年代</a>`).join('');
   const panels = [
     panel('本屋大賞', '書店員が選ぶ', latestHTML(cv(h1.coverImg), `${h1.year}年 大賞`, h1.title, h1.author, hasBookPage(h1) ? bookPageUrl(h1) : `/year/${h1.year}/`), `2004年〜${MAX_YEAR}年　全${BOOKS.length}作（ノミネートを含む）`, '#honya', '年別：' + YEARS.slice(0, 3).map(y => `<a href="/year/${y}/">${y}</a>`).join('') + '…'),
     panel('直木賞', '作家が選ぶ・エンタメ小説', latestHTML(cv(nl.coverImg), `第${nl.kai}回（${half(nl.half)}）`, nl.title, nl.author, `/naoki/#k${nl.kai}`), `第1回〜第${nl.kai}回　受賞${N.filter(w => w.title).length}作`, '/naoki/', '年代別：' + decadeLinks('naoki') + '…'),
     panel('芥川賞', '作家が選ぶ・純文学の新人', latestHTML(cv(al.coverImg), `第${al.kai}回（${half(al.half)}）`, al.title, al.author, `/akutagawa/#k${al.kai}`), `第1回〜第${al.kai}回　受賞${A.filter(w => w.title).length}作`, '/akutagawa/', '年代別：' + decadeLinks('akutagawa') + '…'),
+    panel('山本周五郎賞', '作家が選ぶ・物語の面白さ', latestHTML(cv(yl.coverImg), `第${yl.kai}回（${yl.half}年）`, yl.title, yl.author, `/yamamoto/#k${yl.kai}`), `第1回〜第${yl.kai}回　受賞${Y.filter(w => w.title).length}作`, '/yamamoto/', '年代別：' + decadeLinks('yamamoto') + '…'),
   ].join('');
   const genres = GN.GENRES.map(g => `<a class="genre-tile" href="/genre/${g.slug}/"><span class="gt-name">${g.label}</span><span class="gt-desc">${g.desc}</span><span class="gt-count">${GENRE_INFO.counts[g.slug] || 0}冊</span></a>`).join('');
-  const both = BOOKS.filter(b => b.otherAwards).sort((a, b) => b.year - a.year);
-  const strip = both.map(b => `<a href="${hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.rank}`}"><span class="hs-img">${b.coverImg ? `<img src="${esc(cv(b.coverImg))}" alt="『${esc(b.title)}』の表紙" loading="lazy">` : ''}</span><span class="hs-t">${esc(b.title)}</span><span class="hs-a">${b.otherAwards.map(x => x.label.replace(/ 第\d+回/, '')).join('・')}</span></a>`).join('');
+  const na = b => (b.otherAwards || []).filter(x => /^\/(naoki|akutagawa)\//.test(x.href));
+  const both = BOOKS.filter(b => na(b).length).sort((a, b) => b.year - a.year);
+  const strip = both.map(b => `<a href="${hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.rank}`}"><span class="hs-img">${b.coverImg ? `<img src="${esc(cv(b.coverImg))}" alt="『${esc(b.title)}』の表紙" loading="lazy">` : ''}</span><span class="hs-t">${esc(b.title)}</span><span class="hs-a">${na(b).map(x => x.label.replace(/ 第\d+回/, '')).join('・')}</span></a>`).join('');
   return `<div class="sec-h"><h2>賞で探す</h2></div>
 <div class="hub-grid">${panels}</div>
 <div class="sec-h" id="genres"><h2>ジャンルで探す</h2></div>
