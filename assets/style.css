@@ -413,3 +413,7 @@ body{overflow-anchor:none;}
 .hub-grid{grid-template-columns:repeat(4,1fr)}
 @media(max-width:1000px){.hub-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:640px){.hub-grid{grid-template-columns:1fr}}
+@media(max-width:640px){
+  .nav-top-row,.topbar-inner{flex-wrap:wrap}
+  .nav-top-row .topbar-awards,.topbar-inner .topbar-awards{order:9;flex:1 0 100%;margin:.35rem 0 0}
+}
