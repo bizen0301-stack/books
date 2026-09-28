@@ -433,3 +433,4 @@ body{overflow-anchor:none;}
 .nom-note a{color:var(--red);}
 .nom-table td.nom-links{white-space:nowrap;}
 .nom-links a{display:block;color:var(--red);font-weight:700;text-decoration:underline;font-size:12.5px;line-height:2;}
+.book-section h3.nom-year{font-size:14px;margin:1.2rem 0 .4rem;color:var(--ink);}

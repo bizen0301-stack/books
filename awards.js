@@ -116,7 +116,25 @@ AWARDS.manga = {
 // --- ノミネート作（マンガ大賞、2026-09-28〜） ---
 // 同じ作品を年をまたいで数えるための名前。表記ゆれは ALIAS で寄せる
 const NOM_ALIAS = { 'とめはねっ!鈴里高校書道部': 'とめはねっ!' };
-function nomKey(t) { const k = String(t).normalize('NFKC').replace(/[s　~～]/g, ''); return NOM_ALIAS[k] || k; }
+function nomKey(t) { const k = String(t).normalize('NFKC').replace(/[\s　~～]/g, ''); return NOM_ALIAS[k] || k; }
+// ノミネート作の作品ページ（2026-09-28〜）。作品ごとに1ページで、URL は最初にノミネートされた年と順位（/manga/2016-2/）。
+// 同率で重なるときは、その行に slug を書く。ページの元は content/manga-n-{slug}.md、書誌（isbn・ASIN・書影・紹介）は最初の年の行に書く
+function nomSlug(n) { return n.slug || n.year + '-' + n.rank; }
+function nomPageUrl(key, n) { return '/' + key + '/' + nomSlug(n) + '/'; }
+function nomContentPath(key, n, ROOT) { return path.join(ROOT, 'content', key + '-n-' + nomSlug(n) + '.md'); }
+// 作品ごとの最初のノミネート行のうち、content がそろっているもの
+function nomineePages(key, ROOT) {
+  const all = loadNominees(key, ROOT);
+  const winners = new Set(loadArray(path.join(ROOT, AWARDS[key].file), AWARDS[key].varName).filter(w => w.title).map(w => nomKey(w.title)));
+  const firsts = {};
+  all.slice().sort((a, b) => a.year - b.year).forEach(n => { const k = nomKey(n.title); if (!firsts[k] && !winners.has(k)) firsts[k] = n; });
+  return Object.values(firsts).filter(n => fs.existsSync(nomContentPath(key, n, ROOT)));
+}
+// ある作品（タイトル）のノミネート作ページ。無ければ null
+function nomPageFor(key, title, ROOT) {
+  const p = nomineePages(key, ROOT).find(n => nomKey(n.title) === nomKey(title));
+  return p ? nomPageUrl(key, p) : null;
+}
 function loadNominees(key, ROOT) {
   const A = AWARDS[key];
   return A.nominees ? loadArray(path.join(ROOT, A.nominees.file), A.nominees.varName) : [];
@@ -145,7 +163,8 @@ function nomineeTableHTML(key, year, ctx) {
     if (win) notes.push('<a href="' + (hasWorkPage(key, win.w, ctx.ROOT) ? workPageUrl(key, win.w) : '/' + key + '/#k' + workSlug(win.w)) + '">' + win.year + '年に大賞</a>');
     if (other.length) notes.push('ほかに' + other.join('・') + 'でノミネート');
     const b = { title: n.title, author: n.author };
-    return '<tr><td class="nom-rank">' + n.rank + '位</td><td><span class="nom-title">' + esc(n.title) + '</span><br><span class="nom-author">' + esc(n.author) + '</span>' + (notes.length ? '<br><span class="nom-note">' + notes.join('／') + '</span>' : '') + '</td>'
+    const pg = nomPageFor(key, n.title, ctx.ROOT);
+    return '<tr><td class="nom-rank">' + n.rank + '位</td><td><span class="nom-title">' + (pg ? '<a href="' + pg + '">' + esc(n.title) + '</a>' : esc(n.title)) + '</span><br><span class="nom-author">' + esc(n.author) + '</span>' + (notes.length ? '<br><span class="nom-note">' + notes.join('／') + '</span>' : '') + '</td>'
       + '<td class="nom-links"><a href="' + R.getAmazonKindleLink(b) + '" target="_blank" rel="noopener">Kindle</a><a href="' + R.getRakutenLink(n.title, n.author, null) + '" target="_blank" rel="noopener">楽天</a></td></tr>';
   }).join('');
   const src = year === 2026 && A.nominees.source2026 ? A.nominees.source2026 : A.source;
@@ -419,6 +438,69 @@ function buildWorkPage(key, w, list, ctx) {
   return pageShell({ header, head, breadcrumb: breadcrumbHTML(crumbs), jsonLd: breadcrumbJsonLd(crumbs), extraJsonLd: bookJsonLd, body });
 }
 
+// ノミネート作の作品ページ。作りは大賞作のページ（buildWorkPage）とそろえ、「運営者の視点」は置かない
+function buildNomineePage(key, n, ctx) {
+  const A = AWARDS[key];
+  const { esc, headHTML, pageShell, breadcrumbHTML, breadcrumbJsonLd, R, SITE, parseContent, blockMd } = ctx;
+  const md = fs.readFileSync(nomContentPath(key, n, ctx.ROOT), 'utf8').replace(/\r\n/g, '\n');
+  const { meta, sections } = parseContent(md);
+  const sec = name => sections.find(s => s.title === name);
+  const url = nomPageUrl(key, n);
+  const hist = nomHistory(key, ctx.ROOT)[nomKey(n.title)].filter(x => x.rank !== 1);
+  const label = hist.map(x => A.name + x.year + ' ' + x.rank + '位').join('、');
+  const short = hist.map(x => x.year + '年' + x.rank + '位').join('・');
+  const winners = loadArray(path.join(ctx.ROOT, A.file), A.varName).filter(w => w.title);
+  const head = headHTML({
+    title: n.title + '（' + n.author + '）あらすじ・感想｜' + A.name + ' ノミネート作（' + short + '）｜文学賞ガイド',
+    description: label + 'のノミネート作『' + n.title + '』（' + n.author + '）。あらすじ、読者の受け止め方、分かれる点。Kindle・楽天ブックスへのリンク付き。',
+    canonical: SITE + url,
+    ogTitle: n.title + '｜' + A.name + ' ノミネート作',
+  });
+  const crumbs = [{ label: 'ホーム', url: '/' }, { label: A.name + ' 歴代受賞作', url: '/' + key + '/' }, { label: n.title, url }];
+  const buy = { title: n.title, author: n.author, kindleAsin: n.kindleAsin, amazonAsin: n.amazonAsin, audibleAsin: meta.audibleAsin, audible: !!meta.audibleAsin };
+  const btns = '<div class="buy-buttons">'
+    + (n.noKindle ? '' : '<a class="btn-link btn-kindle" href="' + R.getAmazonKindleLink(buy) + '" target="_blank" rel="noopener">📱 Kindle版</a>')
+    + '<a class="btn-link btn-rakuten" href="' + R.getRakutenLink(n.title, n.author, null) + '" target="_blank" rel="noopener">🔴 楽天ブックス</a>'
+    + (meta.audibleAsin ? '<a class="btn-link btn-audible" href="' + R.getAmazonAudibleLink(buy) + '" target="_blank" rel="noopener">🎧 Audible版</a>' : '')
+    + '<a class="btn-link btn-paper" href="' + R.getAmazonPaperLink(buy) + '" target="_blank" rel="noopener">📖 ' + (n.amazonAsin ? '紙の本' : 'Amazonで探す') + '</a>'
+    + '</div>';
+  const cover = n.coverImg ? '<img src="' + esc(n.coverImg) + '" alt="' + esc(n.title) + '">' : '<div class="book-cover-ph"><span>' + esc(n.title) + '</span></div>';
+  const winPage = y => { const w = winners.find(x => +x.kai === y); return w ? (hasWorkPage(key, w, ctx.ROOT) ? workPageUrl(key, w) : '/' + key + '/#k' + workSlug(w)) : '/' + key + '/'; };
+  const parts = [];
+  parts.push('<div class="book-hero"><div class="book-cover">' + cover + '</div><div class="book-info">'
+    + '<div class="book-award">' + hist.map(x => '<a href="' + winPage(x.year) + '#nominees">' + A.name + x.year + ' ' + x.rank + '位</a>').join('　／　') + '（ノミネート）</div>'
+    + '<h1>' + esc(n.title) + '</h1>'
+    + '<div class="book-meta">' + esc(n.author) + ' 著' + (n.pub ? '　／　' + esc(n.pub) : '') + '</div>'
+    + (n.note ? '<p class="book-synopsis">' + esc(n.note) + '</p>' : '')
+    + btns + '</div></div>');
+  [['読者の受け止め方'], ['分かれる点'], ['著者が語っていること']].forEach(([name]) => {
+    const x = sec(name);
+    if (x && x.text) parts.push('<section class="book-section"><h2>' + name + '</h2>' + blockMd(x.text) + '</section>');
+  });
+  // 同じ年の大賞作と、ほかのノミネート作
+  const yearsHTML = hist.map(x => {
+    const w = winners.find(v => +v.kai === x.year);
+    const others = loadNominees(key, ctx.ROOT).filter(o => o.year === x.year && nomKey(o.title) !== nomKey(n.title)).sort((a, b) => a.rank - b.rank);
+    const li = o => { const pg = nomPageFor(key, o.title, ctx.ROOT); return '<li>' + o.rank + '位　' + (pg ? '<a href="' + pg + '">' + esc(o.title) + '</a>' : esc(o.title)) + ' — ' + esc(o.author) + '</li>'; };
+    return '<h3 class="nom-year">' + A.name + x.year + '（この作品は' + x.rank + '位）</h3><ul class="book-list">'
+      + (w ? '<li>大賞　<a href="' + winPage(x.year) + '">' + esc(w.title) + '</a> — ' + esc(w.author) + '</li>' : '') + others.map(li).join('') + '</ul>';
+  }).join('');
+  parts.push('<section class="book-section"><h2>同じ年の' + A.name + '</h2>' + yearsHTML
+    + '<p class="book-more"><a href="/' + key + '/">' + A.name + 'の歴代大賞作・ノミネート作をすべて見る →</a></p></section>');
+  const audible = sec('Audibleで聴く');
+  if (audible && audible.text) parts.push('<section class="book-section book-audible" id="audible"><h2>『' + esc(n.title) + '』をAudibleで聴く</h2>' + blockMd(audible.text) + '</section>');
+  const mentioned = sec('こんなところでも紹介されています');
+  if (mentioned && mentioned.text) parts.push('<section class="book-section book-mentioned"><h2>こんなところでも紹介されています</h2>' + blockMd(mentioned.text) + '</section>');
+  const src = hist.some(x => x.year === 2026) && A.nominees.source2026 ? A.nominees.source2026 : A.source;
+  parts.push('<p class="aw-source">順位は<a href="' + src.url + '" target="_blank" rel="noopener">' + src.name + '</a>によります。感想のまとめは' + esc(meta.researched || '') + 'に確認したものです。</p>');
+  const body = '<div class="book-page">\n' + parts.join('\n') + '\n</div>';
+  const bookJsonLd = { '@context': 'https://schema.org', '@type': 'Book', name: n.title, author: { '@type': 'Person', name: n.author }, url: SITE + url };
+  if (n.isbn) bookJsonLd.isbn = n.isbn;
+  if (n.coverImg) bookJsonLd.image = n.coverImg;
+  const header = '<header>\n  <div class="hdr-inner">\n    <div class="hdr-kana">' + A.kana + '</div>\n    <div class="site-title"><a href="/' + key + '/">' + A.name + ' <span>歴代受賞作ガイド</span></a></div>\n  </div>\n</header>';
+  return pageShell({ header, head, breadcrumb: breadcrumbHTML(crumbs), jsonLd: breadcrumbJsonLd(crumbs), extraJsonLd: bookJsonLd, body });
+}
+
 function buildWorkPages(key, ctx) {
   const A = AWARDS[key];
   const list = loadArray(path.join(ctx.ROOT, A.file), A.varName);
@@ -430,6 +512,16 @@ function buildWorkPages(key, ctx) {
     urls.push(ctx.SITE + workPageUrl(key, w));
   });
   console.log(key + '/: 作品ページ ' + urls.length + '件');
+  if (A.nominees) {
+    const done = nomineePages(key, ctx.ROOT);
+    done.forEach(n => {
+      const dir = path.join(ctx.ROOT, key, nomSlug(n));
+      fs.mkdirSync(dir, { recursive: true });
+      fs.writeFileSync(path.join(dir, 'index.html'), buildNomineePage(key, n, ctx));
+      urls.push(ctx.SITE + nomPageUrl(key, n));
+    });
+    console.log(key + '/: ノミネート作の作品ページ ' + done.length + '件');
+  }
   return urls;
 }
 

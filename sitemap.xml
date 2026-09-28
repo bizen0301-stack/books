@@ -3679,6 +3679,36 @@
     <priority>0.7</priority>
   </url>
   <url>
+    <loc>https://books.soranoshita.com/manga/2008-2/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://books.soranoshita.com/manga/2008-5/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://books.soranoshita.com/manga/2008-12/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://books.soranoshita.com/manga/2011-7/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
+    <loc>https://books.soranoshita.com/manga/2020-2/</loc>
+    <lastmod>2026-09-28</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://books.soranoshita.com/mystery/</loc>
     <lastmod>2026-09-28</lastmod>
     <changefreq>weekly</changefreq>
