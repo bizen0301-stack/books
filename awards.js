@@ -96,6 +96,21 @@ const AWARDS = {
   },
 };
 
+// マンガ大賞（2026-09-28〜）。回ではなく「マンガ大賞2026」のように年で呼ぶ（yearNamed）。kai は通し番号
+AWARDS.manga = {
+  who: '書店員など、マンガ好きの有志が選ぶ',
+  file: 'manga.js',
+  varName: 'MANGA',
+  name: 'マンガ大賞',
+  fullName: 'マンガ大賞',
+  kana: '「いちばん人に薦めたい」マンガを選ぶ賞',
+  lead: 'マンガ大賞は、書店員をはじめとするマンガ好きの有志が選考員になり、2008年から毎年選ばれている賞です。前の年に出た単行本のうち、最大8巻までの作品が対象で、「いま、いちばん人に薦めたいマンガ」を選びます。',
+  source: { url: 'https://www.mangataisho.com/archives/', name: 'マンガ大賞公式サイトの「過去のマンガ大賞・ノミネート作品」', what: '受賞作・年' },
+  listNote: 'Kindle版・紙の本のボタンは、どれも第1巻につながります。',
+  yearNamed: true,
+  checkedOn: '2026年9月28日',
+};
+
 // 賞のまとめの入口（/mystery/）。group が同じ賞を並べる
 const GROUPS = {
   mystery: {
@@ -108,6 +123,9 @@ const GROUPS = {
   },
 };
 
+// 「第175回」または「マンガ大賞2026」の年の部分
+function roundLabel(A, w) { return A.yearNamed ? String(w.half).slice(0, 4) + '年' : '第' + w.kai + '回'; }
+function awardLabel(A, w) { return A.yearNamed ? A.name + String(w.half).slice(0, 4) : A.name + ' 第' + w.kai + '回'; }
 function halfLabel(h) {
   // 公式一覧の「2026上」→「2026年上半期」
   const m = String(h).match(/^(\d{4})(上|下)$/);
@@ -157,20 +175,20 @@ function buildAwardPage(key, ctx) {
   const bothHTML = both.length ? `<section class="aw-both" id="both">
   <h2>本屋大賞でも上位に入った${A.name}受賞作</h2>
   <p>書店員が選ぶ本屋大賞と、${A.who || ""}${A.name}。選ぶ人も基準も違う2つの賞で、どちらにも名前が挙がった作品です。</p>
-  <ul>${both.map(w => { const b = honya(w); return `<li><a href="#k${w.kai}${w.sub ? '-' + w.sub : ''}">『${esc(w.title)}』${esc(w.author)}</a>：${A.name} 第${w.kai}回／<a href="${honyaHref(b)}">${honyaLabel(b)}</a></li>`; }).join('')}</ul>
+  <ul>${both.map(w => { const b = honya(w); return `<li><a href="#k${w.kai}${w.sub ? '-' + w.sub : ''}">『${esc(w.title)}』${esc(w.author)}</a>：${awardLabel(A, w)}／<a href="${honyaHref(b)}">${honyaLabel(b)}</a></li>`; }).join('')}</ul>
 </section>` : '';
 
   const dbl = winners.filter(w => w.also).sort((a, b) => b.kai - a.kai);
   const dblHTML = dbl.length ? `<section class="aw-both" id="double">
   <h2>${dbl.map(w => AWARDS[w.also[0].key].name).filter((x, i, a) => a.indexOf(x) === i).join('・')}とダブル受賞した${A.name}受賞作</h2>
-  <ul>${dbl.map(w => w.also.map(x => `<li><a href="#k${workSlug(w)}">『${esc(w.title)}』${esc(w.author)}</a>：${A.name} 第${w.kai}回／<a href="${otherHref(x, ctx.ROOT)}">${AWARDS[x.key].name} 第${x.kai}回</a></li>`).join('')).join('')}</ul>
+  <ul>${dbl.map(w => w.also.map(x => `<li><a href="#k${workSlug(w)}">『${esc(w.title)}』${esc(w.author)}</a>：${awardLabel(A, w)}／<a href="${otherHref(x, ctx.ROOT)}">${AWARDS[x.key].name} 第${x.kai}回</a></li>`).join('')).join('')}</ul>
 </section>` : '';
 
   const kindleCount = winners.filter(w => w.kindleAsin).length;
-  const title = `${A.name} 歴代受賞作一覧（第${first.kai}回〜第${latest.kai}回）｜Kindleで読める作品も｜文学賞ガイド`;
+  const title = `${A.name} 歴代受賞作一覧（${A.yearNamed ? first.half + '〜' + latest.half + '年' : '第' + first.kai + '回〜第' + latest.kai + '回'}）｜Kindleで読める作品も｜文学賞ガイド`;
   const head = headHTML({
     title,
-    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の第${first.kai}回（${first.half.slice(0, 4)}年）から第${latest.kai}回（${halfLabel(latest.half)}）までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
+    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の${A.yearNamed ? first.half + '年から' + latest.half + '年' : '第' + first.kai + '回（' + first.half.slice(0, 4) + '年）から第' + latest.kai + '回（' + halfLabel(latest.half) + '）'}までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
     canonical: `${SITE}/${key}/`,
     ogTitle: `${A.name} 歴代受賞作一覧（全${winners.length}作）`,
   });
@@ -178,7 +196,7 @@ function buildAwardPage(key, ctx) {
 
   const body = `<div class="page-h1">
   <h1>${A.name} 歴代受賞作一覧</h1>
-  <p class="page-lead">第${first.kai}回（${first.half.slice(0, 4)}年）〜第${latest.kai}回（${halfLabel(latest.half)}）の全${winners.length}作。Kindle版は${kindleCount}作${both.length ? `。<a href="#both">本屋大賞とも重なる${both.length}作 ↓</a>` : ''}</p>
+  <p class="page-lead">${A.yearNamed ? first.half + '年〜' + latest.half + '年' : '第' + first.kai + '回（' + first.half.slice(0, 4) + '年）〜第' + latest.kai + '回（' + halfLabel(latest.half) + '）'}の全${winners.length}作。Kindle版は${kindleCount}作${both.length ? `。<a href="#both">本屋大賞とも重なる${both.length}作 ↓</a>` : ''}</p>
 </div>
 <nav class="year-nav aw-jump" aria-label="年代別"><span class="year-nav-label">年代</span><div class="year-nav-scroll">${jump}</div></nav>
 <main class="main aw-main">
@@ -239,7 +257,7 @@ const honyaHref = b => hasBookPage(b) ? bookPageUrl(b) : `/year/${b.year}/#r${b.
   const h = w.half.match(/^(\d{4})(上|下)$/);
   return `<article data-award="${key}${A.group ? ' ' + A.group : ''}" data-kindle="${w.kindleAsin ? 1 : 0}" data-sort="${parseInt(w.half, 10) + (/下/.test(w.half) ? 0.5 : 0)}" class="card aw-card${hb ? ' aw-both-card' : ''}" id="k${w.kai}${w.sub ? '-' + w.sub : ''}">
 <div class="cover-wrap">
-  <div class="rank-badge rn">${ctx.showAward ? A.name + " " : ""}第${w.kai}回</div>
+  <div class="rank-badge rn">${A.yearNamed ? (ctx.showAward ? A.name : '大賞') : (ctx.showAward ? A.name + ' ' : '') + '第' + w.kai + '回'}</div>
   <div class="year-badge">${h ? h[1] + '年' + h[2] : esc(halfLabel(w.half))}</div>
   <div class="placeholder"><span class="placeholder-title">${esc(w.title)}</span><span class="placeholder-author">${esc(w.author)}</span></div>
   ${img}
@@ -271,7 +289,7 @@ function alsoOf(key, w, ROOT) {
   Object.entries(AWARDS).forEach(([k, A]) => {
     if (k === key) return;
     loadArray(path.join(ROOT, A.file), A.varName).filter(o => (o.also || []).some(x => x.key === key && x.kai === w.kai && (x.sub || 0) === (w.sub || 0)))
-      .forEach(o => out.push({ label: A.name + ' 第' + o.kai + '回', href: '/' + k + '/#k' + workSlug(o) }));
+      .forEach(o => out.push({ label: awardLabel(A, o), href: '/' + k + '/#k' + workSlug(o) }));
   });
   return out;
 }
@@ -283,12 +301,12 @@ function buildWorkPage(key, w, list, ctx) {
   const { meta, sections } = parseContent(md);
   const sec = name => sections.find(s => s.title === name);
   const url = workPageUrl(key, w);
-  const round = '第' + w.kai + '回（' + halfLabel(w.half) + '）';
+  const round = A.yearNamed ? String(w.half) : '第' + w.kai + '回（' + halfLabel(w.half) + '）';
   const head = headHTML({
-    title: w.title + '（' + w.author + '）あらすじ・感想｜' + A.name + ' ' + round + '｜文学賞ガイド',
-    description: A.name + round + '受賞作『' + w.title + '』（' + w.author + '）。あらすじ、読者の感想から見た受け止め方、分かれる点、著者の言葉。Kindle・楽天ブックスへのリンク付き。',
+    title: w.title + '（' + w.author + '）あらすじ・感想｜' + (A.yearNamed ? awardLabel(A, w) + ' 大賞' : A.name + ' ' + round) + '｜文学賞ガイド',
+    description: (A.yearNamed ? awardLabel(A, w) + ' 大賞' : A.name + round + '受賞作') + '『' + w.title + '』（' + w.author + '）。あらすじ、読者の受け止め方、分かれる点。Kindle・楽天ブックスへのリンク付き。',
     canonical: SITE + url,
-    ogTitle: w.title + '｜' + A.name + ' 第' + w.kai + '回',
+    ogTitle: w.title + '｜' + awardLabel(A, w),
   });
   const crumbs = [{ label: 'ホーム', url: '/' }].concat(A.group ? [{ label: GROUPS[A.group].name, url: '/' + A.group + '/' }] : [], [{ label: A.name + ' 歴代受賞作', url: '/' + key + '/' }, { label: w.title, url }]);
   const buy = { title: w.title, author: w.author, kindleAsin: w.kindleAsin, amazonAsin: w.amazonAsin, audibleAsin: meta.audibleAsin, audible: !!meta.audibleAsin };
@@ -303,7 +321,7 @@ function buildWorkPage(key, w, list, ctx) {
     : '<div class="book-cover-ph"><span>' + esc(w.title) + '</span></div>';
   const parts = [];
   parts.push('<div class="book-hero"><div class="book-cover">' + cover + '</div><div class="book-info">'
-    + '<div class="book-award"><a href="/' + key + '/#k' + workSlug(w) + '">' + A.name + ' ' + esc(round) + '</a>' + alsoOf(key, w, ctx.ROOT).map(x => '　／　<a href="' + x.href + '">' + esc(x.label) + '</a>受賞').join('') + '</div>'
+    + '<div class="book-award"><a href="/' + key + '/#k' + workSlug(w) + '">' + (A.yearNamed ? esc(awardLabel(A, w)) + ' 大賞' : A.name + ' ' + esc(round)) + '</a>' + alsoOf(key, w, ctx.ROOT).map(x => '　／　<a href="' + x.href + '">' + esc(x.label) + '</a>受賞').join('') + '</div>'
     + '<h1>' + esc(w.title) + '</h1>'
     + '<div class="book-meta">' + esc(w.author) + ' 著' + (w.pub ? '　／　' + esc(w.pub) : '') + '</div>'
     + (w.note ? '<p class="book-synopsis">' + esc(w.note) + '</p>' : '')
@@ -315,9 +333,9 @@ function buildWorkPage(key, w, list, ctx) {
   const same = list.filter(x => x.kai === w.kai && x.title && x !== w);
   const near = list.filter(x => x.title && x.kai !== w.kai && Math.abs(x.kai - w.kai) <= 2).sort((a, b) => b.kai - a.kai);
   const link = x => hasWorkPage(key, x, ctx.ROOT) ? workPageUrl(key, x) : '/' + key + '/#k' + workSlug(x);
-  const li = x => '<li><a href="' + link(x) + '">' + esc(x.title) + '</a> — ' + esc(x.author) + '（第' + x.kai + '回）</li>';
+  const li = x => '<li><a href="' + link(x) + '">' + esc(x.title) + '</a> — ' + esc(x.author) + '（' + (A.yearNamed ? x.half + '年' : '第' + x.kai + '回') + '）</li>';
   if (same.length) parts.push('<section class="book-section"><h2>同じ回の' + A.name + '受賞作</h2><ul class="book-list">' + same.map(li).join('') + '</ul></section>');
-  parts.push('<section class="book-section"><h2>前後の回の' + A.name + '受賞作</h2><ul class="book-list">' + near.map(li).join('') + '</ul>'
+  parts.push('<section class="book-section"><h2>' + (A.yearNamed ? '前後の年の' : '前後の回の') + A.name + '受賞作</h2><ul class="book-list">' + near.map(li).join('') + '</ul>'
     + '<p class="book-more"><a href="/' + key + '/">' + A.name + 'の歴代受賞作をすべて見る →</a></p></section>');
   const audible = sec('Audibleで聴く');
   if (audible && audible.text) parts.push('<section class="book-section book-audible" id="audible"><h2>『' + esc(w.title) + '』をAudibleで聴く</h2>' + blockMd(audible.text)
@@ -354,7 +372,7 @@ function crossRefs(ROOT) {
   Object.entries(AWARDS).forEach(([key, A]) => {
     loadArray(path.join(ROOT, A.file), A.varName).filter(w => w.honya).forEach(w => {
       const k = w.honya.year + '-' + w.honya.rank;
-      (map[k] = map[k] || []).push({ label: `${A.name} 第${w.kai}回`, href: `/${key}/#k${w.kai}${w.sub ? '-' + w.sub : ''}` });
+      (map[k] = map[k] || []).push({ label: awardLabel(A, w), href: `/${key}/#k${w.kai}${w.sub ? '-' + w.sub : ''}` });
     });
   });
   return map;

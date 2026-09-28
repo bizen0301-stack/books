@@ -53,7 +53,7 @@ const AFFILIATE_DISCLOSURE = `<div class="affiliate">
   Amazonのアソシエイトとして、文学賞ガイドは適格販売により収入を得ています。
 </div>`;
 
-const FOOTER = `<footer>© 2026 文学賞ガイド（本屋大賞・直木賞・芥川賞・山本周五郎賞・ミステリーの賞）</footer>`;
+const FOOTER = `<footer>© 2026 文学賞ガイド（本屋大賞・直木賞・芥川賞・山本周五郎賞・ミステリーの賞・マンガ大賞）</footer>`;
 
 function esc(s) {
   return String(s == null ? '' : s)
@@ -131,7 +131,7 @@ ${head}
 ${jsonLdBlocks}
 </head>
 <body id="top">
-<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/yamamoto/">山本周五郎賞</a><a href="/mystery/">ミステリーの賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
+<div class="topbar"><div class="topbar-inner"><a class="nav-logo" href="/" aria-label="トップへ戻る">文学賞 <span>ガイド</span></a><nav class="topbar-awards" aria-label="文学賞"><a href="/#honya">本屋大賞</a><a href="/naoki/">直木賞</a><a href="/akutagawa/">芥川賞</a><a href="/yamamoto/">山本周五郎賞</a><a href="/mystery/">ミステリーの賞</a><a href="/manga/">マンガ大賞</a><a href="/#genres">ジャンル</a></nav><a class="topbar-index" href="/#all-index">全作品インデックス</a></div></div>
 ${header || miniHeaderHTML()}
 ${breadcrumb}
 ${body}
@@ -591,6 +591,7 @@ function hubHTML() {
   return `<div class="sec-h"><h2>賞で探す</h2></div>
 <div class="hub-grid">${panels}</div>
 <p class="hub-more">ミステリーの賞も：<a href="/honkaku/">本格ミステリ大賞</a>・<a href="/suikyo/">日本推理作家協会賞</a>・<a href="/ranpo/">江戸川乱歩賞</a>　<a href="/mystery/">3つの賞をまとめて見る →</a></p>
+<p class="hub-more">マンガも：<a href="/manga/">マンガ大賞 歴代大賞作（2008年〜）</a></p>
 <div class="sec-h" id="genres"><h2>ジャンルで探す</h2></div>
 <div class="genre-grid">${genres}</div>
 <div class="sec-h"><h2>本屋大賞と、直木賞・芥川賞の両方に選ばれた${both.length}作</h2></div>
