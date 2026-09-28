@@ -591,7 +591,7 @@ function hubHTML() {
   return `<div class="sec-h"><h2>賞で探す</h2></div>
 <div class="hub-grid">${panels}</div>
 <p class="hub-more">ミステリーの賞も：<a href="/honkaku/">本格ミステリ大賞</a>・<a href="/suikyo/">日本推理作家協会賞</a>・<a href="/ranpo/">江戸川乱歩賞</a>　<a href="/mystery/">3つの賞をまとめて見る →</a></p>
-<p class="hub-more">マンガも：<a href="/manga/">マンガ大賞 歴代大賞作（2008年〜）</a></p>
+<p class="hub-more">マンガも：<a href="/manga/">マンガ大賞 歴代大賞作・ノミネート作（2008年〜）</a></p>
 <div class="sec-h" id="genres"><h2>ジャンルで探す</h2></div>
 <div class="genre-grid">${genres}</div>
 <div class="sec-h"><h2>本屋大賞と、直木賞・芥川賞の両方に選ばれた${both.length}作</h2></div>

@@ -109,7 +109,50 @@ AWARDS.manga = {
   listNote: 'Kindle版・紙の本のボタンは、どれも第1巻につながります。',
   yearNamed: true,
   checkedOn: '2026年9月28日',
+  // 大賞以外の二次選考作品（2008〜2026年、200作）。作品ページは作らず、大賞作のページ（/manga/{年}/）に順位つきで並べる
+  nominees: { file: 'manga-nominees.js', varName: 'MANGA_NOMINEES', source2026: { url: 'https://natalie.mu/comic/news/665435', name: 'コミックナタリーの結果発表記事（2026年3月26日）' } },
 };
+
+// --- ノミネート作（マンガ大賞、2026-09-28〜） ---
+// 同じ作品を年をまたいで数えるための名前。表記ゆれは ALIAS で寄せる
+const NOM_ALIAS = { 'とめはねっ!鈴里高校書道部': 'とめはねっ!' };
+function nomKey(t) { const k = String(t).normalize('NFKC').replace(/[s　~～]/g, ''); return NOM_ALIAS[k] || k; }
+function loadNominees(key, ROOT) {
+  const A = AWARDS[key];
+  return A.nominees ? loadArray(path.join(ROOT, A.nominees.file), A.nominees.varName) : [];
+}
+// 大賞作とノミネート作をまとめて、作品ごとに「何年に何位」を集める
+function nomHistory(key, ROOT) {
+  const list = loadArray(path.join(ROOT, AWARDS[key].file), AWARDS[key].varName).filter(w => w.title);
+  const map = {};
+  list.forEach(w => (map[nomKey(w.title)] = map[nomKey(w.title)] || []).push({ year: +w.kai, rank: 1, w }));
+  loadNominees(key, ROOT).forEach(n => (map[nomKey(n.title)] = map[nomKey(n.title)] || []).push({ year: n.year, rank: n.rank, n }));
+  Object.values(map).forEach(v => v.sort((a, b) => a.year - b.year));
+  return map;
+}
+// 1年分のノミネート作の表。大賞作ページと一覧ページで使う
+function nomineeTableHTML(key, year, ctx) {
+  const A = AWARDS[key];
+  const { esc, R } = ctx;
+  const noms = loadNominees(key, ctx.ROOT).filter(n => n.year === year).sort((a, b) => a.rank - b.rank);
+  if (!noms.length) return '';
+  const hist = nomHistory(key, ctx.ROOT);
+  const rows = noms.map(n => {
+    const h = hist[nomKey(n.title)].filter(x => x.year !== year);
+    const win = h.find(x => x.rank === 1);
+    const other = h.filter(x => x.rank !== 1).map(x => x.year + '年' + x.rank + '位');
+    const notes = [];
+    if (win) notes.push('<a href="' + (hasWorkPage(key, win.w, ctx.ROOT) ? workPageUrl(key, win.w) : '/' + key + '/#k' + workSlug(win.w)) + '">' + win.year + '年に大賞</a>');
+    if (other.length) notes.push('ほかに' + other.join('・') + 'でノミネート');
+    const b = { title: n.title, author: n.author };
+    return '<tr><td class="nom-rank">' + n.rank + '位</td><td><span class="nom-title">' + esc(n.title) + '</span><br><span class="nom-author">' + esc(n.author) + '</span>' + (notes.length ? '<br><span class="nom-note">' + notes.join('／') + '</span>' : '') + '</td>'
+      + '<td class="nom-links"><a href="' + R.getAmazonKindleLink(b) + '" target="_blank" rel="noopener">Kindle</a><a href="' + R.getRakutenLink(n.title, n.author, null) + '" target="_blank" rel="noopener">楽天</a></td></tr>';
+  }).join('');
+  const src = year === 2026 && A.nominees.source2026 ? A.nominees.source2026 : A.source;
+  return '<section class="book-section" id="nominees"><h2>' + A.name + year + ' ノミネート作（大賞のほか' + noms.length + '作）</h2>'
+    + '<p>大賞とともに二次選考に残った作品です。順位は<a href="' + src.url + '" target="_blank" rel="noopener">' + src.name + '</a>によります（同じ順位は同率）。リンクはKindle版・楽天ブックスの検索結果につながります。</p>'
+    + '<div class="table-wrap"><table class="nom-table"><thead><tr><th>順位</th><th>作品・作者</th><th>探す</th></tr></thead><tbody>' + rows + '</tbody></table></div></section>';
+}
 
 // 賞のまとめの入口（/mystery/）。group が同じ賞を並べる
 const GROUPS = {
@@ -185,10 +228,33 @@ function buildAwardPage(key, ctx) {
 </section>` : '';
 
   const kindleCount = winners.filter(w => w.kindleAsin).length;
-  const title = `${A.name} 歴代受賞作一覧（${A.yearNamed ? first.half + '〜' + latest.half + '年' : '第' + first.kai + '回〜第' + latest.kai + '回'}）｜Kindleで読める作品も｜文学賞ガイド`;
+  const noms = A.nominees ? loadNominees(key, ctx.ROOT) : [];
+  let nomHTML = '';
+  if (noms.length) {
+    const hist = nomHistory(key, ctx.ROOT);
+    const page = w => hasWorkPage(key, w, ctx.ROOT) ? workPageUrl(key, w) : '/' + key + '/#k' + workSlug(w);
+    const years = [...new Set(noms.map(n => n.year))].sort((a, b) => b - a);
+    const yearLinks = years.map(y => { const w = winners.find(x => +x.kai === y); return '<li><a href="' + (w && hasWorkPage(key, w, ctx.ROOT) ? workPageUrl(key, w) + '#nominees' : '#k' + y) + '">' + A.name + y + '</a>：' + noms.filter(n => n.year === y).length + '作（大賞は『' + esc(w ? w.title : '') + '』）</li>'; }).join('');
+    const entries = Object.values(hist);
+    const later = entries.filter(v => v.some(x => x.rank === 1) && v.some(x => x.rank !== 1 && x.year < v.find(y => y.rank === 1).year))
+      .map(v => { const win = v.find(x => x.rank === 1); return { win, before: v.filter(x => x.rank !== 1 && x.year < win.year) }; })
+      .sort((a, b) => b.win.year - a.win.year);
+    const laterHTML = later.map(({ win, before }) => '<li><a href="' + page(win.w) + '">『' + esc(win.w.title) + '』' + esc(win.w.author) + '</a>：' + before.map(x => x.year + '年' + x.rank + '位').join('、') + ' → ' + win.year + '年に大賞</li>').join('');
+    const many = entries.filter(v => !v.some(x => x.rank === 1) && v.length >= 3)
+      .map(v => ({ n: v[v.length - 1].n, v }))
+      .sort((a, b) => b.v.length - a.v.length || b.v[b.v.length - 1].year - a.v[a.v.length - 1].year);
+    const manyHTML = many.map(({ n, v }) => '<li>『' + esc(n.title) + '』' + esc(n.author) + '：' + v.map(x => x.year + '年' + x.rank + '位').join('、') + '（' + v.length + '回）</li>').join('');
+    nomHTML = '<section class="aw-both" id="nominees">'
+      + '<h2>年ごとのノミネート作</h2>'
+      + '<p>' + A.name + 'では、一次選考で票を集めた10作ほどが二次選考にノミネートされ、そのなかから大賞が選ばれます。' + years[years.length - 1] + '〜' + years[0] + '年のノミネート作は全' + noms.length + '作。年ごとの順位は、各年の大賞作のページに載せています。</p>'
+      + '<ul>' + yearLinks + '</ul></section>'
+      + (laterHTML ? '<section class="aw-both" id="nominated-then-won"><h2>ノミネートのあと、大賞を取った作品</h2><p>一度は大賞を逃し、翌年以降にあらためて選ばれた作品です。</p><ul>' + laterHTML + '</ul></section>' : '')
+      + (manyHTML ? '<section class="aw-both" id="nominated-often"><h2>3回以上ノミネートされた作品</h2><p>大賞には届かなかったものの、何年にもわたって選考員に推された作品です。</p><ul>' + manyHTML + '</ul></section>' : '');
+  }
+  const title = `${A.name} ${noms.length ? '歴代大賞作・ノミネート作' : '歴代受賞作'}一覧（${A.yearNamed ? first.half + '〜' + latest.half + '年' : '第' + first.kai + '回〜第' + latest.kai + '回'}）｜Kindleで読める作品も｜文学賞ガイド`;
   const head = headHTML({
     title,
-    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の${A.yearNamed ? first.half + '年から' + latest.half + '年' : '第' + first.kai + '回（' + first.half.slice(0, 4) + '年）から第' + latest.kai + '回（' + halfLabel(latest.half) + '）'}までの全受賞作${winners.length}作。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
+    description: `${A.name}${A.fullName !== A.name ? `（${A.fullName}）` : ""}の${A.yearNamed ? first.half + '年から' + latest.half + '年' : '第' + first.kai + '回（' + first.half.slice(0, 4) + '年）から第' + latest.kai + '回（' + halfLabel(latest.half) + '）'}までの全受賞作${winners.length}作${noms.length ? `と、ノミネート作${noms.length}作の順位` : ''}。Kindle版の有無、本屋大賞でも上位に入った作品${dbl.length ? 'や直木賞とのダブル受賞作' : ''}がひと目で分かります。`,
     canonical: `${SITE}/${key}/`,
     ogTitle: `${A.name} 歴代受賞作一覧（全${winners.length}作）`,
   });
@@ -196,13 +262,14 @@ function buildAwardPage(key, ctx) {
 
   const body = `<div class="page-h1">
   <h1>${A.name} 歴代受賞作一覧</h1>
-  <p class="page-lead">${A.yearNamed ? first.half + '年〜' + latest.half + '年' : '第' + first.kai + '回（' + first.half.slice(0, 4) + '年）〜第' + latest.kai + '回（' + halfLabel(latest.half) + '）'}の全${winners.length}作。Kindle版は${kindleCount}作${both.length ? `。<a href="#both">本屋大賞とも重なる${both.length}作 ↓</a>` : ''}</p>
+  <p class="page-lead">${A.yearNamed ? first.half + '年〜' + latest.half + '年' : '第' + first.kai + '回（' + first.half.slice(0, 4) + '年）〜第' + latest.kai + '回（' + halfLabel(latest.half) + '）'}の全${winners.length}作。Kindle版は${kindleCount}作${both.length ? `。<a href="#both">本屋大賞とも重なる${both.length}作 ↓</a>` : ''}${noms.length ? `。<a href="#nominees">ノミネート作${noms.length}作 ↓</a>` : ''}</p>
 </div>
 <nav class="year-nav aw-jump" aria-label="年代別"><span class="year-nav-label">年代</span><div class="year-nav-scroll">${jump}</div></nav>
 <main class="main aw-main">
 ${sections}
 ${bothHTML}
 ${dblHTML}
+${nomHTML}
 <section class="aw-about">
   <h2>${A.name}とは</h2>
   <p>${A.lead}このページでは、受賞作を新しい順に年代ごとに並べています${none ? `（受賞作なしの回が${none}回あります）` : ''}。${A.listNote}</p>
@@ -303,8 +370,8 @@ function buildWorkPage(key, w, list, ctx) {
   const url = workPageUrl(key, w);
   const round = A.yearNamed ? String(w.half) : '第' + w.kai + '回（' + halfLabel(w.half) + '）';
   const head = headHTML({
-    title: w.title + '（' + w.author + '）あらすじ・感想｜' + (A.yearNamed ? awardLabel(A, w) + ' 大賞' : A.name + ' ' + round) + '｜文学賞ガイド',
-    description: (A.yearNamed ? awardLabel(A, w) + ' 大賞' : A.name + round + '受賞作') + '『' + w.title + '』（' + w.author + '）。あらすじ、読者の受け止め方、分かれる点。Kindle・楽天ブックスへのリンク付き。',
+    title: w.title + '（' + w.author + '）あらすじ・感想｜' + (A.yearNamed ? awardLabel(A, w) + (A.nominees ? ' 大賞・ノミネート作' : ' 大賞') : A.name + ' ' + round) + '｜文学賞ガイド',
+    description: (A.yearNamed ? awardLabel(A, w) + ' 大賞' : A.name + round + '受賞作') + '『' + w.title + '』（' + w.author + '）。あらすじ、読者の受け止め方、分かれる点' + (A.nominees && loadNominees(key, ctx.ROOT).some(n => n.year === +w.kai) ? '。同じ年のノミネート作の順位も' : '') + '。Kindle・楽天ブックスへのリンク付き。',
     canonical: SITE + url,
     ogTitle: w.title + '｜' + awardLabel(A, w),
   });
@@ -330,6 +397,7 @@ function buildWorkPage(key, w, list, ctx) {
     const x = sec(name);
     if (x && x.text) parts.push('<section class="book-section' + (cls ? ' ' + cls : '') + '"><h2>' + name + '</h2>' + blockMd(x.text) + '</section>');
   });
+  if (A.nominees) parts.push(nomineeTableHTML(key, +w.kai, ctx));
   const same = list.filter(x => x.kai === w.kai && x.title && x !== w);
   const near = list.filter(x => x.title && x.kai !== w.kai && Math.abs(x.kai - w.kai) <= 2).sort((a, b) => b.kai - a.kai);
   const link = x => hasWorkPage(key, x, ctx.ROOT) ? workPageUrl(key, x) : '/' + key + '/#k' + workSlug(x);
