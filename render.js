@@ -5,7 +5,9 @@
 
 (function (root) {
   // Google Analytics (GA4) 計測タグ。全ページがrender.jsを読み込むため、ここに1回だけ追加する。
-    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+  // 本番の books.soranoshita.com だけで計測する。Cloudflare の仮アドレス（*.pages.dev）には
+  // データセンターのボットが来て数字を汚していたため（2026-10-08、米国アクセスの半分がpages.dev）。
+    if (typeof window !== 'undefined' && typeof document !== 'undefined' && location.hostname === 'books.soranoshita.com') {
           window.dataLayer = window.dataLayer || [];
           function gtag(){ window.dataLayer.push(arguments); }
           window.gtag = gtag;
